@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kokofarm.product.mapper.ProductMapper">
+	<cache />
+		
+	<insert id="insertProdcut" parameterType="Product">
+		insert into product(
+			product_no, product_name, product_unit, product_price, seller_no, product_uploaddate, product_harvestdate, review_number, 
+			product_mainimage, product_detailimage , product_sellerimage 
+		)
+		values(
+		#{product_no}, #{product_name},  #{product_unit}, #{product_price}, #{seller_no}, sysdate, #{product_harvestdate}, 0,
+		#{product_mainimage}, #{product_detailimage}, #{product_sellerimage}
+		)	
+	</insert>
+	
+	<select id="listProduct" resultType="Product">
+		select * from product
+		<if test="searchText != null">
+				where ${searchOption} LIKE #{searchText}
+		</if>
+		order by product_uploaddate	
+	</select>
+	
+	<select id="list_Product" resultType="Product">
+		select * from product
+	</select>
+	
+	
+	
+	<select id="detailProduct" parameterType="String" resultType="Product">
+	 select * from product
+	 where product_no = #{product_no}
+	</select>
+	
+	<select id="countProduct" resultType="int" parameterType="Search">
+	select count(*) from product
+		<if test="searchText !=null">
+			where ${searchOption} LIKE #{searchText}
+		</if>
+	</select>
+	
+	<insert id="InsertPost" parameterType="Post">
+	insert into post (post_no, product_no, member_id, post_content, post_date)
+	values(#{post_no}, #{product_no}, #{member_id}, #{post_content}, sysdate) 
+	</insert>
+	
+	<select id="listPost" parameterType="String" resultType="Post">
+	select * from post
+	where product_no = #{product_no}
+	</select>
+	
+	<delete id="deletePost" parameterType="String">
+	delete from post
+	where post_no = #{post_no}
+	</delete>
+	
+	<update id="updatePost" parameterType="Post">
+	update Post 
+	set post_content = #{post_content}
+	where post_no = #{post_no} 
+	</update>
+	
+	
+	</mapper>
