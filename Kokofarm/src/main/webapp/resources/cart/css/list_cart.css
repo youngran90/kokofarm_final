@@ -1,0 +1,149 @@
+@CHARSET "UTF-8";
+
+	#body{	/* 바디 태그 내용들.. */
+		margin-left: 10%;
+		margin-right: 10%;
+	}
+	#top_contents{/* 주문하기 부터 장바구니 이미지 전 까지  */
+		padding-top: 45px;
+	}
+
+	#top_bar{/* 주문하기 배경태그*/
+		text-align: center;
+    	position: relative;
+    	height: 60px;
+		background: url("../images/bg_cate_tit.gif") repeat-x left 24px;
+	}
+	
+	#top_bar em{/* 주문하기 안에 있는 글자 태그(주문하기)  */
+		display: inline-block;
+    	line-height: 60px;
+		font-size: 23px;
+		padding: 0 18px;
+		background: #f3f3f3;
+	}
+	
+	#top_location a { /* 위치 표시 태그 */
+	    float: left;
+	    display: inline-block;
+	    margin-top : 10px;
+	    margin-right: 6px;
+	}
+	
+	.loca_product_list{ /* 위치 표시 태그 (제품목록) */
+		padding-left: 11px;
+		background: url("../images/ico_location_arr.gif") no-repeat left;
+	}
+	
+	.loca_this{ /* 위치 표시 태그 (장바구니) */
+		padding-left: 11px;
+		background: url("../images/ico_location_arr.gif") no-repeat left;
+	}
+	
+	#top_img_box{ /* 주문 이미지  */
+		height: 70px;
+		padding : 45px 0px 35px 0px;
+	}
+	
+	.cart_amount{ /* 상품 개수 알려주는 태그 */
+		padding : 15px 0px;
+	}
+	
+	.cart_amount span{ /* 상품 개수 알려주는 태그안에 span태그*/
+		font-size: 18px;
+	    font-family: YG76;
+	    text-indent: 4px;
+	    color: #352f29;
+	}
+	
+	.cart_amount em{/* 상품 개수 알려주는 태그안에 em태그 */
+		color: #e2704b;
+    	border-bottom: 1px solid #e2704b;
+	}
+	
+	.order_list_section{ /* 장바구니 내역 테이블 배경 */
+		background: #ffff;
+	}
+	
+	#all_delete{ /* 전체 삭제 */
+		margin-bottom: 8px;
+	}
+	
+	.cart_table th{
+		border-bottom: 1px solid red;
+	}
+	
+	
+	#up{
+		position: relative;
+		bottom : 10px;
+		width: 25px;
+		height: 15px;
+		background: url("http://www.hellonature.net/shop/web/images/common/btn_arr3_t_off.gif") no-repeat;
+		background-origin: content-box;
+		background-size: 15px;
+		overflow: hidden;
+	}
+	
+	#down{
+		position: relative;
+		width: 25px;
+		height: 15px;
+		top: 4px;
+		background: url("http://www.hellonature.net/shop/web/images/common/btn_arr3_b_off.gif") no-repeat;
+		background-origin: content-box;
+		background-size: 15px;
+		overflow: hidden;
+	}
+	#change{
+		width: 65px;
+		height: 37px;
+		background: url("http://www.hellonature.net/shop/web/images/content/ord1_btn_cnt_modi.gif") no-repeat;
+		border: none;
+	}
+	.price_info_box{
+		padding: 30px 0px 30px 0px;
+	}	
+
+	.price_info{
+		position: relative;
+		bottom : 70px;
+		text-align: center;		
+	}
+	
+	.price_info em{
+		vertical-align : middle;
+		font-size: 350%;
+	}
+	
+	#result_price{
+		position: relative;
+		right: 15%;
+	}
+	#result_delivery{
+		position: relative;
+		left: 2%;		
+	}
+	#result_total{
+		position: relative;
+		left: 18%;
+	}
+	
+	
+	.order_btn_box{ /* 예약 / 주문하기  */
+	
+	}
+	
+	#submit_order{
+		width: 208px;
+		height: 54px;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
