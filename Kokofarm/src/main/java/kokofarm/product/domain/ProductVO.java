@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
 
-public class ProductDTO implements Serializable{
+public class ProductVO implements Serializable{
 	
 	private String product_no;
 	private String product_name;
@@ -22,10 +22,10 @@ public class ProductDTO implements Serializable{
 	private String product_sellerimage;
 
 	
-	public ProductDTO(){}
+	public ProductVO(){}
 
 
-	public ProductDTO(String product_no, String product_name, String product_unit, int product_price, String seller_no,
+	public ProductVO(String product_no, String product_name, String product_unit, int product_price, String seller_no,
 			Timestamp product_uploaddate, Date product_harvestdate, int review_number, String product_mainimage,
 			String product_detailimage, String product_sellerimage) {
 		super();
