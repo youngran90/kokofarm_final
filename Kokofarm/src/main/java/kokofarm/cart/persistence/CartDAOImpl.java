@@ -7,9 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import kokofarm.cart.domain.CartDTO;
 import kokofarm.cart.domain.CartListDTO;
-import kokofarm.product.domain.ProductDTO;
 
 @Repository
 public class CartDAOImpl implements CartDAO{
