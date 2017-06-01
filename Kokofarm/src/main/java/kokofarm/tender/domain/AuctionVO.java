@@ -1,6 +1,8 @@
 package kokofarm.tender.domain;
 
-public class AuctionVO {
+import java.io.Serializable;
+
+public class AuctionVO implements Serializable{
 	private String auction_no;
 	private String auction_name;
 	private String start_date;
