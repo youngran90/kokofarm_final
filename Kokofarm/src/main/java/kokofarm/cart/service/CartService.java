@@ -2,13 +2,13 @@ package kokofarm.cart.service;
 
 import java.util.List;
 
-import kokofarm.cart.domain.CartDTO;
-import kokofarm.cart.domain.CartListDTO;
+import kokofarm.cart.domain.CartVO;
+import kokofarm.cart.domain.CartListVO;
 
 public interface CartService {
 	//public void cart_insert(CartDTO cart) throws Exception;
 
-	public List<CartListDTO> cart_list(String member_id) throws Exception;
+	//public List<CartListDTO> cart_list(String member_id) throws Exception;
 
 	/*public void cart_delete(CartDTO cart_delete) throws Exception;
 

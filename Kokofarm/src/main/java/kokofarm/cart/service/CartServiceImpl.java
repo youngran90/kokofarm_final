@@ -6,8 +6,8 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import kokofarm.cart.domain.CartDTO;
-import kokofarm.cart.domain.CartListDTO;
+import kokofarm.cart.domain.CartVO;
+import kokofarm.cart.domain.CartListVO;
 import kokofarm.cart.persistence.CartDAO;
 
 @Service
@@ -20,11 +20,11 @@ public class CartServiceImpl implements CartService{
 	public void cart_insert(CartDTO cart) throws Exception {
 		dao.cart_insert(cart);
 	}*/
-
+/*
 	@Override
 	public List<CartListDTO> cart_list(String member_id) throws Exception {
 		return dao.cart_list(member_id);
-	}
+	}*/
 
 	/*@Override
 	public void cart_delete(CartDTO cart_delete) throws Exception {

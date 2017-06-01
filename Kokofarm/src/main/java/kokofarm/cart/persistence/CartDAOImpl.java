@@ -7,7 +7,8 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import kokofarm.cart.domain.CartListDTO;
+import kokofarm.cart.domain.CartVO;
+import kokofarm.cart.domain.CartListVO;
 
 @Repository
 public class CartDAOImpl implements CartDAO{
@@ -17,16 +18,16 @@ public class CartDAOImpl implements CartDAO{
 	
 	private static String namespace = "kokofarm.cart.mapper.CartMapper";
 
-
-	/*@Override
+/*
+	@Override
 	public void cart_insert(CartDTO cart) throws Exception {
 		session.insert(namespace+".cart_insert",cart);
-	}*/
-
-	@Override
+	}
+*/
+/*	@Override
 	public List<CartListDTO> cart_list(String member_id) throws Exception {
 		return session.selectList(namespace+".cart_list", member_id);
-	}
+	}*/
 
 	/*@Override
 	public void cart_delete(CartDTO cart_delete) throws Exception {

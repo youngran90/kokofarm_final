@@ -4,13 +4,13 @@
 
 <mapper namespace="kokofarm.cart.mapper.CartMapper">
 	
-	<insert id="cart_insert" parameterType="CartDTO">
+	<!-- <insert id="cart_insert" parameterType="CartDTO">
 		insert into cart(
 			cart_no, product_no, member_id, product_unit
 		)values(
 			#{cart_no}, #{product_no}, #{member_id}, #{product_unit}
 		)
-	</insert>
+	</insert> 
 	
 	<select id="cart_list" resultType="CartListDTO">
 		select p.product_name, p.product_price, p.product_no, c.product_unit
@@ -30,7 +30,7 @@
 	
 	<update id="cart_update" parameterType="CartDTO">
 		update cart set product_unit = #{product_unit} where product_no = #{product_no}
-	</update>
+	</update>  -->
 </mapper>
 
 
