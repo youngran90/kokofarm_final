@@ -5,7 +5,10 @@
 <configuration>
 
   <typeAliases>
-    <package name="kokofarm.*.domain"/>    
+    <package name="kokofarm.product.domain"/> 
+    <package name="kokofarm.cart.domain"/> 
+    <package name="kokofarm.tender.domain"/> 
+           
   </typeAliases>
 
 
