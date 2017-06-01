@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kokofarm.tender.mappers.TenderMapper">
+	<cache />
+	
+	<!-- 데이터 삽입(입찰자) -->
+	<insert id="insertTender" parameterType="TenderVO">
+	 insert into tender(
+      tender_no, member_id, tender_price, tender_date, auction_no
+    )
+    values(
+      tender_seq.nextval, #{member_id}, #{tender_price}, sysdate, #{auction_no}
+    )  
+	</insert>
+	
+	<!-- 경매 상품 보여주기 -->
+	<!-- <select id="selectAuctionProduct" resultType="Auction" parameterType="String">
+	  select * from auction where auction_no=#{auction_no}
+	  </select> -->
+	  <!-- 경매 리스트가 완성되면 where절로 경매 번호를 받아와 그 경매번호에 대한
+	  것만 뽑아오겠다.  where auction_no=#{auction_no} --> 
+	
+	
+	<!-- 현재가 뽑아내기 -->
+	<!-- <select id="selectCurrentPrice" resultType="Integer" parameterType="String">
+	  select max(tender_price) from tender where auction_no=#{auction_no}
+	</select> -->
+	
+	<!-- 낙찰자 뽑아내기 -->
+	<!-- <select id="selectSuccess" resultType="Tender" parameterType="map">
+	  select * from tender where auction_no=#{a} and tender_price=#{b}
+	</select> -->
+	
+	<!-- 상한가 뽑아내기 -->
+	<!-- <select id="selectPriceUp" resultType="int" parameterType="String">
+	  select auction_up from auction where auction_no=#{auction_no}
+	</select> -->
+	
+	<!-- 하한가 뽑아내기 -->
+	<!-- <select id="selectPriceDown" resultType="int" parameterType="String">
+	  select auction_down from auction where auction_no=#{auction_no}
+	</select> -->
+	
+	<!-- 낙찰자 확정 -->
+	<!-- <update id="updateTender" parameterType="int">
+	  update tender set success_no=success_seq.nextval where tender_price=#{tender_price}
+	</update> -->
+	
+	<!-- 유찰 확정 -->
+	<!-- <update id="updateAuctionResult" parameterType="String">
+	  update auction set auction_result='유찰' where auction_no=#{auction_no}
+	</update> -->
+	
+	<!-- 판매자 뽑아내기 -->
+	<!--<select id="selectSeller" resultType="String" parameterType="String">
+	  select s.seller_name from seller s,auction a where s.seller_no=a.seller_no and auction_no=#{auction_no}
+	</select> -->
+</mapper>
+
