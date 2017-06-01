@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="kokofarm.member.mapper.MemberMapper">
+	<cache />
+
+<!-- <insert id="insertMember" parameterType="Member">
+	insert into Member  values(#{member_id}, PACK_ENCRYPTION_DECRYPTION.FUNC_ENCRYPT(#{member_password}) , #{member_name}, #{member_email},
+					 #{member_phoneNum},#{member_zipcode},#{member_address1}, #{member_address2},
+					#{member_account}, '일반', SYSDATE, #{cart_No},#{seller_no})			
+					
+</insert>
+
+<select id="idcheck" parameterType="String" resultType="int">
+	select count(*) from member where member_id = #{member_id}
+</select>
+
+<select id = "logincheck" parameterType="java.util.HashMap" resultType="int">
+	select count(*) from member 
+		where member_id=#{member_id} and member_password=PACK_ENCRYPTION_DECRYPTION.FUNC_ENCRYPT(#{member_password})
+</select>
+
+<select id = "selectMember" parameterType="String" resultType="Member">
+	select * from member where member_id=#{member_id}
+</select>
+
+<select id="listJoinedMember" resultType="Member" parameterType="MemberSearch">
+	select * from member
+	동적커리문
+	
+	<if test="area !=null">
+		<where>
+			member_id LIKE %검색% OR member_name LIKE %검색% OR
+				member_email LIKE %검색% OR member_zipcode LIKE %검색% OR
+				member_phoneNum LIKE %검색% OR member_address2 LIKE %검색% OR
+				member_account LIKE %검색% OR join_date LIKE %검색% OR
+			
+			<foreach collection="area" item="item" separator="OR" 
+			open="(" close=")">
+				${item} LIKE #{searchKey}
+			
+			</foreach>
+	
+		</where>
+	</if>
+	
+</select>
+
+
+	<select id="countMember" parameterType="MemberSearch" resultType="int">
+		select count(*) from member
+		<if test="area !=null">
+			<where>
+				<foreach collection="area" item="item" separator="OR" open="("
+								close=")">
+						${item} LIKE #{searchKey}
+				
+				</foreach>
+			
+			</where>
+		
+		</if>
+	
+	
+	
+	</select>
+
+ -->
+
+
+
+	</mapper>

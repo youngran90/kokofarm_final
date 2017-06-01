@@ -16,8 +16,6 @@
 <link href="/resources/owl-carousel/owl.carousel.css" type="text/css" rel="stylesheet" media="screen" />
 <link href="/resources/owl-carousel/owl.transitions.css" type="text/css" rel="stylesheet" media="screen" />
 
-
-
 <script src="/resources/javascript/jquery-2.1.1.min.js" type="text/javascript"></script>
 <script src="/resources/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 <script src="/resources/javascript/jstree.min.js" type="text/javascript"></script>
@@ -25,12 +23,8 @@
 <script src="/resources/javascript/common.js" type="text/javascript"></script>
 <script src="/resources/javascript/global.js" type="text/javascript"></script>
 <script src="/resources/owl-carousel/owl.carousel.min.js" type="text/javascript"></script>
-
-
   
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
-
-
 
 </head>
 <body>
