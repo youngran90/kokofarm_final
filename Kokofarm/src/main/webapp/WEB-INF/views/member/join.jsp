@@ -3,6 +3,33 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
+      <style>
+.error{
+color: "red"
+}
+</style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+ <script type="text/javascript">
+	$(function(){
+	$("#joinBtn").on("click",function(){
+		
+		
+		
+		
+		
+		document.joinForm.submit();
+	})
+	
+
+	
+});
+	
+
+</script>
+    
+    
+    
     <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
     function sample6_execDaumPostcode() {
@@ -72,14 +99,15 @@
             <div class="column-block">
                 <div class="columnblock-title">Account</div>
                 <div class="account-block">
-                    <div class="list-group"> <a class="list-group-item" href="login.html">Login</a> <a class="list-group-item" href="register.html">Register</a> <a class="list-group-item" href="forgetpassword.html">Forgotten Password</a> <a class="list-group-item" href="#">My Account</a> <a class="list-group-item" href="#">Address Book</a> <a class="list-group-item" href="#">Wish List</a> <a class="list-group-item" href="#">Order History</a> <a class="list-group-item" href="download">Downloads</a> <a class="list-group-item" href="#">Reward Points</a> <a class="list-group-item" href="#">Returns</a> <a class="list-group-item" href="#">Transactions</a> <a class="list-group-item" href="#">Newsletter</a><a class="list-group-item last" href="#">Recurring payments</a> </div>
+                    <div class="list-group"> <a class="list-group-item" href="login.html">Login</a> 
+                    <a class="list-group-item" href="register.html">Register</a> <a class="list-group-item" href="forgetpassword.html">Forgotten Password</a> <a class="list-group-item" href="#">My Account</a> <a class="list-group-item" href="#">Address Book</a> <a class="list-group-item" href="#">Wish List</a> <a class="list-group-item" href="#">Order History</a> <a class="list-group-item" href="download">Downloads</a> <a class="list-group-item" href="#">Reward Points</a> <a class="list-group-item" href="#">Returns</a> <a class="list-group-item" href="#">Transactions</a> <a class="list-group-item" href="#">Newsletter</a><a class="list-group-item last" href="#">Recurring payments</a> </div>
                 </div>
             </div>
         </div>
         <div class="col-sm-9" id="content">
             <h1>회원 가입</h1>
             <p>이미 계정이 가입되어 있으면. <a href="login">Login page</a>.</p>
-            <form:form class="form-horizontal" enctype="multipart/form-data" method="post" action="join"  commandName="MemberCommand">
+            <form:form class="form-horizontal" enctype="multipart/form-data" method="post" action="join"  commandName="MemberCommand" name="joinForm">
                 <fieldset id="account">
                     <legend>정보 입력</legend>
                     <div style="display: none;" class="form-group required">
@@ -95,25 +123,30 @@
                     <div class="form-group required">
                         <label for="input-id" class="col-sm-2 control-label">I D</label>
                         <div class="col-sm-10">
-                            <form:input type="text" class="form-control" id="member_id" placeholder="아이디" value="" path="member_id"/>
+                            <form:input type="text" class="form-control" id="member_id" placeholder="아이디         6~15자 특수문자 사용금지" value="" path="member_id"/>
+                            	<form:errors path="member_id" cssClass="error"/>
+                          	
                         </div>
                     </div>
                     <div class="form-group required">
                         <label for="input-name" class="col-sm-2 control-label">이 름</label>
                         <div class="col-sm-10">
                             <form:input type="text" class="form-control" id="member_name" placeholder="이름" value="" path="member_name"/>
+                            <form:errors path="member_name" cssClass="error"/>
                         </div>
                     </div>
                     <div class="form-group required">
                         <label for="input-email" class="col-sm-2 control-label">E-Mail</label>
                         <div class="col-sm-10">
                             <form:input type="email" class="form-control" id="member_email" placeholder="E-Mail" value="" path="member_email"/>
+                            <form:errors path="member_email" cssClass="error"/>
                         </div>
                     </div>
                     <div class="form-group required">
                         <label for="input-telephone" class="col-sm-2 control-label">핸드폰번호</label>
                         <div class="col-sm-10">
                             <form:input type="tel" class="form-control" id="member_phoneNum" placeholder="Telephone" value="" path="member_phoneNum"/>
+                     	  <form:errors path="member_phoneNum" cssClass="error"/>	
                         </div>
                     </div>
                  
@@ -180,7 +213,7 @@
                     <div class="pull-right">I have read and agree to the <a class="agree" href="#"><b>Privacy Policy</b></a>
                         <input type="checkbox" value="1" name="agree">
                         &nbsp;
-                        <input type="submit" class="btn btn-primary" value="회원가입">
+                        <input type="button" class="btn btn-primary" id = "joinBtn" value="회원가입">
                     </div>
                 </div>
             </form:form>
