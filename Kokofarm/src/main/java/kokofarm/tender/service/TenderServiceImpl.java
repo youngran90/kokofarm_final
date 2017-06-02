@@ -24,22 +24,30 @@ public class TenderServiceImpl implements TenderService {
 	}
 
 	@Override
-	public AuctionVO selectAuctionProduct(String auction_no) throws Exception {
+	public AuctionVO selectAuctionProduct(int auction_no) throws Exception {
 		return dao.selectAuctionProduct(auction_no);
 	}
 
 	@Override
-	public Integer selectCurrentPrice(String auction_no) throws Exception {
+	public Integer selectCurrentPrice(int auction_no) throws Exception {
 		return dao.selectCurrentPrice(auction_no);
 	}
 
 	@Override
-	public List<TenderVO> AllTender(String auctioin_no) throws Exception {
+	public List<TenderVO> AllTender(int auctioin_no) throws Exception {
 		return dao.AllTender(auctioin_no);
 	}
-	
-	
-	
-	
+
+	@Override
+	public void insertSuccess(int tender_no) throws Exception {
+		dao.insertSuccess(tender_no);
+		
+	}
+
+	@Override
+	public void updateAuctionResult(int auction_no) throws Exception {
+		dao.updateAuctionResult(auction_no);
+		
+	}
 
 }

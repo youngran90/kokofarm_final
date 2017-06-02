@@ -3,7 +3,7 @@ package kokofarm.tender.domain;
 import java.io.Serializable;
 
 public class AuctionVO implements Serializable{
-	private String auction_no;
+	private int auction_no;
 	private String auction_name;
 	private String start_date;
 	private String end_date;
@@ -14,12 +14,7 @@ public class AuctionVO implements Serializable{
 	private String auction_result;
 	private String auction_detailImg;
 	private String auction_detailImg2;
-	public String getAuction_no() {
-		return auction_no;
-	}
-	public void setAuction_no(String auction_no) {
-		this.auction_no = auction_no;
-	}
+	
 	public String getAuction_name() {
 		return auction_name;
 	}
@@ -80,6 +75,12 @@ public class AuctionVO implements Serializable{
 	public void setAuction_detailImg2(String auction_detailImg2) {
 		this.auction_detailImg2 = auction_detailImg2;
 	}
+	public int getAuction_no() {
+		return auction_no;
+	}
+	public void setAuction_no(int auction_no) {
+		this.auction_no = auction_no;
+	}
 	@Override
 	public String toString() {
 		return "AuctionVO [auction_no=" + auction_no + ", auction_name=" + auction_name + ", start_date=" + start_date
@@ -88,7 +89,7 @@ public class AuctionVO implements Serializable{
 				+ auction_result + ", auction_detailImg=" + auction_detailImg + ", auction_detailImg2="
 				+ auction_detailImg2 + "]";
 	}
-	
+
 	
 
 }

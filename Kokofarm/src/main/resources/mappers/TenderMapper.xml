@@ -6,7 +6,7 @@
 	<cache />
 	
 	<!-- 경매 상품 보여주기 -->
-	 <select id="selectAuctionProduct" resultType="AuctionVO" parameterType="String">
+	 <select id="selectAuctionProduct" resultType="AuctionVO" parameterType="Integer">
 	  select * from auction where auction_no=#{auction_no}
 	  </select> 
 	  <!-- 경매 리스트가 완성되면 where절로 경매 번호를 받아와 그 경매번호에 대한
@@ -24,19 +24,25 @@
 	
 	 	
 	<!-- 현재가 뽑아내기 -->
-	 <select id="selectCurrentPrice" resultType="Integer" parameterType="String">
+	 <select id="selectCurrentPrice" resultType="Integer" parameterType="Integer">
 	  select max(tender_price) from tender where auction_no=#{auction_no}
 	</select>
 	
 	<!-- 입찰내역 뽑아내기 -->
-	<select id="AllTender" resultType="TenderVO" parameterType="String">
-	  select member_id, tender_date, tender_price from tender where auction_no=#{auction_no}
+	<select id="AllTender" resultType="TenderVO" parameterType="Integer">
+	  select * from tender where auction_no=#{auction_no}
 	</select>
 	
-	<!-- 낙찰자 뽑아내기 -->
-	<!-- <select id="selectSuccess" resultType="Tender" parameterType="map">
-	  select * from tender where auction_no=#{a} and tender_price=#{b}
-	</select> -->
+	<!-- 낙찰 -->
+	<insert id="insertSuccess" parameterType="Integer">
+	  insert into success(success_no, tender_no, pay_state)
+	   values(success_seq.nextval, #{tender_no}, null)
+	</insert>
+	
+	<!-- 유찰 확정 -->
+	<update id="updateAuctionResult" parameterType="Integer">
+	  update auction set auction_result='유찰' where auction_no=#{auction_no}
+	</update>
 	
 	<!-- 상한가 뽑아내기 -->
 	<!-- <select id="selectPriceUp" resultType="int" parameterType="String">
@@ -53,10 +59,6 @@
 	  update tender set success_no=success_seq.nextval where tender_price=#{tender_price}
 	</update> -->
 	
-	<!-- 유찰 확정 -->
-	<!-- <update id="updateAuctionResult" parameterType="String">
-	  update auction set auction_result='유찰' where auction_no=#{auction_no}
-	</update> -->
 	
 	<!-- 판매자 뽑아내기 -->
 	<!--<select id="selectSeller" resultType="String" parameterType="String">
