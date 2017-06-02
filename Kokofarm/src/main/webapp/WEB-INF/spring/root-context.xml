@@ -50,7 +50,7 @@
       </bean>
       
       <tx:annotation-driven/>
-		
+	<mvc:annotation-driven></mvc:annotation-driven>
 		
 		
 </beans>
