@@ -5,6 +5,13 @@
 <mapper namespace="kokofarm.tender.mappers.TenderMapper">
 	<cache />
 	
+	<!-- 경매 상품 보여주기 -->
+	 <select id="selectAuctionProduct" resultType="AuctionVO" parameterType="String">
+	  select * from auction where auction_no=#{auction_no}
+	  </select> 
+	  <!-- 경매 리스트가 완성되면 where절로 경매 번호를 받아와 그 경매번호에 대한
+	  것만 뽑아오겠다.  where auction_no=#{auction_no} --> 
+	
 	<!-- 데이터 삽입(입찰자) -->
 	<insert id="insertTender" parameterType="TenderVO">
 	 insert into tender(
@@ -15,18 +22,16 @@
     )  
 	</insert>
 	
-	<!-- 경매 상품 보여주기 -->
-	<!-- <select id="selectAuctionProduct" resultType="Auction" parameterType="String">
-	  select * from auction where auction_no=#{auction_no}
-	  </select> -->
-	  <!-- 경매 리스트가 완성되면 where절로 경매 번호를 받아와 그 경매번호에 대한
-	  것만 뽑아오겠다.  where auction_no=#{auction_no} --> 
-	
-	
+	 	
 	<!-- 현재가 뽑아내기 -->
-	<!-- <select id="selectCurrentPrice" resultType="Integer" parameterType="String">
+	 <select id="selectCurrentPrice" resultType="Integer" parameterType="String">
 	  select max(tender_price) from tender where auction_no=#{auction_no}
-	</select> -->
+	</select>
+	
+	<!-- 입찰내역 뽑아내기 -->
+	<select id="AllTender" resultType="TenderVO" parameterType="String">
+	  select member_id, tender_date, tender_price from tender where auction_no=#{auction_no}
+	</select>
 	
 	<!-- 낙찰자 뽑아내기 -->
 	<!-- <select id="selectSuccess" resultType="Tender" parameterType="map">

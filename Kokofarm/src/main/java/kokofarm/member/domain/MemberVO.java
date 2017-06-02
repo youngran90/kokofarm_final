@@ -1,18 +1,43 @@
 package kokofarm.member.domain;
 
-public class MemberDTO{
+import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+
+public class MemberVO{
+	
+	@NotEmpty(message ="입력")
+	/*@Pattern(regexp ="^[a-z0-9A-Z_]{6,15}$", message= "6~15자 특수문자 사용금지")*/
 	private String member_id;
+	
+	@NotEmpty
+	@Pattern(regexp = "^(?=.*[a-zA-Z])((?=.*\\d)|(?=.*\\W)).{5,20}$",message = "6~15자 영어,숫자포함")
 	private String member_password;
-	private String member_name;
+	
+	@NotEmpty
+	@Pattern(regexp="^[가-힣]{2,8}$", message="한글 외 사용금지")
+		private String member_name;
+	
+	@NotEmpty
+	/*@Pattern(regexp = "^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i", message ="이메일 형식이 옳바르지 않습니다.")*/
+	@Email(message="올바른 이메일 형식이 아닙니다.")
 	private String member_email;
+	
+	@NotEmpty
+	@Pattern(regexp = "^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}$", message = "핸드폰 번호를 다시 입력해 주세요")
 	private String member_phoneNum;
+	
 	private String member_zipcode;
 	private String member_address1;
 	private String member_address2;
 	private String member_account;
-	private String member_grade;
 	private String join_date;
 	private String member_point;
+	
+	
+	public MemberVO(){
+	}
 				
 	public String getMember_point() {
 		return member_point;
@@ -22,8 +47,7 @@ public class MemberDTO{
 		this.member_point = member_point;
 	}
 
-	public MemberDTO(){
-		}
+	
 	
 	public String getJoin_date() {
 		return join_date;
@@ -85,22 +109,17 @@ public class MemberDTO{
 	public void setMember_account(String member_account) {
 		this.member_account = member_account;
 	}
-	public String getMember_grade() {
-		return member_grade;
-	}
-	public void setMember_grade(String member_grade) {
-		this.member_grade = member_grade;
-	}
-	
+
 	@Override
 	public String toString() {
-		return "MemberDTO [member_id=" + member_id + ", member_password=" + member_password + ", member_name="
+		return "MemberVO [member_id=" + member_id + ", member_password=" + member_password + ", member_name="
 				+ member_name + ", member_email=" + member_email + ", member_phoneNum=" + member_phoneNum
 				+ ", member_zipcode=" + member_zipcode + ", member_address1=" + member_address1 + ", member_address2="
-				+ member_address2 + ", member_account=" + member_account + ", member_grade=" + member_grade
-				+ ", join_date=" + join_date + ", member_point=" + member_point + "]";
+				+ member_address2 + ", member_account=" + member_account + ", join_date=" + join_date
+				+ ", member_point=" + member_point + "]";
 	}
 
+	
 	
 	
 	

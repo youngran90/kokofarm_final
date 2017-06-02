@@ -1,8 +1,9 @@
 package kokofarm.tender.domain;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class TenderVO {
+public class TenderVO implements Serializable{
 	private int tender_no;
 	private String member_id;
 	private int tender_price;

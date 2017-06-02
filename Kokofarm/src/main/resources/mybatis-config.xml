@@ -9,7 +9,8 @@
     <package name="kokofarm.cart.domain"/> 
     <package name="kokofarm.tender.domain"/>
     <package name="kokofarm.auction.domain"/>    
-           
+    <package name="kokofarm.member.domain"/>    
+     
   </typeAliases>
 
 
