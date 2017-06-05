@@ -9,9 +9,15 @@
 <insert id="joinMember" parameterType="MemberVO">
 	insert into Member  values(#{member_id}, PACK_ENCRYPTION_DECRYPTION.FUNC_ENCRYPT(#{member_password}) , #{member_name}, #{member_email},
 					 #{member_phoneNum},#{member_zipcode},#{member_address1}, #{member_address2},
-					#{member_account}, SYSDATE)			
+					#{member_account}, SYSDATE,0)			
 					
 </insert>
+
+<select id = "logincheck" resultType="MemberVO" parameterType="LoginDTO">
+	select * from member 
+		where member_id=#{member_id} and member_password=PACK_ENCRYPTION_DECRYPTION.FUNC_ENCRYPT(#{member_password})
+</select>
+
 
 <!--<select id="idcheck" parameterType="String" resultType="int">
 	select count(*) from member where member_id = #{member_id}

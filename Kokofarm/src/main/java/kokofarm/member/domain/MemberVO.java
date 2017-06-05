@@ -1,30 +1,42 @@
 package kokofarm.member.domain;
 
+import java.io.Serializable;
+
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
-public class MemberVO{
+public class MemberVO implements Serializable{
 	
-	@NotEmpty(message ="입력")
-	/*@Pattern(regexp ="^[a-z0-9A-Z_]{6,15}$", message= "6~15자 특수문자 사용금지")*/
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+
+
+
+	public MemberVO(){
+	}
+	
+	
+	@Pattern(regexp ="^[a-z0-9A-Z_]{6,15}$", message= "6~15자 특수문자 사용금지")
 	private String member_id;
 	
-	@NotEmpty
+	
 	@Pattern(regexp = "^(?=.*[a-zA-Z])((?=.*\\d)|(?=.*\\W)).{5,20}$",message = "6~15자 영어,숫자포함")
 	private String member_password;
 	
-	@NotEmpty
+
 	@Pattern(regexp="^[가-힣]{2,8}$", message="한글 외 사용금지")
 		private String member_name;
 	
-	@NotEmpty
+	
 	/*@Pattern(regexp = "^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i", message ="이메일 형식이 옳바르지 않습니다.")*/
 	@Email(message="올바른 이메일 형식이 아닙니다.")
 	private String member_email;
 	
-	@NotEmpty
 	@Pattern(regexp = "^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}$", message = "핸드폰 번호를 다시 입력해 주세요")
 	private String member_phoneNum;
 	
@@ -36,8 +48,7 @@ public class MemberVO{
 	private String member_point;
 	
 	
-	public MemberVO(){
-	}
+	
 				
 	public String getMember_point() {
 		return member_point;

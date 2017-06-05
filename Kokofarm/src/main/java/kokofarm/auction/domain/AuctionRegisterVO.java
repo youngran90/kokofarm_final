@@ -1,7 +1,7 @@
 package kokofarm.auction.domain;
 
 public class AuctionRegisterVO {
-	private String auction_no;
+	private int auction_no;
 	private String auction_name;
 	private String auction_group;
 	private String start_date;
@@ -11,10 +11,13 @@ public class AuctionRegisterVO {
 	private String auction_unit;
 	private String auction_area;
 	private String auction_content;
-	public String getAuction_no() {
+	private String auction_title_img;
+	
+	
+	public int getAuction_no() {
 		return auction_no;
 	}
-	public void setAuction_no(String auction_no) {
+	public void setAuction_no(int auction_no) {
 		this.auction_no = auction_no;
 	}
 	public String getAuction_name() {
@@ -71,13 +74,21 @@ public class AuctionRegisterVO {
 	public void setAuction_content(String auction_content) {
 		this.auction_content = auction_content;
 	}
+	
+	public String getAuction_title_img() {
+		return auction_title_img;
+	}
+	public void setAuction_title_img(String auction_title_img) {
+		this.auction_title_img = auction_title_img;
+	}
 	@Override
 	public String toString() {
-		return "AuctionVO [auction_no=" + auction_no + ", auction_name=" + auction_name + ", auction_group="
+		return "AuctionRegisterVO [auction_no=" + auction_no + ", auction_name=" + auction_name + ", auction_group="
 				+ auction_group + ", start_date=" + start_date + ", end_date=" + end_date + ", auction_up=" + auction_up
 				+ ", auction_down=" + auction_down + ", auction_unit=" + auction_unit + ", auction_area=" + auction_area
-				+ ", auction_content=" + auction_content + "]";
+				+ ", auction_content=" + auction_content + ", auction_title_img=" + auction_title_img + "]";
 	}
+	
 	
 	
 }

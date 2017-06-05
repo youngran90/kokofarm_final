@@ -11,24 +11,37 @@
    function timer(){ 
 	   if(time<=0){
 		   clearInterval(tid);
+		   time=0;
 		   document.getElementById('tend_time').innerHTML="0일0시간0분0초";
 	   } 
 	   m= Math.floor(time/(24*60*60))+"일"+Math.floor((time%(24*60*60)/(60*60)))+"시간"+Math.floor(((time%3600)/60))+"분"+time%60+"초";
 	   document.getElementById('tend_time').innerHTML=m;
 	   time--;
-	   
    } 
+   
  
  $(function(){
-	 tid=setInterval(timer,1000); 
- 
+	 tid=setInterval(timer,1000);
+	 
+	 $('#tenderinfoview').hide();
+	 
+	 $('#tenderinfo').on('click',function(){
+		$('#tenderinfoview').show(); 
+	 });
+	
+	 $('#tenderinfoend').on('click',function(){
+		 $('#tenderinfoview').hide();
+	 });
  })
+ 
+ 
+ 
 </script>
 <div class="container">
   <ul class="breadcrumb">
     <li><a href="index.html"><i class="fa fa-home"></i></a></li>
-    <li><a href="category.html">Desktops</a></li>
-    <li><a href="#">lorem ippsum dolor dummy</a></li>
+    <li><a href="category.html">경매</a></li>
+    <li><a href="#">경매상세</a></li>
   </ul>
   <div class="row">
     <div id="column-left" class="col-sm-3 hidden-xs column-left">
@@ -364,14 +377,30 @@
               <span> ${current_price }</span></li>
             <li>
               <label>입찰수 :</label>
-              <span> 입찰수 적는 곳 </span></li>
+              <span> ${tender_number } </span></li>
             <li>
-              <label><a href="#">경매내역보기</a></label>
-              <span> </span></li>
+              <label><a href="#" id="tenderinfo">경매내역보기</a></label>
+             <!--  <label><input type="button" id="tenderinfo" value="경매내역보기"></label> -->
+              <div id="tenderinfoview"> 
+                <table id="tenderviewtable" border="1">
+                  <tr>
+                    <th>입찰자ID</th>
+                    <th>입찰일자</th>
+                    <th>입찰가격</th>
+                  </tr>
+                  <c:forEach items="${list}" var="tenderVO">
+					<tr>
+					  <td>${tenderVO.member_id}</td>
+					  <td>${tenderVO.tender_date}</td>
+					  <td>${tenderVO.tender_price}</td>
+					</tr>
+				  </c:forEach>
+                </table>
+                <a href="#" id="tenderinfoend" style="margin-left:245px">접기</a>
+              </div></li>
             <li>
               <label>남은시간 :</label>
               <span id="tend_time"></span></li>
-    
           </ul>
           <hr>
           <p class="product-desc"></p>

@@ -3,10 +3,27 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="kokofarm.auction.mapper.auctionMapper">
+<mapper namespace="kokofarm.auction.mappers.auctionMapper">
 
+	<insert id="register" parameterType="AuctionRegisterVO">
+ 		insert into auction(auction_no, auction_name, auction_group, start_date, end_date, auction_up,
+ 							auction_down, auction_unit, auction_area, auction_content, auction_title_img
+ 							)
+ 			values(auction_no.nextval, #{auction_name}, #{auction_group},
+ 						to_date(#{start_date}, 'yyyy-mm-dd hh24:mi:ss'), 
+ 						to_date(#{end_date}, 'yyyy-mm-dd hh24:mi:ss'), #{auction_up}, #{auction_down},
+ 						#{auction_unit}, #{auction_area}, #{auction_content}, null
+ 				  )
+ 	</insert>
  	
-  
+ 	<select id="detail" resultType="AuctionRegisterVO">
+ 		select * from auction where auction_no=#{auction_no}
+ 	</select>
+ 	
+ 	<select id="list" resultType="AuctionRegisterVO">
+ 		select auction_no, auction_name, auction_up, auction_down, auction_title_img
+ 		from auction where auction_no > 0
+ 	</select>
 </mapper>  
 
 
