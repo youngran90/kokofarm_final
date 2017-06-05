@@ -1,8 +1,8 @@
 package kokofarm.product.service;
 
 import java.util.List;
+import java.util.UUID;
 
-import kokofarm.product.domain.ReplyVO;
 import kokofarm.product.domain.ProductVO;
 
 public interface ProductService {
@@ -17,5 +17,6 @@ public interface ProductService {
 	
     public void delete_product(String product_no)throws Exception;
     
+    public String create_UUID() throws Exception;
 
 }

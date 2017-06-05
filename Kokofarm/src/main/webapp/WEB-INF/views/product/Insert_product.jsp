@@ -7,6 +7,7 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
 <script src='//rawgit.com/tuupola/jquery_chained/master/jquery.chained.min.js'></script>
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
+<script type="text/javascript" src="/resources/ckeditor/ckeditor.js"></script>
 
 <script type="text/javascript"> 
 
@@ -24,39 +25,46 @@ $(function() {
 });
 
 function submit1(){
-	
+
 	var product_name = $('#product_name').val();
 	var product_unit = $('#product_unit').val();
 	var product_price = $('#product_price').val();
 	var product_harvest = $('#testDatepicker').val();
 	var product_mainimage = $('#product_mainimage').val();
-	var product_detailimage = $('#product_detailimage').val();
 	var product_sellerimage = $('#product_sellerimage').val();
-	
+	alert("dd");
+
+	var ca1 = $("#ca1 option:selected").val();
+	var ca2 = $("#ca2 option:selected").val();
+	var ca3 = $("#ca3 option:selected").val();
+
 	if(product_name == ''){
 		alert("상품명을 입력해주세요");
+		return;
 	
 	}else if(product_unit == ''){
 		alert("상품 단위를 입력해주세요");
+		return;
 		
 	}else if(product_price == ''){
 		alert("상품 단가를 입력해주세요");
+		return;
 		
 	}else if(product_harvest == ''){
 		alert("수확일을 선택해주세요");
+		return;
 		
 	}else if(product_mainimage == ''){
 		alert("메인이미지를 등록하세요");
-		
-	}else if(product_detailimage == ''){
-		alert("상세이미지를 등록하세요");
+		return;
 		
 	}else if(product_sellerimage == ''){
-		alert("판매업자 이미지를 등록하세요");
+		alert("상세이미지를 등록하세요");
+		return;
 		
 	}else{
 		alert("성공");
-		document.product_form.submit();
+		document.getElementById('registerForm').submit();
 	}
 	
 }
@@ -64,21 +72,49 @@ function submit1(){
 
 	 $("#ca2").chained("#ca1");
 	 $("#ca3").chained("#ca2");
-
+	
  })
  
+ var ckeditor_config = { 
+		resize_enabled : false, // 에디터 크기를 조절하지 않음 
+		enterMode : CKEDITOR.ENTER_BR , // 엔터키를 <br> 로 적용함. 
+		shiftEnterMode : CKEDITOR.ENTER_P , // 쉬프트 + 엔터를 <p> 로 적용함. 
+		toolbarCanCollapse : true , removePlugins : "elementspath", // DOM 출력하지 않음 
+		filebrowserUploadUrl: '/product/file_upload',
+
+		toolbar : [ [ 'Source', '-' , 'NewPage', 'Preview' ],
+			[ 'Cut', 'Copy', 'Paste', 'PasteText', '-', 'Undo', 'Redo' ], 
+			[ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript'],
+			[ 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock' ],
+			'/',
+			[ 'Styles', 'Format', 'Font', 'FontSize' ], 
+			[ 'TextColor', 'BGColor' ], 
+			[ 'Image', 'Flash', 'Table' , 'SpecialChar' , 'Link', 'Unlink'] ] 
+			};
+
+
+
+var editor = null; jQuery(function() { // ckeditor 적용 
+	editor = CKEDITOR.replace( "contents" , ckeditor_config ); 
+	}); 
+
+
+function form_save(form) { 
+	editor.updateElement();
+}
+ 
+window.parent.CKEDITOR.tools.callFunction('${CKEditorFuncNum}', '${file_path}'); 
+
+function onlyNumber(obj) {
+    $(obj).keyup(function(){
+         $(this).val($(this).val().replace(/[^0-9]/g,""));
+         $(this).apend()
+
+    }); 
+}
 </script>
 
-<style>
-.fileDrop {
-  width: 80%;
-  height: 100px;
-  border: 1px dotted gray;
-  background-color: lightslategrey;
-  margin: auto;
-  
-}
-</style>
+
 
 <div class="container">
     <ul class="breadcrumb">
@@ -98,7 +134,7 @@ function submit1(){
         <div class="col-sm-9" id="content">
             <h1>상품등록</h1>
             <P><strong></strong></P>
-            <form class="form-horizontal" enctype="multipart/form-data" method="post" action="register.html">
+            <form id="registerForm" class="form-horizontal" role="form" method="post" action="Insert_product" enctype="multipart/form-data">
                 <fieldset id="account">
                     <legend>상품카테고리를 정확하게 입력해주세요</legend>
                     <div style="display: none;" class="form-group required">
@@ -114,7 +150,7 @@ function submit1(){
                     <div class="form-group required">
                         <label for="input-product_name" class="col-sm-2 control-label">상품 이름</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="product_name" placeholder="상품이름" value="" name="product_name">
+                            <input type="text" class="form-control" id="product_name" placeholder="상품이름" value="1"  name="product_name">
                         </div>
                     </div>
                    
@@ -123,12 +159,12 @@ function submit1(){
                         <div class="col-sm-10">
 							<select  id="ca1" name="ca1">
 								  <option value="">-- 대분류 --</option>
-								  <option value="vegetable">야채</option>
+								  <option value="vegetable" selected="selected">야채</option>
 								  <option value="fruit">과일</option>
 							</select>
 							<select id="ca2" name="ca2">
 								  <option value="">-- 중분류 --</option>
-								  <option class="vegetable" value=vs>쌈/야채</option>
+								  <option class="vegetable" value="vs" selected="selected">쌈/야채</option>
 								  <option class="vegetable" value="vf">열매채소</option>
 								  <option class="vegetable" value="vr">뿌리채소</option>
 								  <option class="fruit" value="fs">과일</option>
@@ -136,7 +172,7 @@ function submit1(){
 							</select>
 							<select id="ca3" name="ca3">
 								  <option value="">-- 소분류 --</option>
-								  <option class="vs" value="vs_1">상추/깻잎</option>
+								  <option class="vs" value="vs_1" selected="selected">상추/깻잎</option>
 								  <option class="vs" value="vs_2">치커리/케일</option>
 								  <option class="vs" value="vs_3">쑥갓/청겨자</option>
 								  <option class="vf" value="vf_1">가지/오이</option>
@@ -168,14 +204,14 @@ function submit1(){
                      <div class="form-group required">
                         <label for="input-product_price" class="col-sm-2 control-label">상품 가격</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="input-lastname" placeholder="단위 당  ex)10000 (1kg기준) " value="" name="product_price">
+                            <input type="text" class="form-control" id="input-lastname" placeholder="단위 당  ex)10000 (1kg기준) " value="1" name="product_price"  onkeydown="onlyNumber(this)"/>
                         </div>
                     </div>
                     
                     <div class="form-group required">
                         <label for="input-product_unit" class="col-sm-2 control-label">단위</label>
                         <div class="col-sm-10">
-                            <input type=text id="product_unit" placeholder="ex)1" value="" name="product_unit">
+                            <input type=text id="product_unit" placeholder="ex)1" value="1"  name="product_unit" onkeydown="onlyNumber(this)"/>
                         	<select id="unit" name="unit">
 								  <option value="kg">kg</option>
 								  <option value="g">g</option>
@@ -186,13 +222,13 @@ function submit1(){
                     <div class="form-group required">
                         <label for="input-product_area" class="col-sm-2 control-label">생산지</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="product_area" placeholder="생산지" value="" name="product_area">
+                            <input type="text" class="form-control" id="product_area" placeholder="생산지" value="1" name="product_area">
                         </div>
                     </div>
                     <div class="form-group required">
                         <label for="input-producer" class="col-sm-2 control-label">생산자</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="producer" placeholder="생산자" value="" name="producer">
+                            <input type="text" class="form-control" id="producer" placeholder="생산자" value="1"  name="producer">
                         </div>
                     </div>
                     
@@ -203,6 +239,7 @@ function submit1(){
                         </div>
                     </div>
                 </fieldset>
+                
                   <fieldset>
                    <legend>상품 이미지
                     <sub>* 메인이미지는 자동으로 작은 이미지로 변경되어 리스트에 반영됩니다.</sub>
@@ -210,29 +247,28 @@ function submit1(){
                     <div class="form-group required">
                         <label for="input-product_mainimage" class="col-sm-2 control-label">상품메인이미지</label>
                         <div class="col-sm-10">
-                           <input type="file" id="product_mainimage" name="product_mainimage">
+                           <input multiple="multiple" type="file" id="product_mainimage" name="file1">
                         </div>
                         </div>
-                          <div class="form-group">
-                        <label for="input-product_detailimage" class="col-sm-2 control-label">상세이미지</label>
+                         
+                           <div class="form-group">
+                        <label for="input-s_contents" class="col-sm-2 control-label">메인 간단 설명</label>
                         <div class="col-sm-10">
-                           <input type="file" id="product_detailimage" name="product_detailimage">
+                            <input type="text" class="form-control" id="s_contents" placeholder="메인이미지 옆 간단설명을 입력해주세요" value="1" name="s_contents">
                         </div>
-                        </div>
+                    </div>
                           <div class="form-group required">
                         <label for="input-product_sellerimage" class="col-sm-2 control-label">판매자이미지</label>
                         <div class="col-sm-10">
-                           <input type="file" id="product_sellerimage" name="product_sellerimage">
+                           <input multiple="multiple" type="file" id="product_sellerimage" name="file2">
                         </div>
                         </div>
                   
                   <div class="form-group">
-			<label for="exampleInputEmail1">File DROP Here</label>
-			<div class="fileDrop"></div>
+			<label for="exampleInputEmail1" style="margin-left: 10%">상세파일</label>
+			<textarea id="contents" name="contents"></textarea>
 		</div>
-			
-           	       </fieldset>
-              
+ 	       </fieldset>
                 
                 <fieldset>
                  <legend></legend>
@@ -246,97 +282,7 @@ function submit1(){
     </div>
 </div>
 
-<script type="text/javascript" src="/resources/upload/js/upload.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 
-<script id="template" type="text/x-handlebars-template">
-<li>
-  <span><img src="{{imgsrc}}" alt="Attachment"></span>
-  <div class="mailbox-attachment-info">
-	<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
-	<a href="{{fullName}}" 
-     class="btn btn-default btn-xs pull-right delbtn"><i class="fa fa-fw fa-remove"></i></a>
-	</span>
-  </div>
-</li>                
-</script>    
-
-<script>
-
-var template = Handlebars.compile($("#template").html());
-
-$(".fileDrop").on("dragenter dragover", function(event){
-	event.preventDefault();
-});
-
-
-$(".fileDrop").on("drop", function(event){
-	event.preventDefault();
-	
-	var files = event.originalEvent.dataTransfer.files;
-	
-	var file = files[0];
-
-	var formData = new FormData();
-	
-	formData.append("file", file);	
-	
-	
-	$.ajax({
-		  url: '/uploadAjax',
-		  data: formData,
-		  dataType:'text',
-		  processData: false,
-		  contentType: false,
-		  type: 'POST',
-		  success: function(data){
-			  
-			  var fileInfo = getFileInfo(data);
-			  
-			  var html = template(fileInfo);
-			  
-			  $(".uploadedList").append(html);
-		  }
-		});	
-});
-
-
-$("#registerForm").submit(function(event){
-	event.preventDefault();
-	
-	var that = $(this);
-	
-	var str ="";
-	$(".uploadedList .delbtn").each(function(index){
-		 str += "<input type='hidden' name='files["+index+"]' value='"+$(this).attr("href") +"'> ";
-	});
-	
-	that.append(str);
-
-	that.get(0).submit();
-});
-
-$(".uploadedList").on("click", ".delbtn", function(event){
-	
-	event.preventDefault();
-	
-	var that = $(this);
-	 
-	$.ajax({
-	   url:"/deleteFile",
-	   type:"post",
-	   data: {fileName:$(this).attr("href")},
-	   dataType:"text",
-	   success:function(result){
-		   if(result == 'deleted'){
-			   that.closest("li").remove();
-		   }
-	   }
-   });
-});
-
-
-</script>
 
     
     

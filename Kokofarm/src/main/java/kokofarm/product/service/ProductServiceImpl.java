@@ -1,12 +1,12 @@
 package kokofarm.product.service;
 
 import java.util.List;
+import java.util.UUID;
 
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import kokofarm.product.domain.ReplyVO;
 import kokofarm.product.domain.ProductVO;
 import kokofarm.product.persistence.ProductDAO;
 
@@ -18,6 +18,8 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public void insert_product(ProductVO product) throws Exception {
+	/*	String uuid = create_UUID();
+		product.setProduct_no("P-"+uuid);*/
 		dao.insert_Pro(product);
 	}
 
@@ -39,6 +41,12 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public void delete_product(String product_no) throws Exception {
 		dao.delete_pro(product_no);
+	}
+
+	@Override
+	public String create_UUID() throws Exception {
+		      String uuid = UUID.randomUUID().toString().replace("-", "");
+		  return uuid;		
 	}
 
 
