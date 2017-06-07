@@ -97,7 +97,7 @@
       </div>
       <div class="col-sm-4 col-xs-12 header-middle">
         <div class="header-middle-top">
-          <div id="logo"> <a href="index.html"><img src="/resources/image/logo.png" title="E-Commerce" alt="E-Commerce" class="img-responsive" /></a> </div>
+          <div id="logo"> <a href="/"><img src="/resources/image/logo.png" title="E-Commerce" alt="E-Commerce" class="img-responsive" /></a> </div>
         </div>
       </div>
       <div class="col-sm-4 col-xs-12 header-right">
@@ -156,13 +156,13 @@
     </div>
     <div class="navbar-collapse">
       <ul class="main-navigation">
-        <li><a href="index.html"   class="parent"  >홈</a> </li>
+        <li><a href="/"   class="parent"  >홈</a> </li>
         <li><a href="category.html"   class="parent"  >과일</a> </li>
         <li><a href="category.html"   class="parent"  >채소</a> </li>
-        <li><a href="category.html"   class="parent"  >Exotica</a> </li>
-        <li><a href="category.html"   class="parent"  >Groceries</a> </li>
-        <li><a href="category.html"   class="parent"  >Health & Beauty</a> </li>
-        <li><a href="#" class="active parent">Page</a>
+        <li><a href="category.html"   class="parent"  >일반경매</a> </li>
+         <li><a href="category.html"   class="parent" >실시간경매</a> </li>
+        <li><a href="category.html"   class="parent"  >고객센터</a> </li>
+        <li><a href="#" class="active parent">MyPage</a>
           <ul>
             <li><a href="category.html">Category Page</a></li>
             <li><a href="cart.html">Cart Page</a></li>
@@ -173,9 +173,9 @@
             <li><a href="contact.html">Contact Page</a></li>
           </ul>
         </li>
-        <li><a href="blog.html" class="parent"  >Blog</a></li>
+     <!--    <li><a href="blog.html" class="parent"  >Blog</a></li>
         <li><a href="about-us.html" >About us</a></li>
-        <li><a href="contact.html" >Contact Us</a> </li>
+        <li><a href="contact.html" >Contact Us</a> </li> -->
       </ul>
     </div>
   </div>

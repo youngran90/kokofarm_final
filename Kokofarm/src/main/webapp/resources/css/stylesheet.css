@@ -1313,13 +1313,13 @@ h2.price {
 .main-navigation li a {
 	color: #fff;
 	font-family: "Roboto",Arial,Helvetica,sans-serif;
-	font-size: 16px;
+	font-size: 17px;
 	font-weight: 400;
 	letter-spacing: 0.5px;
 }
 .main-navigation li li a {
     font-family: "Roboto",Arial,Helvetica,sans-serif;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 200;
     text-shadow: 0px 0px;
 }
@@ -1331,6 +1331,7 @@ h2.price {
     font-weight: 500;
     padding: 25px;
     position: relative;
+    margin-left : 12px;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
     text-transform: uppercase;
     }
@@ -1340,8 +1341,10 @@ ul.main-navigation {
 	width: 100%;
 	padding: 20px 0;
 	margin: 0;
+	margin-left: 50px;
 	vertical-align: top;
 	text-align: center;
+
 }
 .main-navigation li ul {
 	position: absolute;
