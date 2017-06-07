@@ -977,7 +977,7 @@ pre code {
     }
 
     .col-sm-9 {
-        width: 75%;
+        width: 80%;
     }
 
     .col-sm-8 {
@@ -1599,7 +1599,7 @@ th {
 }
 
 .table {
-    width: 100%;
+    width: auto;
     margin-bottom: 20px;
 }
 
@@ -1641,6 +1641,7 @@ th {
 }
 
 .table-bordered>thead>tr>th,.table-bordered>thead>tr>td {
+	border-bottom-color: #e2704b;
     border-bottom-width: 2px;
 }
 

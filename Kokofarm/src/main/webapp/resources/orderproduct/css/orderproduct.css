@@ -1,0 +1,65 @@
+@CHARSET "UTF-8";
+
+#top_img_box {
+	height: 100px;
+	padding-bottom: 50px;
+}
+
+.op_title {
+	padding-bottom: 15px;
+}
+
+.op_title h3 {
+	font-size: 18px;
+	font-family: YG76;
+	text-indent: 4px;
+	color: #352f29;
+}
+
+.table-bordered b {
+	padding-left: 10px;
+}
+
+.product_price {
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.total_price {
+	color: #38a9a5;
+}
+
+.result_info_box {
+	padding: 25px 0px;
+}
+
+.inbox {
+	background-image:
+		url("/../../resources/orderproduct/image/ord1_amout_bg.gif");
+	background-repeat: no-repeat;
+	background-size: 940px 130px;
+	height: 130px;
+}
+
+.inbox div {
+	float: left;
+	text-align: center;
+	font-size: 24px;
+	width: 33.3%;
+	padding-top: 64px;
+}
+
+.inbox em {
+	font-size: 30px;
+	vertical-align: middle;
+}
+
+.inbox b {
+	margin-left: 10px;
+	font-size: 30px;
+	vertical-align: middle;
+}
+
+.result_total {
+	color: #38a9a5;
+}

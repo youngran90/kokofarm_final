@@ -1,0 +1,241 @@
+@CHARSET "UTF-8";
+
+#top_img_box {
+	height: 100px;
+	padding-bottom: 50px;
+}
+
+.cart_amount {
+	padding-bottom: 15px;
+}
+
+.cart_amount span { /* 상품 개수 알려주는 태그안에 span태그*/
+	font-size: 18px;
+	font-family: YG76;
+	text-indent: 4px;
+	color: #352f29;
+}
+
+.cart_amount em { /* 상품 개수 알려주는 태그안에 em태그 */
+	color: #e2704b;
+	border-bottom: 1px solid #e2704b;
+}
+
+#all_delete a { /* 전체 삭제 */
+	font-size: 12px;
+}
+
+#all_delete a img {
+	position: relative;
+	top: -1px;
+}
+
+#all_del {
+	height: 15px;
+}
+
+#all { /* 전체 선택 체크박스 */
+	width: 16px;
+	height: 16px;
+	background: url("/../../resources/cart/image/input_ch.PNG") no-repeat;
+}
+
+/* 테이블 수량변경 버튼 */
+#change {
+	width: 65px;
+	height: 37px;
+	background:
+		url("http://www.hellonature.net/shop/web/images/content/ord1_btn_cnt_modi.gif")
+		no-repeat;
+	border: none;
+}
+
+.img-thumbnail { /* 장바구니 물품 이미지 크기 */
+	width: 98px;
+	height: 98px;
+}
+
+#product_name { /* 제품명 위치 */
+	margin-left: 20px;
+}
+
+.table-bordered b { /* 가격에 단위 */
+	margin-left: 5px;
+}
+
+.pro_cnt_box {
+	position: relative;
+	left: 27px;
+	width: 65px;
+	height: 35px;
+	float: left;
+}
+
+.amount_box {
+	float: left;
+}
+
+#product_amount {
+	width: 45px;
+	height: 35px;
+}
+
+.cnt_box {
+	float: right;
+	width: 20px;
+	height: 35px;
+}
+
+.cnt_top_box {
+	height: 20px;
+}
+
+.amount_up { /* 수량 증가 */
+	width: 20px;
+	height: 18px;
+	background: url("/../../resources/cart/image/btn_arr3_t_off.gif")
+		no-repeat center;
+}
+
+.amount_down { /* 수량 감소 */
+	position: relative;
+	top: -3px;
+	width: 20px;
+	height: 17px;
+	background: url("/../../resources/cart/image/btn_arr3_b_off.gif")
+		no-repeat center;
+}
+
+.relevant_prod_tit {
+	font-size: 21px;
+	border-top: 1px solid #a7a7a7;
+	border-bottom: 1px solid #a7a7a7;
+	height: 60px;
+	text-align: center;
+	padding-top: 2.2%;
+	margin-top: 30px;
+}
+
+.relevant_box {
+	background-color: #f3f3f3;
+	border: 1px solid #a7a7a7;
+	text-align: center;
+	padding: 30px;
+}
+
+.relevant_box p {
+	line-height: 15px;
+	font-size: 10px;
+	margin: 0px;
+}
+
+.relevant_box b {
+	line-height: 15px;
+	font-size: 10px;
+}
+
+.deli_guide_tit {
+	font-size: 21px;
+	border-top: 1px solid #a7a7a7;
+	border-bottom: 1px solid #a7a7a7;
+	height: 60px;
+	text-align: center;
+	padding-top: 2.2%;
+}
+
+.delivery_area {
+	text-align: center;
+	vertical-align: middle;
+	padding: 10px 30px;
+	border: 1px solid #a7a7a7;
+	background-color: #f3f3f3;
+	height: 250px;
+}
+
+#delivery_1 {
+	float: left;
+	border-right: 1px solid #a7a7a7;
+	padding-left: 5%;
+	padding-right: 14%;
+}
+
+.delivery_area h2 {
+	margin-top: 10px;
+}
+
+.delivery_area p {
+	font-size: 12px;
+	line-height: 15px;
+	margin: 0px;
+	padding: 0px;
+}
+
+.table-bordered th {
+	height: 39px;
+	color: #e2704b;
+}
+
+.table-bordered em {
+	font-size: 13px;
+}
+
+.result_info_box {
+	padding: 25px 0px;
+}
+
+.inbox {
+	background-image: url("/../../resources/cart/image/ord1_amout_bg.gif");
+	background-repeat: no-repeat;
+	background-size: 940px 130px;
+	height: 130px;
+}
+
+.inbox div {
+	float: left;
+	text-align: center;
+	font-size: 24px;
+	width: 33.3%;
+	padding-top: 64px;
+}
+
+.inbox em {
+	font-size: 30px;
+	vertical-align: middle;
+}
+
+.inbox b {
+	margin-left: 10px;
+	font-size: 30px;
+	vertical-align: middle;
+}
+
+.result_total {
+	color: #38a9a5;
+}
+
+
+
+input[name=delete] {
+	text-align: right;
+	width: 20px;
+	height: 20px;
+	background: url("/../../resources/cart/image/btn_cart_del.gif");
+}
+
+.btn-primary {
+	width: 208px;
+	height: 54px;
+}
+
+.buttons {
+	height: 40px;
+}
+
+.btn-primary {
+	padding: 23px 46px;
+	font-size: 18px;
+}
+
+.info_section {
+	margin-top: 20px;
+}

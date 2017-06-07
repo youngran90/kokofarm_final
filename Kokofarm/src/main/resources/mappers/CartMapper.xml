@@ -10,27 +10,30 @@
 		)values(
 			#{cart_no}, #{product_no}, #{member_id}, #{product_unit}
 		)
-	</insert> 
+	</insert> -->
 	
-	<select id="cart_list" resultType="CartListDTO">
+	<select id="cart_list" resultType="CartListVO">
 		select p.product_name, p.product_price, p.product_no, c.product_unit
 		from cart c, product p 
 		where c.product_no = p.product_no
   		and member_id = #{member_id}
 	</select>
 	
-	<delete id="cart_delete" parameterType="CartDTO">
+	
+	<delete id="delete" parameterType="String">
 			delete from cart where product_no = #{product_no}			
-				and member_id = #{member_id}
+			<!-- and member_id = #{member_id} -->
+	</delete> 
+	
+	 
+	<delete id="cart_delte_all">
+		delete from cart where product_no = #{product_no}
 	</delete>
 	
-	<delete id="cart_delte_all" parameterType="CartDTO">
-		delete from cart where member_id = #{member_id}
-	</delete>
-	
+	<!--
 	<update id="cart_update" parameterType="CartDTO">
 		update cart set product_unit = #{product_unit} where product_no = #{product_no}
-	</update>  -->
+	</update> -->
 </mapper>
 
 

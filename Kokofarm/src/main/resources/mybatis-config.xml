@@ -10,7 +10,7 @@
     <package name="kokofarm.tender.domain"/>
     <package name="kokofarm.auction.domain"/>    
     <package name="kokofarm.member.domain"/>    
-     
+    <package name="kokofarm.orderproduct.domain"/> 
   </typeAliases>
 
 

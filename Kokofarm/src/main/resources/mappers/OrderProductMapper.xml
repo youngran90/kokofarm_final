@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kokofarm.orderproduct.mapper.OrderProductMapper">
+	
+ 	<insert id="order_insert" parameterType="OrderProductData">
+		insert into orderproduct (
+			member_id, product_no, order_product_amount, order_delivery_price, order_total_price, product_price, product_name
+		)
+		select #{member_id}, #{product_no}, #{order_product_amount},#{order_delivery_price},#{order_total_price}, product_price, product_name
+			from product where product_no = #{product_no}
+	</insert> 
+	
+	<select id="order_list" resultType="OrderProductData">
+		select * from orderproduct where member_id = #{member_id}
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
