@@ -38,9 +38,9 @@
             <div class="language">
               <form action="#" method="post" enctype="multipart/form-data" id="language">
                 <div class="btn-group">
-                  <button class="btn btn-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> <img src="/resources/image/flags/gb.png" alt="English" title="English">English <i class="fa fa-caret-down"></i></button>
+                  <button class="btn btn-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> <img src="/resources/image/flags/gb.png" alt="Korea" title="Korea">Korea <i class="fa fa-caret-down"></i></button>
                   <ul class="dropdown-menu">
-                    <li><a href="#"><img src="/resources/image/flags/lb.png" alt="Arabic" title="Arabic"> Arabic</a></li>
+                    <li><a href="#"><img src="/resources/image/flags/lb.png" alt="Korea" title="Korea"> Korea</a></li>
                     <li><a href="#"><img src="/resources/image/flags/gb.png" alt="English" title="English"> English</a></li>
                   </ul>
                 </div>
@@ -92,7 +92,7 @@
       <div class="col-sm-4 col-xs-6 header-left">
         <div class="shipping">
           <div class="shipping-img"></div>
-          <div class="shipping-text">+91(000)1234-1234<span class="shipping-detail">Week From 9:00am To 7:00pm</span></div>
+          <div class="shipping-text">+81(010)1234-7777<span class="shipping-detail">Week From 9:00am To 7:00pm</span></div>
         </div>
       </div>
       <div class="col-sm-4 col-xs-12 header-middle">
