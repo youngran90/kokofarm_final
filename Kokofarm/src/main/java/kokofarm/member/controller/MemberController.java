@@ -23,6 +23,13 @@ public class MemberController {
 	@Inject
 	private MemberService service;
 	
+	
+	
+	@RequestMapping("/join1")
+	public void join1(Model model) throws Exception{
+		
+	}
+	
 	@RequestMapping(value= "/join", method = RequestMethod.GET)
 	public void join(Model model) throws Exception{
 		model.addAttribute("MemberCommand", new MemberVO());
