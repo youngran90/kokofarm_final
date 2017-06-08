@@ -1,6 +1,7 @@
 package kokofarm.orderproduct.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -28,8 +29,12 @@ public class OrderProductController {
 	
 	@RequestMapping(value="/orderproduct", method=RequestMethod.GET)
 	public void orderproductGet(Model model) throws Exception{
-		model.addAttribute("order_list",service.order_list("123123"));
+		model.addAttribute("order_list", service.order_list("ddong85"));
+		model.addAttribute("member_point", service.member_point("ddong85"));
 	}
+	
+	
+	
 	
 	/*@RequestMapping(value="/orderproduct", method=RequestMethod.POST)
 	public String orderproductPost(@RequestBody OrderProductData vo) throws Exception{

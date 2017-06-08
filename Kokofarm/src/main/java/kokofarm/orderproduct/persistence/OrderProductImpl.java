@@ -20,13 +20,23 @@ public class OrderProductImpl implements OrderProductDAO {
 	@Override
 	public void order_insert(OrderProductData data) throws Exception {
 		session.insert(namespace+".order_insert", data);
-		
 	}
 
 	@Override
 	public List<OrderProductData> order_list(String member_id) throws Exception {
 		return session.selectList(namespace+".order_list", member_id);
 	}
+
+	@Override
+	public void order_update(OrderProductData data) throws Exception {
+		session.update(namespace+".order_update",data);
+	}
+
+	@Override
+	public int member_point(String member_id) throws Exception {
+		return session.selectOne(namespace+".member_point", member_id);
+	}
+	
 	
 	
 }

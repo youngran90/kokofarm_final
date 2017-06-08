@@ -6,16 +6,27 @@
 	
  	<insert id="order_insert" parameterType="OrderProductData">
 		insert into orderproduct (
-			member_id, product_no, order_product_amount, order_delivery_price, order_total_price, product_price, product_name
+			member_id, product_no, order_product_amount, order_delivery_price, order_total_price
+		)values(
+			#{member_id},#{product_no},#{order_product_amount},#{order_delivery_price},#{order_total_price}
 		)
-		select #{member_id}, #{product_no}, #{order_product_amount},#{order_delivery_price},#{order_total_price}, product_price, product_name
-			from product where product_no = #{product_no}
 	</insert> 
 	
 	<select id="order_list" resultType="OrderProductData">
-		select * from orderproduct where member_id = #{member_id}
+		select op.member_id, op.product_no, op.order_product_amount, op.order_delivery_price, op.order_total_price, p.product_price, p.product_name,p.product_mainimage
+		 from orderproduct op, product p
+		 where op.product_no = p.product_no
+		 and member_id = #{member_id}
 	</select>
 	
+	<update id="order_update" parameterType="OrderProductData">
+		update orderproduct set order_product_amount = order_product_amount + #{order_product_amount}, order_total_price = order_total_price + #{order_total_price}
+		where product_no = #{product_no}
+	</update>
+	
+	<select id="member_point" resultType="Integer">
+		select member_point from member where member_id = #{member_id} 
+	</select>
 </mapper>
 
 

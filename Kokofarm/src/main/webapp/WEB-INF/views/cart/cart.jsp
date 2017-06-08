@@ -148,21 +148,17 @@
             </thead>
             <tbody>
 		<form enctype="multipart/form-data" method="post" action="/cart/orderproduct" id="cartForm">
-			<td style="display: none;"><input type="checkbox" id="rp" name="order_result_price" value="0" class="rp">금액</td> <!-- 총 금액 값 submit -->
-            <td style="display: none;"><input type="checkbox" id="rd" name="order_result_delivery" value="0" class="rd">배송비</td> <!-- 총 배송비 값 submit -->
-            <td style="display: none;"><input type="checkbox" id="rt" name="order_result_total" value="0" class="rt">금+배</td> <!-- 총 금액+배송비 값 submit -->
-            
         <c:forEach var="cart_list" items="${listcart }" varStatus="status">
-           <td style="display: none;"><input type="hidden" id="dp" name="order_delivery_price" value="0" class="${status.count }dp"></td> <!-- 배송비 값 submit -->
-           <td style="display: none;"><input type="hidden" id="tp" name="order_total_price" value="0" class="${status.count }tp"></td> <!-- 금액 값 submit -->
-           <td style="display: none;"><input type="hidden" class="${status.count}opa" id="order_product_amount" name="order_product_amount" value="${cart_list.product_unit }" >${cart_list.product_unit }</td>
+           <td style="display: none"><input type="checkbox" id="dp" name="order_delivery_price" value="0" class="${status.count }dp"></td> <!-- 배송비 값 submit -->
+           <td style="display: none"><input type="checkbox" id="tp" name="order_total_price" value="0" class="${status.count }tp"></td> <!-- 금액 값 submit -->
+           <td style="display: none"><input type="checkbox" class="${status.count}opa" id="order_product_amount" name="order_product_amount" value="${cart_list.product_unit }" ></td>
               <tr>
               	<td class="text-center">
               		<input type="checkbox" id="${status.count }ac" name="product_no" value ="${cart_list.product_no }">
               	</td>
                 <td class="text-left">
-	                <a href="product.html"><img class="img-thumbnail" title="women's clothing" alt="women's clothing" src="image/product/2product50x59.jpg"></a>
-	             	<a href="product.html" id="product_name">${cart_list.product_name }</a>
+	                <a href="/product/detail_product?product_no=${cart_list.product_no} "><img class="img-thumbnail" title="${cart_list.product_name }" alt="${cart_list.product_name }" src="/resources/files/attach/${cart_list.product_mainimage} "></a>
+	             	<a href="/product/detail_product?product_no=${cart_list.product_no} " id="product_name">${cart_list.product_name }</a>
                 </td>
                 <td>
                 	<input type="button" name="delete" onclick="location.href='delete?product_no=${cart_list.product_no }'">

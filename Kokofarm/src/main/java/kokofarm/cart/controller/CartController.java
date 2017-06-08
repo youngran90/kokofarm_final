@@ -33,7 +33,7 @@ public class CartController {
 	public void cartGet(Model model) throws Exception{
 		logger.info("장바구니 리스트");
 		
-		model.addAttribute("listcart",service.cart_list("123123"));
+		model.addAttribute("listcart",service.cart_list("ddong85"));
 	}
 	
 	@RequestMapping(value="/delete", method=RequestMethod.GET)
@@ -63,15 +63,21 @@ public class CartController {
 		OrderProductData data = new OrderProductData();
 		
 		for(int i=0; i<product_no.length; i++){
-			data.setMember_id("123123");
+			data.setMember_id("ddong85");
 			data.setProduct_no(product_no[i]);
 			data.setOrder_product_amount(order_product_amount[i]);
 			data.setOrder_delivery_price(order_delivery_price[i]);
 			data.setOrder_total_price(order_total_price[i]);
-			
 			op_service.order_insert(data);
 		}
 
+		for(int i=0; i<product_no.length; i++){
+			System.out.println(product_no[i]);
+			System.out.println(order_product_amount[i]);
+			System.out.println(order_delivery_price[i]);
+			System.out.println(order_total_price[i]);
+		}
+		
 		
 		return "redirect:/orderproduct/orderproduct";
 	}

@@ -63,3 +63,206 @@
 .result_total {
 	color: #38a9a5;
 }
+
+/* @@@@ Step1 배송 고객 정보 @@@@ */
+.order_info02 h4 {
+	font-size: 20px;
+	border-top: 2px solid #e2704b;
+	padding: 10px;
+	margin: 0px;
+}
+
+.recipient_name {
+	padding-right: 48px;
+}
+
+.rd_label01 {
+	padding-left: 40px;
+}
+
+.rd_label02 {
+	padding-left: 40px;
+}
+
+.recipient_monile {
+	padding-right: 78px;
+}
+
+.recipient_phone {
+	padding: 0px 35px;
+}
+
+.recipient_customer01 {
+	height: 40px;
+}
+
+.recipient_customer02 {
+	height: 45px;
+}
+
+.recipient_addr {
+	padding-right: 78px;
+}
+
+.recipientpost {
+	margin-right: 20px;
+}
+
+.post_addr {
+	height: 40px
+}
+
+.sub_addr {
+	margin-left: 125px;
+	height: 40px;
+}
+
+.caption_info {
+	height: 35px;
+}
+
+.caption_info p {
+	text-align: center;
+	vertical-align: bottom;
+	padding: 4px;
+	font-size: 10px;
+}
+
+.delivery_msg01 {
+	float: left;
+}
+
+.msg_box {
+	padding-right: 51px;
+}
+
+.comment {
+	width: 750px;
+	height: 75px;
+	resize: none;
+}
+
+select {
+	width: 70px;
+}
+
+/* @@@@ Step2 마일리지 사용 @@@@ */
+.pays {
+	display: inline-block;
+	list-style: none;
+}
+
+.pays li {
+	float: left;
+	padding-right: 20px;
+}
+
+.pays li span {
+	padding-left: 10px;
+}
+
+.pays li img {
+	padding-left: 10px;
+}
+
+.point_box {
+	height: 150px;
+	width: 200px;
+	border: 1px solid red;
+	float: left;
+	padding: 10px;
+	margin: 0px 35px 0px 15px;
+}
+
+.pay_list {
+	border: 1px solid blue;
+	height: 150px;
+	width: 650px;
+	float: left;
+	padding: 10px;
+	margin-bottom: 30px;
+}
+
+/* @@@@ Step2 결제 방법 사용 @@@@ */
+.creditcard_info03 p {
+	font-size: 10px;
+	padding-left: 30px;
+}
+
+#month {
+	width: 200px;
+}
+
+#creditcards {
+	width: 200px;
+	margin-bottom: 10px;
+}
+
+.creditcard_info01 strong {
+	padding: 10px 30px 20px 30px;
+}
+
+.creditcard_info02 strong {
+	padding: 10px 30px 20px 30px;
+}
+
+.pay_info {
+	border: 1px solid green;
+	height: 90px;
+	padding-top: 10px;
+}
+
+.img-thumbnail {
+	width: 98px;
+	height: 98px;
+}
+
+.point_box {
+	height: 150px;
+	width: 200px;
+	border: 1px solid red;
+	float: left;
+	padding: 10px;
+	margin: 0px 35px 0px 15px;
+}
+
+.pay_list {
+	border: 1px solid blue;
+	height: 150px;
+	width: 650px;
+	float: left;
+	padding: 10px;
+	margin-bottom: 30px;
+}
+
+.kakaopay_info01 p {
+	padding-left: 30px;
+	font-size: 15px;
+}
+
+.naverpay_info01 p {
+	padding-left: 30px;
+	font-size: 15px;
+}
+
+.payment_info01 {
+	margin-bottom: 8px;
+}
+
+#bankaccount {
+	width: 250px;
+}
+
+.payment_info01 strong {
+	padding: 10px 30px 20px 30px;
+}
+
+.payment_info02 strong {
+	padding: 10px 64px 20px 30px;
+}
+
+.payment_info02 p {
+	padding-left: 30px;
+	font-size: 10px;
+	color: #e2704b;
+}

@@ -13,7 +13,7 @@
 	</insert> -->
 	
 	<select id="cart_list" resultType="CartListVO">
-		select p.product_name, p.product_price, p.product_no, c.product_unit
+		select p.product_name, p.product_price, p.product_no, c.product_unit, p.product_mainimage
 		from cart c, product p 
 		where c.product_no = p.product_no
   		and member_id = #{member_id}

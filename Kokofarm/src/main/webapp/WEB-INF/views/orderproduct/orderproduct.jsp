@@ -5,6 +5,53 @@
 <link rel="stylesheet" href="/resources/orderproduct/css/orderproduct.css">
 <script src="/resources/orderproduct/js/orderproduct.js"></script>
 
+
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script>
+    function sample6_execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var fullAddr = ''; // 최종 주소 변수
+                var extraAddr = ''; // 조합형 주소 변수
+
+                // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                    fullAddr = data.roadAddress;
+
+                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                    fullAddr = data.jibunAddress;
+                }
+
+                // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
+                if(data.userSelectedType === 'R'){
+                    //법정동명이 있을 경우 추가한다.
+                    if(data.bname !== ''){
+                        extraAddr += data.bname;
+                    }
+                    // 건물명이 있을 경우 추가한다.
+                    if(data.buildingName !== ''){
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+                    fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
+                }
+
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('sample6_postcode').value = data.zonecode; //5자리 새우편번호 사용
+                document.getElementById('sample6_address').value = fullAddr;
+
+                // 커서를 상세주소 필드로 이동한다.
+                document.getElementById('sample6_address2').focus();
+            }
+        }).open();
+    }
+   
+</script>
+
 <div class="container">
   <ul class="breadcrumb">
     <li><a href="/"><i class="fa fa-home"></i></a></li>
@@ -83,9 +130,6 @@
             <tbody>
  
 		<form enctype="multipart/form-data" method="post" action="/cart/orderproduct" id="cartForm">
-			<td style="display: none;"><input type="checkbox" id="rp" name="order_result_price" value="0" class="rp">금액</td> <!-- 총 금액 값 submit -->
-            <td style="display: none;"><input type="checkbox" id="rd" name="order_result_delivery" value="0" class="rd">배송비</td> <!-- 총 배송비 값 submit -->
-            <td style="display: none;"><input type="checkbox" id="rt" name="order_result_total" value="0" class="rt">금+배</td> <!-- 총 금액+배송비 값 submit -->
             
         <c:forEach var="order_list" items="${order_list }" varStatus="status">
            <td style="display: none;"><input type="hidden" id="dp" name="order_delivery_price" value="0" class="${status.count }dp"></td> <!-- 배송비 값 submit -->
@@ -96,10 +140,10 @@
               		<input type="checkbox" id="${status.count }ac" name="product_no" value ="${order_list.product_no }">
               	</td>
                 <td class="text-left">
-	                <a href="product.html"><img class="img-thumbnail" title="women's clothing" alt="women's clothing" src="image/product/2product50x59.jpg"></a>
-	             	<a href="product.html" id="product_name">${order_list.product_name }</a>
+	                <a href="/product/detail_product?product_no=${order_list.product_no}"><img class="img-thumbnail" title="${order_list.product_name }" alt="${order_list.product_name }" src="/resources/files/attach/${order_list.product_mainimage} "></a>
+	             	<a href="/product/detail_product?product_no=${order_list.product_no}" id="product_name">${order_list.product_name }</a>
                 </td>
-                <td class="text-center"><em class="delivery_price" id="${status.count }dp">2500</em><b id="${status.count }dp_unit">원</b></td>
+                <td class="text-center"><em class="delivery_price" id="${status.count }dp" >${order_list.order_delivery_price }</em><b id="${status.count }dp_unit">원</b></td>
                 <td class="text-right"><em class="product_price" id="${status.count }pp">${order_list.product_price }</em><b>원</b></td>
                 <td class="text-center">
 	               <em class="order_product_amount" id="${status.count}opa" name="order_product_amount">${order_list.order_product_amount }</em>
@@ -111,40 +155,6 @@
             </tbody>
           </table>
         </div>
-           
-      <script type="text/javascript">
-			$(function(){
-				alert("주문 테이블을 만들자 09");
-				var size = $(".total_price").length;
-				
-				var price_sum = 0;
-				$(".total_price").each(function(i){
-					var index = i + 1;
-					var price = $(this).text();
-					var price_c = numberReplace(price);
-					
-					if(index <= size){
-						price_sum += parseInt(price_c);
-					}
-				})
-				
-				var price_sum_c = numberFormat(price_sum);
-				
-				//정규화 함수(천의 자리마다 ,)
-				function numberFormat(number) { //3 자리수 마다 , 표시
-				return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-				}
-				//정규화 함수(,제거)
-				function numberReplace(number){
-					return number.replace(/[^0-9]/g,"");
-				}
-				
-			})
-		</script>
-		
-	<style>
-		
-	</style>
             
       <div class="result_info_box">
       	<div class="inbox">
@@ -153,894 +163,178 @@
       		<div class="total_info"><em class="result_total"></em><b>원</b></div>
       	</div>
       </div>
-      
-      
       <!-- 주문 내역 테이블 종료 -->
+      
+      
       <div id="accordion" class="panel-group">
         <div class="panel panel-default">
           <div class="panel-heading">
-            <h4 class="panel-title"><a class="accordion-toggle collapsed" data-parent="#accordion" data-toggle="collapse" href="#collapse-checkout-option" aria-expanded="false">Step 1: Checkout Options <i class="fa fa-caret-down"></i></a></h4>
+            <h4 class="panel-title"><a class="accordion-toggle collapsed" data-parent="#accordion" data-toggle="collapse" href="#collapse-checkout-option" aria-expanded="true">Step 1: 배송고객 정보 <i class="fa fa-caret-down"></i></a></h4>
           </div>
           <div id="collapse-checkout-option"  role="heading" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
             <div class="panel-body">
-              <div class="row">
-                <div class="col-sm-6">
-                  <h2>New Customer</h2>
-                  <p>Checkout Options:</p>
-                  <div class="radio">
-                    <label>
-                      <input type="radio" checked="checked" value="register" name="account">
-                      Register Account</label>
-                  </div>
-                  <div class="radio">
-                    <label>
-                      <input type="radio" value="guest" name="account">
-                      Guest Checkout</label>
-                  </div>
-                  <p>By creating an account you will be able to shop faster, be up to date on an order's status, and keep track of the orders you have previously made.</p>
-                  <input type="button" class="btn btn-primary" data-loading-text="Loading..." id="button-account" value="Continue">
-                </div>
-                <div class="col-sm-6">
-                  <h2>Returning Customer</h2>
-                  <p>I am a returning customer</p>
-                  <div class="form-group">
-                    <label for="input-email" class="control-label">E-Mail</label>
-                    <input type="text" class="form-control" id="input-email" placeholder="E-Mail" value="" name="email">
-                  </div>
-                  <div class="form-group">
-                    <label for="input-password" class="control-label">Password</label>
-                    <input type="password" class="form-control" id="input-password" placeholder="Password" value="" name="password">
-                    <a href="http://localhost/opc001/index.php?route=account/forgotten">Forgotten Password</a></div>
-                  <input type="button" class="btn btn-primary" data-loading-text="Loading..." id="button-login" value="Login">
-                </div>
-              </div>
+				<div class="order_info02">
+            		<h4>받는 고객</h4>
+            	</div>
+				<div class="recipient_customer01">
+					<strong class="recipient_name">받으시는분</strong>
+							<input type="text" class="input_recipientname" name="namereceiver" value="" placeholder=" 받으시는 분의 이름을 적어주세요" size="45">
+								<label class="rd_label01">
+									<input type="radio" id="addr01" name="addr" class="addr01">
+										<span></span>
+											다른 주소지
+								</label>
+								<label class="rd_label02">
+									<input type="radio" id="addr02" name="addr" class="addr02" checked="checked">
+										<span></span>
+											내 주소지
+								</label>
+				</div>
+				<div class="recipient_customer02">
+					<strong class="recipient_monile">휴대폰</strong>
+							<!-- <input type="text" class="mobilerecipient1" name="mobileReceiver1" value="" maxlength="3" size="7"> -->
+							<select name="mobileReceiver1">
+								<option value="010">010</option>
+								<option value="011">011</option>
+								<option value="017">017</option>
+								<option value="019">019</option>
+							</select>
+								<span class="hyphen">-</span>
+							<input type="text" class="mobilerecipient2" name="mobileReceiver2" value="" maxlength="4" size="7">
+								<span class="hyphen">-</span>
+							<input type="text" class="mobilerecipient3" name="mobileReceiver3" value="" maxlength="4" size="7">
+					<strong class="recipient_phone">전화번호</strong>
+						<!-- <input type="text" class="phonerecipient1" name="phoneReceiver1" value="" maxlength="3" size="7"> -->
+						<select name="phoneReceiver1">
+								<option value="02">02</option>
+								<option value="031">031</option>
+								<option value="032">032</option>
+								<option value="033">033</option>
+								<option value="041">041</option>
+								<option value="042">042</option>
+								<option value="043">043</option>
+								<option value="051">051</option>
+								<option value="052">052</option>
+								<option value="053">053</option>
+								<option value="054">054</option>
+								<option value="055">055</option>
+								<option value="061">061</option>
+								<option value="062">062</option>
+								<option value="063">063</option>
+								<option value="064">064</option>
+							</select>
+							<span class="hyphen">-</span>
+						<input type="text" class="phonerecipient2" name="phoneReceiver2" value="" maxlength="4" size="7">
+							<span class="hyphen">-</span>
+						<input type="text" class="phonerecipient3" name="phoneReceiver3" value="" maxlength="4" size="7">
+				</div>
+				<div class="recipient_customer03">
+					<div class="post_addr">
+						<strong class="recipient_addr">배송지</strong>
+							<input type="text" class="recipientpost" name="recipientpost" id="sample6_postcode" placeholder="우편번호" value="" size="25" readonly="readonly">
+							<input type="button" class="post_btn" id="post_btn" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
+					</div>
+					<div class="sub_addr">
+							<input type="text" class="address" name="address" id="sample6_address" readonly="" value="" required"="" size="45">
+							<input type="text" class="address_sub" name="address_sub" id="sample6_address2" value="" size="55">
+					</div>
+					<div class="caption_info">
+						<p class="caption">* 주말, 공휴일에 회사로 배송이 되어 상품 수령을 하지 못하는 경우, 반송에 따른 <span>추가 배송비 및 추가 비용이 부과</span>될 수 있습니다. </p>
+					</div>
+					<div class="delivery_msg01">
+						<strong class="msg_box">배송메시지</strong>
+					</div>
+					<div class="delivery_msg02">
+							<textarea name="msg" class="comment" placeholder="※배송메시지 기재 필수 사항  
+					1.선물의 경우 [선물용]이라는 문구 기재
+					2.건물 1층 입구 비밀번호, 배송요청사항 등 구체적인 요청사항 "></textarea>
+					</div>
+				</div>
+               </div>
             </div>
           </div>
         </div>
         <div class="panel panel-default">
           <div class="panel-heading">
-            <h4 class="panel-title"><a class="accordion-toggle collapsed" data-parent="#accordion" data-toggle="collapse" href="#collapse-payment-address" aria-expanded="false">Step 2: Billing Details <i class="fa fa-caret-down"></i></a></h4>
-          </div>
-          <div id="collapse-payment-address" role="heading" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
-            <div class="panel-body">
-              <form class="form-horizontal">
-                <div class="radio">
-                  <label>
-                    <input type="radio" checked="checked" value="existing" name="payment_address" data-id="payment-existing">
-                    I want to use an existing address</label>
-                </div>
-                <div id="payment-existing">
-                  <select class="form-control" name="address_id">
-                    <option selected="selected" value="4"></option>
-                  </select>
-                </div>
-                <div class="radio">
-                  <label>
-                    <input type="radio" value="new" name="payment_address" data-id="payment-new">
-                    I want to use a new address</label>
-                </div>
-                <br>
-                <div id="payment-new"  style="display: none;">
-                  <div class="form-group required">
-                    <label for="input-payment-firstname" class="col-sm-2 control-label">First Name</label>
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="input-payment-firstname" placeholder="First Name" value="" name="firstname">
-                    </div>
-                  </div>
-                  <div class="form-group required">
-                    <label for="input-payment-lastname" class="col-sm-2 control-label">Last Name</label>
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="input-payment-lastname" placeholder="Last Name" value="" name="lastname">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="input-payment-company" class="col-sm-2 control-label">Company</label>
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="input-payment-company" placeholder="Company" value="" name="company">
-                    </div>
-                  </div>
-                  <div class="form-group required">
-                    <label for="input-payment-address-1" class="col-sm-2 control-label">Address 1</label>
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="input-payment-address-1" placeholder="Address 1" value="" name="address_1">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="input-payment-address-2" class="col-sm-2 control-label">Address 2</label>
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="input-payment-address-2" placeholder="Address 2" value="" name="address_2">
-                    </div>
-                  </div>
-                  <div class="form-group required">
-                    <label for="input-payment-city" class="col-sm-2 control-label">City</label>
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="input-payment-city" placeholder="City" value="" name="city">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="input-payment-postcode" class="col-sm-2 control-label">Post Code</label>
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="input-payment-postcode" placeholder="Post Code" value="" name="postcode">
-                    </div>
-                  </div>
-                  <div class="form-group required">
-                    <label for="input-payment-country" class="col-sm-2 control-label">Country</label>
-                    <div class="col-sm-10">
-                      <select class="form-control" id="input-payment-country" name="country_id">
-                        <option value=""> --- Please Select --- </option>
-                        <option value="244">Aaland Islands</option>
-                        <option value="1">Afghanistan</option>
-                        <option value="2">Albania</option>
-                        <option value="3">Algeria</option>
-                        <option value="4">American Samoa</option>
-                        <option value="5">Andorra</option>
-                        <option value="6">Angola</option>
-                        <option value="7">Anguilla</option>
-                        <option value="8">Antarctica</option>
-                        <option value="9">Antigua and Barbuda</option>
-                        <option value="10">Argentina</option>
-                        <option value="11">Armenia</option>
-                        <option value="12">Aruba</option>
-                        <option value="252">Ascension Island (British)</option>
-                        <option value="13">Australia</option>
-                        <option value="14">Austria</option>
-                        <option value="15">Azerbaijan</option>
-                        <option value="16">Bahamas</option>
-                        <option value="17">Bahrain</option>
-                        <option value="18">Bangladesh</option>
-                        <option value="19">Barbados</option>
-                        <option value="20">Belarus</option>
-                        <option value="21">Belgium</option>
-                        <option value="22">Belize</option>
-                        <option value="23">Benin</option>
-                        <option value="24">Bermuda</option>
-                        <option value="25">Bhutan</option>
-                        <option value="26">Bolivia</option>
-                        <option value="245">Bonaire, Sint Eustatius and Saba</option>
-                        <option value="27">Bosnia and Herzegovina</option>
-                        <option value="28">Botswana</option>
-                        <option value="29">Bouvet Island</option>
-                        <option value="30">Brazil</option>
-                        <option value="31">British Indian Ocean Territory</option>
-                        <option value="32">Brunei Darussalam</option>
-                        <option value="33">Bulgaria</option>
-                        <option value="34">Burkina Faso</option>
-                        <option value="35">Burundi</option>
-                        <option value="36">Cambodia</option>
-                        <option value="37">Cameroon</option>
-                        <option value="38">Canada</option>
-                        <option value="251">Canary Islands</option>
-                        <option value="39">Cape Verde</option>
-                        <option value="40">Cayman Islands</option>
-                        <option value="41">Central African Republic</option>
-                        <option value="42">Chad</option>
-                        <option value="43">Chile</option>
-                        <option value="44">China</option>
-                        <option value="45">Christmas Island</option>
-                        <option value="46">Cocos (Keeling) Islands</option>
-                        <option value="47">Colombia</option>
-                        <option value="48">Comoros</option>
-                        <option value="49">Congo</option>
-                        <option value="50">Cook Islands</option>
-                        <option value="51">Costa Rica</option>
-                        <option value="52">Cote D'Ivoire</option>
-                        <option value="53">Croatia</option>
-                        <option value="54">Cuba</option>
-                        <option value="246">Curacao</option>
-                        <option value="55">Cyprus</option>
-                        <option value="56">Czech Republic</option>
-                        <option value="237">Democratic Republic of Congo</option>
-                        <option value="57">Denmark</option>
-                        <option value="58">Djibouti</option>
-                        <option value="59">Dominica</option>
-                        <option value="60">Dominican Republic</option>
-                        <option value="61">East Timor</option>
-                        <option value="62">Ecuador</option>
-                        <option value="63">Egypt</option>
-                        <option value="64">El Salvador</option>
-                        <option value="65">Equatorial Guinea</option>
-                        <option value="66">Eritrea</option>
-                        <option value="67">Estonia</option>
-                        <option value="68">Ethiopia</option>
-                        <option value="69">Falkland Islands (Malvinas)</option>
-                        <option value="70">Faroe Islands</option>
-                        <option value="71">Fiji</option>
-                        <option value="72">Finland</option>
-                        <option value="74">France, Metropolitan</option>
-                        <option value="75">French Guiana</option>
-                        <option value="76">French Polynesia</option>
-                        <option value="77">French Southern Territories</option>
-                        <option value="126">FYROM</option>
-                        <option value="78">Gabon</option>
-                        <option value="79">Gambia</option>
-                        <option value="80">Georgia</option>
-                        <option value="81">Germany</option>
-                        <option value="82">Ghana</option>
-                        <option value="83">Gibraltar</option>
-                        <option value="84">Greece</option>
-                        <option value="85">Greenland</option>
-                        <option value="86">Grenada</option>
-                        <option value="87">Guadeloupe</option>
-                        <option value="88">Guam</option>
-                        <option value="89">Guatemala</option>
-                        <option value="256">Guernsey</option>
-                        <option value="90">Guinea</option>
-                        <option value="91">Guinea-Bissau</option>
-                        <option value="92">Guyana</option>
-                        <option value="93">Haiti</option>
-                        <option value="94">Heard and Mc Donald Islands</option>
-                        <option value="95">Honduras</option>
-                        <option value="96">Hong Kong</option>
-                        <option value="97">Hungary</option>
-                        <option value="98">Iceland</option>
-                        <option value="99">India</option>
-                        <option value="100">Indonesia</option>
-                        <option value="101">Iran (Islamic Republic of)</option>
-                        <option value="102">Iraq</option>
-                        <option value="103">Ireland</option>
-                        <option value="254">Isle of Man</option>
-                        <option value="104">Israel</option>
-                        <option value="105">Italy</option>
-                        <option value="106">Jamaica</option>
-                        <option value="107">Japan</option>
-                        <option value="257">Jersey</option>
-                        <option value="108">Jordan</option>
-                        <option value="109">Kazakhstan</option>
-                        <option value="110">Kenya</option>
-                        <option value="111">Kiribati</option>
-                        <option value="113">Korea, Republic of</option>
-                        <option value="253">Kosovo, Republic of</option>
-                        <option value="114">Kuwait</option>
-                        <option value="115">Kyrgyzstan</option>
-                        <option value="116">Lao People's Democratic Republic</option>
-                        <option value="117">Latvia</option>
-                        <option value="118">Lebanon</option>
-                        <option value="119">Lesotho</option>
-                        <option value="120">Liberia</option>
-                        <option value="121">Libyan Arab Jamahiriya</option>
-                        <option value="122">Liechtenstein</option>
-                        <option value="123">Lithuania</option>
-                        <option value="124">Luxembourg</option>
-                        <option value="125">Macau</option>
-                        <option value="127">Madagascar</option>
-                        <option value="128">Malawi</option>
-                        <option value="129">Malaysia</option>
-                        <option value="130">Maldives</option>
-                        <option value="131">Mali</option>
-                        <option value="132">Malta</option>
-                        <option value="133">Marshall Islands</option>
-                        <option value="134">Martinique</option>
-                        <option value="135">Mauritania</option>
-                        <option value="136">Mauritius</option>
-                        <option value="137">Mayotte</option>
-                        <option value="138">Mexico</option>
-                        <option value="139">Micronesia, Federated States of</option>
-                        <option value="140">Moldova, Republic of</option>
-                        <option value="141">Monaco</option>
-                        <option value="142">Mongolia</option>
-                        <option value="242">Montenegro</option>
-                        <option value="143">Montserrat</option>
-                        <option value="144">Morocco</option>
-                        <option value="145">Mozambique</option>
-                        <option value="146">Myanmar</option>
-                        <option value="147">Namibia</option>
-                        <option value="148">Nauru</option>
-                        <option value="149">Nepal</option>
-                        <option value="150">Netherlands</option>
-                        <option value="151">Netherlands Antilles</option>
-                        <option value="152">New Caledonia</option>
-                        <option value="153">New Zealand</option>
-                        <option value="154">Nicaragua</option>
-                        <option value="155">Niger</option>
-                        <option value="156">Nigeria</option>
-                        <option value="157">Niue</option>
-                        <option value="158">Norfolk Island</option>
-                        <option value="112">North Korea</option>
-                        <option value="159">Northern Mariana Islands</option>
-                        <option value="160">Norway</option>
-                        <option value="161">Oman</option>
-                        <option value="162">Pakistan</option>
-                        <option value="163">Palau</option>
-                        <option value="247">Palestinian Territory, Occupied</option>
-                        <option value="164">Panama</option>
-                        <option value="165">Papua New Guinea</option>
-                        <option value="166">Paraguay</option>
-                        <option value="167">Peru</option>
-                        <option value="168">Philippines</option>
-                        <option value="169">Pitcairn</option>
-                        <option value="170">Poland</option>
-                        <option value="171">Portugal</option>
-                        <option value="172">Puerto Rico</option>
-                        <option value="173">Qatar</option>
-                        <option value="174">Reunion</option>
-                        <option value="175">Romania</option>
-                        <option value="176">Russian Federation</option>
-                        <option value="177">Rwanda</option>
-                        <option value="178">Saint Kitts and Nevis</option>
-                        <option value="179">Saint Lucia</option>
-                        <option value="180">Saint Vincent and the Grenadines</option>
-                        <option value="181">Samoa</option>
-                        <option value="182">San Marino</option>
-                        <option value="183">Sao Tome and Principe</option>
-                        <option value="184">Saudi Arabia</option>
-                        <option value="185">Senegal</option>
-                        <option value="243">Serbia</option>
-                        <option value="186">Seychelles</option>
-                        <option value="187">Sierra Leone</option>
-                        <option value="188">Singapore</option>
-                        <option value="189">Slovak Republic</option>
-                        <option value="190">Slovenia</option>
-                        <option value="191">Solomon Islands</option>
-                        <option value="192">Somalia</option>
-                        <option value="193">South Africa</option>
-                        <option value="194">South Georgia &amp; South Sandwich Islands</option>
-                        <option value="248">South Sudan</option>
-                        <option value="195">Spain</option>
-                        <option value="196">Sri Lanka</option>
-                        <option value="249">St. Barthelemy</option>
-                        <option value="197">St. Helena</option>
-                        <option value="250">St. Martin (French part)</option>
-                        <option value="198">St. Pierre and Miquelon</option>
-                        <option value="199">Sudan</option>
-                        <option value="200">Suriname</option>
-                        <option value="201">Svalbard and Jan Mayen Islands</option>
-                        <option value="202">Swaziland</option>
-                        <option value="203">Sweden</option>
-                        <option value="204">Switzerland</option>
-                        <option selected="selected" value="205">Syrian Arab Republic</option>
-                        <option value="206">Taiwan</option>
-                        <option value="207">Tajikistan</option>
-                        <option value="208">Tanzania, United Republic of</option>
-                        <option value="209">Thailand</option>
-                        <option value="210">Togo</option>
-                        <option value="211">Tokelau</option>
-                        <option value="212">Tonga</option>
-                        <option value="213">Trinidad and Tobago</option>
-                        <option value="255">Tristan da Cunha</option>
-                        <option value="214">Tunisia</option>
-                        <option value="215">Turkey</option>
-                        <option value="216">Turkmenistan</option>
-                        <option value="217">Turks and Caicos Islands</option>
-                        <option value="218">Tuvalu</option>
-                        <option value="219">Uganda</option>
-                        <option value="220">Ukraine</option>
-                        <option value="221">United Arab Emirates</option>
-                        <option value="222">United Kingdom</option>
-                        <option value="223">United States</option>
-                        <option value="224">United States Minor Outlying Islands</option>
-                        <option value="225">Uruguay</option>
-                        <option value="226">Uzbekistan</option>
-                        <option value="227">Vanuatu</option>
-                        <option value="228">Vatican City State (Holy See)</option>
-                        <option value="229">Venezuela</option>
-                        <option value="230">Viet Nam</option>
-                        <option value="231">Virgin Islands (British)</option>
-                        <option value="232">Virgin Islands (U.S.)</option>
-                        <option value="233">Wallis and Futuna Islands</option>
-                        <option value="234">Western Sahara</option>
-                        <option value="235">Yemen</option>
-                        <option value="238">Zambia</option>
-                        <option value="239">Zimbabwe</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="form-group required">
-                    <label for="input-payment-zone" class="col-sm-2 control-label">Region / State</label>
-                    <div class="col-sm-10">
-                      <select class="form-control" id="input-payment-zone" name="zone_id">
-                        <option value=""> --- Please Select --- </option>
-                        <option selected="selected" value="3121">Al Hasakah</option>
-                        <option value="3122">Al Ladhiqiyah</option>
-                        <option value="3123">Al Qunaytirah</option>
-                        <option value="3124">Ar Raqqah</option>
-                        <option value="3125">As Suwayda</option>
-                        <option value="3126">Dara</option>
-                        <option value="3127">Dayr az Zawr</option>
-                        <option value="3128">Dimashq</option>
-                        <option value="3129">Halab</option>
-                        <option value="3130">Hamah</option>
-                        <option value="3131">Hims</option>
-                        <option value="3132">Idlib</option>
-                        <option value="3133">Rif Dimashq</option>
-                        <option value="3134">Tartus</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-                <div class="buttons clearfix">
-                  <div class="pull-right">
-                    <input type="button" class="btn btn-primary" data-loading-text="Loading..." id="button-payment-address" value="Continue">
-                  </div>
-                </div>
-              </form>
-              <script type="text/javascript">
-$('input[name=\'payment_address\']').on('change', function() {
-    if (this.value == 'new') {
-		$('#payment-existing').hide();
-		$('#payment-new').show();
-	} else {
-		$('#payment-existing').show();
-		$('#payment-new').hide();
-	}
-});
-
-</script>
-            </div>
-          </div>
-        </div>
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h4 class="panel-title"><a class="accordion-toggle collapsed" data-parent="#accordion" data-toggle="collapse" href="#collapse-shipping-address" aria-expanded="false">Step 3: Delivery Details <i class="fa fa-caret-down"></i></a></h4>
-          </div>
-          <div id="collapse-shipping-address" role="heading" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
-            <div class="panel-body">
-              <form class="form-horizontal">
-                <div class="radio">
-                  <label>
-                    <input type="radio" checked="checked" value="existing" name="shipping_address">
-                    I want to use an existing address</label>
-                </div>
-                <div id="shipping-existing" >
-                  <select class="form-control" name="address_id">
-                    <option selected="selected" value="4"></option>
-                  </select>
-                </div>
-                <div class="radio">
-                  <label>
-                    <input type="radio" value="new" name="shipping_address">
-                    I want to use a new address</label>
-                </div>
-                <br>
-                <div id="shipping-new" style="display: none;">
-                  <div class="form-group required">
-                    <label for="input-shipping-firstname" class="col-sm-2 control-label">First Name</label>
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="input-shipping-firstname" placeholder="First Name" value="" name="firstname">
-                    </div>
-                  </div>
-                  <div class="form-group required">
-                    <label for="input-shipping-lastname" class="col-sm-2 control-label">Last Name</label>
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="input-shipping-lastname" placeholder="Last Name" value="" name="lastname">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="input-shipping-company" class="col-sm-2 control-label">Company</label>
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="input-shipping-company" placeholder="Company" value="" name="company">
-                    </div>
-                  </div>
-                  <div class="form-group required">
-                    <label for="input-shipping-address-1" class="col-sm-2 control-label">Address 1</label>
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="input-shipping-address-1" placeholder="Address 1" value="" name="address_1">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="input-shipping-address-2" class="col-sm-2 control-label">Address 2</label>
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="input-shipping-address-2" placeholder="Address 2" value="" name="address_2">
-                    </div>
-                  </div>
-                  <div class="form-group required">
-                    <label for="input-shipping-city" class="col-sm-2 control-label">City</label>
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="input-shipping-city" placeholder="City" value="" name="city">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="input-shipping-postcode" class="col-sm-2 control-label">Post Code</label>
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="input-shipping-postcode" placeholder="Post Code" value="123456" name="postcode">
-                    </div>
-                  </div>
-                  <div class="form-group required">
-                    <label for="input-shipping-country" class="col-sm-2 control-label">Country</label>
-                    <div class="col-sm-10">
-                      <select class="form-control" id="input-shipping-country" name="country_id">
-                        <option value=""> --- Please Select --- </option>
-                        <option value="244">Aaland Islands</option>
-                        <option value="1">Afghanistan</option>
-                        <option value="2">Albania</option>
-                        <option value="3">Algeria</option>
-                        <option value="4">American Samoa</option>
-                        <option value="5">Andorra</option>
-                        <option value="6">Angola</option>
-                        <option value="7">Anguilla</option>
-                        <option value="8">Antarctica</option>
-                        <option value="9">Antigua and Barbuda</option>
-                        <option value="10">Argentina</option>
-                        <option value="11">Armenia</option>
-                        <option value="12">Aruba</option>
-                        <option value="252">Ascension Island (British)</option>
-                        <option value="13">Australia</option>
-                        <option value="14">Austria</option>
-                        <option value="15">Azerbaijan</option>
-                        <option value="16">Bahamas</option>
-                        <option value="17">Bahrain</option>
-                        <option value="18">Bangladesh</option>
-                        <option value="19">Barbados</option>
-                        <option value="20">Belarus</option>
-                        <option value="21">Belgium</option>
-                        <option value="22">Belize</option>
-                        <option value="23">Benin</option>
-                        <option value="24">Bermuda</option>
-                        <option value="25">Bhutan</option>
-                        <option value="26">Bolivia</option>
-                        <option value="245">Bonaire, Sint Eustatius and Saba</option>
-                        <option value="27">Bosnia and Herzegovina</option>
-                        <option value="28">Botswana</option>
-                        <option value="29">Bouvet Island</option>
-                        <option value="30">Brazil</option>
-                        <option value="31">British Indian Ocean Territory</option>
-                        <option value="32">Brunei Darussalam</option>
-                        <option value="33">Bulgaria</option>
-                        <option value="34">Burkina Faso</option>
-                        <option value="35">Burundi</option>
-                        <option value="36">Cambodia</option>
-                        <option value="37">Cameroon</option>
-                        <option value="38">Canada</option>
-                        <option value="251">Canary Islands</option>
-                        <option value="39">Cape Verde</option>
-                        <option value="40">Cayman Islands</option>
-                        <option value="41">Central African Republic</option>
-                        <option value="42">Chad</option>
-                        <option value="43">Chile</option>
-                        <option value="44">China</option>
-                        <option value="45">Christmas Island</option>
-                        <option value="46">Cocos (Keeling) Islands</option>
-                        <option value="47">Colombia</option>
-                        <option value="48">Comoros</option>
-                        <option value="49">Congo</option>
-                        <option value="50">Cook Islands</option>
-                        <option value="51">Costa Rica</option>
-                        <option value="52">Cote D'Ivoire</option>
-                        <option value="53">Croatia</option>
-                        <option value="54">Cuba</option>
-                        <option value="246">Curacao</option>
-                        <option value="55">Cyprus</option>
-                        <option value="56">Czech Republic</option>
-                        <option value="237">Democratic Republic of Congo</option>
-                        <option value="57">Denmark</option>
-                        <option value="58">Djibouti</option>
-                        <option value="59">Dominica</option>
-                        <option value="60">Dominican Republic</option>
-                        <option value="61">East Timor</option>
-                        <option value="62">Ecuador</option>
-                        <option value="63">Egypt</option>
-                        <option value="64">El Salvador</option>
-                        <option value="65">Equatorial Guinea</option>
-                        <option value="66">Eritrea</option>
-                        <option value="67">Estonia</option>
-                        <option value="68">Ethiopia</option>
-                        <option value="69">Falkland Islands (Malvinas)</option>
-                        <option value="70">Faroe Islands</option>
-                        <option value="71">Fiji</option>
-                        <option value="72">Finland</option>
-                        <option value="74">France, Metropolitan</option>
-                        <option value="75">French Guiana</option>
-                        <option value="76">French Polynesia</option>
-                        <option value="77">French Southern Territories</option>
-                        <option value="126">FYROM</option>
-                        <option value="78">Gabon</option>
-                        <option value="79">Gambia</option>
-                        <option value="80">Georgia</option>
-                        <option value="81">Germany</option>
-                        <option value="82">Ghana</option>
-                        <option value="83">Gibraltar</option>
-                        <option value="84">Greece</option>
-                        <option value="85">Greenland</option>
-                        <option value="86">Grenada</option>
-                        <option value="87">Guadeloupe</option>
-                        <option value="88">Guam</option>
-                        <option value="89">Guatemala</option>
-                        <option value="256">Guernsey</option>
-                        <option value="90">Guinea</option>
-                        <option value="91">Guinea-Bissau</option>
-                        <option value="92">Guyana</option>
-                        <option value="93">Haiti</option>
-                        <option value="94">Heard and Mc Donald Islands</option>
-                        <option value="95">Honduras</option>
-                        <option value="96">Hong Kong</option>
-                        <option value="97">Hungary</option>
-                        <option value="98">Iceland</option>
-                        <option value="99">India</option>
-                        <option value="100">Indonesia</option>
-                        <option value="101">Iran (Islamic Republic of)</option>
-                        <option value="102">Iraq</option>
-                        <option value="103">Ireland</option>
-                        <option value="254">Isle of Man</option>
-                        <option value="104">Israel</option>
-                        <option value="105">Italy</option>
-                        <option value="106">Jamaica</option>
-                        <option value="107">Japan</option>
-                        <option value="257">Jersey</option>
-                        <option value="108">Jordan</option>
-                        <option value="109">Kazakhstan</option>
-                        <option value="110">Kenya</option>
-                        <option value="111">Kiribati</option>
-                        <option value="113">Korea, Republic of</option>
-                        <option value="253">Kosovo, Republic of</option>
-                        <option value="114">Kuwait</option>
-                        <option value="115">Kyrgyzstan</option>
-                        <option value="116">Lao People's Democratic Republic</option>
-                        <option value="117">Latvia</option>
-                        <option value="118">Lebanon</option>
-                        <option value="119">Lesotho</option>
-                        <option value="120">Liberia</option>
-                        <option value="121">Libyan Arab Jamahiriya</option>
-                        <option value="122">Liechtenstein</option>
-                        <option value="123">Lithuania</option>
-                        <option value="124">Luxembourg</option>
-                        <option value="125">Macau</option>
-                        <option value="127">Madagascar</option>
-                        <option value="128">Malawi</option>
-                        <option value="129">Malaysia</option>
-                        <option value="130">Maldives</option>
-                        <option value="131">Mali</option>
-                        <option value="132">Malta</option>
-                        <option value="133">Marshall Islands</option>
-                        <option value="134">Martinique</option>
-                        <option value="135">Mauritania</option>
-                        <option value="136">Mauritius</option>
-                        <option value="137">Mayotte</option>
-                        <option value="138">Mexico</option>
-                        <option value="139">Micronesia, Federated States of</option>
-                        <option value="140">Moldova, Republic of</option>
-                        <option value="141">Monaco</option>
-                        <option value="142">Mongolia</option>
-                        <option value="242">Montenegro</option>
-                        <option value="143">Montserrat</option>
-                        <option value="144">Morocco</option>
-                        <option value="145">Mozambique</option>
-                        <option value="146">Myanmar</option>
-                        <option value="147">Namibia</option>
-                        <option value="148">Nauru</option>
-                        <option value="149">Nepal</option>
-                        <option value="150">Netherlands</option>
-                        <option value="151">Netherlands Antilles</option>
-                        <option value="152">New Caledonia</option>
-                        <option value="153">New Zealand</option>
-                        <option value="154">Nicaragua</option>
-                        <option value="155">Niger</option>
-                        <option value="156">Nigeria</option>
-                        <option value="157">Niue</option>
-                        <option value="158">Norfolk Island</option>
-                        <option value="112">North Korea</option>
-                        <option value="159">Northern Mariana Islands</option>
-                        <option value="160">Norway</option>
-                        <option value="161">Oman</option>
-                        <option value="162">Pakistan</option>
-                        <option value="163">Palau</option>
-                        <option value="247">Palestinian Territory, Occupied</option>
-                        <option value="164">Panama</option>
-                        <option value="165">Papua New Guinea</option>
-                        <option value="166">Paraguay</option>
-                        <option value="167">Peru</option>
-                        <option value="168">Philippines</option>
-                        <option value="169">Pitcairn</option>
-                        <option value="170">Poland</option>
-                        <option value="171">Portugal</option>
-                        <option value="172">Puerto Rico</option>
-                        <option value="173">Qatar</option>
-                        <option value="174">Reunion</option>
-                        <option value="175">Romania</option>
-                        <option value="176">Russian Federation</option>
-                        <option value="177">Rwanda</option>
-                        <option value="178">Saint Kitts and Nevis</option>
-                        <option value="179">Saint Lucia</option>
-                        <option value="180">Saint Vincent and the Grenadines</option>
-                        <option value="181">Samoa</option>
-                        <option value="182">San Marino</option>
-                        <option value="183">Sao Tome and Principe</option>
-                        <option value="184">Saudi Arabia</option>
-                        <option value="185">Senegal</option>
-                        <option value="243">Serbia</option>
-                        <option value="186">Seychelles</option>
-                        <option value="187">Sierra Leone</option>
-                        <option value="188">Singapore</option>
-                        <option value="189">Slovak Republic</option>
-                        <option value="190">Slovenia</option>
-                        <option value="191">Solomon Islands</option>
-                        <option value="192">Somalia</option>
-                        <option value="193">South Africa</option>
-                        <option value="194">South Georgia &amp; South Sandwich Islands</option>
-                        <option value="248">South Sudan</option>
-                        <option value="195">Spain</option>
-                        <option value="196">Sri Lanka</option>
-                        <option value="249">St. Barthelemy</option>
-                        <option value="197">St. Helena</option>
-                        <option value="250">St. Martin (French part)</option>
-                        <option value="198">St. Pierre and Miquelon</option>
-                        <option value="199">Sudan</option>
-                        <option value="200">Suriname</option>
-                        <option value="201">Svalbard and Jan Mayen Islands</option>
-                        <option value="202">Swaziland</option>
-                        <option value="203">Sweden</option>
-                        <option value="204">Switzerland</option>
-                        <option selected="selected" value="205">Syrian Arab Republic</option>
-                        <option value="206">Taiwan</option>
-                        <option value="207">Tajikistan</option>
-                        <option value="208">Tanzania, United Republic of</option>
-                        <option value="209">Thailand</option>
-                        <option value="210">Togo</option>
-                        <option value="211">Tokelau</option>
-                        <option value="212">Tonga</option>
-                        <option value="213">Trinidad and Tobago</option>
-                        <option value="255">Tristan da Cunha</option>
-                        <option value="214">Tunisia</option>
-                        <option value="215">Turkey</option>
-                        <option value="216">Turkmenistan</option>
-                        <option value="217">Turks and Caicos Islands</option>
-                        <option value="218">Tuvalu</option>
-                        <option value="219">Uganda</option>
-                        <option value="220">Ukraine</option>
-                        <option value="221">United Arab Emirates</option>
-                        <option value="222">United Kingdom</option>
-                        <option value="223">United States</option>
-                        <option value="224">United States Minor Outlying Islands</option>
-                        <option value="225">Uruguay</option>
-                        <option value="226">Uzbekistan</option>
-                        <option value="227">Vanuatu</option>
-                        <option value="228">Vatican City State (Holy See)</option>
-                        <option value="229">Venezuela</option>
-                        <option value="230">Viet Nam</option>
-                        <option value="231">Virgin Islands (British)</option>
-                        <option value="232">Virgin Islands (U.S.)</option>
-                        <option value="233">Wallis and Futuna Islands</option>
-                        <option value="234">Western Sahara</option>
-                        <option value="235">Yemen</option>
-                        <option value="238">Zambia</option>
-                        <option value="239">Zimbabwe</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="form-group required">
-                    <label for="input-shipping-zone" class="col-sm-2 control-label">Region / State</label>
-                    <div class="col-sm-10">
-                      <select class="form-control" id="input-shipping-zone" name="zone_id">
-                        <option value=""> --- Please Select --- </option>
-                        <option selected="selected" value="3121">Al Hasakah</option>
-                        <option value="3122">Al Ladhiqiyah</option>
-                        <option value="3123">Al Qunaytirah</option>
-                        <option value="3124">Ar Raqqah</option>
-                        <option value="3125">As Suwayda</option>
-                        <option value="3126">Dara</option>
-                        <option value="3127">Dayr az Zawr</option>
-                        <option value="3128">Dimashq</option>
-                        <option value="3129">Halab</option>
-                        <option value="3130">Hamah</option>
-                        <option value="3131">Hims</option>
-                        <option value="3132">Idlib</option>
-                        <option value="3133">Rif Dimashq</option>
-                        <option value="3134">Tartus</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-                <div class="buttons clearfix">
-                  <div class="pull-right">
-                    <input type="button" class="btn btn-primary" data-loading-text="Loading..." id="button-shipping-address" value="Continue">
-                  </div>
-                </div>
-              </form>
-              <script type="text/javascript">
-$('input[name=\'shipping_address\']').on('change', function() {
-	if (this.value == 'new') {
-		$('#shipping-existing').hide();
-		$('#shipping-new').show();
-	} else {
-		$('#shipping-existing').show();
-		$('#shipping-new').hide();
-	}
-});
-</script>
-            </div>
-          </div>
-        </div>
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h4 class="panel-title"><a class="accordion-toggle collapsed" data-parent="#accordion" data-toggle="collapse" href="#collapse-shipping-method" aria-expanded="false">Step 4: Delivery Method <i class="fa fa-caret-down"></i></a></h4>
-          </div>
-          <div id="collapse-shipping-method" role="heading" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
-            <div class="panel-body">
-              <p>Please select the preferred shipping method to use on this order.</p>
-              <p><strong>Flat Rate</strong></p>
-              <div class="radio">
-                <label>
-                  <input type="radio" checked="checked" value="flat.flat" name="shipping_method">
-                  Flat Shipping Rate - $5.00</label>
-              </div>
-              <p><strong>Add Comments About Your Order</strong></p>
-              <p>
-                <textarea class="form-control" rows="8" name="comment"></textarea>
-              </p>
-              <div class="buttons">
-                <div class="pull-right">
-                  <input type="button" class="btn btn-primary" data-loading-text="Loading..." id="button-shipping-method" value="Continue">
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h4 class="panel-title"><a class="accordion-toggle collapsed" data-parent="#accordion" data-toggle="collapse" href="#collapse-payment-method" aria-expanded="false">Step 5: Payment Method <i class="fa fa-caret-down"></i></a></h4>
-          </div>
-          <div id="collapse-payment-method" role="heading" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
-            <div class="panel-body">
-              <p>Please select the preferred payment method to use on this order.</p>
-              <div class="radio">
-                <label>
-                  <input type="radio" checked="checked" value="cod" name="payment_method">
-                  Cash On Delivery </label>
-              </div>
-              <p><strong>Add Comments About Your Order</strong></p>
-              <p>
-                <textarea class="form-control" rows="8" name="comment"></textarea>
-              </p>
-              <div class="buttons">
-                <div class="pull-right">I have read and agree to the <a class="agree" href="#"><b>Terms &amp; Conditions</b></a>
-                  <input type="checkbox" value="1" name="agree">
-                  &nbsp;
-                  <input type="button" class="btn btn-primary" data-loading-text="Loading..." id="button-payment-method" value="Continue">
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h4 class="panel-title"><a class="accordion-toggle" data-parent="#accordion" data-toggle="collapse" href="#collapse-checkout-confirm" aria-expanded="true">Step 6: Confirm Order <i class="fa fa-caret-down"></i></a></h4>
+            <h4 class="panel-title"><a class="accordion-toggle" data-parent="#accordion" data-toggle="collapse" href="#collapse-checkout-confirm" aria-expanded="false">Step 2: 마일리지 확인/사용  <i class="fa fa-caret-down"></i></a></h4>
           </div>
           <div id="collapse-checkout-confirm" role="heading" class="panel-collapse collapse in" aria-expanded="true" style="">
             <div class="panel-body">
               <div class="table-responsive">
-                <table class="table table-bordered table-hover">
-                  <thead>
-                    <tr>
-                      <td class="text-left">Product Name</td>
-                      <td class="text-left">Model</td>
-                      <td class="text-right">Quantity</td>
-                      <td class="text-right">Unit Price</td>
-                      <td class="text-right">Total</td>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td class="text-left"><a href="http://localhost/opc001/index.php?route=product/product&amp;product_id=46">Sony VAIO</a></td>
-                      <td class="text-left">Product 19</td>
-                      <td class="text-right">1</td>
-                      <td class="text-right">$1,000.00</td>
-                      <td class="text-right">$1,000.00</td>
-                    </tr>
-                  </tbody>
-                  <tfoot>
-                    <tr>
-                      <td class="text-right" colspan="4"><strong>Sub-Total:</strong></td>
-                      <td class="text-right">$1,000.00</td>
-                    </tr>
-                    <tr>
-                      <td class="text-right" colspan="4"><strong>Flat Shipping Rate:</strong></td>
-                      <td class="text-right">$5.00</td>
-                    </tr>
-                    <tr>
-                      <td class="text-right" colspan="4"><strong>Total:</strong></td>
-                      <td class="text-right">$1,005.00</td>
-                    </tr>
-                  </tfoot>
-                </table>
-              </div>
+            
+              	<div class="point_box">
+              			<span>내 마일리지 </span><button>조회하기</button>
+              	</div>
+              	
+              	<div class="pay_list">
+					 <ul class="pays">
+					     <li><input type="radio" name="pay" class="pay" value="creditcard"><span></span>신용카드</li>
+					     <li><input type="radio" name="pay" class="pay" value="kakaopay"><img src="/../../resources/orderproduct/image/kakaopay.png" alt="kakaopay"></li>
+					     <li><input type="radio" name="pay" class="pay" value="naverpay"><img src="/../../resources/orderproduct/image/naverpay.png" alt="naverpay"></li>
+					     <li><input type="radio" name="pay" class="pay" value="payment"><span></span>무통장입금</li>
+					 </ul>
+					 		<div class="pay_info">
+					 			<div class="creditcard_info"> <!-- 신용카드 -->
+							 		<div class="creditcard_info01">
+								 		<strong>카드 종류 </strong><select id="creditcards">
+								 			<option>&nbsp;&nbsp;==선택==</option>
+								 			<option vlaue="신한카드">&nbsp;신한카드</option>
+								 			<option vlaue="kosta카드">&nbsp;kosta카드</option>
+								 			<option vlaue="KB국민카드">&nbsp;KB국민카드</option>
+								 			<option vlaue="현대카드">&nbsp;현대카드</option>
+								 		</select>
+							 		</div>
+							 		<div class="creditcard_info02">
+							 			<strong>할부 기간  </strong><select id="month">
+								 			<option>&nbsp;&nbsp;==선택==</option>
+								 			<option value="2f">&nbsp;2개월(무이자)</option>
+								 			<option value="3f">&nbsp;3개월(무이자)</option>
+								 		</select>
+							 		</div>
+							 		<div class="creditcard_info03">
+							 			<p>* 과도한 구매는 언제든지 감사합니다.</p>
+							 		</div>
+						 		</div>
+						 		<div class="kakaopay_info"> <!-- 카카오페이 -->
+						 			<div class="kakaopay_info01">
+						 				<p>* 카카오페이 결제 서비스로 결제됩니다.<br> 결제후 세부 결제 내역은 카카오페이 구매내역을 확인하여 주십시오.
+						 			</div>
+						 		</div>
+						 		
+						 		<div class="naverpay_info"> <!-- 네이버 -->
+						 			<div class="naverpay_info01">
+						 				<p>* 네이버페이 간편결제 서비스로 결제됩니다.<br> 결제후 세부 결제내역은 네이버페이 구매내역을 확인하여 주십시오.
+						 			</div>
+						 		</div>
+						 		
+						 		<div class="payment_info"> <!-- 무통장 입금 -->
+						 			<div class="payment_info01">
+						 				<strong>입금계좌 선택  </strong><select id="bankaccount">
+								 			<option>&nbsp;&nbsp;==입금계좌 선택==</option>
+								 			<option value="k_123-4567-89-123">&nbsp;국민은행 123-4567-89-123(주)KokoFarm</option>
+								 			<option value="w_123-4567-89-123">&nbsp;우리은행 123-4567-89-123(주)KokoFarm</option>
+								 			<option value="i_123-4567-89-123">&nbsp;기업은행 123-4567-89-123(주)KokoFarm</option>
+								 		</select>
+						 			</div>
+						 			<div class="payment_info02">
+						 				<strong>입금자명 </strong><input type="text" placeholder="입금자명을 적어주세요." size="20">
+						 				<p> * 실제 입금자명과 정확히 일치하여야 정상 주문이 됩니다.</p>
+						 			</div>
+						 		</div>
+						 </div>
+	               	</div>
+              </div> 
+              
               <div class="buttons">
                 <div class="pull-right">
-                  <input type="button" data-loading-text="Loading..." class="btn btn-primary" id="button-confirm" value="Confirm Order">
+                  <input type="button" data-loading-text="Loading..." class="btn btn-primary" id="button-confirm" value="주문하기">
                 </div>
               </div>
+              
             </div>
           </div>
         </div>
-      </div>
-    </div>
+	</div>
   </div>
 </div>	
 <%@include file="../include/footer.jsp"%>

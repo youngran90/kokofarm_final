@@ -7,19 +7,29 @@ public class CartListVO implements Serializable{
 	private String product_name;
 	private int product_price;
 	private String product_unit;
+	private String product_mainimage;
 	
 	public CartListVO() {
 		super();
 	}
 
-	public CartListVO(String product_no, String product_name, int product_price, String product_unit) {
+	public CartListVO(String product_no, String product_name, int product_price, String product_unit,
+			String product_mainimage) {
 		super();
 		this.product_no = product_no;
 		this.product_name = product_name;
 		this.product_price = product_price;
 		this.product_unit = product_unit;
+		this.product_mainimage = product_mainimage;
 	}
-	
+
+	public String getProduct_mainimage() {
+		return product_mainimage;
+	}
+
+	public void setProduct_mainimage(String product_mainimage) {
+		this.product_mainimage = product_mainimage;
+	}
 
 	public String getProduct_unit() {
 		return product_unit;
@@ -57,9 +67,10 @@ public class CartListVO implements Serializable{
 
 	@Override
 	public String toString() {
-		return "CartListDTO [product_no=" + product_no + ", product_name=" + product_name + ", product_price="
-				+ product_price + ", product_unit=" + product_unit + "]";
+		return "CartListVO [product_no=" + product_no + ", product_name=" + product_name + ", product_price="
+				+ product_price + ", product_unit=" + product_unit + ", product_mainimage=" + product_mainimage + "]";
 	}
+
 
 	
 	

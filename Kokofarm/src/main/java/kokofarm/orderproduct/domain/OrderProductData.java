@@ -10,13 +10,14 @@ public class OrderProductData {
 	private String order_product_amount; //수량
 	private String order_delivery_price;
 	private String order_total_price;
+	private String product_mainimage;
 	
 	public OrderProductData() {
 	}
 
 	public OrderProductData(String member_id, String product_no, String product_name, String product_price,
-			String order_product_amount, String order_delivery_price, String order_total_price) {
-		super();
+			String order_product_amount, String order_delivery_price, String order_total_price,
+			String product_mainimage) {
 		this.member_id = member_id;
 		this.product_no = product_no;
 		this.product_name = product_name;
@@ -24,6 +25,7 @@ public class OrderProductData {
 		this.order_product_amount = order_product_amount;
 		this.order_delivery_price = order_delivery_price;
 		this.order_total_price = order_total_price;
+		this.product_mainimage = product_mainimage;
 	}
 
 	public String getMember_id() {
@@ -32,6 +34,14 @@ public class OrderProductData {
 
 	public void setMember_id(String member_id) {
 		this.member_id = member_id;
+	}
+
+	public String getProduct_mainimage() {
+		return product_mainimage;
+	}
+
+	public void setProduct_mainimage(String product_mainimage) {
+		this.product_mainimage = product_mainimage;
 	}
 
 	public String getProduct_no() {
@@ -86,11 +96,10 @@ public class OrderProductData {
 	public String toString() {
 		return "OrderProductData [member_id=" + member_id + ", product_no=" + product_no + ", product_name="
 				+ product_name + ", product_price=" + product_price + ", order_product_amount=" + order_product_amount
-				+ ", order_delivery_price=" + order_delivery_price + ", order_total_price=" + order_total_price + "]";
+				+ ", order_delivery_price=" + order_delivery_price + ", order_total_price=" + order_total_price
+				+ ", product_mainimage=" + product_mainimage + "]";
 	}
 
-
-	
 
 	
 }
