@@ -3,33 +3,167 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
+ <%@include file="../include/header.jsp"%>
       <style>
 .error{
 color: "red"
+}
+
+
+   
+
+select[type=tel], input[type=tel]{
+text-align: center;
 }
 </style>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
  <script type="text/javascript">
+ 
 	$(function(){
+	/* 	$('#id_check').on('click',function(){
+			var userid = $("#member_id").val();
+			var param = "userid="+userid;
+			$.ajax({
+				type : "post",
+				url : "/member/id_check",
+				data : param,
+				dataType : 'text',
+				success : function(result){
+					
+				}
+				
+				
+			})
+			
+			
+			
+			
+		}); */
+		
+	
+		
+		$("#member_id").on("keydown",function(){
+			
+			$("#idDuplication").attr("value","idUncheck");
+		});
+				
+		$("#id_check").on('click',function(){
+	
+			var userid = $("#member_id").val();
+		
+			window.name = "parentForm";
+			openWin = window.open("/member/id_check?userid="+userid,
+					"childForm", "width =500, height = 300, resizable = no, scrollbars = no");
+			
+
+	
+		});
+		
+		
+		
+		//회원가입 정규 표현식
 	$("#joinBtn").on("click",function(){
+	
 		
 		
 		
+		var idD = $("#idDuplication").val();
+		if(idD !="idCheck"){
+			alert("아이디 중복체크를 해주세요.");
+			return false;
+			
+			
+		}
+		var id = $('#member_id').val();
+		var eid = /^[a-z0-9A-Z_]{4,15}$/;
+		if(!eid.test(id)){
+			alert("아이디를 다시 입력해 주세요")
+			$("#member_id").focus();
+			return;
+		}
+		
+		var name = $('#member_name').val();
+		var ename = /^[가-힣]{2,8}$/;
+		
+		if(!ename.test(name)){
+			alert("이름을 다시 입력해 주세요")
+			$('#member_name').focus();
+			return;
+		}
+		
+		var email = $('#member_email').val();
+		var eemail =/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+		
+		if(!eemail.test(email)){
+			alert("이메일 형식에 맞지 않습니다. 다시 입력해 주세요")
+			$('#member_email').focus();
+			return;
+		}
+		
+		var phone = $('#member_phoneNum2').val();
+		var ephone= /^[0-9]{3,4}$/;
+		
+		if(!ephone.test(phone)){
+			alert("전화번호를 다시 입력해 주세요")
+			$('member_phoneNum2').focus();
+			return;
+		}
+		var zip=$('#sample6_postcode').val();
+		
+		if(zip==""){
+			alert("주소를 입력해 주세요");
+			return;
+		}
+		 var address2 = $('#sample6_address2').val();
+		 
+		 if(address2==""){
+			 alert("상세주소를 입력해 주세요");
+			 $('#sample6_address2').focus();
+			 return;
+		 }
+		 
+		 var pw = $('#member_password').val();
+		 var pw2 =$('#member_password2').val();
+		
+		var epw =/^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{5,20}$/;
+		if(!epw.test(pw)){
+			alert("암호를 다시 입력해 주세요");
+			$('#member_password').focus();
+			return;
+			
+		}else if(pw!=pw2){
+			alert('입력한 비밀번호가 다릅니다.');
+			$('#member_password2').focus();
+			return;
+		}
+		
+		
+		var p1=$("#member_phoneNum1").val();
+		var p2 =$("#member_phoneNum2").val();
+		var p3 = $("#member_phoneNum3").val();
+		
+		
+		var p4 = p1+p2+p3;
+		$("#member_phoneNum").attr('value',p4);
+		
+		
+		alert($("#member_phoneNum").val());
+		
+		var t1 = $("#member_tel1").val();
+		var t2 =$("#member_tel2").val();
+		var t3 =$("#member_tel3").val();
+		var t4 =t1+t2+t3;
+		$("#member_tele").attr('value',t4);
 		
 		
 		document.joinForm.submit();
 	})
 	
-
-	
 });
 	
-
 </script>
-    
-    
-    
+       
     <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
     function sample6_execDaumPostcode() {
@@ -80,7 +214,7 @@ color: "red"
     
     
 
-<%@include file="../include/header.jsp"%>
+
 
 <div class="container">
     <ul class="breadcrumb">
@@ -100,7 +234,19 @@ color: "red"
                 <div class="columnblock-title">Account</div>
                 <div class="account-block">
                     <div class="list-group"> <a class="list-group-item" href="login.html">Login</a> 
-                    <a class="list-group-item" href="register.html">Register</a> <a class="list-group-item" href="forgetpassword.html">Forgotten Password</a> <a class="list-group-item" href="#">My Account</a> <a class="list-group-item" href="#">Address Book</a> <a class="list-group-item" href="#">Wish List</a> <a class="list-group-item" href="#">Order History</a> <a class="list-group-item" href="download">Downloads</a> <a class="list-group-item" href="#">Reward Points</a> <a class="list-group-item" href="#">Returns</a> <a class="list-group-item" href="#">Transactions</a> <a class="list-group-item" href="#">Newsletter</a><a class="list-group-item last" href="#">Recurring payments</a> </div>
+                    <a class="list-group-item" href="/member/join">Register</a> 
+                    <a class="list-group-item" href="forgetpassword.html">Forgotten Password</a> 
+                    <a class="list-group-item" href="#">My Account</a> 
+                    <a class="list-group-item" href="#">Address Book</a> 
+                    <a class="list-group-item" href="#">Wish List</a> 
+                    <a class="list-group-item" href="#">Order History</a> 
+                    <a class="list-group-item" href="download">Downloads</a>
+                     <a class="list-group-item" href="#">Reward Points</a> 
+                     <a class="list-group-item" href="#">Returns</a>
+                      <a class="list-group-item" href="#">Transactions</a>
+                       <a class="list-group-item" href="#">Newsletter</a>
+                       <a class="list-group-item last" href="#">Recurring payments</a> 
+                       </div>
                 </div>
             </div>
         </div>
@@ -123,31 +269,69 @@ color: "red"
                     <div class="form-group required">
                         <label for="input-id" class="col-sm-2 control-label">I D</label>
                         <div class="col-sm-10">
-                            <form:input type="text" class="form-control" id="member_id" placeholder="아이디         6~15자 특수문자 사용금지" value="" path="member_id"/>
+                            <form:input type="text" class="form-control" id="member_id" placeholder="아이디      4~15자 특수문자 사용금지" value="" path="member_id" />
+                            <input type="button" value = "중복확인" id ="id_check">
                             	<form:errors path="member_id" cssClass="error"/>
-                          	
+                            		<input type="hidden" id = "idDuplication" name = "idDuplication" value="idUncheck">                          	
                         </div>
                     </div>
                     <div class="form-group required">
                         <label for="input-name" class="col-sm-2 control-label">이 름</label>
                         <div class="col-sm-10">
-                            <form:input type="text" class="form-control" id="member_name" placeholder="이름" value="" path="member_name"/>
+                            <form:input type="text" class="form-control" id="member_name" placeholder="이름        한글만(특수문자 금지)" value="" path="member_name"/>
                             <form:errors path="member_name" cssClass="error"/>
                         </div>
                     </div>
                     <div class="form-group required">
                         <label for="input-email" class="col-sm-2 control-label">E-Mail</label>
                         <div class="col-sm-10">
-                            <form:input type="email" class="form-control" id="member_email" placeholder="E-Mail" value="" path="member_email"/>
+                            <form:input type="email" class="form-control" id="member_email" placeholder="abcd@abcd.com" value="" path="member_email"/>
                             <form:errors path="member_email" cssClass="error"/>
                         </div>
                     </div>
                     <div class="form-group required">
                         <label for="input-telephone" class="col-sm-2 control-label">핸드폰번호</label>
                         <div class="col-sm-10">
-                            <form:input type="tel" class="form-control" id="member_phoneNum" placeholder="Telephone" value="" path="member_phoneNum"/>
-                     	  <form:errors path="member_phoneNum" cssClass="error"/>	
+                            <%-- <form:input type="tel" class="form-control" id="member_phoneNum1" placeholder="000-0000-0000" value="" path="member_phoneNum"/> --%>
+                     	  	<select name = "member_phoneNum1" id = "member_phoneNum1" style="height: 28px; margin-top: 3px">
+                     	  		<option value="010">010</option>
+                     	  		<option value="011">011</option>
+                     	  		<option value="017">017</option>
+                     	  		<option value="019">019</option>
+                     	  	</select> -
+                     	  	<input type="tel"  id = "member_phoneNum2" name = "member_phoneNum2" size="5" maxlength="4"> -
+                     	  	<input type="tel" id = "member_phoneNum3" name = "member_phoneNum3" size="5" maxlength="4">
+                     		<input type="hidden" id = "member_phoneNum" name="member_phoneNum" value="">
+                     	 <%--  <form:errors path="member_phoneNum" cssClass="error"/> --%>	
                         </div>
+                    </div>
+                    
+                    <div class = "form-group">
+                    	<label for ="input-tel" class="col-sm-2 control-label">전화번호</label>
+                    	<div class="col-sm-10">
+                    	<select id="member_tel1" name ="member_tel1" style="height: 28px; margin-top: 3px">
+                    	<option value="02">02</option>
+                        <option value="031">031</option>
+                        <option value="032">032</option>
+                        <option value="033">033</option>
+                        <option value="041">041</option>
+                        <option value="042">042</option>
+                        <option value="043">043</option>
+                        <option value="051">051</option>
+                        <option value="052">052</option>
+                        <option value="053">053</option>
+                        <option value="054">054</option>
+                        <option value="055">055</option>
+                        <option value="061">061</option>
+                        <option value="062">062</option>
+                        <option value="063">063</option>
+                        <option value="064">064</option>
+                     </select> -
+                     <input type="tel"  id = "member_tel2" name="member_tel2" size="5" maxlength="4"> -
+                     <input type="tel"  id="member_tel3" name = "member_tel3" size = "5" maxlength="4">
+                    	<input type ="hidden" id ="member_tele" name="member_tele" value="">
+                    	</div>
+                    
                     </div>
                  
                 </fieldset>
@@ -204,7 +388,6 @@ color: "red"
                                 <input type="radio" value="1" name="newsletter">
                                 Yes</label>
                             <label class="radio-inline">
-                                <input type="radio" checked="checked" value="0" name="newsletter">
                                 No</label>
                         </div>
                     </div>

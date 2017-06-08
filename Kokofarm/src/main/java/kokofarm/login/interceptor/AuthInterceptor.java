@@ -11,6 +11,26 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 public class AuthInterceptor extends HandlerInterceptorAdapter {
 
+private void saveDest(HttpServletRequest request){
+		
+		String uri = request.getRequestURI();
+		String query = request.getQueryString();
+		
+		System.out.println("uri :" +uri);
+		System.out.println("query :" +uri);
+		
+		if(query ==null || query.equals("null")){
+			query = "";
+		}else{
+			query = "?" +query;
+		}
+		
+		if (request.getMethod().equals("GET")){
+			
+			request.getSession().setAttribute("dest", uri+query);
+		}
+	}	
+	
 
 		
 	@Override
@@ -20,6 +40,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 		HttpSession session = request.getSession();
 		
 		if(session.getAttribute("login")== null){
+			saveDest(request);
 			
 			response.sendRedirect("/member/login");
 			

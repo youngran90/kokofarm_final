@@ -1,5 +1,6 @@
 package kokofarm.login.interceptor;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -19,14 +20,32 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
-		HttpSession session = request.getSession();
-		ModelMap modelMap = modelAndView.getModelMap();
-		Object MemberVO = modelMap.get("MemberVO");
 		
-		if(MemberVO != null){
+		HttpSession session = request.getSession();
+		
+		ModelMap modelMap = modelAndView.getModelMap();
+		Object memberVO = modelMap.get("memberVO");
+		
+		System.out.println(memberVO.toString());
+		if(memberVO != null){
 			logger.info("new login success");
-			session.setAttribute(LOGIN, MemberVO);
-			response.sendRedirect("/");
+			session.setAttribute(LOGIN, memberVO);
+			
+			
+			
+			if( request.getParameter("useCookie") !=null){
+				Cookie loginCookie = new Cookie("loginCookie",session.getId());
+				loginCookie.setPath("/");
+				loginCookie.setMaxAge(60*60*24*7);
+				response.addCookie(loginCookie);
+				
+				
+			}
+			
+			Object dest = session.getAttribute("dest");
+			response.sendRedirect(dest != null ? (String)dest : "/");
+			
+		//	response.sendRedirect("/");
 		}
 	}
 	@Override

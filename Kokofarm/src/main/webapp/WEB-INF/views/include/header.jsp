@@ -1,5 +1,7 @@
+<%@page import="kokofarm.member.domain.MemberVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,6 +27,38 @@
 <script src="/resources/owl-carousel/owl.carousel.min.js" type="text/javascript"></script>
   
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
+<script type="text/javascript">
+
+
+
+<%
+MemberVO vo = (MemberVO)session.getAttribute("login");
+System.out.println("세션값" +vo);
+
+	if(vo==null){%>
+	$(function(){
+		$(".list-inline li").eq(0).css("display","none");
+			});
+				
+	<%}
+
+		if(vo !=null) {
+		String id = vo.getMember_id();
+		System.out.println("세션아이디 :" +vo.getMember_id());
+		System.out.println("포인트 :" +vo.getMember_point());
+%>$(function(){
+	$(".dropdown-menu-right a").eq(0).attr("href","/member/myPage");
+	 $(".dropdown-menu-right a").eq(0).text("마이페이지");
+	 
+	 $(".dropdown-menu-right a").eq(1).attr("href","/member/logout").text("로그아웃");
+	
+	
+	
+	});
+<%}%>
+	
+	
+	</script>
 
 </head>
 <body>
@@ -42,7 +76,7 @@
                   <ul class="dropdown-menu">
                     <li><a href="#"><img src="/resources/image/flags/lb.png" alt="Korea" title="Korea"> Korea</a></li>
                     <li><a href="#"><img src="/resources/image/flags/gb.png" alt="English" title="English"> English</a></li>
-                  </ul>
+                  </ul>	
                 </div>
               </form>
             </div>
@@ -68,10 +102,11 @@
           <div class="top-right pull-right">
             <div id="top-links" class="nav pull-right">
               <ul class="list-inline">
+              <li><i class="fa fa-user"></i><span id="check_id">${login.member_id }님 환영 합니다.</span></a></li>
                 <li class="dropdown"><a href="#" title="My Account" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-user"></i><span>My Account</span> <span class="caret"></span></a>
                   <ul class="dropdown-menu dropdown-menu-right">
-                    <li><a href="register.html">Register</a></li>
-                    <li><a href="login.html">Login</a></li>
+                    <li><a href="/member/join1">회원가입</a></li>
+                    <li><a href="/member/login">로그인</a></li>
                   </ul>
                 </li>
                 <li><a href="#" id="wishlist-total" title="Wish List (0)"><i class="fa fa-heart"></i><span>Wish List</span><span> (0)</span></a></li>

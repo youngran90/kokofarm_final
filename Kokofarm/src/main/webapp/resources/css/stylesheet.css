@@ -123,7 +123,7 @@ div.required .control-label:before {
 #wishlist-total {
     color: #808080;
 }
-.dropdown a {
+.dropdown a, #check_id {
     color: #808080 ;
 }
 #top-links li .fa {
@@ -1313,7 +1313,7 @@ h2.price {
 .main-navigation li a {
 	color: #fff;
 	font-family: "Roboto",Arial,Helvetica,sans-serif;
-	font-size: 17px;
+	font-size: 16px;
 	font-weight: 400;
 	letter-spacing: 0.5px;
 }
@@ -1341,7 +1341,7 @@ ul.main-navigation {
 	width: 100%;
 	padding: 20px 0;
 	margin: 0;
-	margin-left: 50px;
+	margin-left: 10px;
 	vertical-align: top;
 	text-align: center;
 

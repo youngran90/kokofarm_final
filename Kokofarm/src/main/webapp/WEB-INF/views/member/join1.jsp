@@ -1,11 +1,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<link href = "/resources/css/joincss.css" rel="stylesheet">
+
 
 <%@include file="../include/header.jsp"%>
 
-
+<link href = "/resources/css/joincss.css" rel="stylesheet">
 <style>
 	table.policy_table{text-align:center;font-size:11px;}
 	table.policy_table thead{background:#666;color:#fff;}
@@ -37,7 +37,13 @@
 
 <div class="content_area">
 
-		<section class="join_section join_section1">
+<ul class="breadcrumb">
+        <li><a href="/"><i class="fa fa-home"></i></a></li>
+        <li><a href="#">Mypage</a></li>
+        <li><a href="/member/join">Register</a></li>
+    </ul>
+
+		<!-- <section class="join_section join_section1">
 			<section class="sub_top_section">
 				<h2 class="cate_title"><span>회원가입</span></h2>
 				<div class="page_location">
@@ -45,8 +51,8 @@
 					<a class="loca_depth">회원가입</a>
 					<a class="loca_depth loca_this">약관동의</a>
 				</div>
-			</section>
-			<form name="frmAgree" action="/shop/member/join.php" method="post">
+			</section> -->
+			<form name="frmAgree" action="/member/join" method="get">
 				<input name="style" type="hidden" value="join2">				
 			</form>
 			<div class="step_box"><img alt="step1. 약관동의" src="/resources/image/join/join_topcon_step1.jpg"></div>

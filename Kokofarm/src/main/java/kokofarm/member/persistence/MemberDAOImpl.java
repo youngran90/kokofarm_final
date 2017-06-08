@@ -31,4 +31,11 @@ class MemberDAOImpl implements MemberDAO {
 		return session.selectOne(namespace+".logincheck", dto);
 	}
 
+
+	@Override
+	public Integer id_check(String userid) throws Exception {
+	
+		return session.selectOne(namespace+".id_check", userid);
+	}
+
 }
