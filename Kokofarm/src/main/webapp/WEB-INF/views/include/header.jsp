@@ -192,11 +192,10 @@ System.out.println("세션값" +vo);
     <div class="navbar-collapse">
       <ul class="main-navigation">
         <li><a href="/"   class="parent"  >홈</a> </li>
-        <li><a href="category.html"   class="parent"  >과일</a> </li>
-        <li><a href="category.html"   class="parent"  >채소</a> </li>
+        <li><a href="/product/list_product"   class="parent"  >과일/채소</a> </li>
         <li><a href="category.html"   class="parent"  >일반경매</a> </li>
-         <li><a href="category.html"   class="parent" >실시간경매</a> </li>
-        <li><a href="category.html"   class="parent"  >고객센터</a> </li>
+         <li><a href="#"   class="parent" >실시간경매</a> </li>
+        <li><a href="#"   class="parent"  >고객센터</a> </li>
         <li><a href="#" class="active parent">MyPage</a>
           <ul>
             <li><a href="category.html">Category Page</a></li>

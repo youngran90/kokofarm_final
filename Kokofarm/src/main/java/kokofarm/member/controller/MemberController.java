@@ -121,5 +121,12 @@ public class MemberController {
 	}
 
 	
+	@RequestMapping("/join0")
+	public void join0(){
+		
+		
+	}
+	
+	
 }
 
