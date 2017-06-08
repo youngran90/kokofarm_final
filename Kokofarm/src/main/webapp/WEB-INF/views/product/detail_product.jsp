@@ -3,7 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
+<%
+	MemberVO member = (MemberVO)session.getAttribute("login");
+	String m_id = member.getMember_id();
+	String member_id = m_id.substring(0, 3);
+	System.out.println(member_id);
+%>
 
 <%@include file="../include/header.jsp"%>
 <style>
@@ -343,7 +348,8 @@
               <span>${product.product_area}</span></li>
             <li>
               <label>생산자:</label>
-              <span>  <a href="#">${product.producer}</a></span></li>
+    			<span>  <a href="#">${product.producer}</a></span></li>
+              <%-- <span>  <a href="#">${login.member_name}</a></span></li> --%>
             <li>
             <li>
               <label>규격:</label>
@@ -527,7 +533,7 @@
               <div class="form-group required">
               <label class="control-label" for="input-review">아이디</label>
                 <div class="col-sm-12">
-               <input  class="control-label" id="member_id" name="member_id" value="m_1"/>
+               <input  class="control-label" id="member_id" name="member_id" value="${login.member_id}" readonly="readonly"/>
                 </div>
               </div>
               <div class="form-group required">
@@ -589,6 +595,7 @@
 				<tbody>	
 				<c:if test="${not empty replylist}">
 					<c:forEach var="replylist" items="${replylist}" varStatus="status">
+					<input type="hidden" value="${replylist.reply_no}" id="re_no" class="re_no">
 					<tr class="tit_tr user_tit_tr">
 						<td>${status.count}</td>
 						<td style="text-align:left; ">
@@ -608,10 +615,9 @@
 				<%-- 	<c:if test="${replylist.member_id eq member_id}"> --%>
 				<%-- 	 </c:if> --%>
 						 	<td colspan="2"><button id="deleteReply" value="${replylist.reply_no}" onclick="deleteReply('${replylist.reply_no}')">삭제</button>
-						 	<button id="updateReply" class="updateReply" value="${status.count}" onclick="updateReply()">수정</button></td>
+						 	<button id="updateReply" class="updateReply" value="${status.count}" onclick="updateReply('${replylist.reply_no}')">수정</button></td>
 					</tr>
 					<tr>
-					</div>
 					</tr>
 					</c:forEach>
 				</c:if>
@@ -625,38 +631,27 @@
 </div>
 
 <script type="text/javascript">
-	function gocart(product_no){
-		alert(product_no);
-		var num = parseInt($("#ea").val());
-		alert(num);
-		location.href="/cart/cart?num=" + num + "&product_no="+ product_no;
-		
-	}
 
-	function deleteReply(reply_no) {
-		alert(reply_no);
-		
-		$.ajax({
-			type : "get",
-			url : "/deleteReply",
-			data : {
-				"reply_no" : reply_no
-			},
-			success : function(data) {
-				location.reload();
-				alert("댓글이 삭제되었습니다.");
-			},
-			error : function(data) {
-				console.log('Error:', data);
-				alert("오류");
-			}
-		})
-	};
+$(function(){
+	var doubleSubmitFlag = true;
+	$(".updateReply").on("click", function(){
+		 if(doubleSubmitFlag){
+				var index =$(this).attr("value");
+				var reply_content = $(".tit_td").eq(index-1).html();
+				var re_no = $(".re_no").eq(index-1).attr("value");
+				alert(re_no);
+				$(".tit_td").eq(index-1).html('<input type="text" id="reply_contents" value="'+ reply_content+'" size="50"/><button id="update_Re" value="'+re_no+'" onclick="update_Re()">수정완료</button> ');
+				doubleSubmitFlag = false;
+		    }else{
+		        return false;
+		    }
+	});
+	})
 
 	function update_Re() {
-
+		
 		var reply_content = $("#reply_contents").val();
-		alert(reply_content);
+		var reply_no = $("#update_Re").attr("value");
 		
 		$.ajax({
 			type : "get",
@@ -695,8 +690,28 @@
 				}
 			})
 	}
+	
+	function deleteReply(reply_no) {
+		alert(reply_no);
+		
+		$.ajax({
+			type : "get",
+			url : "/deleteReply",
+			data : {
+				"reply_no" : reply_no
+			},
+			success : function(data) {
+				location.reload();
+				alert("댓글이 삭제되었습니다.");
+			},
+			error : function(data) {
+				console.log('Error:', data);
+				alert("오류");
+			}
+		})
+	};
+
 	 function eaup() {
-			
 			var price = $('#price').val();
 			
 			var num = parseInt($("#ea").val());
@@ -720,47 +735,18 @@
 				$("#aa").text(price * (ea-1) + "원");
 			}
 		}
-		function deletpost(post_no) {
-			$.ajax({
-				type : "get",
-				url : "deletePost.product",
-				data : {
-					"post_no" : post_no
-				},
-				success : function(data) {
-					location.reload();
-					alert("댓글삭제");
-				},
-				error : function(data) {
-					console.log('Error:', data);
-					alert("오류");
-				}
-			})
+		
+		function gocart(product_no){
+			alert(product_no);
+			var num = parseInt($("#ea").val());
+			alert(num);
+			location.href="/cart/cart_detail?num=" + num + "&product_no="+ product_no;
 		}
-
-		function updatepost(post_no) {
-			$("#updatePost").append('<input type="submit" name="post_content" size="50"/>');
-			location.reload();
-
-			$.ajax({
-				type : "get",
-				url : "updatePostAction.product",
-				data : {
-					"post_no" : post_no
-				},
-				success : function(data) {
-					location.reload();
-					alert("댓글수정");
-				},
-				error : function(data) {
-					console.log('Error:', data);
-					alert("오류");
-				}
-			})
-		}
+		
 		function question(product_name, product_no, seller_no) {
 			window.open("doInquiry.Inquiry?product_name=" + product_name + "&product_no=" + product_no + "&seller_no=" + seller_no, "", "width=500,height=400");
 		}
+		
 		
 		<%-- function cart(product_no){
 			var member_id = 0;

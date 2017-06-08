@@ -14,7 +14,7 @@
   <div class="row">
     <div id="column-left" class="col-sm-3 hidden-xs column-left">
       <div class="column-block">
-        <div class="columnblock-title"></div>
+        <div class="columnblock-title">Fruit</div>
         <div class="category_block">
         <ul class="box-category treeview-list treeview">
             <li><a href="/product/list_product?ca2=fs" class="activSub">과일</a>
@@ -38,7 +38,7 @@
           </div>
         
         
-        <div class="columnblock-title">Categories</div>
+        <div class="columnblock-title">Vegetable</div>
         <div class="category_block">
         <ul class="box-category treeview-list treeview">
             <li><a href="/product/list_product?ca2=vs" class="activSub">쌈/야채</a>
