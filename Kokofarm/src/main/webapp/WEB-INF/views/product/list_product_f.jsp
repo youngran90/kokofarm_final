@@ -14,9 +14,9 @@
   <div class="row">
     <div id="column-left" class="col-sm-3 hidden-xs column-left">
       <div class="column-block">
-        <div class="columnblock-title"></div>
+        <div class="columnblock-title">Categories</div>
         <div class="category_block">
-        <ul class="box-category treeview-list treeview">
+          <ul class="box-category treeview-list treeview">
             <li><a href="/product/list_product?ca2=fs" class="activSub">과일</a>
               <ul>
                 <li><a href="/product/list_product?ca3=fs_1" >딸기</a></li>
@@ -35,38 +35,6 @@
                </ul>
             </li>
           </ul>
-          </div>
-        
-        
-        <div class="columnblock-title">Categories</div>
-        <div class="category_block">
-        <ul class="box-category treeview-list treeview">
-            <li><a href="/product/list_product?ca2=vs" class="activSub">쌈/야채</a>
-              <ul>
-                <li><a href="/product/list_product?ca3=vs_1" >상추/깻잎</a></li>
-                <li><a href="/product/list_product?ca3=vs_2" >치커리/케일</a></li>
-                <li><a href="/product/list_product?ca3=vs_3" >쑥갓/청겨자</a></li>
-              </ul>
-            </li>
-            <li><a href="/product/list_product?ca2=vf" class="activSub">열매채소</a>
-              <ul>
-                <li><a href="/product/list_product?ca3=vf_1" >가지/오이</a></li>
-                <li><a href="/product/list_product?ca3=vf_2" >고추/파프리카</a></li>
-                <li><a href="/product/list_product?ca3=vf_3" >옥수수/호박</a></li>
-              </ul>
-            </li>
-            <li><a href="/product/list_product?ca2=vr" class="activSub">뿌리채소</a>
-              <ul>
-	                <li><a href="/product/list_product?ca3=vr_1" >양파/당근</a></li>
-	                <li><a href="/product/list_product?ca3=vr_2" >무/파</a></li>
-	                <li><a href="/product/list_product?ca3=vr_3" >생각/마늘</a></li>
-	                <li><a href="/product/list_product?ca3=vr_4" >고구마/감자</a></li>
-                  </ul>
-            </li>
-          </ul>
-        
-        
-        
         </div>
       </div>
       <div class="panel panel-default filter">

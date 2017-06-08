@@ -11,7 +11,7 @@ public interface ReplyDAO {
 		
 		public List<ReplyVO> list_Po(String product_no)throws Exception;
 		
-		public void delete_Po(String post_no)throws Exception;
+		public void delete_Po(String reply_no)throws Exception;
 		
 		public void update_Po(ReplyVO vo)throws Exception;
 	

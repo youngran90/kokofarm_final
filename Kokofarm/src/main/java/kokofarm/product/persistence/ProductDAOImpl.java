@@ -1,6 +1,8 @@
 package kokofarm.product.persistence;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -25,11 +27,13 @@ public class ProductDAOImpl implements ProductDAO {
 
 	}
 
+	//전체출력
 	@Override
-	public List<ProductVO> list_Pro() throws Exception {
-		return session.selectList(namespace+".list_Product");
+	public List<ProductVO> list_Pro(Map<String, String>map) throws Exception {
+	return session.selectList(namespace+".listProduct", map);
 	}
-
+	
+	
 	@Override
 	public int Count_Pro() throws Exception {
 		return session.selectOne(namespace+".countProduct");
@@ -46,5 +50,6 @@ public class ProductDAOImpl implements ProductDAO {
 
 	}
 
+	
 
 }

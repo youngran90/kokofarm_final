@@ -5,8 +5,8 @@
 	<cache />
 
 	<insert id="InsertReply" parameterType="ReplyVO">
-	insert into Reply (post_no, product_no, member_id, post_content, post_date)
-	values(#{Reply_no}, #{product_no}, #{member_id}, #{Reply_content}, sysdate) 
+	insert into Reply (reply_no, product_no, member_id, reply_content, reply_rating, reply_date)
+	values(#{reply_no}, #{product_no}, #{member_id}, #{reply_content}, #{reply_rating}, sysdate) 
 	</insert>
 	
 	<select id="listReply" parameterType="String" resultType="ReplyVO">
@@ -16,13 +16,13 @@
 	
 	<delete id="deleteReply" parameterType="String">
 	delete from Reply
-	where Reply_no = #{Reply_no}
+	where reply_no = #{reply_no}
 	</delete>
 	
 	<update id="updateReply" parameterType="ReplyVO">
 	update Reply 
-	set Reply_content = #{Reply_content}
-	where Reply_no = #{Reply_no} 
+	set reply_content = #{reply_content}
+	where reply_no = #{reply_no} 
 	</update>
 	
 	

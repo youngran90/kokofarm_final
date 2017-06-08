@@ -2,12 +2,16 @@ package kokofarm.product.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -20,7 +24,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kokofarm.basic.domain.FileBean;
 import kokofarm.product.domain.ProductVO;
+import kokofarm.product.domain.ReplyVO;
 import kokofarm.product.service.ProductService;
+import kokofarm.product.service.ReplyService;
 
 @Controller
 @RequestMapping("/product/*")
@@ -28,6 +34,10 @@ public class ProductController {
 	
 	@Inject
 	private ProductService service;
+	
+	@Inject
+	private ReplyService re_service;
+	
 	
 	private static final Logger logger = LoggerFactory.getLogger(ProductController.class); 
 	
@@ -74,26 +84,35 @@ public class ProductController {
 	}
 
 	@RequestMapping(value="/list_product", method= RequestMethod.GET)
-	public void listProduct(Model model)throws Exception{
+	public void listProduct(@Param("ca1") String ca1, 
+			@Param("ca2") String ca2, @Param("ca3") String ca3,  Model model)throws Exception{
 
 		logger.info("product..list...");
-		
-		model.addAttribute("list", service.list_product());
+
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("ca1", ca1);
+		map.put("ca2", ca2);
+		map.put("ca3", ca3);
+		model.addAttribute("list", service.list_product(map));
 	}
+	
 	
 	@RequestMapping(value="/detail_product", method= RequestMethod.GET)
 	public void detail_product(Model model,@RequestParam("product_no") String product_no)throws Exception{
 
-		logger.info("product..detail_product..."+product_no);
+		logger.info("product..detail_product...");
 	
+		List<ReplyVO> replylist = null;
 		ProductVO productVo = service.detail_product(product_no);
 		model.addAttribute("product", productVo);
+		
+		replylist = re_service.list_Post(product_no);
+		System.out.println("---------------------------");
+		System.out.println("list"+replylist.toString());
+		model.addAttribute("replylist", replylist);
 		//return "/product/detail_product";
 	}
-	
-	
-	
-	
+		
 	//게시판 
 	@RequestMapping(value = "/file_upload", method = RequestMethod.POST) 
 	public String procFileUpload(FileBean fileBean,HttpServletRequest request, Model model) {

@@ -16,8 +16,8 @@ public class ReplyServiceImpl implements ReplyService {
 	private ReplyDAO dao;
 
 	@Override
-	public void Insert_Post(ReplyVO post) throws Exception {
-		dao.Insert_Po(post);
+	public void Insert_Post(ReplyVO reply) throws Exception {
+		dao.Insert_Po(reply);
 	}
 
 	@Override
@@ -26,13 +26,13 @@ public class ReplyServiceImpl implements ReplyService {
 	}
 
 	@Override
-	public void delete_Post(String post_no) throws Exception {
-		dao.delete_Po(post_no);
+	public void delete_Post(String reply_no) throws Exception {
+		dao.delete_Po(reply_no);
 	}
 
 	@Override
-	public void update_Post(ReplyVO post) throws Exception {
-		dao.update_Po(post);
+	public void update_Post(ReplyVO reply) throws Exception {
+		dao.update_Po(reply);
 	}
 
 	

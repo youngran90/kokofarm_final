@@ -20,23 +20,23 @@ public class ReplyDAOImpl implements ReplyDAO {
 
 	@Override
 	public void Insert_Po(ReplyVO vo) throws Exception {
-		session.insert(namespace+".InsertPost", vo);
+		session.insert(namespace+".InsertReply", vo);
 
 	}
 
 	@Override
 	public List<ReplyVO> list_Po(String product_no) throws Exception {
-		return session.selectList(namespace+".listPost", product_no);
+		return session.selectList(namespace+".listReply", product_no);
 	}
 
 	@Override
-	public void delete_Po(String post_no) throws Exception {
-		session.delete(namespace+".deletePost", post_no);
+	public void delete_Po(String reply_no) throws Exception {
+		session.delete(namespace+".deleteReply", reply_no);
 	}
 
 	@Override
 	public void update_Po(ReplyVO vo) throws Exception {
-		session.update(namespace+".updatePost", vo);
+		session.update(namespace+".updateReply", vo);
 	}
 
 }

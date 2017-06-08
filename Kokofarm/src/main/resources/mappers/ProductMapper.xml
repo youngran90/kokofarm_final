@@ -18,16 +18,34 @@
 		)	
 	</insert>
 	
-	<select id="listProduct" resultType="ProductVO">
+	<select id="listProduct" resultType="ProductVO" parameterType="java.util.HashMap">
 		select * from product
-		<if test="searchText != null">
-				where ${searchOption} LIKE #{searchText}
+		<where>
+		<if test="ca1 != null">
+				ca1 = #{ca1}
 		</if>
-		order by product_uploaddate	
+		<if test="ca2 != null">
+				ca2 = #{ca2}
+		</if>
+		<if test="ca3 != null">
+			ca3 = #{ca3}
+		</if>
+		</where>
 	</select>
 	
-	<select id="list_Product" resultType="ProductVO">
+	<select id="listProduct_ca1" resultType="ProductVO" parameterType="String">
 		select * from product
+		where ca1 = #{ca1}
+	</select>
+	
+	<select id="listProduct_ca2" resultType="ProductVO" parameterType="String">
+		select * from product
+		where ca2 = #{ca2}
+	</select>
+	
+	<select id="listProduct_ca3" resultType="ProductVO" parameterType="String">
+		select * from product
+		where ca3 = #{ca3}
 	</select>
 	
 	

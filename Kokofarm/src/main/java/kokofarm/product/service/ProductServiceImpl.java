@@ -1,6 +1,7 @@
 package kokofarm.product.service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.inject.Inject;
@@ -9,12 +10,16 @@ import org.springframework.stereotype.Service;
 
 import kokofarm.product.domain.ProductVO;
 import kokofarm.product.persistence.ProductDAO;
+import kokofarm.product.persistence.ReplyDAO;
 
 @Service
 public class ProductServiceImpl implements ProductService {
 	
 	@Inject
 	private ProductDAO dao;
+	
+	@Inject
+	private ReplyDAO replyDao;
 
 	@Override
 	public void insert_product(ProductVO product) throws Exception {
@@ -23,10 +28,12 @@ public class ProductServiceImpl implements ProductService {
 		dao.insert_Pro(product);
 	}
 
+	//전체출력
 	@Override
-	public List<ProductVO> list_product() throws Exception {
-		return dao.list_Pro();
+	public List<ProductVO> list_product(Map<String, String>map) throws Exception {
+		return dao.list_Pro(map);
 	}
+	
 
 	@Override
 	public int Count_Product() throws Exception {
@@ -48,6 +55,8 @@ public class ProductServiceImpl implements ProductService {
 		      String uuid = UUID.randomUUID().toString().replace("-", "");
 		  return uuid;		
 	}
+
+	
 
 
 }

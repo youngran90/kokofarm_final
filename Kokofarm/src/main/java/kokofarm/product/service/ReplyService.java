@@ -12,7 +12,7 @@ public interface ReplyService {
 	
 	public List<ReplyVO> list_Post(String product_no)throws Exception;
 	
-	public void delete_Post(String post_no)throws Exception;
+	public void delete_Post(String reply_no)throws Exception;
 	
 	public void update_Post(ReplyVO vo)throws Exception;
 }
