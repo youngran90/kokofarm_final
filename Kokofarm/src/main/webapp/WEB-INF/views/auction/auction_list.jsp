@@ -5,14 +5,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>코코팜::경매상품</title>
 
-<body class="category col-2 left-col">
 <%@include file="../include/header.jsp"%>
-<div class="preloader loader" style="display: block; background:#f2f2f2;"> <img src="image/loader.gif"  alt="#"/></div>
+
+<!-- <div class="preloader loader" style="display: block; background:#f2f2f2;"> <img src="image/loader.gif"  alt="#"/></div> -->
 <div class="container">
   <ul class="breadcrumb">
-    <li><a href="index.html"><i class="fa fa-home"></i></a></li>
-    <li><a href="category.html">경매</a></li>
-    <li><a href="category.html">경매 상품</a></li>
+    <li><a href="http://localhost:8081/"><i class="fa fa-home"></i></a></li>
+    <li><a href="/auction/auction_list">경매</a></li>
+    <li><a href="#">경매 상품</a></li>
   </ul>
   <div class="row">
     <div id="column-left" class="col-sm-3 hidden-xs column-left">
@@ -56,7 +56,7 @@
       <!-- LNB 끝 -->
       
       <!-- LNB (Search) 시작 -->
-      <div class="panel panel-default filter">
+      <div class="panel panel-default filter" style="display: none;">
         <div class="panel-heading columnblock-title">Refine Search</div>
         <div class="filter-block">
           <div class="list-group"> <a class="list-group-item">Color</a>
@@ -106,11 +106,11 @@
       </div>
       <!-- LNB (Search) 끝 -->
       <!-- Special 시작 -->
-      <div class="banner" >
+      <div class="banner" style="display: none;">
         <div class="item"> <a href="#"><img src="image/banners/LeftBanner.jpg" alt="Left Banner" class="img-responsive" /></a> </div>
       </div>
-      <h3 class="productblock-title">Specials</h3>
-      <div class="row special-grid product-grid">
+      <h3 class="productblock-title" style="display: none;">Specials</h3>
+      <div class="row special-grid product-grid" style="display: none;">
         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-grid-item">
           <div class="product-thumb transition">
             <div class="image product-imageblock"> <a href="#"><img src="image/product/5product50x59.jpg" alt="women's clothing" title="women's clothing" class="img-responsive" /></a>
@@ -227,7 +227,7 @@
           </div>
           <a href="#" id="compare-total">Product Compare (0)</a> </div>
         <div class="col-md-1 text-right page-wrapper">
-          <label class="control-label" for="input-limit">Show :</label>
+          <!-- <label class="control-label" for="input-limit">Show :</label>
           <div class="limit">
             <select id="input-limit" class="form-control">
               <option value="8" selected="selected">8</option>
@@ -237,9 +237,9 @@
               <option value="100">100</option>
             </select>
           </div>
-        </div>
+        </div> -->
         <div class="col-md-2 text-right sort-wrapper">
-          <label class="control-label" for="input-sort">Sort By :</label>
+          <label class="control-label" for="input-sort">정렬</label>
           <div class="sort-inner">
             <select id="input-sort" class="form-control">
               <option value="ASC" selected="selected">Default</option>
@@ -257,484 +257,25 @@
       </div>
       <br />
       
-     <div class="grid-list-wrapper">
+     <div class="grid-list-wrapper" style="margin-bottom: 100px;">
      <c:forEach items="${list}" var="AuctionRegisterVO">
      	<div class="product-layout product-list col-xs-12">
      		<div class="product-thumb">
-     			<div class="image product-imageblock"><a href=""><img src="${auctionRegisterVO.auction_title_img}" class="img-responsive"></a></div>
-     			<h4 class="product-name"> <a href="">${auctionRegisterVO.auction_name}</a></h4>
-     			<p class="price product-price"><span class="price-old">상한가</span>${auctionRegisterVO.auction_up}</p>
-     			<p class="price product-price"><span class="price-old">하한가</span>${auctionRegisterVO.auction_down}</p>
+     			<div class="image product-imageblock"><a href="/tender/tenderform?auction_no=${AuctionRegisterVO.auction_no}"><img src='/resources/files/attach/${AuctionRegisterVO.auction_title_img}' class="img-responsive"></a></div>
+     			<h4 class="product-name"> <a href="/tender/tenderform?auction_no=${AuctionRegisterVO.auction_no}">${AuctionRegisterVO.auction_name}</a></h4>
+     			<p class="price product-price" style="margin-right:10px;">
+     			<span style="font-size: 12px; color:#A6A6A6; font-weight: lighter; margin-right:5px;">상한가</span>${AuctionRegisterVO.auction_up}
+     			</p>
+     			<p class="price product-price">
+     			<span style="font-size: 12px; color:#A6A6A6; font-weight: lighter; margin-right:5px;">하한가</span>${AuctionRegisterVO.auction_down}
+     			</p>
+     			
      		</div>
      	</div>
      	
      	</c:forEach>
-        <div class="product-layout product-list col-xs-12">
-          <div class="product-thumb">
-            <div class="image product-imageblock"> <a href="product.html"> <img src="image/product/pro-2-220x294.jpg" alt="women's clothing stores" title="lorem ippsum dolor dummy" class="img-responsive" /> </a>
-              <!-- <div class="button-group">
-                <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
-                <button type="button" class="addtocart-btn">Add to Cart</button>
-                <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product"><i class="fa fa-exchange"></i></button>
-              </div> -->
-            </div>
-            <div class="caption product-detail">
-              <h4 class="product-name"> <a href="product.html" title="lorem ippsum dolor dummy"> lorem ippsum dolor dummy </a> </h4>
-              <p class="product-desc"> More room to move.
-
-                With 80GB or 160GB of storage and up to 40 hours of battery life, the new lorem ippsum dolor dummy lets you enjoy up to 40,000 songs or up to 200 hours of video or any combination wherever you go.
-
-                Cover Flow.
-
-                Browse through your music collection by flipping..</p>
-              <p class="price product-price"><span class="price-old">$272.00</span> $122.00 <span class="price-tax">Ex Tax: $100.00</span> </p>
-              <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
-            </div>
-            <div class="button-group">
-              <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
-              <button type="button" class="addtocart-btn">Add to Cart</button>
-              <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product"><i class="fa fa-exchange"></i></button>
-            </div>
-          </div>
-        </div>
-        
-        <div class="product-layout product-list col-xs-12">
-          <div class="product-thumb">
-            <div class="image product-imageblock"> <a href="product.html"> <img src="image/product/pro-3-220x294.jpg" alt="lorem ippsum dolor dummy" title="lorem ippsum dolor dummy" class="img-responsive" /> </a>
-              <div class="button-group">
-                <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
-                <button type="button" class="addtocart-btn">Add to Cart</button>
-                <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product"><i class="fa fa-exchange"></i></button>
-              </div>
-            </div>
-            <div class="caption product-detail">
-              <h4 class="product-name"> <a href="product.html" title="lorem ippsum dolor dummy"> lorem ippsum dolor dummy </a> </h4>
-              <p class="product-desc"> More room to move.
-
-                With 80GB or 160GB of storage and up to 40 hours of battery life, the new lorem ippsum dolor dummy lets you enjoy up to 40,000 songs or up to 200 hours of video or any combination wherever you go.
-
-                Cover Flow.
-
-                Browse through your music collection by flipping..</p>
-              <p class="price product-price"><span class="price-old">$272.00</span> $122.00 <span class="price-tax">Ex Tax: $100.00</span> </p>
-              <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
-            </div>
-            <div class="button-group">
-              <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
-              <button type="button" class="addtocart-btn">Add to Cart</button>
-              <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product"><i class="fa fa-exchange"></i></button>
-            </div>
-          </div>
-        </div>
-        
-        <div class="product-layout product-list col-xs-12">
-          <div class="product-thumb">
-            <div class="image product-imageblock"> <a href="product.html"> <img src="image/product/pro-4-220x294.jpg" alt="lorem ippsum dolor dummy" title="lorem ippsum dolor dummy" class="img-responsive" /> </a>
-              <div class="button-group">
-                <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
-                <button type="button" class="addtocart-btn">Add to Cart</button>
-                <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product"><i class="fa fa-exchange"></i></button>
-              </div>
-            </div>
-            <div class="caption product-detail">
-              <h4 class="product-name"> <a href="product.html" title="lorem ippsum dolor dummy"> lorem ippsum dolor dummy </a> </h4>
-              <p class="product-desc"> More room to move.
-
-                With 80GB or 160GB of storage and up to 40 hours of battery life, the new lorem ippsum dolor dummy lets you enjoy up to 40,000 songs or up to 200 hours of video or any combination wherever you go.
-
-                Cover Flow.
-
-                Browse through your music collection by flipping..</p>
-              <p class="price product-price"><span class="price-old">$272.00</span> $122.00 <span class="price-tax">Ex Tax: $100.00</span> </p>
-              <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
-            </div>
-            <div class="button-group">
-              <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
-              <button type="button" class="addtocart-btn">Add to Cart</button>
-              <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product"><i class="fa fa-exchange"></i></button>
-            </div>
-          </div>
-        </div>
-        
-        <div class="product-layout product-list col-xs-12">
-          <div class="product-thumb">
-            <div class="image product-imageblock"> <a href="product.html"> <img src="image/product/pro-5-220x294.jpg" alt="lorem ippsum dolor dummy" title="lorem ippsum dolor dummy" class="img-responsive" /> </a>
-              <div class="button-group">
-                <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
-                <button type="button" class="addtocart-btn">Add to Cart</button>
-                <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product"><i class="fa fa-exchange"></i></button>
-              </div>
-            </div>
-            <div class="caption product-detail">
-              <h4 class="product-name"> <a href="product.html" title="lorem ippsum dolor dummy"> lorem ippsum dolor dummy </a> </h4>
-              <p class="product-desc"> More room to move.
-
-                With 80GB or 160GB of storage and up to 40 hours of battery life, the new lorem ippsum dolor dummy lets you enjoy up to 40,000 songs or up to 200 hours of video or any combination wherever you go.
-
-                Cover Flow.
-
-                Browse through your music collection by flipping..</p>
-              <p class="price product-price"><span class="price-old">$272.00</span> $122.00 <span class="price-tax">Ex Tax: $100.00</span> </p>
-              <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
-            </div>
-            <div class="button-group">
-              <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
-              <button type="button" class="addtocart-btn">Add to Cart</button>
-              <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product"><i class="fa fa-exchange"></i></button>
-            </div>
-          </div>
-        </div>
-        
-        <div class="product-layout product-list col-xs-12">
-          <div class="product-thumb">
-            <div class="image product-imageblock"> <a href="product.html"> <img src="image/product/pro-6-220x294.jpg" alt="lorem ippsum dolor dummy" title="lorem ippsum dolor dummy" class="img-responsive" /> </a>
-              <div class="button-group">
-                <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
-                <button type="button" class="addtocart-btn">Add to Cart</button>
-                <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product"><i class="fa fa-exchange"></i></button>
-              </div>
-            </div>
-            <div class="caption product-detail">
-              <h4 class="product-name"> <a href="product.html" title="lorem ippsum dolor dummy"> lorem ippsum dolor dummy </a> </h4>
-              <p class="product-desc"> More room to move.
-
-                With 80GB or 160GB of storage and up to 40 hours of battery life, the new lorem ippsum dolor dummy lets you enjoy up to 40,000 songs or up to 200 hours of video or any combination wherever you go.
-
-                Cover Flow.
-
-                Browse through your music collection by flipping..</p>
-              <p class="price product-price"><span class="price-old">$272.00</span> $122.00 <span class="price-tax">Ex Tax: $100.00</span> </p>
-              <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
-            </div>
-            <div class="button-group">
-              <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
-              <button type="button" class="addtocart-btn">Add to Cart</button>
-              <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product"><i class="fa fa-exchange"></i></button>
-            </div>
-          </div>
-        </div>
-        
-        <div class="product-layout product-list col-xs-12">
-          <div class="product-thumb">
-            <div class="image product-imageblock"> <a href="product.html"> <img src="image/product/pro-7-220x294.jpg" alt="lorem ippsum dolor dummy" title="lorem ippsum dolor dummy" class="img-responsive" /> </a>
-              <div class="button-group">
-                <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
-                <button type="button" class="addtocart-btn">Add to Cart</button>
-                <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product"><i class="fa fa-exchange"></i></button>
-              </div>
-            </div>
-            <div class="caption product-detail">
-              <h4 class="product-name"> <a href="product.html" title="lorem ippsum dolor dummy"> lorem ippsum dolor dummy </a> </h4>
-              <p class="product-desc"> More room to move.
-
-                With 80GB or 160GB of storage and up to 40 hours of battery life, the new lorem ippsum dolor dummy lets you enjoy up to 40,000 songs or up to 200 hours of video or any combination wherever you go.
-
-                Cover Flow.
-
-                Browse through your music collection by flipping..</p>
-              <p class="price product-price"><span class="price-old">$272.00</span> $122.00 <span class="price-tax">Ex Tax: $100.00</span> </p>
-              <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
-            </div>
-            <div class="button-group">
-              <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
-              <button type="button" class="addtocart-btn">Add to Cart</button>
-              <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product"><i class="fa fa-exchange"></i></button>
-            </div>
-          </div>
-        </div>
-        
-        <div class="product-layout product-list col-xs-12">
-          <div class="product-thumb">
-            <div class="image product-imageblock"> <a href="product.html"> <img src="image/product/pro-8-220x294.jpg" alt="lorem ippsum dolor dummy" title="lorem ippsum dolor dummy" class="img-responsive" /> </a>
-              <div class="button-group">
-                <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
-                <button type="button" class="addtocart-btn">Add to Cart</button>
-                <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product"><i class="fa fa-exchange"></i></button>
-              </div>
-            </div>
-            <div class="caption product-detail">
-              <h4 class="product-name"> <a href="product.html" title="lorem ippsum dolor dummy"> lorem ippsum dolor dummy </a> </h4>
-              <p class="product-desc"> More room to move.
-
-                With 80GB or 160GB of storage and up to 40 hours of battery life, the new lorem ippsum dolor dummy lets you enjoy up to 40,000 songs or up to 200 hours of video or any combination wherever you go.
-
-                Cover Flow.
-
-                Browse through your music collection by flipping..</p>
-              <p class="price product-price"><span class="price-old">$272.00</span> $122.00 <span class="price-tax">Ex Tax: $100.00</span> </p>
-              <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
-            </div>
-            <div class="button-group">
-              <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
-              <button type="button" class="addtocart-btn">Add to Cart</button>
-              <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product"><i class="fa fa-exchange"></i></button>
-            </div>
-          </div>
-        </div>
-        
-        <div class="product-layout product-list col-xs-12">
-          <div class="product-thumb">
-            <div class="image product-imageblock"> <a href="product.html"> <img src="image/product/pro-2-220x294.jpg" alt="lorem ippsum dolor dummy" title="lorem ippsum dolor dummy" class="img-responsive" /> </a>
-              <div class="button-group">
-                <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
-                <button type="button" class="addtocart-btn">Add to Cart</button>
-                <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product"><i class="fa fa-exchange"></i></button>
-              </div>
-            </div>
-            <div class="caption product-detail">
-              <h4 class="product-name"> <a href="product.html" title="lorem ippsum dolor dummy"> lorem ippsum dolor dummy </a> </h4>
-              <p class="product-desc"> More room to move.
-
-                With 80GB or 160GB of storage and up to 40 hours of battery life, the new lorem ippsum dolor dummy lets you enjoy up to 40,000 songs or up to 200 hours of video or any combination wherever you go.
-
-                Cover Flow.
-
-                Browse through your music collection by flipping..</p>
-              <p class="price product-price"><span class="price-old">$272.00</span> $122.00 <span class="price-tax">Ex Tax: $100.00</span> </p>
-              <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
-            </div>
-            <div class="button-group">
-              <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
-              <button type="button" class="addtocart-btn">Add to Cart</button>
-              <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product"><i class="fa fa-exchange"></i></button>
-            </div>
-          </div>
-        </div>
-        
-        <div class="product-layout product-list col-xs-12">
-          <div class="product-thumb">
-            <div class="image product-imageblock"> <a href="product.html"> <img src="image/product/pro-4-220x294.jpg" alt="lorem ippsum dolor dummy" title="lorem ippsum dolor dummy" class="img-responsive" /> </a>
-              <div class="button-group">
-                <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
-                <button type="button" class="addtocart-btn">Add to Cart</button>
-                <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product"><i class="fa fa-exchange"></i></button>
-              </div>
-            </div>
-            <div class="caption product-detail">
-              <h4 class="product-name"> <a href="product.html" title="lorem ippsum dolor dummy"> lorem ippsum dolor dummy </a> </h4>
-              <p class="product-desc"> More room to move.
-
-                With 80GB or 160GB of storage and up to 40 hours of battery life, the new lorem ippsum dolor dummy lets you enjoy up to 40,000 songs or up to 200 hours of video or any combination wherever you go.
-
-                Cover Flow.
-
-                Browse through your music collection by flipping..</p>
-              <p class="price product-price"><span class="price-old">$272.00</span> $122.00 <span class="price-tax">Ex Tax: $100.00</span> </p>
-              <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
-            </div>
-            <div class="button-group">
-              <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
-              <button type="button" class="addtocart-btn">Add to Cart</button>
-              <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product"><i class="fa fa-exchange"></i></button>
-            </div>
-          </div>
-        </div>
-        
-        <div class="product-layout product-list col-xs-12">
-          <div class="product-thumb">
-            <div class="image product-imageblock"> <a href="product.html"> <img src="image/product/pro-2-220x294.jpg" alt="lorem ippsum dolor dummy" title="lorem ippsum dolor dummy" class="img-responsive" /> </a>
-              <div class="button-group">
-                <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
-                <button type="button" class="addtocart-btn">Add to Cart</button>
-                <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product"><i class="fa fa-exchange"></i></button>
-              </div>
-            </div>
-            <div class="caption product-detail">
-              <h4 class="product-name"> <a href="product.html" title="lorem ippsum dolor dummy"> lorem ippsum dolor dummy </a> </h4>
-              <p class="product-desc"> More room to move.
-
-                With 80GB or 160GB of storage and up to 40 hours of battery life, the new lorem ippsum dolor dummy lets you enjoy up to 40,000 songs or up to 200 hours of video or any combination wherever you go.
-
-                Cover Flow.
-
-                Browse through your music collection by flipping..</p>
-              <p class="price product-price"> $122.00 <span class="price-tax">Ex Tax: $100.00</span> </p>
-              <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
-            </div>
-            <div class="button-group">
-              <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
-              <button type="button" class="addtocart-btn">Add to Cart</button>
-              <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product"><i class="fa fa-exchange"></i></button>
-            </div>
-          </div>
-        </div>
-        
-        <div class="product-layout product-list col-xs-12">
-          <div class="product-thumb">
-            <div class="image product-imageblock"> <a href="product.html"> <img src="image/product/pro-3-220x294.jpg" alt="lorem ippsum dolor dummy" title="lorem ippsum dolor dummy" class="img-responsive" /> </a>
-              <div class="button-group">
-                <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
-                <button type="button" class="addtocart-btn">Add to Cart</button>
-                <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product"><i class="fa fa-exchange"></i></button>
-              </div>
-            </div>
-            <div class="caption product-detail">
-              <h4 class="product-name"> <a href="product.html" title="lorem ippsum dolor dummy"> lorem ippsum dolor dummy </a> </h4>
-              <p class="product-desc"> More room to move.
-
-                With 80GB or 160GB of storage and up to 40 hours of battery life, the new lorem ippsum dolor dummy lets you enjoy up to 40,000 songs or up to 200 hours of video or any combination wherever you go.
-
-                Cover Flow.
-
-                Browse through your music collection by flipping..</p>
-              <p class="price product-price"> $122.00 <span class="price-tax">Ex Tax: $100.00</span> </p>
-              <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
-            </div>
-            <div class="button-group">
-              <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
-              <button type="button" class="addtocart-btn">Add to Cart</button>
-              <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product"><i class="fa fa-exchange"></i></button>
-            </div>
-          </div>
-        </div>
-        
-        <div class="product-layout product-list col-xs-12">
-          <div class="product-thumb">
-            <div class="image product-imageblock"> <a href="product.html"> <img src="image/product/pro-4-220x294.jpg" alt="lorem ippsum dolor dummy" title="lorem ippsum dolor dummy" class="img-responsive" /> </a>
-              <div class="button-group">
-                <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
-                <button type="button" class="addtocart-btn">Add to Cart</button>
-                <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product"><i class="fa fa-exchange"></i></button>
-              </div>
-            </div>
-            <div class="caption product-detail">
-              <h4 class="product-name"> <a href="product.html" title="lorem ippsum dolor dummy"> lorem ippsum dolor dummy </a> </h4>
-              <p class="product-desc"> More room to move.
-
-                With 80GB or 160GB of storage and up to 40 hours of battery life, the new lorem ippsum dolor dummy lets you enjoy up to 40,000 songs or up to 200 hours of video or any combination wherever you go.
-
-                Cover Flow.
-
-                Browse through your music collection by flipping..</p>
-              <p class="price product-price"> $122.00 <span class="price-tax">Ex Tax: $100.00</span> </p>
-              <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
-            </div>
-            <div class="button-group">
-              <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
-              <button type="button" class="addtocart-btn">Add to Cart</button>
-              <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product"><i class="fa fa-exchange"></i></button>
-            </div>
-          </div>
-        </div>
-        
-        <div class="product-layout product-list col-xs-12">
-          <div class="product-thumb">
-            <div class="image product-imageblock"> <a href="product.html"> <img src="image/product/pro-5-220x294.jpg" alt="lorem ippsum dolor dummy" title="lorem ippsum dolor dummy" class="img-responsive" /> </a>
-              <div class="button-group">
-                <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
-                <button type="button" class="addtocart-btn">Add to Cart</button>
-                <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product"><i class="fa fa-exchange"></i></button>
-              </div>
-            </div>
-            <div class="caption product-detail">
-              <h4 class="product-name"> <a href="product.html" title="lorem ippsum dolor dummy"> lorem ippsum dolor dummy </a> </h4>
-              <p class="product-desc"> More room to move.
-
-                With 80GB or 160GB of storage and up to 40 hours of battery life, the new lorem ippsum dolor dummy lets you enjoy up to 40,000 songs or up to 200 hours of video or any combination wherever you go.
-
-                Cover Flow.
-
-                Browse through your music collection by flipping..</p>
-              <p class="price product-price"> $122.00 <span class="price-tax">Ex Tax: $100.00</span> </p>
-              <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
-            </div>
-            <div class="button-group">
-              <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
-              <button type="button" class="addtocart-btn">Add to Cart</button>
-              <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product"><i class="fa fa-exchange"></i></button>
-            </div>
-          </div>
-        </div>
-        
-        <div class="product-layout product-list col-xs-12">
-          <div class="product-thumb">
-            <div class="image product-imageblock"> <a href="product.html"> <img src="image/product/pro-6-220x294.jpg" alt="lorem ippsum dolor dummy" title="lorem ippsum dolor dummy" class="img-responsive" /> </a>
-              <div class="button-group">
-                <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
-                <button type="button" class="addtocart-btn">Add to Cart</button>
-                <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product"><i class="fa fa-exchange"></i></button>
-              </div>
-            </div>
-            <div class="caption product-detail">
-              <h4 class="product-name"> <a href="product.html" title="lorem ippsum dolor dummy"> lorem ippsum dolor dummy </a> </h4>
-              <p class="product-desc"> More room to move.
-
-                With 80GB or 160GB of storage and up to 40 hours of battery life, the new lorem ippsum dolor dummy lets you enjoy up to 40,000 songs or up to 200 hours of video or any combination wherever you go.
-
-                Cover Flow.
-
-                Browse through your music collection by flipping..</p>
-              <p class="price product-price"> $122.00 <span class="price-tax">Ex Tax: $100.00</span> </p>
-              <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
-            </div>
-            <div class="button-group">
-              <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
-              <button type="button" class="addtocart-btn">Add to Cart</button>
-              <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product"><i class="fa fa-exchange"></i></button>
-            </div>
-          </div>
-        </div>
-        
-        <div class="product-layout product-list col-xs-12">
-          <div class="product-thumb">
-            <div class="image product-imageblock"> <a href="product.html"> <img src="image/product/pro-7-220x294.jpg" alt="lorem ippsum dolor dummy" title="lorem ippsum dolor dummy" class="img-responsive" /> </a>
-              <div class="button-group">
-                <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
-                <button type="button" class="addtocart-btn">Add to Cart</button>
-                <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product"><i class="fa fa-exchange"></i></button>
-              </div>
-            </div>
-            <div class="caption product-detail">
-              <h4 class="product-name"> <a href="product.html" title="lorem ippsum dolor dummy"> lorem ippsum dolor dummy </a> </h4>
-              <p class="product-desc"> More room to move.
-
-                With 80GB or 160GB of storage and up to 40 hours of battery life, the new lorem ippsum dolor dummy lets you enjoy up to 40,000 songs or up to 200 hours of video or any combination wherever you go.
-
-                Cover Flow.
-
-                Browse through your music collection by flipping..</p>
-              <p class="price product-price"> $122.00 <span class="price-tax">Ex Tax: $100.00</span> </p>
-              <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
-            </div>
-            <div class="button-group">
-              <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
-              <button type="button" class="addtocart-btn">Add to Cart</button>
-              <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product"><i class="fa fa-exchange"></i></button>
-            </div>
-          </div>
-        </div>
-        
-        <div class="product-layout product-list col-xs-12">
-          <div class="product-thumb">
-            <div class="image product-imageblock"> <a href="product.html"> <img src="image/product/pro-8-220x294.jpg" alt="lorem ippsum dolor dummy" title="lorem ippsum dolor dummy" class="img-responsive" /> </a>
-              <div class="button-group">
-                <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
-                <button type="button" class="addtocart-btn">Add to Cart</button>
-                <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product"><i class="fa fa-exchange"></i></button>
-              </div>
-            </div>
-            <div class="caption product-detail">
-              <h4 class="product-name"> <a href="product.html" title="lorem ippsum dolor dummy"> lorem ippsum dolor dummy </a> </h4>
-              <p class="product-desc"> More room to move.
-
-                With 80GB or 160GB of storage and up to 40 hours of battery life, the new lorem ippsum dolor dummy lets you enjoy up to 40,000 songs or up to 200 hours of video or any combination wherever you go.
-
-                Cover Flow.
-
-                Browse through your music collection by flipping..</p>
-              <p class="price product-price"> $122.00 <span class="price-tax">Ex Tax: $100.00</span> </p>
-              <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
-            </div>
-            <div class="button-group">
-              <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
-              <button type="button" class="addtocart-btn">Add to Cart</button>
-              <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product"><i class="fa fa-exchange"></i></button>
-            </div>
-          </div>
-        </div>
-        
-        
-      </div>
+      
+       </div>
       <!-- 페이징 처리 -->
       <div class="category-page-wrapper">
         <div class="result-inner">Showing 1 to 8 of 10 (2 Pages)</div>

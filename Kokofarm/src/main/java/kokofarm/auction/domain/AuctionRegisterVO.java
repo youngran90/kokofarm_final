@@ -1,6 +1,10 @@
 package kokofarm.auction.domain;
 
-public class AuctionRegisterVO {
+import java.io.Serializable;
+
+import org.springframework.web.multipart.MultipartFile;
+
+public class AuctionRegisterVO implements Serializable{
 	private int auction_no;
 	private String auction_name;
 	private String auction_group;
@@ -12,6 +16,7 @@ public class AuctionRegisterVO {
 	private String auction_area;
 	private String auction_content;
 	private String auction_title_img;
+	private MultipartFile file;
 	
 	
 	public int getAuction_no() {
@@ -81,12 +86,19 @@ public class AuctionRegisterVO {
 	public void setAuction_title_img(String auction_title_img) {
 		this.auction_title_img = auction_title_img;
 	}
+	public MultipartFile getFile() {
+		return file;
+	}
+	public void setFile(MultipartFile file) {
+		this.file = file;
+	}
 	@Override
 	public String toString() {
 		return "AuctionRegisterVO [auction_no=" + auction_no + ", auction_name=" + auction_name + ", auction_group="
 				+ auction_group + ", start_date=" + start_date + ", end_date=" + end_date + ", auction_up=" + auction_up
 				+ ", auction_down=" + auction_down + ", auction_unit=" + auction_unit + ", auction_area=" + auction_area
-				+ ", auction_content=" + auction_content + ", auction_title_img=" + auction_title_img + "]";
+				+ ", auction_content=" + auction_content + ", auction_title_img=" + auction_title_img + ", file=" + file
+				+ "]";
 	}
 	
 	
