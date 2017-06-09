@@ -7,12 +7,12 @@ import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
-public class MemberVO1 implements Serializable{
+public class LicenseVO implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
 
-	public MemberVO1(){
+	public LicenseVO(){
 	}
 	
 	

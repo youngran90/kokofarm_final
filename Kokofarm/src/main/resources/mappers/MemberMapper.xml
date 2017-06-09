@@ -7,10 +7,14 @@
 	<cache />
 
 <insert id="joinMember" parameterType="MemberVO">
-	insert into Member  values(#{member_id}, PACK_ENCRYPTION_DECRYPTION.FUNC_ENCRYPT(#{member_password}) , #{member_name}, #{member_email},
-					 #{member_phoneNum},#{member_zipcode},#{member_address1}, #{member_address2},
-					#{member_account}, SYSDATE,0,#{member_tele})			
-					
+			
+		INSERT 	 INTO MEMBER 		 		 	
+		(member_id, member_password, member_name, member_email, member_phoneNum, member_zipcode,
+		member_address1, member_address2, member_account, join_date, member_point, member_tele, bizNum, bizName, seller_no)
+	 	 VALUES (#{member_id}, PACK_ENCRYPTION_DECRYPTION.FUNC_ENCRYPT(#{member_password}) , #{member_name}, #{member_email},
+					 #{member_phoneNum}, #{member_zipcode}, #{member_address1}, #{member_address2},
+					#{member_account}, SYSDATE, 0, #{member_tele}, #{bizNum}, #{bizName},#{seller_no})		
+			
 </insert>
 
 <select id = "logincheck" resultType="MemberVO" parameterType="LoginDTO">
@@ -36,7 +40,7 @@
 	select * from member
 	동적커리문
 	
-	<if test="area !=null">
+	<if test="area !=null"> 
 		<where>
 			member_id LIKE %검색% OR member_name LIKE %검색% OR
 				member_email LIKE %검색% OR member_zipcode LIKE %검색% OR

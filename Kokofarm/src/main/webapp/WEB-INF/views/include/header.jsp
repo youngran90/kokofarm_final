@@ -3,7 +3,7 @@
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <title>Fresh Food</title>
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
@@ -27,26 +27,32 @@
 <script src="/resources/owl-carousel/owl.carousel.min.js" type="text/javascript"></script>
   
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
+
+<style type="text/css">
+#top-links li .logout {
+display: none;!important;
+}
+</style>
+
 <script type="text/javascript">
-
-
 
 <%
 MemberVO vo = (MemberVO)session.getAttribute("login");
 System.out.println("세션값" +vo);
 
 	if(vo==null){%>
-	$(function(){
-		$(".list-inline li").eq(0).css("display","none");
+	
+	
+	$(document).ready(function(){
+		$("#check_id").addClass("logout");
 			});
 				
 	<%}
 
 		if(vo !=null) {
-		String id = vo.getMember_id();
-		System.out.println("세션아이디 :" +vo.getMember_id());
-		System.out.println("포인트 :" +vo.getMember_point());
-%>$(function(){
+			
+%>$(document).ready(function(){
+	$("#check_id").removeClass("logout");
 	$(".dropdown-menu-right a").eq(0).attr("href","/member/myPage");
 	 $(".dropdown-menu-right a").eq(0).text("마이페이지");
 	 
@@ -102,12 +108,12 @@ System.out.println("세션값" +vo);
           <div class="top-right pull-right">
             <div id="top-links" class="nav pull-right">
               <ul class="list-inline">
-              <li><i class="fa fa-user"></i><span id="check_id">${login.member_id }님 환영 합니다.</span></a></li>
-                <li class="dropdown"><a href="#" title="My Account" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-user"></i><span>My Account</span> <span class="caret"></span></a>
-                  <ul class="dropdown-menu dropdown-menu-right">
-                    <li><a href="/member/join1">회원가입</a></li>
-                    <li><a href="/member/login">로그인</a></li>
-                  </ul>
+              		<li><span id="check_id"><i class="fa fa-user"></i>${login.member_id }님 환영 합니다.</span></li>
+                	<li class="dropdown"><a href="#" title="My Account" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-user"></i><span>My Account</span> <span class="caret"></span></a>
+                  		<ul class="dropdown-menu dropdown-menu-right">
+                    			<li><a href="/member/join0">회원가입</a></li>
+                  				  <li><a href="/member/login">로그인</a></li>
+                 		 </ul>
                 </li>
                 <li><a href="#" id="wishlist-total" title="Wish List (0)"><i class="fa fa-heart"></i><span>Wish List</span><span> (0)</span></a></li>
               </ul>

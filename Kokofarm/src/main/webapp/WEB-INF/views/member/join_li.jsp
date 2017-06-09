@@ -3,48 +3,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
+
  <%@include file="../include/header.jsp"%>
-    
-  <style>
-.error{	
+      <style>
+.error{
 color: "red"
 }
 
-
+#bizNum1,#bizNum2,#bizNum3{
+text-align: center;
+}
    
 
 select[type=tel], input[type=tel]{
 text-align: center;
 }
 </style>
-<!--   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+ <!--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
 
  <script type="text/javascript">
  
 	$(function(){
-	/* 	$('#id_check').on('click',function(){
-			var userid = $("#member_id").val();
-			var param = "userid="+userid;
-			$.ajax({
-				type : "post",
-				url : "/member/id_check",
-				data : param,
-				dataType : 'text',
-				success : function(result){
-					
-				}
-				
-				
-			})
-			
-			
-			
-			
-		}); */
-		
-	
-		
-		$("#member_id").on("keydown",function(){
+		 $("#member_id").on("keydown",function(){
 			
 			$("#idDuplication").attr("value","idUncheck");
 		});
@@ -57,14 +37,16 @@ text-align: center;
 			openWin = window.open("/member/id_check?userid="+userid,
 					"childForm", "width =500, height = 300, resizable = no, scrollbars = no");
 			
+
+	
 		});
-				
+		
+		
+		
 		//회원가입 정규 표현식
 	$("#joinBtn").on("click",function(){
 	
-		
-		
-		
+			
 		var idD = $("#idDuplication").val();
 		if(idD !="idCheck"){
 			alert("아이디 중복체크를 해주세요.");
@@ -152,6 +134,44 @@ text-align: center;
 		var t4 =t1+t2+t3;
 		$("#member_tele").attr('value',t4);
 		
+		
+		
+		
+
+		var bizNum1 = $("#bizNum1").val();
+		var bizNum2 = $("#bizNum2").val();
+		var bizNum3 = $("#bizNum3").val();
+		var license = bizNum1+bizNum2+bizNum3;
+		
+		$("#bizNum").attr('value',license);
+		
+		$("#seller_no").val(id);
+			
+			
+		var bizreg1 =/^[0-9]{3}/;
+		
+		var bizreg2 = /^[0-9]{2}$/;
+		
+		var bizreg3 = /^[0-9]{5}$/;
+					
+		if(!bizreg1.test(bizNum1)){
+			alert("3자리 숫자만 입력해주세요");
+			$("#bizNum1").focus();
+			return false;
+		}else if(!bizreg2.test(bizNum2)){
+			alert("2자리 숫자만 입력해주세요");
+			$("#bizNum2").focus();
+			return false;
+		}else if(!bizreg3.test(bizNum3)){
+			alert("5자리 숫자만 입력해주세요");
+			$("#bizNum3").focus();
+			return false;
+		}
+		
+		var bizName = $("#bizName").val();
+		
+		
+		
 		   if($("#chkBox").prop("checked")){
 				document.joinForm.submit();
 		   }else{
@@ -159,14 +179,13 @@ text-align: center;
 			   return false;	
 		   } ;
 
-		
-
+		   
 	})
 	
 });
 	
 </script>
-       
+ 
     <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
     function sample6_execDaumPostcode() {
@@ -281,14 +300,14 @@ text-align: center;
                     <div class="form-group required">
                         <label for="input-name" class="col-sm-2 control-label">이 름</label>
                         <div class="col-sm-10">
-                            <form:input type="text" class="form-control" id="member_name" placeholder="이름        한글만(특수문자 금지)" value="" path="member_name"/>
+                            <form:input type="text" class="form-control" id="member_name" placeholder="이름        한글만(특수문자 금지)" value="동훈" path="member_name"/>
                             <form:errors path="member_name" cssClass="error"/>
                         </div>
                     </div>
                     <div class="form-group required">
                         <label for="input-email" class="col-sm-2 control-label">E-Mail</label>
                         <div class="col-sm-10">
-                            <form:input type="email" class="form-control" id="member_email" placeholder="abcd@abcd.com" value="" path="member_email"/>
+                            <form:input type="email" class="form-control" id="member_email" placeholder="abcd@abcd.com" value="aa@aa.com" path="member_email"/>
                             <form:errors path="member_email" cssClass="error"/>
                         </div>
                     </div>
@@ -302,15 +321,15 @@ text-align: center;
                      	  		<option value="017">017</option>
                      	  		<option value="019">019</option>
                      	  	</select> -
-                     	  	<input type="tel"  id = "member_phoneNum2" name = "member_phoneNum2" size="5" maxlength="4"> -
-                     	  	<input type="tel" id = "member_phoneNum3" name = "member_phoneNum3" size="5" maxlength="4">
+                     	  	<input type="tel"  id = "member_phoneNum2" name = "member_phoneNum2" size="5" maxlength="4" value="3333"> -
+                     	  	<input type="tel" id = "member_phoneNum3" name = "member_phoneNum3" size="5" maxlength="4" value="4444">
                      		<input type="hidden" id = "member_phoneNum" name="member_phoneNum" value="">
-                     	  <form:errors path="member_phoneNum" cssClass="error"/>	
+                     	 <%--  <form:errors path="member_phoneNum" cssClass="error"/> --%>	
                         </div>
                     </div>
                     
                     <div class = "form-group">
-                    	<label for ="input-tel" class="col-sm-2 control-label">전화번호</label>
+                    	<label for ="input-tel" class="col-sm-2 control-label">사업체 전화번호</label>
                     	<div class="col-sm-10">
                     	<select id="member_tel1" name ="member_tel1" style="height: 28px; margin-top: 3px">
                     	<option value="02">02</option>
@@ -330,12 +349,9 @@ text-align: center;
                         <option value="063">063</option>
                         <option value="064">064</option>
                      </select> -
-                     <input type="tel"  id = "member_tel2" name="member_tel2" size="5" maxlength="4"> -
-                     <input type="tel"  id="member_tel3" name = "member_tel3" size = "5" maxlength="4">
+                     <input type="tel"  id = "member_tel2" name="member_tel2" size="5" maxlength="4" value="3333"> -
+                     <input type="tel"  id="member_tel3" name = "member_tel3" size = "5" maxlength="4" value="3333">
                     	<input type ="hidden" id ="member_tele" name="member_tele" value="">
-                    	<input type="hidden" id ="bizNum" name = "bizNum" value="">
-                    	<input type="hidden" id ="bizName" name = "bizName" value="">
-                    	<input type="hidden" id= "seller_no" name = "seller_no" value="">
                     	</div>
                     
                     </div>
@@ -351,7 +367,7 @@ text-align: center;
                         </div>
                     </div>                   
                       <div class="form-group required">
-                        <label for="input-address-1" class="col-sm-2 control-label">주소</label>
+                        <label for="input-address-1" class="col-sm-2 control-label">사업체 주소</label>
                         <div class="col-sm-10">
                             <form:input type="text" class="form-control" id="sample6_address" placeholder="Address 1" value="" path="member_address1"/>
                         </div>
@@ -368,6 +384,29 @@ text-align: center;
                             <input type="text" class="form-control" id="member_account" placeholder="계좌번호" value="" name="member_account">
                         </div>
                     </div>
+                    
+                  <div class="form-group required">
+                    <label for="input-account" class="col-sm-2 control-label">사업자 번호</label>
+                    <div class="col-sm-10">
+						<input type="text" id="bizNum1" name="bizNum1" size="4" maxlength="3" title="사업자번호 첫번째 자리" onblur="CheckBusinessRegistrationNumber1(this, true);" />
+						<span class="md_txt">-</span>
+						<input type="text" id="bizNum2" name="bizNum2" size="3" maxlength="2" title="사업자번호 두번째 자리" onblur="CheckBusinessRegistrationNumber2(this, true);"  />
+						<span class="md_txt">-</span>
+						<input type="text" id="bizNum3" name="bizNum3" size="6" maxlength="5" title="사업자번호 세번째 자리" onblur="CheckBusinessRegistrationNumber3(this, true);"  />
+						<input type="hidden" id="bizNum" name = "bizNum">
+						<input type="hidden" id ="seller_no" name = "seller_no">
+								 </div>
+                  </div>
+                    
+                     <div class="form-group required">
+                    <label for="input-account" class="col-sm-2 control-label">사업 업체명</label>
+                    <div class="col-sm-10">
+						<input type="text" id="bizName" name="bizName" size="40" maxlength="40" title="사업자 업체명" />
+						 </div>
+                  </div>
+                    
+                    
+                    
                                  
                 </fieldset>
                 <fieldset>
@@ -376,7 +415,6 @@ text-align: center;
                         <label for="input-password" class="col-sm-2 control-label">Password</label>
                         <div class="col-sm-10">
                             <input type="password" class="form-control" id="member_password" placeholder="5~20자 영문, 숫자 포함 입력." value="" name="member_password">
-	                        	
                         </div>
                     </div>
                     <div class="form-group required">
@@ -398,4 +436,6 @@ text-align: center;
         </div>
     </div>
 </div>
-<%@include file="../include/footer.jsp"%>
+ 
+ 
+ <%@include file="../include/footer.jsp"%>

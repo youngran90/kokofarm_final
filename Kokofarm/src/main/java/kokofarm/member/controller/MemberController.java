@@ -23,7 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kokofarm.member.domain.LoginDTO;
 import kokofarm.member.domain.MemberVO;
-import kokofarm.member.domain.MemberVO1;
+import kokofarm.member.domain.LicenseVO;
 import kokofarm.member.service.MemberService;
 
 @Controller
@@ -40,6 +40,11 @@ public class MemberController {
 		
 	}
 	
+	@RequestMapping("/join1_1")
+	public void join1_1(Model model) throws Exception{
+		
+	}
+	
 	@RequestMapping(value= "/join", method = RequestMethod.GET)
 	public void join(Model model) throws Exception{
 		model.addAttribute("MemberCommand", new MemberVO());
@@ -48,21 +53,8 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
-	public String join(@ModelAttribute("MemberCommand") MemberVO vo,MemberVO1 vo1,BindingResult errors) throws Exception{
-	
-		System.out.println(vo1.toString());
-		System.out.println(vo.toString());
-		/*String pho1 = vo1.getMember_phoneNum1();
-		String pho2 = vo1.getMember_phoneNum2();
-		String pho3 = vo1.getMember_phoneNum3();
-		vo.setMember_phoneNum(pho1+pho2+pho3);
-		System.out.println(vo.getMember_phoneNum());
-		String tel1 = vo1.getMember_tel1();
-		String tel2 =vo1.getMember_tel2();
-		String tel3 =vo1.getMember_tel3();
-		
-		vo.setMember_tele(tel1+tel2+tel3);*/
-		System.out.println(vo.getMember_tele());
+	public String join(@ModelAttribute("MemberCommand") MemberVO vo,BindingResult errors) throws Exception{
+	System.out.println("널이 되나 안되나:" +vo.getBizNum());
 		
 		service.joinMember(vo);
 		return "redirect:/";
@@ -123,9 +115,23 @@ public class MemberController {
 	
 	@RequestMapping("/join0")
 	public void join0(){
-		
-		
+				
 	}
+	
+	@RequestMapping(value= "/join_li", method = RequestMethod.GET)
+	public void join_li(Model model) throws Exception{
+		model.addAttribute("MemberCommand", new MemberVO());
+		
+			
+	}
+
+	@RequestMapping(value = "/join_li", method = RequestMethod.POST)
+	public String join_li(@ModelAttribute("MemberCommand") MemberVO vo,BindingResult errors) throws Exception{
+				
+		service.joinMember(vo);
+		return "redirect:/";
+	}
+	
 	
 	
 }

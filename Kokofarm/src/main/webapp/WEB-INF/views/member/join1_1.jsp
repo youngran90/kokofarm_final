@@ -2,7 +2,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-
 <%@include file="../include/header.jsp"%>
 
 <link href = "/resources/css/joincss.css" rel="stylesheet">
@@ -16,8 +15,7 @@
 <div class="container" id="hn_container">
 
 <script>
-	function chkagreement(event){
-		
+	function chkagreement(){
 		if($("#ch_terms_agree1").is(":checked") === false){
 			alert("[이용약관]에 동의를 하셔야 회원가입이 가능합니다.");
 			$("#ch_terms_agree1").focus();
@@ -28,7 +26,7 @@
 			$("#ch_terms_agree2").focus();
 			return false;
 		}else{
-			location.href="/member/join"
+			location.href="/member/join_li"
 		}
 		return false;
 	}
@@ -53,8 +51,8 @@
 					<a class="loca_depth loca_this">약관동의</a>
 				</div>
 			</section> -->
-			<form name="frmAgree" action="/member/join" method="get">
-							
+			<form name="frmAgree" action="/member/join_li" method="get">
+				<input name="style" type="hidden" value="join2">				
 			</form>
 			<div class="step_box"><img alt="step1. 약관동의" src="/resources/image/join/join_topcon_step1.jpg"></div>
 
@@ -421,7 +419,7 @@
 							</tbody>
 						</table>
 
-						KokoFarm(http://www.kokoFarm.net)는 통신비밀보호법, 전기통신사업법, 정보통신망 이용촉진 및 정보보호 등에 관한 법률 등
+						KokoFarm(http://www.hellonature.net)는 통신비밀보호법, 전기통신사업법, 정보통신망 이용촉진 및 정보보호 등에 관한 법률 등
 						정보통신 서비스 제공자가 준수하여야 할 관련 법령상의 개인 정보 보호 규정을 준수하며, 관련 법령에 의거한 개인정보보호방침을 정하여 이용자의 권익 보호에 최선을 다하고 있습니다. 
 
 						KokoFarm의 개인정보보호방침은 다음과 같습니다. 
@@ -595,7 +593,7 @@
 					<a class="btn_next" onclick="chkagreement();" href="javascript:">다음</a>
 				</div>
 			</section>
-	
+		
 
 	</div><!--//content_area-->
 

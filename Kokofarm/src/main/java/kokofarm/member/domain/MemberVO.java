@@ -35,17 +35,44 @@ public class MemberVO implements Serializable{
 	//@Pattern(regexp = "^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}$", message = "핸드폰 번호를 다시 입력해 주세요")
 	private String member_phoneNum;
 	
-	private String member_tele;
-	
+	private String member_tele;	
 	private String member_zipcode;
 	private String member_address1;
 	private String member_address2;
 	private String member_account;
 	private String join_date;
 	private String member_point;
+	private String bizNum;
+	private String bizName;
+	private String seller_no;
+
 	
+	public String getSeller_no() {
+		return seller_no;
+	}
+
+
+	public void setSeller_no(String seller_no) {
+		this.seller_no = seller_no;
+	}
+
+
+	public String getBizNum() {
+		return bizNum;
+	}
 	
-	
+
+	public String getBizName() {
+		return bizName;
+	}
+
+	public void setBizName(String bizName) {
+		this.bizName = bizName;
+	}
+
+	public void setBizNum(String bizNum) {
+		this.bizNum = bizNum;
+	}
 
 	public String getMember_tele() {
 		return member_tele;
@@ -62,7 +89,6 @@ public class MemberVO implements Serializable{
 	public void setMember_point(String member_point) {
 		this.member_point = member_point;
 	}
-
 	
 	
 	public String getJoin_date() {
@@ -132,7 +158,8 @@ public class MemberVO implements Serializable{
 				+ member_name + ", member_email=" + member_email + ", member_phoneNum=" + member_phoneNum
 				+ ", member_tele=" + member_tele + ", member_zipcode=" + member_zipcode + ", member_address1="
 				+ member_address1 + ", member_address2=" + member_address2 + ", member_account=" + member_account
-				+ ", join_date=" + join_date + ", member_point=" + member_point + "]";
+				+ ", join_date=" + join_date + ", member_point=" + member_point + ", bizNum=" + bizNum + ", bizName="
+				+ bizName + ", seller_no=" + seller_no + "]";
 	}
 
 		
