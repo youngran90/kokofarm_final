@@ -30,8 +30,9 @@
 	
 	<!-- 입찰내역 뽑아내기 -->
 	<select id="AllTender" resultType="TenderVO" parameterType="Integer">
-	  select * from tender where auction_no=#{auction_no}
+	  select * from tender where auction_no=#{auction_no} order by tender_price desc
 	</select>
+	
 	
 	<!-- 낙찰 -->
 	<insert id="insertSuccess" parameterType="Integer">
@@ -42,6 +43,41 @@
 	<!-- 유찰 확정 -->
 	<update id="updateAuctionResult" parameterType="Integer">
 	  update auction set auction_result='유찰' where auction_no=#{auction_no}
+	</update>
+	
+	<!-- 낙찰테이블 데이터 뽑아내기 -->
+	<select id="selectSuccess" resultType="SuccessVO">
+	  select * from success
+	</select>
+	
+	<!-- 낙찰상품 장바구니로 -->
+	<select id="selectSuccessPay" resultType="SuccessPayVO" parameterType="TenderVO">
+	  select success_no, auction_group, auction_name, auction_unit, t.tender_price, t.auction_no, t.member_id
+		from tender t, success s, auction a
+		where t.tender_no = #{tender_no} and a.auction_no= #{auction_no}
+	</select>
+	
+	<!-- 한사람의 입찰 내역 뽑아내기 -->
+	<select id="selectTender" parameterType="Integer" resultType="TenderVO">
+	  select * from tender where tender_no = #{tender_no}
+	</select>
+	
+	<!-- 결제 정보 삽입 -->
+	<insert id="insertPayInfo" parameterType="PayVO">
+	  insert into tender_pay(pay_no, success_no, recipient, phone_no, tel_no, ship_area,
+	   ship_msg, pay_sort, card_sort, period, account, deposit_name, price, pay_date)
+	    values(pay_seq.nextval, #{success_no}, #{recipient}, #{phone_no}, #{tel_no}, #{ship_area},
+	     #{ship_msg}, #{pay_sort}, #{card_sort}, #{period}, #{account}, #{deposit_name}, #{price}, sysdate)
+	</insert>
+	
+	<!-- 결제 정보 뽑아오기 -->
+	<select id="selectPayInfo" resultType="PayVO">
+	  select * from tender_pay
+	</select>
+	
+	<!-- 낙찰테이블 경매 결과 업데이트 -->
+	<update id="updateSuccess" parameterType="String">
+	  update success set pay_state=#{pay_no}
 	</update>
 	
 	<!-- 상한가 뽑아내기 -->

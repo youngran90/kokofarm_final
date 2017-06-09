@@ -10,11 +10,17 @@ public class AuctionVO implements Serializable{
 	private int auction_up;
 	private int auction_down;
 	private String auction_content;
-	private String auction_file;
 	private String auction_result;
-	private String auction_detailImg;
-	private String auction_detailImg2;
-	
+	private String auction_group;
+	private String auction_unit;
+	private String auction_area;
+	//private String auction_title_img;
+	public int getAuction_no() {
+		return auction_no;
+	}
+	public void setAuction_no(int auction_no) {
+		this.auction_no = auction_no;
+	}
 	public String getAuction_name() {
 		return auction_name;
 	}
@@ -51,45 +57,52 @@ public class AuctionVO implements Serializable{
 	public void setAuction_content(String auction_content) {
 		this.auction_content = auction_content;
 	}
-	public String getAuction_file() {
-		return auction_file;
-	}
-	public void setAuction_file(String auction_file) {
-		this.auction_file = auction_file;
-	}
 	public String getAuction_result() {
 		return auction_result;
 	}
 	public void setAuction_result(String auction_result) {
 		this.auction_result = auction_result;
 	}
-	public String getAuction_detailImg() {
-		return auction_detailImg;
+	public String getAuction_group() {
+		return auction_group;
 	}
-	public void setAuction_detailImg(String auction_detailImg) {
-		this.auction_detailImg = auction_detailImg;
+	public void setAuction_group(String auction_group) {
+		this.auction_group = auction_group;
 	}
-	public String getAuction_detailImg2() {
-		return auction_detailImg2;
+	public String getAuction_unit() {
+		return auction_unit;
 	}
-	public void setAuction_detailImg2(String auction_detailImg2) {
-		this.auction_detailImg2 = auction_detailImg2;
+	public void setAuction_unit(String auction_unit) {
+		this.auction_unit = auction_unit;
 	}
-	public int getAuction_no() {
-		return auction_no;
+	public String getAuction_area() {
+		return auction_area;
 	}
-	public void setAuction_no(int auction_no) {
-		this.auction_no = auction_no;
+	public void setAuction_area(String auction_area) {
+		this.auction_area = auction_area;
 	}
+	/*public String getAuction_title_img() {
+		return auction_title_img;
+	}
+	public void setAuction_title_img(String auction_title_img) {
+		this.auction_title_img = auction_title_img;
+	}*/
+	/*@Override
+	public String toString() {
+		return "AuctionVO [auction_no=" + auction_no + ", auction_name=" + auction_name + ", start_date=" + start_date
+				+ ", end_date=" + end_date + ", auction_up=" + auction_up + ", auction_down=" + auction_down
+				+ ", auction_content=" + auction_content + ", auction_result=" + auction_result + ", auction_group="
+				+ auction_group + ", auction_unit=" + auction_unit + ", auction_area=" + auction_area
+				+ ", auction_title_img=" + auction_title_img + "]";
+	}
+	*/
 	@Override
 	public String toString() {
 		return "AuctionVO [auction_no=" + auction_no + ", auction_name=" + auction_name + ", start_date=" + start_date
 				+ ", end_date=" + end_date + ", auction_up=" + auction_up + ", auction_down=" + auction_down
-				+ ", auction_content=" + auction_content + ", auction_file=" + auction_file + ", auction_result="
-				+ auction_result + ", auction_detailImg=" + auction_detailImg + ", auction_detailImg2="
-				+ auction_detailImg2 + "]";
+				+ ", auction_content=" + auction_content + ", auction_result=" + auction_result + ", auction_group="
+				+ auction_group + ", auction_unit=" + auction_unit + ", auction_area=" + auction_area + "]";
 	}
-
 	
-
+	
 }

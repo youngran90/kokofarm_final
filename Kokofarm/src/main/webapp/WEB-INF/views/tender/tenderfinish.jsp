@@ -5,8 +5,8 @@
 <div class="container">
   <ul class="breadcrumb">
     <li><a href="index.html"><i class="fa fa-home"></i></a></li>
-    <li><a href="category.html">Desktops</a></li>
-    <li><a href="#">lorem ippsum dolor dummy</a></li>
+    <li><a href="category.html">경매</a></li>
+    <li><a href="#">경매 완료</a></li>
   </ul>
   <div class="row">
     <div id="column-left" class="col-sm-3 hidden-xs column-left">

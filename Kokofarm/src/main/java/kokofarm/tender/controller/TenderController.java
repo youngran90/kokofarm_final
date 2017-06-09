@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import kokofarm.tender.domain.AuctionVO;
+import kokofarm.tender.domain.PayVO;
+import kokofarm.tender.domain.SuccessPayVO;
 import kokofarm.tender.domain.SuccessVO;
 import kokofarm.tender.domain.TenderVO;
 import kokofarm.tender.service.TenderService;
@@ -43,13 +45,25 @@ public class TenderController {
 			}
 			model.addAttribute("current_price", current_price);
 			
+			
+			
 			//입찰내역 list
 			List<TenderVO> list=service.AllTender(9);
-			int tender_number = list.size();
-			System.out.println(tender_number);
-			model.addAttribute("tender_number",tender_number);
-			System.out.println(list);
-			model.addAttribute("list",list);
+			List<TenderVO> s_list=list;
+			
+			if(list!=null){
+				for(int i=0;i<list.size();i++){
+					String m_id =list.get(i).getMember_id();
+					String s_id=m_id.replace(m_id.substring(m_id.length()-3, m_id.length()),"***");
+					System.out.println(s_id);
+					s_list.get(i).setMember_id(s_id);
+				}
+				int tender_number = list.size();
+				System.out.println(tender_number);
+				model.addAttribute("tender_number",tender_number);
+				System.out.println(list);
+				model.addAttribute("list",s_list);
+			}
 			
 			
 			String start_time = auction.getStart_date();
@@ -145,14 +159,30 @@ public class TenderController {
 			model.addAttribute("visitingTime", visitingTime);
 					
 			int tender_no = 0;
+			String member_id =null;
 			if(visitingTime==0){  
 				if(current_price!=0){
 					for(int i=0;i<list.size();i++){
 						if(list.get(i).getTender_price()==current_price){
 							 tender_no = list.get(i).getTender_no();
+							 member_id = list.get(i).getMember_id();
 						}
 					}
-					service.insertSuccess(tender_no);
+					
+					model.addAttribute("member_id",member_id);
+					
+					List<SuccessVO> successList=service.selectSuccess();
+					if(successList.size()==0){
+						service.insertSuccess(tender_no);
+					}else{
+						for(int i=0;i<successList.size();i++){
+							if(tender_no!=0){
+								if(tender_no!=successList.get(i).getTender_no()){
+									service.insertSuccess(tender_no);
+								}
+							}
+						}
+					}	
 				}else{ //시간은 다됐는데 현재가=0  ==> 유찰 
 					service.updateAuctionResult(9);  
 				}
@@ -165,14 +195,28 @@ public class TenderController {
 							 tender_no = list.get(i).getTender_no();
 						}
 					}
-					service.insertSuccess(tender_no);
+					
+					List<SuccessVO> successList=service.selectSuccess();
+					if(successList.size()==0){
+						service.insertSuccess(tender_no);
+						
+					}else{
+						for(int i=0;i<successList.size();i++){
+							if(tender_no!=0){
+								if(tender_no!=successList.get(i).getTender_no()){
+									service.insertSuccess(tender_no);
+								}
+							}
+						}
+					}	
 				}
 			}
+			model.addAttribute("tender_no",tender_no);
 		}
 		
 		@RequestMapping(value="tenderform", method=RequestMethod.POST)
-		public String tenderformPOST(TenderVO tender, Model model) throws Exception{
-			tender.setMember_id("aa");
+		public String tenderformPOST(TenderVO tender, Model model, PayVO payvo) throws Exception{
+			tender.setMember_id("asdfg98");
 			tender.setAuction_no(9);
 			AuctionVO auction = service.selectAuctionProduct(9);
 			int current_price;
@@ -190,7 +234,82 @@ public class TenderController {
 				service.insertTender(tender);
 				model.addAttribute("tender",tender);
 				return "/tender/tenderfinish";
-			}						
+			}
+			
+			/*if(payvo.getPay_no()!=null){
+				
+			}*/
 		}
 		
+		@RequestMapping("tenderpay")
+		public void tenderpay(@RequestParam(value="tender_no") Integer tender_no, @RequestParam(value="member_id") String member_id, Model model) throws Exception{
+			System.out.println("장바구니로 넘어오는가");
+			List<SuccessVO> successlist= service.selectSuccess();
+			System.out.println("낙찰리스트: "+successlist);
+			System.out.println("넘어온 입찰자 번호: "+tender_no);
+			TenderVO tender = service.selectTender(tender_no);
+			System.out.println("낙찰자 정보: "+tender);
+			
+			SuccessPayVO successPay=null;
+			
+			for(int i=0;i<successlist.size();i++){
+				if(tender_no==successlist.get(i).getTender_no()){
+					System.out.println("for문 안 tender: "+tender);
+					successPay= service.selectSuccessPay(tender);
+					System.out.println("장바구니: "+successPay);
+				  }
+			}
+			
+			System.out.println("for문밖 successPay"+successPay);
+			model.addAttribute("successPay",successPay);
+					
+		}
+		
+		@RequestMapping(value="paycomplete", method=RequestMethod.POST)
+		public void paycomplete(PayVO payvo, Model model, @RequestParam("address_sub") String address_sub, @RequestParam("recipientpost") String recipientpost,
+					    @RequestParam("mobileReceiver2") String mobileReceiver2, @RequestParam("mobileReceiver3") String mobileReceiver3,
+					    @RequestParam("phoneReceiver2") String phoneReceiver2, @RequestParam("phoneReceiver3") String phoneReceiver3) throws Exception{
+			
+			String ship_area = "우편번호: "+recipientpost+", 상세주소: "+payvo.getShip_area()+", "+address_sub;
+			System.out.println("주소: "+ship_area);
+			payvo.setShip_area(ship_area);
+		
+		
+			String phone_no = payvo.getPhone_no()+"-"+mobileReceiver2+"-"+mobileReceiver3;
+			System.out.println("휴대폰번호: "+phone_no);
+			payvo.setPhone_no(phone_no);
+			
+			String tel_no= payvo.getTel_no()+"-"+phoneReceiver2+"-"+phoneReceiver3;
+			System.out.println("전화번호 앞자리: "+payvo.getTel_no());
+			System.out.println("전화번호: "+tel_no);
+			payvo.setTel_no(tel_no);
+			
+			/*if(payvo.getPay_sort()=="신용카드"){
+				payvo.setAccount("null");
+				payvo.setDeposit_name("null");
+			}else if(payvo.getPay_sort()=="무통장입금"){
+				payvo.setCard_sort("null");
+				payvo.setPeriod("null");
+			}else{
+				payvo.setAccount("null");
+				payvo.setDeposit_name("null");
+				payvo.setCard_sort("null");
+				payvo.setPeriod("null");
+			}*/
+		
+				
+			System.out.println(payvo);
+			
+			service.insertPayInfo(payvo);
+			
+			List<PayVO> payinfolist =service.selectPayInfo();
+			for(int i=0;i<payinfolist.size();i++){
+				if(payinfolist.get(i).getSuccess_no()==payvo.getSuccess_no()){
+					payvo=payinfolist.get(i);
+				
+					model.addAttribute("payvo",payvo);
+				}
+			}
+			
+		}
 }

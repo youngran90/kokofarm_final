@@ -7,17 +7,31 @@
  <script type="text/javascript">
 
   var time=${visitingTime};
-   
+  
    function timer(){ 
 	   if(time<=0){
 		   clearInterval(tid);
 		   time=0;
-		   document.getElementById('tend_time').innerHTML="0일0시간0분0초";
+		   document.getElementById('h_tend_time').innerHTML="0일0시간0분0초";
 	   } 
-	   m= Math.floor(time/(24*60*60))+"일"+Math.floor((time%(24*60*60)/(60*60)))+"시간"+Math.floor(((time%3600)/60))+"분"+time%60+"초";
-	   document.getElementById('tend_time').innerHTML=m;
-	   time--;
+	   else if(time <3600){
+		   $('#tend_time').hide();
+	   	m= Math.floor(time/(24*60*60))+"일"+Math.floor((time%(24*60*60)/(60*60)))+"시간"+Math.floor(((time%3600)/60))+"분"+time%60+"초";
+	   	document.getElementById('h_tend_time').innerHTML=m;
+	   	time--;
+	   }
+	   else{
+		   m= Math.floor(time/(24*60*60))+"일"+Math.floor((time%(24*60*60)/(60*60)))+"시간"+Math.floor(((time%3600)/60))+"분"+time%60+"초";
+		   	document.getElementById('tend_time').innerHTML=m;
+		   	time--;
+	   }
    } 
+   
+   /* function check(){
+	   if(${member_id}!=null){
+		   $('#successPayButton').show();
+	   }
+   } */
    
  
  $(function(){
@@ -26,12 +40,24 @@
 	 $('#tenderinfoview').hide();
 	 
 	 $('#tenderinfo').on('click',function(){
-		$('#tenderinfoview').show(); 
+		$('#tenderinfoview').slideDown('slow');
 	 });
 	
 	 $('#tenderinfoend').on('click',function(){
 		 $('#tenderinfoview').hide();
 	 });
+	 
+	  var formObj = $("form[role='form']");
+	  
+	  $('#payNow').on('click',function(){
+		  formObj.attr("action", "/tender/tenderpay");
+		  formObj.submit();
+	  });
+	  
+	 // $('#successPayButton').hide();
+	
+	  //check();
+	
  })
  
  
@@ -288,7 +314,7 @@
         <div class="col-sm-6">
           <div class="thumbnails">
           <!-- 이미지 부분 -->
-            <div><a class="thumbnail" href="image/product/product8.jpg" title="lorem ippsum dolor dummy"><img src="../../resources/image/product/product1.jpg" title="lorem ippsum dolor dummy" alt="lorem ippsum dolor dummy" /></a></div>
+            <div><a class="thumbnail" href="image/product/product8.jpg" title="lorem ippsum dolor dummy"><img src="C://image/수박.png" title="lorem ippsum dolor dummy" alt="lorem ippsum dolor dummy" /></a></div>
             <div id="product-thumbnail" class="owl-carousel">
               <!-- <div class="item">
                 <div class="image-additional"><a class="thumbnail  " href="image/product/product1.jpg" title="lorem ippsum dolor dummy"> <img src="image/product/pro-1-220x294.jpg" title="lorem ippsum dolor dummy" alt="lorem ippsum dolor dummy" /></a></div>
@@ -382,17 +408,44 @@
               <label><a href="#" id="tenderinfo">경매내역보기</a></label>
              <!--  <label><input type="button" id="tenderinfo" value="경매내역보기"></label> -->
               <div id="tenderinfoview"> 
-                <table id="tenderviewtable" border="1">
-                  <tr>
-                    <th>입찰자ID</th>
-                    <th>입찰일자</th>
-                    <th>입찰가격</th>
+                <div style="margin-left: 120px">
+                  <p style="color: #ff6600; float: left; margin-right: 10px;">◈ 낙찰자</p>
+                  <p style="color: #004eff">◈ 낙찰가능자</p>
+                </div>
+                <table id="tenderviewtable" style="border: 1px;">
+                  <tr style="background: #ef8829; color: white; text-align: center;">
+                    <th style="text-align: center;">입찰자ID</th>
+                    <th style="text-align: center;">입찰일자</th>
+                    <th style="text-align: center;">입찰가격</th>
                   </tr>
                   <c:forEach items="${list}" var="tenderVO">
-					<tr>
-					  <td>${tenderVO.member_id}</td>
-					  <td>${tenderVO.tender_date}</td>
-					  <td>${tenderVO.tender_price}</td>
+					<tr style="text-align: center;">
+					 <c:choose>
+					   <c:when test="${tenderVO.tender_price == current_price}">
+					     <c:choose>
+					       <c:when test="${tenderVO.tender_price == auction.auction_up}">
+					         <td style="color: #ff6600; font-weight: bold;">${tenderVO.member_id}</td>
+					       </c:when>
+					       <c:otherwise>
+					         <c:choose>
+					          <c:when test="${visitingTime==0 }">
+					            <td style="color: #ff6600; font-weight: bold;">${tenderVO.member_id}</td>
+					          </c:when>
+					          <c:otherwise>
+					             <td style="color: #004eff; font-weight: bold;">${tenderVO.member_id}</td>
+					          </c:otherwise>
+					         </c:choose>     
+					       </c:otherwise>
+					     </c:choose>
+					    <td>${tenderVO.tender_date}</td>
+					    <td>${tenderVO.tender_price}</td>
+					   </c:when>
+					   <c:otherwise>
+					    <td>${tenderVO.member_id}</td>
+					    <td>${tenderVO.tender_date}</td>
+					    <td>${tenderVO.tender_price}</td>
+					  </c:otherwise>
+					  </c:choose>
 					</tr>
 				  </c:forEach>
                 </table>
@@ -400,7 +453,15 @@
               </div></li>
             <li>
               <label>남은시간 :</label>
-              <span id="tend_time"></span></li>
+              <%-- <c:choose>
+                <c:when test="${visitingTime <=3600}"> --%>
+                  <span id="h_tend_time" style="color: red; font-weight: bold;"></span>
+                <%-- </c:when>
+                <c:otherwise> --%>
+                  <span id="tend_time"></span>
+                <%-- </c:otherwise>
+              </c:choose> --%>
+              </li>
           </ul>
           <hr>
           <p class="product-desc"></p>
@@ -408,14 +469,17 @@
             <div class="form-group">
 		       <c:choose>
 		       <c:when test="${ current_price == auction.auction_up}">
-		         <p class="end">경매가 완료되었습니다.<p><br>
+		         <p class="end">경매가 완료되었습니다.<p> 
 		       </c:when>
 		       <c:when test="${visitingTime==0 }">
 		         <p class="end">경매가 종료되었습니다.</p>
+		         <!-- <input type="button" value="경매 확인하기" id="checkSuccess" style="background: #ef8829; color: white;">  -->
+		         <!-- <input type="button" value="바로결제" id="payNow" style="background: #ef8829; color: white; float: left;  margin-right: 10px;">
+		         <input type="button" value="나중에 결제" id="payLater"> -->
 		       </c:when>
 		       <c:otherwise>
               <label class="control-label qty-label" for="input-quantity">입찰가격</label>
-              <input type="number" name="tender_price" size=20 id="input-quantity" class="form-control productpage-qty" />
+              <input type="number" name="tender_price" id="input-quantity" class="form-control productpage-qty" style="width:150px;"/>
               <input type="hidden" name="product_id" value="48" />
               
               <!-- <div class="btn-group"> -->
@@ -435,6 +499,17 @@
        </form>
       </div>
       
+        <c:if test="${member_id!=null}">
+          <div id="successPayButton" style="margin-left: 730px;">
+             <form role="form" method="post">
+		       <input type="hidden" name="tender_no" value="${tender_no}">
+			   <input type="hidden" name="member_id" value="${member_id }">
+		       <input type="submit" value="바로결제" id="payNow" style="background: #ef8829; color: white; float: left; margin-right: 10px; height: 30px;">
+		       <input type="submit" value="나중에 결제" id="payLater" style="height: 30px; background: white; color: black;">
+		    </form>
+           </div>
+        </c:if>
+        
       <div class="productinfo-tab">
         <ul class="nav nav-tabs">
           <li class="active"><a href="#tab-description" data-toggle="tab">Description</a></li>

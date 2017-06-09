@@ -1,6 +1,8 @@
 package kokofarm.tender.domain;
 
-public class SuccessVO {
+import java.io.Serializable;
+
+public class SuccessVO implements Serializable{
 	private int success_no;
 	private int tender_no;
 	private String pay_state;

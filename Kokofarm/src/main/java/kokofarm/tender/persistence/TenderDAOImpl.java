@@ -8,6 +8,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import kokofarm.tender.domain.AuctionVO;
+import kokofarm.tender.domain.PayVO;
+import kokofarm.tender.domain.SuccessPayVO;
+import kokofarm.tender.domain.SuccessVO;
 import kokofarm.tender.domain.TenderVO;
 
 @Repository
@@ -48,5 +51,43 @@ public class TenderDAOImpl implements TenderDAO {
 		session.update(namespace+".updateAuctionResult",auction_no);
 		
 	}
+
+	@Override
+	public List<SuccessVO> selectSuccess() throws Exception {
+		return session.selectList(namespace+".selectSuccess");
+	}
+
+	@Override
+	public SuccessPayVO selectSuccessPay(TenderVO tender) throws Exception {
+		return session.selectOne(namespace+".selectSuccessPay",tender);
+	}
+
+	@Override
+	public TenderVO selectTender(int tender_no) throws Exception {
+		return session.selectOne(namespace+".selectTender",tender_no);
+	}
+
+	@Override
+	public void insertPayInfo(PayVO payvo) throws Exception {
+		session.insert(namespace+".insertPayInfo",payvo);
+		
+	}
+
+	@Override
+	public List<PayVO> selectPayInfo() throws Exception {
+		return session.selectList(namespace+".selectPayInfo");
+	}
+
+	@Override
+	public void updateSuccess(String pay_no) throws Exception {
+		session.update(namespace+".updateSuccess",pay_no);
+		
+	}
+	
+	
+	
+	
+	
+	
 	
 }
