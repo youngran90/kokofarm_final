@@ -22,7 +22,7 @@ text-align: center;
  <script type="text/javascript">
  
 	$(function(){
-	/* 	$('#id_check').on('click',function(){
+		$('#id_check').on('click',function(){
 			var userid = $("#member_id").val();
 			var param = "userid="+userid;
 			$.ajax({
@@ -40,7 +40,7 @@ text-align: center;
 			
 			
 			
-		}); */
+		}); 
 		
 	
 		
@@ -62,8 +62,6 @@ text-align: center;
 		//회원가입 정규 표현식
 	$("#joinBtn").on("click",function(){
 	
-		
-		
 		
 		var idD = $("#idDuplication").val();
 		if(idD !="idCheck"){

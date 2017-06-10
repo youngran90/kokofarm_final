@@ -1,5 +1,8 @@
 package kokofarm.member.service;
 
+
+import java.util.Date;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -23,9 +26,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	
-	@Transactional
 	@Override
-	public MemberVO login(LoginDTO dto) throws Exception {
+	public Integer login(LoginDTO dto) throws Exception {
 	
 		return dao.logincheck(dto);
 				
@@ -35,6 +37,27 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public Integer id_checkService(String userid) throws Exception {
 		return dao.id_check(userid);
+	}
+
+
+	@Override
+	public void keepLogin(String member_id, String sessionId, Date next) throws Exception {
+		dao.keepLogin(member_id, sessionId, next);
+		
+	}
+
+
+	@Override
+	public MemberVO checkLoginBefore(String value) {
+		
+		return dao.checkUserWithSessionKey(value);
+	}
+
+
+	@Override
+	public MemberVO memberInfo(LoginDTO dto) throws Exception {
+		
+		return dao.memberInfo(dto);
 	}
 
 }

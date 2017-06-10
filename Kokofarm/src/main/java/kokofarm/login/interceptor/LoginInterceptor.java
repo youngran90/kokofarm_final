@@ -21,12 +21,12 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
 		
+		
 		HttpSession session = request.getSession();
 		
 		ModelMap modelMap = modelAndView.getModelMap();
 		Object memberVO = modelMap.get("memberVO");
-		
-		System.out.println(memberVO.toString());
+				
 		if(memberVO != null){
 			logger.info("new login success");
 			session.setAttribute(LOGIN, memberVO);
@@ -52,6 +52,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		
+	
 		HttpSession session = request.getSession();
 		
 		if(session.getAttribute(LOGIN) !=null){

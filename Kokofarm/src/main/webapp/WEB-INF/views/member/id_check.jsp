@@ -68,7 +68,7 @@ $(function(){
 	 if(!eid.test(id)){ 
 		alert("4~15글자 한글 및 특수문자는 아이디로 사용 할 수 없습니다.");
 	
-	 }  else{
+	 }else{
 		 $.ajax({
 			 type : "post",
 			 url : "/member/id_check",
@@ -93,18 +93,7 @@ $(function(){
 		 
 	 }
 	 
-	 
-	 /*  else{
-		 var param="id="+id
-         httpRequest = getXMLHttpRequest();
-         httpRequest.onreadystatechange = callback;
-         httpRequest.open("POST", "/member/id_check", true);    
-         httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); 
-         httpRequest.send(param); 
-
-	}  */
-
-} 
+	} 
 
 
 // 사용하기 클릭 시 부모창으로 값 전달 

@@ -18,6 +18,7 @@
 <link href="/resources/owl-carousel/owl.carousel.css" type="text/css" rel="stylesheet" media="screen" />
 <link href="/resources/owl-carousel/owl.transitions.css" type="text/css" rel="stylesheet" media="screen" />
 
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>  -->
 <script src="/resources/javascript/jquery-2.1.1.min.js" type="text/javascript"></script>
 <script src="/resources/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 <script src="/resources/javascript/jstree.min.js" type="text/javascript"></script>
@@ -199,13 +200,13 @@ System.out.println("세션값" +vo);
       <ul class="main-navigation">
         <li><a href="/"   class="parent"  >홈</a> </li>
         <li><a href="/product/list_product"   class="parent"  >과일/채소</a> </li>
-        <li><a href="category.html"   class="parent"  >일반경매</a> </li>
+        <li><a href="/auction/auction_list"   class="parent"  >일반경매</a> </li>
          <li><a href="#"   class="parent" >실시간경매</a> </li>
         <li><a href="#"   class="parent"  >고객센터</a> </li>
         <li><a href="#" class="active parent">MyPage</a>
           <ul>
-            <li><a href="category.html">Category Page</a></li>
-            <li><a href="cart.html">Cart Page</a></li>
+            <li><a href="category.html">주문배송조회</a></li>
+            <li><a href="cart.html">장바구니</a></li>
             <li><a href="checkout.html">Checkout Page</a></li>
             <li><a href="blog.html" >Blog Page</a></li>
             <li><a href="singale-blog.html" >Singale Blog Page</a></li>

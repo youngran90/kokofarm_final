@@ -1,10 +1,10 @@
 package kokofarm.member.controller;
 
-
-
 import java.io.PrintWriter;
+import java.util.Date;
 
 import javax.inject.Inject;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -20,10 +20,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.util.WebUtils;
 
 import kokofarm.member.domain.LoginDTO;
 import kokofarm.member.domain.MemberVO;
-import kokofarm.member.domain.LicenseVO;
+
 import kokofarm.member.service.MemberService;
 
 @Controller
@@ -54,7 +55,7 @@ public class MemberController {
 
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
 	public String join(@ModelAttribute("MemberCommand") MemberVO vo,BindingResult errors) throws Exception{
-	System.out.println("널이 되나 안되나:" +vo.getBizNum());
+	
 		
 		service.joinMember(vo);
 		return "redirect:/";
@@ -65,18 +66,41 @@ public class MemberController {
 		
 	}
 	
-	@RequestMapping(value="/loginPost", method= RequestMethod.POST)
-	public String loginPOST(LoginDTO dto, HttpSession session, Model model) throws Exception{
-		MemberVO vo = service.login(dto);
-		
+	@RequestMapping(value="/loginOk", method= RequestMethod.POST)
+	public void loginOk(HttpServletRequest request, HttpServletResponse response,LoginDTO dto ) throws Exception{
 	
+	response.setCharacterEncoding("utf-8");
+	response.setContentType("text/html;charset=utf-8");
+	
+	PrintWriter out = response.getWriter();
+	int re = service.login(dto);
+	
+	if (re==0){
+		out.println("0");
+	}else if(re==1){
+		out.println("1");
+	}
+	
+	}
+	
+	@RequestMapping(value="/loginPost", method= RequestMethod.POST)
+	public void loginPOST(LoginDTO dto, HttpSession session, Model model) throws Exception{
+		System.out.println("출력:"+dto.toString());
+					
+		MemberVO vo = null;
 		
-		if(vo == null){
-			return "member/login";
-		}
-			
+		vo= service.memberInfo(dto);
 		model.addAttribute("memberVO", vo);
-		return "member/loginPost";
+				
+		if(dto.isUseCookie()){
+			int amount = 60*60*24*7;
+			Date sessionLimit = new Date(System.currentTimeMillis()+(1000*amount));
+			service.keepLogin(vo.getMember_id(), session.getId(), sessionLimit);
+			
+		}
+				
+			
+	
 	}
 	
 	@RequestMapping(value="/id_check", method = RequestMethod.GET)
@@ -107,9 +131,23 @@ public class MemberController {
 	
 }
 
-	@RequestMapping("/logout")
-	public void logout(){
-		
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logout(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception{
+		Object obj = session.getAttribute("login");
+		if(obj !=null){
+			MemberVO vo = (MemberVO)obj;
+			session.removeAttribute("login");
+			session.invalidate();
+			Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
+			
+			if(loginCookie != null){
+				loginCookie.setPath("/");
+				loginCookie.setMaxAge(0);
+				response.addCookie(loginCookie);
+				service.keepLogin(vo.getMember_id(), session.getId(),new java.util.Date());
+			}
+		}
+		return "/member/logout";
 	}
 
 	
@@ -131,6 +169,8 @@ public class MemberController {
 		service.joinMember(vo);
 		return "redirect:/";
 	}
+	
+	
 	
 	
 	

@@ -11,22 +11,62 @@
     	left: 52%;
     	}
     </style>
-    
+    <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+ 	<script>
+	var jq = $.noConflict(true);
+ 	</script>
  
-    
-    
-    
+ 
+ <script>
+ jq(document).ready(function(){
+	 
+
+jq("#loginBtn").on("click",function(){
+ 	
+  	var params=jq("#loginForm").serialize();
+  	  	
+  		 	 jq.ajax({
+ 			 type : "post",
+ 			 url : "/member/loginOk",
+ 			 data : params,
+ 			 dataType : "html",
+ 			 success : function(result){
+ 				 
+ 				  if(result==0){
+ 					 alert("사용 할 수 없는 아이디 입니다.");
+ 					return false;
+ 				 } else if(result ==1){
+ 					
+ 					 document.loginForm.submit();
+ 			    /*   location.href="/member/loginPost" */
+ 					 					
+ 			    
+ 				 }; 
+ 				 
+ 			 }
+ 			 
+ 		 });
+	});
+ });
+  	
+ 	 
+ 	
+ 
+ 
+ 
+ </script>
+ 
     <div class="container">
   <ul class="breadcrumb">
     <li><a href="#">Account</a></li>
-    <li><a href="login.html">Login</a></li>
+    <li><a href="/member/login">Login</a></li>
   </ul>
   <div class="row">
     <div class="col-sm-3 hidden-xs column-left" id="column-left">
       <div class="column-block">
         <div class="columnblock-title">Account</div>
         <div class="account-block">
-          <div class="list-group"> <a class="list-group-item" href="login.html">Login</a>
+          <div class="list-group"> <a class="list-group-item" href="/member/login">Login</a>
            <a class="list-group-item" href="register.html">Register</a> 
           <a class="list-group-item" href="forgetpassword.html">Forgotten Password</a> 
           <a class="list-group-item" href="#">My Account</a> 
@@ -56,7 +96,7 @@
           <div class="well">
             <h2>로그인</h2>
             <p><strong>I am a returning customer</strong></p>
-            <form enctype="multipart/form-data" method="post" action="/member/loginPost">
+            <form enctype="multipart/form-data" method="post" id = "loginForm" name="loginForm" action="/member/loginPost">
               <div class="form-group">
                 <label for="input-email" class="control-label">아이디</label>
                 <input type="text" class="form-control" id="member_id" placeholder="아이디" value="" name="member_id">
@@ -71,7 +111,7 @@
                    	</label>
                 </div>
                	
-              <input type="submit" class="btn btn-primary" id = "loginBtn" value="로그인">
+              <input type="button" class="btn btn-primary" id = "loginBtn"  value="로그인">
             </form>
           </div>
         </div>

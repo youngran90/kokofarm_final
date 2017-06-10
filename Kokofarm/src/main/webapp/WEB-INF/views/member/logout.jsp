@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 </head>
 <%
-session.removeAttribute("login");
 response.sendRedirect("/");
 %>
 <body>
