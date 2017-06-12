@@ -3,8 +3,29 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="kokofarm.mileage.mapper.MileageMapper">
-	<select id="max"></select>
- 	
+
+	<insert id="insert_mileage" parameterType="MileageVO">
+		insert into mileage
+		(
+			mileage_no, mileage_use, mileage_saving, mileage_total, mileage_member_id, mileage_date, orderfinish_no, mileage_current
+		) values ( 
+			#{mileage_no}, #{mileage_use}, #{mileage_saving}, #{mileage_total}, #{member_id}, sysdate, #{orderfinish_no}, 
+			(select member_point from member where member_id = #{member_id})
+		)
+	</insert>
+	
+	<select id="mileage_current" resultType="Integer">
+		select member_point from member where member_id = #{member_id}
+	</select>
+
+	<update id="milage_update">
+		update member set member_point = #{member_point} where member_id = #{member_id}
+	</update>
+	
+	<update id="update">
+		update mileage set mileage_current = #{mileage_current} where mileage_member_id = #{mileage_member_id}
+	</update>
+	
 </mapper>
 
 

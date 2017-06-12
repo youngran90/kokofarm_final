@@ -1,9 +1,11 @@
 package kokofarm.cart.controller;
 
 import java.util.HashMap;
-import java.util.Map;
+import java.util.UUID;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import kokofarm.cart.domain.CartVO;
 import kokofarm.cart.service.CartService;
-import kokofarm.orderproduct.domain.OrderProductData;
+import kokofarm.member.domain.MemberVO;
+import kokofarm.orderproduct.domain.OrderProductVO;
 import kokofarm.orderproduct.service.OrderProductService;
 
 @Controller
@@ -27,13 +31,42 @@ public class CartController {
 	@Inject
 	private OrderProductService op_service;
 	
+	
+	private static String cart_no = UUID.randomUUID().toString().replace("-", "");
+	private static String order_no = UUID.randomUUID().toString().replace("-", "");
+	
 	private static final Logger logger = LoggerFactory.getLogger(CartController.class);
 	
 	@RequestMapping(value="/cart", method=RequestMethod.GET)
-	public void cartGet(Model model) throws Exception{
-		logger.info("장바구니 리스트");
+	public String cartGet(Model model, HttpServletRequest request) throws Exception{
 		
-		model.addAttribute("listcart",service.cart_list("ddong85"));
+		HttpSession session = request.getSession();
+		MemberVO member = (MemberVO)session.getAttribute("login");
+		
+		if(member == null){
+			return "/cart/cart";
+		}
+		model.addAttribute("listcart",service.cart_list(member.getMember_id()));
+		return "/cart/cart";
+	}
+	
+	@RequestMapping(value="/cart_detail", method=RequestMethod.GET)
+	public String cart_detailkGet(@RequestParam("num") String product_unit,
+			@RequestParam("product_no") String product_no,
+			Model model, HttpServletRequest request) throws Exception{
+		
+	HttpSession session = request.getSession();
+		MemberVO member = (MemberVO)session.getAttribute("login");
+		
+		CartVO vo = new CartVO();
+		vo.setCart_no(cart_no);
+		vo.setMember_id(member.getMember_id());
+		vo.setProduct_no(product_no);
+		vo.setProduct_unit(product_unit);
+		service.cart_insert(vo);
+		
+		model.addAttribute("listcart",service.cart_list(member.getMember_id()));
+		return "redirect:/cart/cart";
 	}
 	
 	@RequestMapping(value="/delete", method=RequestMethod.GET)
@@ -58,29 +91,33 @@ public class CartController {
 	public String orderproductPost(@RequestParam("product_no") String[] product_no,
 			@RequestParam("order_product_amount") String[] order_product_amount,
 			@RequestParam("order_delivery_price") String[] order_delivery_price,
-			@RequestParam("order_total_price") String[] order_total_price, Model model ) throws Exception{
+			@RequestParam("order_total_price") String[] order_total_price, 
+			@RequestParam("order_product_name") String[] order_product_name,
+			@RequestParam("order_product_price") String[] order_product_price,
+			Model model, HttpServletRequest request ) throws Exception{
 		
-		OrderProductData data = new OrderProductData();
+		OrderProductVO data = new OrderProductVO();
+		
+		HttpSession session = request.getSession();
+		MemberVO member = (MemberVO)session.getAttribute("login");
 		
 		for(int i=0; i<product_no.length; i++){
-			data.setMember_id("ddong85");
+			data.setOrder_no(order_no);
+			data.setMember_id(member.getMember_id());
 			data.setProduct_no(product_no[i]);
 			data.setOrder_product_amount(order_product_amount[i]);
 			data.setOrder_delivery_price(order_delivery_price[i]);
 			data.setOrder_total_price(order_total_price[i]);
+			data.setOrder_product_name(order_product_name[i]);
+			data.setOrder_product_price(order_product_price[i]);
 			op_service.order_insert(data);
 		}
-
-		for(int i=0; i<product_no.length; i++){
-			System.out.println(product_no[i]);
-			System.out.println(order_product_amount[i]);
-			System.out.println(order_delivery_price[i]);
-			System.out.println(order_total_price[i]);
-		}
-		
 		
 		return "redirect:/orderproduct/orderproduct";
 	}
+	
+	
+	
 	
 
 }

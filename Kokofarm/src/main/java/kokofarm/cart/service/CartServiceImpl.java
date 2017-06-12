@@ -8,7 +8,9 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import kokofarm.cart.domain.CartListVO;
+import kokofarm.cart.domain.CartVO;
 import kokofarm.cart.persistence.CartDAO;
+import kokofarm.orderproduct.domain.OrderProductListVO;
 
 @Service
 public class CartServiceImpl implements CartService{
@@ -16,10 +18,30 @@ public class CartServiceImpl implements CartService{
 	@Inject
 	private CartDAO dao;
 
-	/*@Override
-	public void cart_insert(CartDTO cart) throws Exception {
-		dao.cart_insert(cart);
-	}*/
+	@Override
+	public void cart_insert(CartVO vo) throws Exception {
+		List<CartListVO> list = dao.cart_list(vo.getMember_id()); // 저장 정보
+		int count=0;
+		
+		if( list.size() == 0 ){
+			dao.cart_insert(vo);
+		}else{
+			Loop: for(int i=0; i<list.size(); i++){
+				if(list.get(i).getProduct_no().contains(vo.getProduct_no())){
+					count++;
+					break Loop;
+				}
+			}
+			if(count != 0){
+				cart_update(vo);
+				count = 0;
+			}else if(count == 0){//아닐시
+				dao.cart_insert(vo);
+			}
+		}
+		
+	}
+	
 
 	@Override
 	public List<CartListVO> cart_list(String member_id) throws Exception {
@@ -37,10 +59,10 @@ public class CartServiceImpl implements CartService{
 	}
 
 
-/*@Override
-	public void cart_update(CartDTO cart) throws Exception {
-		dao.cart_update(cart);
-	}*/
+	@Override
+	public void cart_update(CartVO vo) throws Exception {
+		dao.cart_update(vo);
+	}
 	
 	
 }

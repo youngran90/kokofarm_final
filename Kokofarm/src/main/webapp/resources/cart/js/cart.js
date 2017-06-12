@@ -18,6 +18,8 @@
 						$("input:checkbox[class="+index+"dp]").prop("checked", true); // 각 제품 배송비
 						$("input:checkbox[class="+index+"tp]").prop("checked", true); // 각 제품 총 금액
 						$("input:checkbox[class="+index+"opa]").prop("checked", true); // 각 제품 총 수량
+						$("input:checkbox[class="+index+"pn]").prop("checked",true); // 각 제품 품명
+						$("input:checkbox[class="+index+"pp]").prop("checked",true); // 각각의 제품 금액
 					})
 					
 						$("#deleteall").on('click',function(event){
@@ -64,11 +66,15 @@
 									$("input[class="+index+"dp]").prop("checked",true); //배송비
 									$("input[class="+index+"tp]").prop("checked",true); // 금액
 									$("input[class="+index+"opa]").prop("checked",true); // 수량
+									$("input[class="+index+"pn]").prop("checked",true); // 품명
+									$("input[class="+index+"pp]").prop("checked",true); // 각각의 제품 금액
 								}else if(cnt >= 0){
 									$("input[id="+index+"ac]").prop("checked",false);
 									$("input[class="+index+"dp]").prop("checked",false); //배송비
 									$("input[class="+index+"tp]").prop("checked",false); // 금액
 									$("input[class="+index+"opa]").prop("checked",false); // 수량
+									$("input[class="+index+"pn]").prop("checked",false); // 품명
+									$("input[class="+index+"pp]").prop("checked",false); // 각각의 제품 금액
 								} 
 							}  
 						}); // 선택 이벤트 종료 
@@ -92,10 +98,14 @@
 										$("input[class="+i+"dp]").prop("checked",true); //배송비
 										$("input[class="+i+"tp]").prop("checked",true); // 금액
 										$("input[class="+i+"opa]").prop("checked",true); // 수량
+										$("input[class="+i+"pn]").prop("checked",true); // 품명
+										$("input[class="+i+"pp]").prop("checked",true); // 각각의 제품 금액
 									}else if($('input:checkbox[id='+i+'ac]').is(":checked") == false){
 										$("input[class="+i+"dp]").prop("checked",false); //배송비
 										$("input[class="+i+"tp]").prop("checked",false); // 금액
 										$("input[class="+i+"opa]").prop("checked",false); // 금액
+										$("input[class="+i+"pn]").prop("checked",false); // 품명
+										$("input[class="+i+"pp]").prop("checked",false); // 각각의 제품 금액
 									}
 								}
 							})

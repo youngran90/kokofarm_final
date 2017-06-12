@@ -19,12 +19,12 @@ public class CartDAOImpl implements CartDAO{
 	
 	private static String namespace = "kokofarm.cart.mapper.CartMapper";
 
-/*
+
 	@Override
-	public void cart_insert(CartDTO cart) throws Exception {
-		session.insert(namespace+".cart_insert",cart);
+	public void cart_insert(CartVO vo) throws Exception {
+		session.insert(namespace+".cart_insert",vo);
 	}
-*/
+
 	@Override //장바구니 출력
 	public List<CartListVO> cart_list(String member_id) throws Exception {
 		return session.selectList(namespace+".cart_list", member_id);
@@ -40,10 +40,10 @@ public class CartDAOImpl implements CartDAO{
 		session.delete(namespace+".cart_delte_all",product_no);
 	}
 
-	/*	@Override
-	public void cart_update(CartDTO cart) throws Exception {
-		session.update(namespace+".cart_update", cart);
-	}*/
+	@Override
+	public void cart_update(CartVO vo) throws Exception {
+		session.update(namespace+".cart_update", vo);
+	}
 	
 	
 

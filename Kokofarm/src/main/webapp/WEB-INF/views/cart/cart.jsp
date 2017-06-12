@@ -2,13 +2,16 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="../include/header.jsp"%>
-
+<% 
+	session.getAttribute("login");
+%>
 <link rel="stylesheet" href="/resources/cart/css/cart.css">
 <script src="/resources/cart/js/cart.js"></script>
 
 <div class="container">
   <ul class="breadcrumb">
     <li><a href="/"><i class="fa fa-home"></i></a></li>
+	<li><a href="/product/list_product"><i class="fa fa-list_product"></i>물품 리스트</a></li>    
     <li><a href="#">장바구니</a></li>
   </ul>
  	<section id="top_img_box" name="top_img_box">
@@ -55,6 +58,7 @@
             </ul>
           </div>
         </div>
+        <div style="display: none;">
         <h3 class="productblock-title">Bestsellers</h3>
         <div class="row bestseller-grid product-grid">
           <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-grid-item">
@@ -118,6 +122,8 @@
             </div>
           </div>
         </div>
+        </div>
+        
       </div>
     </div>
    <!-- 왼쪽 탭 메뉴 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
@@ -152,6 +158,8 @@
            <td style="display: none"><input type="checkbox" id="dp" name="order_delivery_price" value="0" class="${status.count }dp"></td> <!-- 배송비 값 submit -->
            <td style="display: none"><input type="checkbox" id="tp" name="order_total_price" value="0" class="${status.count }tp"></td> <!-- 금액 값 submit -->
            <td style="display: none"><input type="checkbox" class="${status.count}opa" id="order_product_amount" name="order_product_amount" value="${cart_list.product_unit }" ></td>
+           <td style="display: none"><input type="checkbox" id="pn" name="order_product_name" value="${cart_list.product_name}" class="${status.count}pn"></td> <!-- 품명 submit -->   
+           <td style="display: none"><input type="checkbox" id="pp" name="order_product_price" value="${cart_list.product_price}" class="${status.count}pp"></td> <!-- 품명 submit -->
               <tr>
               	<td class="text-center">
               		<input type="checkbox" id="${status.count }ac" name="product_no" value ="${cart_list.product_no }">

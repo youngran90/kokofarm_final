@@ -4,10 +4,14 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 public class OrderProductVO implements Serializable{
-
+		private String order_no;
 		private String member_id;
-		private String order_product_no;
-		private String product_amount; //수량
+		private String product_no;
+		
+		private String order_product_name;
+		private String order_product_price;
+		
+		private String order_product_amount; //수량
 		
 		private String order_delivery_price;
 		private String order_total_price;
@@ -17,15 +21,27 @@ public class OrderProductVO implements Serializable{
 		public OrderProductVO() {
 		}
 
-		public OrderProductVO(String member_id, String order_product_no, String product_amount,
-				String order_delivery_price, String order_total_price, Timestamp order_date) {
+		public OrderProductVO(String order_no, String member_id, String product_no, String order_product_name,
+				String order_product_price, String order_product_amount, String order_delivery_price,
+				String order_total_price, Timestamp order_date) {
 			super();
+			this.order_no = order_no;
 			this.member_id = member_id;
-			this.order_product_no = order_product_no;
-			this.product_amount = product_amount;
+			this.product_no = product_no;
+			this.order_product_name = order_product_name;
+			this.order_product_price = order_product_price;
+			this.order_product_amount = order_product_amount;
 			this.order_delivery_price = order_delivery_price;
 			this.order_total_price = order_total_price;
 			this.order_date = order_date;
+		}
+
+		public String getOrder_no() {
+			return order_no;
+		}
+
+		public void setOrder_no(String order_no) {
+			this.order_no = order_no;
 		}
 
 		public String getMember_id() {
@@ -36,20 +52,36 @@ public class OrderProductVO implements Serializable{
 			this.member_id = member_id;
 		}
 
-		public String getOrder_product_no() {
-			return order_product_no;
+		public String getProduct_no() {
+			return product_no;
 		}
 
-		public void setOrder_product_no(String order_product_no) {
-			this.order_product_no = order_product_no;
+		public void setProduct_no(String product_no) {
+			this.product_no = product_no;
 		}
 
-		public String getProduct_amount() {
-			return product_amount;
+		public String getOrder_product_name() {
+			return order_product_name;
 		}
 
-		public void setProduct_amount(String product_amount) {
-			this.product_amount = product_amount;
+		public void setOrder_product_name(String order_product_name) {
+			this.order_product_name = order_product_name;
+		}
+
+		public String getOrder_product_price() {
+			return order_product_price;
+		}
+
+		public void setOrder_product_price(String order_product_price) {
+			this.order_product_price = order_product_price;
+		}
+
+		public String getOrder_product_amount() {
+			return order_product_amount;
+		}
+
+		public void setOrder_product_amount(String order_product_amount) {
+			this.order_product_amount = order_product_amount;
 		}
 
 		public String getOrder_delivery_price() {
@@ -78,10 +110,18 @@ public class OrderProductVO implements Serializable{
 
 		@Override
 		public String toString() {
-			return "OrderProductVO [member_id=" + member_id + ", order_product_no=" + order_product_no
-					+ ", product_amount=" + product_amount + ", order_delivery_price=" + order_delivery_price
-					+ ", order_total_price=" + order_total_price + ", order_date=" + order_date + "]";
+			return "OrderProductVO [order_no=" + order_no + ", member_id=" + member_id + ", product_no=" + product_no
+					+ ", order_product_name=" + order_product_name + ", order_product_price=" + order_product_price
+					+ ", order_product_amount=" + order_product_amount + ", order_delivery_price="
+					+ order_delivery_price + ", order_total_price=" + order_total_price + ", order_date=" + order_date
+					+ "]";
 		}
+
+		
+
+		
+
+		
 
 		
 

@@ -4,29 +4,77 @@
 
 <mapper namespace="kokofarm.orderproduct.mapper.OrderProductMapper">
 	
- 	<insert id="order_insert" parameterType="OrderProductData">
+ 	<insert id="order_insert" parameterType="OrderProductVO">
 		insert into orderproduct (
-			member_id, product_no, order_product_amount, order_delivery_price, order_total_price
+			order_no, member_id, product_no, order_product_amount, order_delivery_price, order_total_price, order_product_name, order_product_price,order_date
 		)values(
-			#{member_id},#{product_no},#{order_product_amount},#{order_delivery_price},#{order_total_price}
+		#{order_no}, #{member_id},#{product_no},#{order_product_amount},#{order_delivery_price},#{order_total_price}, #{order_product_name}, #{order_product_price},sysdate
 		)
 	</insert> 
 	
-	<select id="order_list" resultType="OrderProductData">
-		select op.member_id, op.product_no, op.order_product_amount, op.order_delivery_price, op.order_total_price, p.product_price, p.product_name,p.product_mainimage
+	<select id="order_list" resultType="OrderProductListVO">
+		select op.product_no, op.member_id, op.order_product_amount, op.order_delivery_price, op.order_total_price, p.product_price, p.product_name,p.product_mainimage, p.product_total
 		 from orderproduct op, product p
 		 where op.product_no = p.product_no
 		 and member_id = #{member_id}
+		 order by op.product_no asc
 	</select>
 	
-	<update id="order_update" parameterType="OrderProductData">
-		update orderproduct set order_product_amount = order_product_amount + #{order_product_amount}, order_total_price = order_total_price + #{order_total_price}
+	<update id="order_update" parameterType="OrderProductVO">
+		update orderproduct set order_product_amount = order_product_amount + #{order_product_amount}, order_total_price = order_total_price + #{order_total_price},
+		order_delivery_price = #{order_delivery_price}
 		where product_no = #{product_no}
 	</update>
 	
-	<select id="member_point" resultType="Integer">
-		select member_point from member where member_id = #{member_id} 
+	<select id="member_info" resultType="MemberVO">
+		select * from member where member_id = #{member}
 	</select>
+	
+	<insert id="orderfinish_insert" parameterType="OrderFinishVO">
+		insert into order_finish(
+			orderfinish_no, orderfinish_product_no, orderfinish_product_name,
+			orderfinish_product_amount,	orderfinish_product_price, orderfinish_delivery_price,
+			orderfinish_total_price, orderfinish_member_id, orderfinish_member_name,
+			orderfinish_member_phonenum, orderfinish_member_homenum, orderfinish_member_address, orderfinish_message, orderfinish_date, orderfinish_final_price
+		)values(
+			#{orderfinish_no}, #{orderfinish_product_no}, #{orderfinish_product_name},
+			#{orderfinish_product_amount}, #{orderfinish_product_price}, #{orderfinish_delivery_price},
+			#{orderfinish_total_price}, #{orderfinish_member_id}, #{orderfinish_member_name},
+			#{orderfinish_member_phonenum}, #{orderfinish_member_homenum}, #{orderfinish_member_address},
+			#{orderfinish_message}, sysdate, #{orderfinish_final_price}
+		)
+	</insert>
+	
+	<insert id="payment_insert" parameterType="OrderFinish_Payment_Info">
+		insert into payment(
+			payment_no, pay, creditcard_name, pay_month, pay_bank, deposit_name, payment_date, member_id, orderfinish_no
+		)values(
+			#{payment_no}, #{pay}, #{creditcard_name}, #{pay_month}, #{pay_bank}, #{deposit_name}, sysdate, #{member_id},#{orderfinish_no}
+		)
+	</insert>
+	
+	<select id="total_price" resultType="Integer" >
+		select distinct o.orderfinish_final_price from payment p, order_finish o
+ 		 where p.orderfinish_no = o.orderfinish_no 
+  		and o.orderfinish_no = #{orderfinish_no}
+	</select>
+	
+	<update id="product_update">
+		update product set product_total = product_total - #{orderfinish_product_amount} where product_no = #{orderfinish_product_no}
+	</update>
+	
+	<select id="orderfinish_no" resultType="String">
+		select orderfinish_no from payment where orderfinish_no = #{orderfinish_no}
+	</select>
+	
+	<delete id="cart_delete">
+		delete from cart where member_id = #{member_id}	
+	</delete>
+	
+	<delete id="orderproduct_delete">
+		delete from orderproduct where member_id = #{member_id}	
+	</delete>
+	
 </mapper>
 
 

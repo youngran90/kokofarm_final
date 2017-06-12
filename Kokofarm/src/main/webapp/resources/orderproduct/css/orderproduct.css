@@ -168,14 +168,12 @@ select {
 .point_box {
 	height: 150px;
 	width: 200px;
-	border: 1px solid red;
 	float: left;
 	padding: 10px;
 	margin: 0px 35px 0px 15px;
 }
 
 .pay_list {
-	border: 1px solid blue;
 	height: 150px;
 	width: 650px;
 	float: left;
@@ -183,6 +181,43 @@ select {
 	margin-bottom: 30px;
 }
 
+.point_info {
+	padding: 5px;
+}
+
+.point_check {
+	float: right;
+}
+
+.point_result {
+	padding: 5px;
+	clear: both;
+}
+
+.point_box span {
+	font-weight: bold;
+	color: #38a9a5;
+	clear: both;
+}
+
+.current_point {
+	padding-right: 40px;
+}
+
+.point_use {
+	clear: both;
+	padding: 5px;
+}
+
+#use {
+	padding-left: 30px;
+	text-align: right;
+}
+
+.use_btn {
+	padding: 5px;
+	float: right;
+}
 /* @@@@ Step2 결제 방법 사용 @@@@ */
 .creditcard_info03 p {
 	font-size: 10px;
@@ -207,7 +242,6 @@ select {
 }
 
 .pay_info {
-	border: 1px solid green;
 	height: 90px;
 	padding-top: 10px;
 }
@@ -220,14 +254,12 @@ select {
 .point_box {
 	height: 150px;
 	width: 200px;
-	border: 1px solid red;
 	float: left;
 	padding: 10px;
 	margin: 0px 35px 0px 15px;
 }
 
 .pay_list {
-	border: 1px solid blue;
 	height: 150px;
 	width: 650px;
 	float: left;
@@ -265,4 +297,78 @@ select {
 	padding-left: 30px;
 	font-size: 10px;
 	color: #e2704b;
+}
+
+.result_box {
+	background-image: url("/resources/orderproduct/image/ord2_amout_bg.jpg");
+	background-repeat: no-repeat;
+	background-size: 900px 130px;
+	height: 130px;
+	margin-bottom: 30px;
+}
+
+.result_box div {
+	float: left;
+	text-align: center;
+	font-size: 24px;
+	width: 33.3%;
+	padding-top: 64px;
+}
+
+.result_box em {
+	font-size: 30px;
+	vertical-align: middle;
+}
+
+.result_box b {
+	margin-left: 10px;
+	font-size: 30px;
+	vertical-align: middle;
+}
+
+.order_result_price_total {
+	color: #38a9a5;
+}
+
+.use_btn span {
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+
+
+/* 결제 완료 페이지 CSS */
+.finish_area img {
+	height: 300px;
+	width: 800px;
+}
+
+.home {
+	height: 60px;
+	width: 220px;
+	float: left;
+	margin-right: 20px;
+	background-color: #e2704b;
+}
+
+.shopping {
+	margin-left: 20px;
+	height: 60px;
+	width: 220px;
+	float: left;
+	background-color: #e2704b;
+}
+
+#home p {
+	font-size: 24px;
+	color: white;
+	margin-top: 20px;
+	text-align: center;
+}
+
+#shopping p {
+	text-align: center;
+	font-size: 24px;
+	color: white;
+	margin-top: 20px;
 }
