@@ -3,81 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%
-	MemberVO member = (MemberVO)session.getAttribute("login");
-	String m_id = member.getMember_id();
-	String member_id = m_id.substring(0, 3);
-	System.out.println(member_id);
-%>
+
 
 <%@include file="../include/header.jsp"%>
-<style>
-.f-nav {z-index:9999; position:fixed; left:0; top:0; width:1; }
-.delivery_content .content_box{padding:0px 29px 29px 31px;}
-			.delivery_content .deli_img{margin-bottom:60px;}
-			.deli_inner:after{clear:both;content:"";display:block;}
-			.deli_inner_L{float:left;}
-			.deli_inner_R{float:right;}
-			.deli_inner_T{float:left;padding-top:8px;width:1168px;}
-			.deli_inner_table{width:435px;height:345px;border-top:1px solid #d9d9d9;}
-			.deli_inner p{position:relative;line-height:18px;color:#666;}
-			.deli_inner h5{margin-bottom:20px;font-family:YG77;font-size:15px;color:#352f29;font-weight: bold;}
-			.deli_inner h6{margin-bottom:4px;font-size:11px;line-height:17px;font-family:YG77;}
-			.deli_inner_table span{color:#e2704b;}
-			.deli_inner_table tr{border-bottom:1px solid #d9d9d9; font-size: 12px;}
-			.deli_inner_table th{width:68px;font-family:YG76;line-height:18px;color:#555;background-color:#f3f3f3;font-size: 13px;text-align: center;}
-			.deli_inner_table td{padding:5px 0 8px 20px; font-size: 12px;}
-			.deli_inner_table td.pd{padding:15px 0 20px 20px;}
-			.deli_inner_R .deli_inner_table td.pd{padding:13px 0 10px 30px;}
-			.deli_inner_table td p.fir{margin-bottom:5px;}
-			.deli_inner_table td p.last{margin-bottom:5px;}
-			.deli_inner_R .deli_inner_table td p.last{margin-bottom:7px;}
-			.deli_inner_L .deli_inner_table td p.fir span{font-family:YG77;}
-			.deli_inner_L .deli_inner_table span.abs{position:absolute;top:0;left:172px;font-family:YG77;}
-			.deli_inner_L .deli_inner_table span.abs:before{display:inline-block;margin-right:5px;content: "-"; color:#666;}
-			.deli_inner_R .deli_inner_table span.cle{display:block;margin-left:15px;color:#666;font-weight:normal;}
-			.deli_inner_R .deli_inner_table p.cle{margin:0 0 6px 54px;}
-			.deli_inner_R .deli_inner_table p.word_wrap{margin:0 0 5px 20px;}
-			.deli_inner_R .deli_inner_table span.nor{display:inline-block;width:40px;color:#666;}
-		 	.deli_inner_table td strong{display:block;margin-bottom:20px;font-size:15px;line-height:24px;}
-			.deli_inner_table td strong img{margin-right:5px;vertical-align:top;}
-			.deli_inner_table td div{margin-bottom:18px;}
-			.deli_inner_table td div.last{margin-bottom:0px;}
-			.deli_inner .deli_inner_T p{color:#888;font-size:5px;}
 
-			.view_content{margin-bottom:80px;}
-			.view_content:last-child{margin-bottom:0px;}
-			.view_content .content_box{overflow:hidden;border:1px solid #dadada;padding:29px;background:#fff;}
-			.view_board_table{width:100%;margin-bottom:20px;}
-			.view_board_table th{text-align:center;font-family:YG76;color:#555;height:39px;border-top:2px solid #38a9a5;border-bottom:1px solid #d9d9d9;background:#f3f3f3;}
-			.view_board_table td{text-align:center;font-family:YG76;color:#555;min-height:39px;padding:13px 8px;border-bottom:1px solid #d9d9d9;}
-			.view_board_table td img{max-width:100%;}
-			.view_board_table .tit_tr{}
-			.view_board_table .txt_tr{display:none;}
-			.view_board_table .txt_tr td{background:#f3f3f3;}
-			.view_board_table .tit_td{cursor:pointer;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-			.view_board_table .tit_td br{display:none;}
-			.view_board_table .txt_td{text-align:left;line-height:1.5;}
-			.view_board_table .txt_td img{display:block;}
-			.view_board_table .reply_tit_tr .tit_td{padding-left:32px;color:#38a9a5;background:url(../images/common/bu_reply.gif) no-repeat 8px 11px;}
-			.view_board_table .reply_txt_tr .txt_td{padding-left:40px;padding-right:40px;}
-			.view_board_table .reply_txt_tr .reply_txt{padding:18px 274px 31px 190px;}
-			.view_board_table .reply_txt_tr .reply_user_txt{border-bottom:1px dashed #d0d0d0;}
-			.view_board_table .reply_txt_tr .reply_admin_txt{padding:31px 274px 18px 190px;}
-			.view_board_table .reply_check{display:inline-block;width:41px;height:21px;line-height:21px;text-align:center;color:#fff;border-radius:2px;background:#ccc0b1;}
-			.view_board_table .reply_check.comp{background:#38a9a5;}
-
-			.review_content{position:relative;}
-			.review_content .caption{position:absolute;right:0;top:5px;color:#777777;}
-			.review_content .caption a{color:#e2704b;text-decoration:underline;}
-			.review_content .caption span{color:#e2704b;}
-			.grade_box .full{background:url(/resources/image/ico_star_f.png) no-repeat center;background-size:100%; }
-			
-</style>
-
-<script type="text/javascript"	src=http://code.jquery.com/jquery-1.10.2.js></script>
-<link rel="stylesheet" href="css/product.css">
-
+<link rel="stylesheet" href="/resources/css/detail.css">
 
 <div class="container">
   <ul class="breadcrumb">
@@ -89,7 +19,30 @@
     <div id="column-left" class="col-sm-3 hidden-xs column-left">
       <div class="column-block">
         <div class="column-block">
-          <div class="columnblock-title">Categories</div>
+        <div class="columnblock-title">과일(Fruit)</div>
+        <div class="category_block">
+        <ul class="box-category treeview-list treeview">
+            <li><a href="/product/list_product?ca2=fs" class="activSub">과일</a>
+              <ul>
+                <li><a href="/product/list_product?ca3=fs_1" >딸기</a></li>
+                <li><a href="/product/list_product?ca3=fs_2" >한라봉</a></li>
+                <li><a href="/product/list_product?ca3=fs_3" >수박</a></li>
+                <li><a href="/product/list_product?ca3=fs_4" >참외</a></li>
+                <li><a href="/product/list_product?ca3=fs_5" >포도</a></li>
+                <li><a href="/product/list_product?ca3=fs_6" >복숭아</a></li>
+                <li><a href="/product/list_product?ca3=fs_7" >배</a></li>
+                <li><a href="/product/list_product?ca3=fs_8" >사과</a></li>
+                <li><a href="/product/list_product?ca3=fs_9" >귤</a></li>
+                <li><a href="/product/list_product?ca3=fs_10" >바나나</a></li>
+                <li><a href="/product/list_product?ca3=fs_11" >복분자</a></li>
+                <li><a href="/product/list_product?ca3=fs_12" >블루베리</a></li>
+                <li><a href="/product/list_product?ca3=fs_13" >기타</a></li>
+               </ul>
+            </li>
+          </ul>
+          </div>
+        
+          <div class="columnblock-title">채소(Vegetable)</div>
           <div class="category_block">
           <ul class="box-category treeview-list treeview">
             <li><a href="/product/list_product?ca2=vs" class="activSub">쌈/야채</a>
@@ -361,7 +314,7 @@
 			</li>
           </ul>
 					<button type="button" onclick="eadown()"; ><img src="/resources/image/minu.bt.png"  width="20px;"></button>
-					<input id="ea" name="ea" value="1" readonly="" type="text" size="1"
+					<input id="ea" name="ea" value="1" readonly="readonly" type="text" size="1"
 						style="text-align: center;">
 					<button type="button" onclick="eaup()"><img src="/resources/image/plus_bt.png"  width="20px;"></button>
 			
@@ -374,9 +327,10 @@
             <div class="form-group">
               <input type="hidden" name="product_id" value="48" />
               <div class="btn-group">
-                <button type="button" data-toggle="tooltip" class="btn btn-default wishlist" title="Add to Wish List" ><i class="fa fa-heart-o"></i></button>
+                <!-- <button type="button" data-toggle="tooltip" class="btn btn-default wishlist" title="Add to Wish List" ><i class="fa fa-heart-o"></i></button> -->
                 <button type="button" id="button-cart" data-loading-text="Loading..." class="btn btn-primary btn-lg btn-block addtocart" onclick="gocart('${product.product_no}')">Add to Cart</button>
-                <button type="button" data-toggle="tooltip" class="btn btn-default compare" title="Compare this Product" ><i class="fa fa-exchange"></i></button>
+                <button type="button" id="button-inquiry" data-loading-text="Loading..." class="btn btn-primary btn-lg btn-block addtocart" onclick="inquiry('${product.product_name}','${product.product_no}','${product.seller_no}')">1:1문의글쓰기</button>
+               <!--  <button type="button" data-toggle="tooltip" class="btn btn-default compare" title="Compare this Product" ><i class="fa fa-exchange"></i></button> -->
               </div>
             </div>
           </div>
@@ -386,7 +340,7 @@
       <div class="nav">
         <ul class="nav nav-tabs">
           <li class="active"><a href="#tab-description" data-toggle="tab">상품상세정보</a></li>
-          <li><a href="#tab-review" data-toggle="tab">Reviews ()</a></li>
+          <li><a href="#tab-review" data-toggle="tab">Reviews(${reply_count})</a></li>
         </ul>
         </div>
         <div class="tab-content">
@@ -525,15 +479,17 @@
          
 	
 <!-- 댓글 -->
+
           <div class="tab-pane" id="tab-review">
+            <c:if test="${login.member_id ne null}">
             <form class="form-horizontal" id="commentForm">
             <input type="hidden" name="product_no" id="product_no" value="${product.product_no}" ></input>
               <div id="review"></div>
               <h2>댓글(Review)</h2>
               <div class="form-group required">
               <label class="control-label" for="input-review">아이디</label>
-                <div class="col-sm-12">
-               <input  class="control-label" id="member_id" name="member_id" value="${login.member_id}" readonly="readonly"/>
+                <div class="col-sm-12">${login.member_id}
+              <input type="hidden" class="control-label" id="member_id" name="member_id" value="${login.member_id}" readonly="readonly"/>
                 </div>
               </div>
               <div class="form-group required">
@@ -558,18 +514,58 @@
                   <input type="radio" name="reply_rating" id="reply_rating" value="5" />
                   &nbsp;Good</div>
               </div>
+            
               <div class="buttons clearfix">
                 <div class="pull-right">
                   <button type="button" id="button-review" data-loading-text="Loading..." class="btn btn-primary" onclick="InsertPost('${product.product_no}')">댓글완료</button>
                 </div>
               </div>
             </form>
+            </c:if>
+            
+            <c:if test="${login.member_id == null}">
+            <form class="form-horizontal" id="commentForm-login">
+              <div id="review"></div>
+              <h2>댓글(Review)</h2>
+              <div class="form-group required">
+              <label class="control-label" for="input-review">아이디</label>
+                <div class="col-sm-12"><input type="text" disabled="disabled"></div>
+              </div>
+              <div class="form-group required">
+                <div class="col-sm-12">
+                  <label class="control-label" for="input-review">댓글내용</label>
+                  <textarea rows="5" name="reply_content" id="reply_content" class="form-control" disabled="disabled"></textarea>
+                  <div class="help-block"><span class="text-danger">Note:</span>로그인시 작성가능합니다.</div>
+                </div>
+              </div>
+              <div class="form-group required">
+                <div class="col-sm-12">
+                  <label class="control-label">평점</label>
+                  &nbsp;&nbsp;&nbsp; Bad&nbsp;
+                  <input type="radio" name="reply_rating"  id="reply_rating" value="1" />
+                  &nbsp;
+                  <input type="radio" name="reply_rating"  id="reply_rating"  value="2" />
+                  &nbsp;
+                  <input type="radio" name="reply_rating" id="reply_rating" value="3"  checked="checked"/>
+                  &nbsp;  
+                  <input type="radio" name="reply_rating" id="reply_rating" value="4" />
+                  &nbsp;
+                  <input type="radio" name="reply_rating" id="reply_rating" value="5" />
+                  &nbsp;Good</div>
+              </div>
+              
+              <div class="buttons clearfix">
+                <div class="pull-right">
+                  <button type="button" id="button-review" data-loading-text="Loading..." class="btn btn-primary" >댓글완료</button>
+                </div>
+              </div>
+            </form>
+              </c:if>
+          </div>
           </div>
         </div>
-      </div>
-      
-      
-<h3 class="productblock-title">Review</h3>
+        
+        <h3 class="productblock-title">Review</h3>
 <label>상품구매 후기</label>
  <div class="board_comment" id="commentListArea">  
 	<table class="view_board_table">
@@ -587,9 +583,7 @@
 						<th>내용</th>
 						<th>작성자</th>
 						<th>작성일</th>
-					<%-- 	<c:if test="${replylist.member_id eq member_id}">
-						</c:if> --%>
-						<th>버튼</th>
+						<th>&nbsp;&nbsp;</th>
 					</tr>
 				</thead>
 				<tbody>	
@@ -607,15 +601,17 @@
 							</div>
 						</td>
 						<td class="tit_td" >${replylist.reply_content}</td>
-						<td>${replylist.member_id}</td>
+						<c:set var="m_id" value="${replylist.member_id}"></c:set>
+						<td>${fn:substring(m_id,0,3)}****</td>
 						<td>
 							<span class="write_date"><fmt:formatDate value="${replylist.reply_date}" pattern="yyyy-MM-dd HH:mm:ss"/></span>
 						</td>
-						
-				<%-- 	<c:if test="${replylist.member_id eq member_id}"> --%>
-				<%-- 	 </c:if> --%>
-						 	<td colspan="2"><button id="deleteReply" value="${replylist.reply_no}" onclick="deleteReply('${replylist.reply_no}')">삭제</button>
-						 	<button id="updateReply" class="updateReply" value="${status.count}" onclick="updateReply('${replylist.reply_no}')">수정</button></td>
+				
+				<c:set var="member_id" value="${login.member_id}"></c:set>
+					<c:if test="${replylist.member_id eq member_id}">
+					 	<td colspan="2"><button id="deleteReply" value="${replylist.reply_no}" onclick="deleteReply('${replylist.reply_no}')">삭제</button>
+					 	<button id="updateReply" class="updateReply" value="${status.count}" onclick="updateReply('${replylist.reply_no}')">수정</button></td>
+					</c:if> 
 					</tr>
 					<tr>
 					</tr>
@@ -626,9 +622,9 @@
 			</table>
 			
 			</div>
+      </div>
     </div>
   </div>
-</div>
 
 <script type="text/javascript">
 
@@ -649,9 +645,13 @@ $(function(){
 	})
 
 	function update_Re() {
-		
 		var reply_content = $("#reply_contents").val();
 		var reply_no = $("#update_Re").attr("value");
+		
+		if(reply_content == ""){
+			alert("댓글내용을 입력해주세요");
+			return false;
+		}
 		
 		$.ajax({
 			type : "get",
@@ -663,6 +663,7 @@ $(function(){
 			success : function(data) {
 				location.reload();
 				alert("댓글수정");
+				return false;
 			},
 			error : function(data) {
 				console.log('Error:', data);
@@ -673,22 +674,27 @@ $(function(){
 
 	function InsertPost() {
 	     var param = $("#commentForm").serialize();
-
-	     $.ajax({
-				type : "post",
-				url : "/Insert_Post",
-				data : param,
-			    dataType : "html",
-				success : function(data) {
-					alert("성공");
-					 location.reload();
-					 $(".nav-tabs li:eq(1) a").tab("show"); 
-				},
-				error : function(data) {
-					console.log('Error:', data);
-					alert("오류");
-				}
-			})
+	     var reply_content = $("#reply_content").val();
+	 	
+	     if(reply_content == ""){
+			alert("댓글내용을 입력해주세요");
+			return false;
+		}else{
+			 $.ajax({
+					type : "post",
+					url : "/Insert_Post",
+					data : param,
+				    dataType : "html",
+					success : function(data) {
+						alert("성공");
+						 location.reload();
+					},
+					error : function(data) {
+						console.log('Error:', data);
+						alert("오류");
+					}
+				})
+		}
 	}
 	
 	function deleteReply(reply_no) {
@@ -703,6 +709,7 @@ $(function(){
 			success : function(data) {
 				location.reload();
 				alert("댓글이 삭제되었습니다.");
+				return false;
 			},
 			error : function(data) {
 				console.log('Error:', data);
@@ -743,25 +750,20 @@ $(function(){
 			location.href="/cart/cart_detail?num=" + num + "&product_no="+ product_no;
 		}
 		
-		function question(product_name, product_no, seller_no) {
-			window.open("doInquiry.Inquiry?product_name=" + product_name + "&product_no=" + product_no + "&seller_no=" + seller_no, "", "width=500,height=400");
+		
+		function inquiry(product_name, product_no, seller_no) {
+			var member_id = $("#member_id").val();
+			if(member_id == null){
+				alert("로그인시 작성가능합니다.");
+			}else{
+				window.open("/mypage/Insert_inquiry?product_name=" + product_name + "&product_no=" + product_no + "&seller_no=" + seller_no, "", "width=600,height=500");
+			}
 		}
-		
-		
-		<%-- function cart(product_no){
-			var member_id = 0;
-		 <% 
-		 if(member_id==null){ %>
-			alert("로그인이 필요합니다.");
-			return;
-		 <%}else{%>
-		 var num = $("#ea").val();
-			var ea = parseInt(num);
-			location.href="gocartAaction.product?ea=" + ea + "&product_no="+ product_no;
-			<%}%>
-			} --%>
-	 
 
+		$("#commentForm-login").click(function(){
+			alert("로그인이 하셔야 작성 가능합니다.");
+			return false;
+		})
  
 </script>
 

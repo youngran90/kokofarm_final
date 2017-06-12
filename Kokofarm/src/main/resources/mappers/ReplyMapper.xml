@@ -12,6 +12,7 @@
 	<select id="listReply" parameterType="String" resultType="ReplyVO">
 	select * from Reply
 	where product_no = #{product_no}
+	order by reply_date desc
 	</select>
 	
 	<delete id="deleteReply" parameterType="String">
@@ -25,7 +26,15 @@
 	where reply_no = #{reply_no} 
 	</update>
 	
+	<select id="countReply" resultType="int"  parameterType="String">
+		select count(*) from Reply
+		where product_no = #{product_no}
+	</select>
 	
+	<select id="getProduct_no" resultType="String">
+		select product_no from Reply
+		where reply_no = #{reply_no}
+	</select>
 	
 	
 	</mapper>

@@ -39,4 +39,15 @@ public class ReplyDAOImpl implements ReplyDAO {
 		session.update(namespace+".updateReply", vo);
 	}
 
+	@Override
+	public int countReply(String product_no) throws Exception {
+		return session.selectOne(namespace+".countReply", product_no);
+	}
+
+	@Override
+	public String get_product_no(String reply_no) throws Exception {
+		return session.selectOne(namespace+".getProduct_no", reply_no);
+	}
+
+
 }

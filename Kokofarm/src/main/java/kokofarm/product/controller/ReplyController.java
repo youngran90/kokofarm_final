@@ -25,18 +25,6 @@ public class ReplyController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(ReplyController.class); 
 	
-	/*@RequestMapping(value="/Insert_Post", method= RequestMethod.POST)
-	public String replyPost(ReplyVO reply, Model model)throws Exception{
-		logger.info("post----insert--------");
-		String uuid = UUID.randomUUID().toString().replace("-", "");
-		String reply_no = "r-"+uuid;
-		reply.setReply_no(reply_no);
-		System.out.println(reply.toString());
-		String product_no = reply.getProduct_no();
-		service.Insert_Post(reply);
-		
-		return "/product/detail_product=product_no?"+product_no;
-	}*/
 	
 	@RequestMapping(value = "/Insert_Post",method = RequestMethod.POST)
 	@ResponseBody
@@ -47,7 +35,6 @@ public class ReplyController {
 		reply.setReply_no(reply_no);
 		System.out.println(reply.toString());
 		service.Insert_Post(reply);
-		//model.addAttribute("replylist", service.list_Post(reply.getProduct_no()));
 	}
 	
 	@RequestMapping(value = "/deleteReply",method = RequestMethod.GET)

@@ -7,6 +7,8 @@ import java.util.UUID;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import kokofarm.product.domain.ProductVO;
 import kokofarm.product.persistence.ProductDAO;
@@ -39,7 +41,7 @@ public class ProductServiceImpl implements ProductService {
 	public int Count_Product() throws Exception {
 		return dao.Count_Pro();
 	}
-
+	
 	@Override
 	public ProductVO detail_product(String product_no) throws Exception {
 		return dao.detail_pro(product_no);
@@ -55,6 +57,15 @@ public class ProductServiceImpl implements ProductService {
 		      String uuid = UUID.randomUUID().toString().replace("-", "");
 		  return uuid;		
 	}
+
+	@Override
+	public void view_count(String product_no) throws Exception {
+		dao.view_count(product_no);
+	}
+
+
+
+	
 
 	
 

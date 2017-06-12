@@ -50,6 +50,22 @@ public class ProductDAOImpl implements ProductDAO {
 
 	}
 
-	
+	@Override
+	public void view_count(String product_no) throws Exception {
+		session.update(namespace+".viewProduct", product_no);
+	}
+
+	@Override
+	public int countReply(String product_no) throws Exception {
+		return session.selectOne(namespace+".countReply", product_no);
+	}
+
+	@Override
+	public void update_reply_count(String product_no, int amount) throws Exception {
+		Map<String, Object>map = new HashMap<>();
+		map.put("product_no", product_no);
+		map.put("amount", amount);
+		session.update(namespace+".update_reply_count", map);
+	}
 
 }

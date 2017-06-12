@@ -13,13 +13,13 @@
 		)
 		values(
 		#{product_no}, #{product_name},  #{product_unit}, #{unit}, #{ca1},  #{ca2},  #{ca3}, #{product_area}, #{producer},
-		  #{product_price}, 0, sysdate, #{product_harvestdate}, 0,
+		  #{product_price}, 0, sysdate, #{product_harvestdate}, #{seller_no},
 		#{product_mainimage}, #{product_sellerimage}, #{contents}
 		)	
 	</insert>
 	
 	<select id="listProduct" resultType="ProductVO" parameterType="java.util.HashMap">
-		select * from product
+		select * from product 
 		<where>
 		<if test="ca1 != null">
 				ca1 = #{ca1}
@@ -31,26 +31,18 @@
 			ca3 = #{ca3}
 		</if>
 		</where>
-	</select>
-	
-	<select id="listProduct_ca1" resultType="ProductVO" parameterType="String">
-		select * from product
-		where ca1 = #{ca1}
-	</select>
-	
-	<select id="listProduct_ca2" resultType="ProductVO" parameterType="String">
-		select * from product
-		where ca2 = #{ca2}
-	</select>
-	
-	<select id="listProduct_ca3" resultType="ProductVO" parameterType="String">
-		select * from product
-		where ca3 = #{ca3}
-	</select>
-	
+		order by product_uploaddate desc
+	</select> 
+
 	
 	<select id="detailProduct" parameterType="String" resultType="ProductVO">
 	 select * from product
+	 where product_no = #{product_no}
+	</select>
+	
+	<select id="viewProduct" parameterType="String" >
+	 update product
+	 set view_count = view_count+1
 	 where product_no = #{product_no}
 	</select>
 	
@@ -64,6 +56,13 @@
 	<delete id="deleteProduct" parameterType="String">
 		delete * from product where product_no =#{product_no}
 	</delete>
+	
+	
+	<update id="update_reply_count">
+	update product
+	set reply_count = reply_count+#{amount}
+	where product_no = #{product_no}	
+	</update>
 	
 	
 	</mapper>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kokofarm.mapper.InquiryMapper">
+	<cache />
+	
+	<insert id="insertInquiry" parameterType="InquiryVO">
+	Insert into Inquiry(
+	inquiry_no, product_no, product_name, member_id, seller_no, inquiry_content, inquiry_date)
+	values(
+	#{inquiry_no}, #{product_no}, #{product_name}, #{member_id}, #{seller_no}, #{inquiry_content}, SYSDATE)
+	</insert>
+	
+	<select id="listInquiry" resultType="InquiryVO" parameterType="String">
+	select * from Inquiry
+	where member_id = #{member_id}
+	order by inquiry_date desc
+	</select>
+	
+	<select id="list_Inquiry" resultType="InquiryVO" parameterType="String">
+	select * from Inquiry
+	where seller_no = #{seller_no}
+	order by inquiry_date desc
+	</select>
+	
+	<select id="detailInquiry" parameterType="String" resultType="InquiryVO">
+	select * from Inquiry
+	where inquiry_no = #{inquiry_no}
+	</select>
+	
+	<delete id="deleteInquiry" parameterType="String">
+	delete Inquiry
+	where inquiry_no = #{inquiry_no}
+	</delete>
+	
+	<update id="updateInquiry" parameterType="InquiryVO">
+	update Inquiry 
+	set inquiry_content = #{inquiry_content}
+	where inquiry_no = #{inquiry_no}
+	</update>
+	
+	
+	<update id="insertInquiryReply" parameterType="InquiryVO">
+	update Inquiry 
+	set inquiry_reply = #{inquiry_reply}, inquiry_replydate = SYSDATE 
+	where inquiry_no = #{inquiry_no}
+	</update>
+
+</mapper>

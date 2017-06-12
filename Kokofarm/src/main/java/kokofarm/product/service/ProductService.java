@@ -19,5 +19,9 @@ public interface ProductService {
     public void delete_product(String product_no)throws Exception;
     
     public String create_UUID() throws Exception;
+    
+    public void view_count(String product_no)throws Exception;
+    
+ 
 
 }

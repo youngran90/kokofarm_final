@@ -211,7 +211,7 @@ function onlyNumber(obj) {
                     <div class="form-group required">
                         <label for="input-product_unit" class="col-sm-2 control-label">단위</label>
                         <div class="col-sm-10">
-                            <input type=text id="product_unit" placeholder="ex)1" value="1"  name="product_unit" onkeydown="onlyNumber(this)"/>
+                            <input type=text id="product_unit" placeholder="단위당 수량" value="1"  name="product_unit" onkeydown="onlyNumber(this)"/>
                         	<select id="unit" name="unit">
 								  <option value="kg">kg</option>
 								  <option value="g">g</option>
@@ -219,16 +219,24 @@ function onlyNumber(obj) {
 							</select>
                         </div>
                     </div>
+                    
+                    <div class="form-group required">
+                        <label for="input-product_unit" class="col-sm-2 control-label">총수량</label>
+                        <div class="col-sm-10">
+                            <input type=text id="product_total" placeholder="단위별 총 수량" value=""  name="product_total" onkeydown="onlyNumber(this)"/>
+                        </div>
+                    </div>
+                    
                     <div class="form-group required">
                         <label for="input-product_area" class="col-sm-2 control-label">생산지</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="product_area" placeholder="생산지" value="1" name="product_area">
+                        <div class="col-sm-10">${login.member_address1}
+                            <input type="hidden" class="form-control" id="product_area" placeholder="생산지" value="${login.member_address1}" name="product_area">
                         </div>
                     </div>
                     <div class="form-group required">
                         <label for="input-producer" class="col-sm-2 control-label">생산자</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="producer" placeholder="생산자" value="1"  name="producer">
+                        <div class="col-sm-10">${login.bizName}
+                            <input type="hidden" class="form-control" id="producer" placeholder="생산자" value="${login.bizName}"  name="producer">
                         </div>
                     </div>
                     
@@ -282,9 +290,6 @@ function onlyNumber(obj) {
     </div>
 </div>
 
-
-
-    
     
     
   <%@include file="../include/footer.jsp"%>

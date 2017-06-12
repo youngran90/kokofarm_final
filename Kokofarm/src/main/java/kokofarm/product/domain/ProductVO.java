@@ -28,6 +28,8 @@ public class ProductVO implements Serializable{
 	private Date product_harvestdate;
 	private String contents;
 	private int review_number;
+	private int view_count;
+	private int reply_count;
 	
 	private String product_mainimage;
 	private String s_contents;
@@ -38,7 +40,7 @@ public class ProductVO implements Serializable{
 	public ProductVO(String product_no, String product_name, String product_unit, String unit, int product_total,
 			int product_price, String ca1, String ca2, String ca3, String product_area, String producer,
 			String seller_no, Timestamp product_uploaddate, Date product_harvestdate, String contents,
-			int review_number, String product_mainimage, String s_contents, String product_sellerimage,
+			int review_number, int view_count, int reply_count,  String product_mainimage, String s_contents, String product_sellerimage,
 			MultipartFile file1, MultipartFile file2) {
 		super();
 		this.product_no = product_no;
@@ -57,9 +59,11 @@ public class ProductVO implements Serializable{
 		this.product_harvestdate = product_harvestdate;
 		this.contents = contents;
 		this.review_number = review_number;
+		this.view_count = view_count;
 		this.product_mainimage = product_mainimage;
 		this.s_contents = s_contents;
 		this.product_sellerimage = product_sellerimage;
+		this.reply_count = reply_count;
 		this.file1 = file1;
 		this.file2 = file2;
 	}
@@ -159,6 +163,12 @@ public class ProductVO implements Serializable{
 	public void setReview_number(int review_number) {
 		this.review_number = review_number;
 	}
+	public int getView_count() {
+		return view_count;
+	}
+	public void setView_count(int view_count) {
+		this.view_count = view_count;
+	}
 	public String getProduct_mainimage() {
 		return product_mainimage;
 	}
@@ -189,17 +199,6 @@ public class ProductVO implements Serializable{
 	public void setFile2(MultipartFile file2) {
 		this.file2 = file2;
 	}
-	@Override
-	public String toString() {
-		return "ProductVO [product_no=" + product_no + ", product_name=" + product_name + ", product_unit="
-				+ product_unit + ", unit=" + unit + ", product_total=" + product_total + ", product_price="
-				+ product_price + ", ca1=" + ca1 + ", ca2=" + ca2 + ", ca3=" + ca3 + ", product_area=" + product_area
-				+ ", producer=" + producer + ", seller_no=" + seller_no + ", product_uploaddate=" + product_uploaddate
-				+ ", product_harvestdate=" + product_harvestdate + ", contents=" + contents + ", review_number="
-				+ review_number + ", product_mainimage=" + product_mainimage + ", s_contents=" + s_contents
-				+ ", product_sellerimage=" + product_sellerimage + ", file1=" + file1 + ", file2=" + file2 + "]";
-	}
-	
 	
 }
 	

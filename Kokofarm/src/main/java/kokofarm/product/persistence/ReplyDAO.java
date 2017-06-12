@@ -14,5 +14,8 @@ public interface ReplyDAO {
 		public void delete_Po(String reply_no)throws Exception;
 		
 		public void update_Po(ReplyVO vo)throws Exception;
-	
+		
+		public int countReply(String product_no)throws Exception;
+		
+		public String get_product_no(String reply_no)throws Exception;
 }

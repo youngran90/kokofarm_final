@@ -9,6 +9,7 @@ import java.util.UUID;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.annotations.Param;
@@ -17,12 +18,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import kokofarm.basic.domain.Criteria;
 import kokofarm.basic.domain.FileBean;
+import kokofarm.basic.domain.PageMaker;
+import kokofarm.mypage.domain.InquiryVO;
 import kokofarm.product.domain.ProductVO;
 import kokofarm.product.domain.ReplyVO;
 import kokofarm.product.service.ProductService;
@@ -83,17 +88,23 @@ public class ProductController {
 		return "redirect:/product/list_product";
 	}
 
-	@RequestMapping(value="/list_product", method= RequestMethod.GET)
+	@RequestMapping(value="/list_product", method= {RequestMethod.GET, RequestMethod.POST})
 	public void listProduct(@Param("ca1") String ca1, 
-			@Param("ca2") String ca2, @Param("ca3") String ca3,  Model model)throws Exception{
+			@Param("ca2") String ca2, @Param("ca3") String ca3,  
+			InquiryVO inquiry,Model model)throws Exception{
 
 		logger.info("product..list...");
-
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("ca1", ca1);
 		map.put("ca2", ca2);
 		map.put("ca3", ca3);
 		model.addAttribute("list", service.list_product(map));
+	/*	PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(service.Count_Product());
+		model.addAttribute("pageMaker", pageMaker);*/
+		
+		
 	}
 	
 	
@@ -101,16 +112,17 @@ public class ProductController {
 	public void detail_product(Model model,@RequestParam("product_no") String product_no)throws Exception{
 
 		logger.info("product..detail_product...");
-	
+		
 		List<ReplyVO> replylist = null;
 		ProductVO productVo = service.detail_product(product_no);
 		model.addAttribute("product", productVo);
 		
+		int reply_count = re_service.countReply(product_no);
+		System.out.println(reply_count);
+		model.addAttribute("reply_count", reply_count);
+		
 		replylist = re_service.list_Post(product_no);
-		System.out.println("---------------------------");
-		System.out.println("list"+replylist.toString());
 		model.addAttribute("replylist", replylist);
-		//return "/product/detail_product";
 	}
 		
 	//게시판 

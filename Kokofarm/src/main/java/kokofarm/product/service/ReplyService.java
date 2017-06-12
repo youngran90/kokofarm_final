@@ -15,4 +15,6 @@ public interface ReplyService {
 	public void delete_Post(String reply_no)throws Exception;
 	
 	public void update_Post(ReplyVO vo)throws Exception;
+	
+	public int countReply(String product_no)throws Exception;
 }
