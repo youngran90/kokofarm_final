@@ -1,14 +1,33 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
+  <style>
+.mainbanner .addmainslider-btn{
+  background: #ef8829;
+	display: inline-block;
+	padding: 8px 17px;
+	font-weight:500;
+	float: none;
+	width: auto;
+	color: #ffffff;
+	margin:0 2px;
+  }
+  </style>
+  
+  
   <%@include file="include/header.jsp" %>
+  
+  
   
 <div class="mainbanner">
   <div id="main-banner" class="owl-carousel home-slider">
     <div class="item"> <a href="#"><img src="../../../resources/image/banners/Main-Banner1.jpg" alt="main-banner1" class="img-responsive" /></a> </div>
     <div class="item"> <a href="#"><img src="../../../resources/image/banners/Main-Banner2.jpg" alt="main-banner2" class="img-responsive" /></a> </div>
     <div class="item"> <a href="#"><img src="../../../resources/image/banners/Main-Banner3.jpg" alt="main-banner3" class="img-responsive" /></a> </div>
-  </div>
+   </div>
+   <div class="button-group">
+  	 	 <button class="addmainslider-btn" type="button">addMainSlider</button>
+ 	</div>
 </div>
 <div class="container">
   <div class="row">
