@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 
  <%@include file="../include/header.jsp"%>
+ <link rel="stylesheet" href="/resources/tenderpay/css/tenderpay.css">
+
 <div class="container">
   <ul class="breadcrumb">
     <li><a href="index.html"><i class="fa fa-home"></i></a></li>
@@ -251,7 +253,7 @@
     <div id="content" class="col-sm-9">
       <div class="row">
         <div class="col-sm-6">
-          <div class="thumbnails">
+          <div class="thumbnails" style="display: none;">
           <!-- 이미지 부분 -->
             <div><a class="thumbnail" href="image/product/product8.jpg" title="lorem ippsum dolor dummy"><img src="../../resources/image/product/product1.jpg" title="lorem ippsum dolor dummy" alt="lorem ippsum dolor dummy" /></a></div>
             <div id="product-thumbnail" class="owl-carousel">
@@ -375,13 +377,23 @@
         </div>
        </form> --%>
        
-        <p id="firstP">경매번호 : ${tender.auction_no } </p>
-		<p id="secondP">${tender.member_id }님 입찰이 완료되었습니다.</p>
-		<input id="btn" type="button" value="돌아가기" onclick="location.href='tenderform'">
-     
+       
       </div>
       
-      <div class="productinfo-tab">
+      <!-- =================입찰 완료 창============================= -->
+      
+       <form action="tenderform">
+        <input type="hidden" name="auction_no" value="${tender.auction_no }">
+        <div id="tendercompleteDiv" style="text-align: center; font-size: 30px; padding: 6px;">
+        <p id="firstP">경매번호 : ${tender.auction_no } </p>
+		<p id="secondP">${tender.member_id }님 입찰이 완료되었습니다.</p>
+		<input id="btn" type="submit" value="돌아가기" style="margin-top:6px; background: #ef8829; color: white; width: 170px; height: 40px; font-weight: bold;">
+		</div>
+       </form>
+      
+      
+      
+      <div class="productinfo-tab" style="display: none;">
         <ul class="nav nav-tabs">
           <li class="active"><a href="#tab-description" data-toggle="tab">Description</a></li>
           <li><a href="#tab-review" data-toggle="tab">Reviews (1)</a></li>
@@ -390,14 +402,7 @@
           <div class="tab-pane active" id="tab-description">
             <div class="cpt_product_description ">
               <div>
-                <p> <strong>More room to move.</strong></p>
-                <p> With 80GB or 160GB of storage and up to 40 hours of battery life, the new lorem ippsum dolor dummy lets you enjoy up to 40,000 songs or up to 200 hours of video or any combination wherever you go.</p>
-                <p> <strong>Cover Flow.</strong></p>
-                <p> Browse through your music collection by flipping through album art. Select an album to turn it over and see the track list.</p>
-                <p> <strong>Enhanced interface.</strong></p>
-                <p> Experience a whole new way to browse and view your music and video.</p>
-                <p> <strong>Sleeker design.</strong></p>
-                <p> Beautiful, durable, and sleeker than ever, lorem ippsum dolor dummy now features an anodized aluminum and polished stainless steel enclosure with rounded edges.</p>
+                
               </div>
             </div>
             <!-- cpt_container_end --></div>
@@ -442,8 +447,8 @@
           </div>
         </div>
       </div>
-      <h3 class="productblock-title">Related Products</h3>
-      <div class="box">
+      <h3 class="productblock-title" style="display: none;">Related Products</h3>
+      <div class="box" style="display: none;">
         <div id="related-slidertab" class="row owl-carousel product-slider">
           <div class="item">
             <div class="product-thumb transition">

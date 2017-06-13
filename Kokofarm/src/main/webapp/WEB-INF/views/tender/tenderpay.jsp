@@ -49,6 +49,9 @@
         }).open();
     }
    
+    $('#submitPay').on('click',function(){
+    	
+    });
 </script>
 
 
@@ -187,7 +190,7 @@
                 <td class="text-center">${successPay.success_no}</td>
                 <input type="hidden" name="success_no" value="${successPay.success_no}">
                 <td class="text-center">${successPay.auction_group}</td>
-                <td class="text-center"><a href="product.html"><img class="img-thumbnail" title="수박사진" alt="수박사진" src="C://image/수박.png" style="width: 100px; height: 100px;"></a></td>
+                <td class="text-center"><a href="product.html"><img class="img-thumbnail" title="${successPay.auction_name}" alt="" src="/resources/files/attach/${auction_title_img }" style="width: 100px; height: 100px;"></a></td>
                 <td class="text-center"><a href="product.html">${successPay.auction_name}</a></td>
                 <td class="text-center">${successPay.auction_unit}</td>
                 <td class="text-center">${successPay.tender_price }원</td>
@@ -580,8 +583,8 @@
         </div>
       </div>  
       <div class="buttons">
-        <div class="pull-left"><a class="btn btn-default" href="index.html">경매상품보기</a></div>
-        <div class="pull-right" style="margin-right: 80px;"><input type="submit" class="btn btn-primary" name="결제하기" value="결제하기"></div>
+        <div class="pull-left"><a class="btn btn-default" href="../auction/auction_list">경매상품보기</a></div>
+        <div class="pull-right" style="margin-right: 80px;"><input type="submit" id="submitPay" class="btn btn-primary" name="결제하기" value="결제하기"></div>
       </div>
       </form>
     </div>

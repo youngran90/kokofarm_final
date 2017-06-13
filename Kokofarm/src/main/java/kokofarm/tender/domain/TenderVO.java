@@ -10,6 +10,16 @@ public class TenderVO implements Serializable{
 	private Timestamp tender_date;
 	private int auction_no;
 	
+	public TenderVO(){}
+	
+	public TenderVO(int tender_no, String member_id, int tender_price, Timestamp tender_date, int auction_no) {
+		super();
+		this.tender_no = tender_no;
+		this.member_id = member_id;
+		this.tender_price = tender_price;
+		this.tender_date = tender_date;
+		this.auction_no = auction_no;
+	}
 	public int getTender_no() {
 		return tender_no;
 	}

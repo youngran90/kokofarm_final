@@ -3,9 +3,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
  <%@include file="../include/header.jsp"%>
+ <%
+   MemberVO member = (MemberVO) session.getAttribute("login");
+   String id= member.getMember_id();
+   System.out.println("세션에서 얻어온 memeber_id ="+id);
+ %>
  
  <script type="text/javascript">
 
+  
   var time=${visitingTime};
   
    function timer(){ 
@@ -13,6 +19,7 @@
 		   clearInterval(tid);
 		   time=0;
 		   document.getElementById('h_tend_time').innerHTML="0일0시간0분0초";
+		  // $('#successPayButton').show();
 	   } 
 	   else if(time <3600){
 		   $('#tend_time').hide();
@@ -35,6 +42,7 @@
    
  
  $(function(){
+	 
 	 tid=setInterval(timer,1000);
 	 
 	 $('#tenderinfoview').hide();
@@ -54,7 +62,7 @@
 		  formObj.submit();
 	  });
 	  
-	 // $('#successPayButton').hide();
+	  //$('#successPayButton').hide();
 	
 	  //check();
 	
@@ -314,9 +322,9 @@
         <div class="col-sm-6">
           <div class="thumbnails">
           <!-- 이미지 부분 -->
-            <div><a class="thumbnail" href="image/product/product8.jpg" title="lorem ippsum dolor dummy"><img src="C://image/수박.png" title="lorem ippsum dolor dummy" alt="lorem ippsum dolor dummy" /></a></div>
-            <div id="product-thumbnail" class="owl-carousel">
-              <!-- <div class="item">
+            <div><a class="thumbnail" href="image/product/product8.jpg" title="lorem ippsum dolor dummy"><img src="/resources/files/attach/${auction.auction_title_img }" title="lorem ippsum dolor dummy" alt="lorem ippsum dolor dummy" /></a></div>
+            <!-- <div id="product-thumbnail" class="owl-carousel" style="display: none;">
+               <div class="item">
                 <div class="image-additional"><a class="thumbnail  " href="image/product/product1.jpg" title="lorem ippsum dolor dummy"> <img src="image/product/pro-1-220x294.jpg" title="lorem ippsum dolor dummy" alt="lorem ippsum dolor dummy" /></a></div>
               </div>
               <div class="item">
@@ -336,8 +344,8 @@
               </div>
               <div class="item">
                 <div class="image-additional"><a class="thumbnail  " href="image/product/product7.jpg" title="lorem ippsum dolor dummy"> <img src="image/product/pro-7-220x294.jpg" title="lorem ippsum dolor dummy" alt="lorem ippsum dolor dummy" /></a></div>
-              </div> -->
-            </div>
+              </div>
+            </div> -->
           </div>
         </div>
         
@@ -386,6 +394,7 @@
           </ul>
            <!-- <hr> -->
           <ul class="list-unstyled product_info">
+            <input type="hidden" name="auction_no" value="${auction.auction_no}">
             <li>
               <label>경매시작일 : </label>
               <span> ${auction.start_date }</span></li>
@@ -414,11 +423,11 @@
                 </div>
                 <table id="tenderviewtable" style="border: 1px;">
                   <tr style="background: #ef8829; color: white; text-align: center;">
-                    <th style="text-align: center;">입찰자ID</th>
-                    <th style="text-align: center;">입찰일자</th>
-                    <th style="text-align: center;">입찰가격</th>
+                    <th style="text-align: center;">입찰자ID &nbsp;&nbsp;</th>
+                    <th style="text-align: center;">입찰일자 &nbsp;&nbsp;</th>
+                    <th style="text-align: center;">입찰가격 &nbsp;&nbsp;</th>
                   </tr>
-                  <c:forEach items="${list}" var="tenderVO">
+                  <c:forEach items="${s_list}" var="tenderVO">
 					<tr style="text-align: center;">
 					 <c:choose>
 					   <c:when test="${tenderVO.tender_price == current_price}">
@@ -482,51 +491,69 @@
               <input type="number" name="tender_price" id="input-quantity" class="form-control productpage-qty" style="width:150px;"/>
               <input type="hidden" name="product_id" value="48" />
               
-              <!-- <div class="btn-group"> -->
-               <!--  <button type="button" data-toggle="tooltip" class="btn btn-default wishlist" title="Add to Wish List" ><i class="fa fa-heart-o"></i></button> -->
+              <div class="btn-group">
+                 <button type="button" data-toggle="tooltip" class="btn btn-default wishlist" title="Add to Wish List" style="display: none;"><i class="fa fa-heart-o" style="display: none;"></i></button> 
                
                <!-- 입찰버튼 -->
                 <input type="submit" id="button-cart" data-loading-text="Loading..." class="btn btn-primary btn-lg btn-block addtocart" value="입찰하기">
-               
+                <button type="button" data-toggle="tooltip" class="btn btn-default compare" title="Compare this Product"style="display: none;" ><i class="fa fa-exchange" style="display: none;"></i></button>
+                </div>
                </c:otherwise>    
        			</c:choose>
-                <!-- <button type="button" data-toggle="tooltip" class="btn btn-default compare" title="Compare this Product" ><i class="fa fa-exchange"></i></button> -->
+               
               </div>
              
             </div>
           </div>
-        </div>
+        <!-- </div> -->
        </form>
-      </div>
-      
-        <c:if test="${member_id!=null}">
+       
           <div id="successPayButton" style="margin-left: 730px;">
              <form role="form" method="post">
 		       <input type="hidden" name="tender_no" value="${tender_no}">
 			   <input type="hidden" name="member_id" value="${member_id }">
-		       <input type="submit" value="바로결제" id="payNow" style="background: #ef8829; color: white; float: left; margin-right: 10px; height: 30px;">
-		       <input type="submit" value="나중에 결제" id="payLater" style="height: 30px; background: white; color: black;">
+			   <input type="hidden" name="auction_title_img" value="${auction.auction_title_img }">
+		       
+		       <%-- <c:choose>
+		        <c:when test="${member_id==null }">
+		          <input type="submit" value="바로결제" id="payNow" style="display:none; background: #ef8829; color: white; float: left; margin-right: 10px; height: 30px;">
+		          <input type="submit" value="나중에 결제" id="payLater" style="display:none; height: 30px; background: white; color: black;">
+		        </c:when>
+		        
+		        <c:if test="${visitingTime==0 }">
+		        <c:when test="${member_id=id }">
+		           <input type="submit" value="바로결제" id="payNow" style="background: #ef8829; color: white; float: left; margin-right: 10px; height: 30px;">
+		           <input type="submit" value="나중에 결제" id="payLater" style="height: 30px; background: white; color: black;">
+		        </c:when>
+		        </c:if>
+		        <c:otherwise>
+		           <input type="submit" value="바로결제" id="payNow" style="display:none; background: #ef8829; color: white; float: left; margin-right: 10px; height: 30px;">
+		           <input type="submit" value="나중에 결제" id="payLater" style="display:none; height: 30px; background: white; color: black;">
+		        </c:otherwise>
+		       </c:choose> --%>
+		       
+		        <c:if test="${member_id==id}">
+		        <input type="submit" value="바로결제" id="payNow" style="background: #ef8829; color: white; float: left; margin-right: 10px; height: 30px;">
+		        <input type="submit" value="나중에 결제" id="payLater" style="height: 30px; background: white; color: black;">
+		        </c:if>
+		       
 		    </form>
            </div>
-        </c:if>
+         
+      </div>
+      
+        
         
       <div class="productinfo-tab">
         <ul class="nav nav-tabs">
-          <li class="active"><a href="#tab-description" data-toggle="tab">Description</a></li>
-          <li><a href="#tab-review" data-toggle="tab">Reviews (1)</a></li>
+          <li class="active"><a href="#tab-description" data-toggle="tab" style="font-size: 15px; font-weight: bold;">상세설명</a></li>
+          <li><a href="#tab-review" data-toggle="tab" style="display: none;">Reviews (1)</a></li>
         </ul>
         <div class="tab-content">
           <div class="tab-pane active" id="tab-description">
             <div class="cpt_product_description ">
-              <div>
-                <p> <strong>More room to move.</strong></p>
-                <p> With 80GB or 160GB of storage and up to 40 hours of battery life, the new lorem ippsum dolor dummy lets you enjoy up to 40,000 songs or up to 200 hours of video or any combination wherever you go.</p>
-                <p> <strong>Cover Flow.</strong></p>
-                <p> Browse through your music collection by flipping through album art. Select an album to turn it over and see the track list.</p>
-                <p> <strong>Enhanced interface.</strong></p>
-                <p> Experience a whole new way to browse and view your music and video.</p>
-                <p> <strong>Sleeker design.</strong></p>
-                <p> Beautiful, durable, and sleeker than ever, lorem ippsum dolor dummy now features an anodized aluminum and polished stainless steel enclosure with rounded edges.</p>
+              <div style="text-align: center; margin-top: 60px; font-size: 20px; font-weight: bold;">
+                ${auction.auction_content }
               </div>
             </div>
             <!-- cpt_container_end --></div>
@@ -571,8 +598,8 @@
           </div>
         </div>
       </div>
-      <h3 class="productblock-title">Related Products</h3>
-      <div class="box">
+      <h3 class="productblock-title" style="display: none;">Related Products</h3>
+      <div class="box" style="display: none;">
         <div id="related-slidertab" class="row owl-carousel product-slider">
           <div class="item">
             <div class="product-thumb transition">

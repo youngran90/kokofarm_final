@@ -1,20 +1,25 @@
 package kokofarm.tender.controller;
 
+import java.lang.reflect.Member;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import kokofarm.member.domain.MemberVO;
 import kokofarm.tender.domain.AuctionVO;
 import kokofarm.tender.domain.PayVO;
 import kokofarm.tender.domain.SuccessPayVO;
@@ -30,16 +35,24 @@ public class TenderController {
 		@Inject
 		private TenderService service;
 		
-		@RequestMapping("tenderform")
-		public void tenderformGET(TenderVO tender, Model model) throws Exception{
+		@RequestMapping(value="tenderform", method=RequestMethod.GET)
+		public void tenderformGET(HttpServletRequest request,TenderVO tender, Model model, @RequestParam("auction_no") int auction_no) throws Exception{
+			//System.out.println("넘어오나요 "+auction_no);
+			
+			HttpSession session = request.getSession();
+			MemberVO member = (MemberVO)session.getAttribute("login");
+			String id= member.getMember_id();
+			System.out.println("세션아이디:::::::::::::::"+id);
+			model.addAttribute("id",id);
+			
 			//상품이 뜨도록 로드
-			AuctionVO auction= service.selectAuctionProduct(9);
+			AuctionVO auction= service.selectAuctionProduct(auction_no);
 			model.addAttribute("auction",auction);
 			
 			int current_price;
 			
-			if(service.selectCurrentPrice(9)!=null){
-				current_price=service.selectCurrentPrice(9);
+			if(service.selectCurrentPrice(auction_no)!=null){
+				current_price=service.selectCurrentPrice(auction_no);
 			}else{
 				current_price=0;
 			}
@@ -48,22 +61,65 @@ public class TenderController {
 			
 			
 			//입찰내역 list
-			List<TenderVO> list=service.AllTender(9);
-			List<TenderVO> s_list=list;
+			List<TenderVO> list= service.AllTender(auction_no);
+			//List<TenderVO> copy_list=new ArrayList<TenderVO>();
+			//@SuppressWarnings("unchecked")
+			//List<TenderVO> s_list=(List<TenderVO>)list.clone();
+ 			List<TenderVO> s_list = new ArrayList<TenderVO>();
+			
+			System.out.println("s_list "+ s_list);
+			//List<TenderVO> s_list = new ArrayList<TenderVO>();
+			//List<TenderVO> s_list;
+			
+			//System.out.println("=======================s_list==========="+s_list);
+			String m_id=null;
 			
 			if(list!=null){
+				
 				for(int i=0;i<list.size();i++){
-					String m_id =list.get(i).getMember_id();
+					int tender_no= list.get(i).getTender_no();
+					String member_id = list.get(i).getMember_id();
+					int tender_price = list.get(i).getTender_price();
+					Timestamp tender_date = list.get(i).getTender_date();
+					int auction_no2 = list.get(i).getAuction_no();
+					
+					TenderVO tender1 = new TenderVO(tender_no, member_id, tender_price, tender_date, auction_no2);
+					s_list.add(tender1);
+					System.out.println("s_list"+s_list);
+				}
+				
+				for(int i=0;i<list.size();i++){
+					
+					System.out.println("==========s_list에 들어가는 내용:========="+s_list);
+					
+					m_id =s_list.get(i).getMember_id();
+					//copy_list.get(i).setMember_id(m_id);
+					// list에 있는 아이디를 얻어  m_id에 넣고, replace하여 list의 아이디도 바껴있다. 
 					String s_id=m_id.replace(m_id.substring(m_id.length()-3, m_id.length()),"***");
+					
+					
+					System.out.println("================밑의 m_id======="+m_id);
 					System.out.println(s_id);
+				
 					s_list.get(i).setMember_id(s_id);
+					//list.get(i).setMember_id(m_id);
 				}
 				int tender_number = list.size();
 				System.out.println(tender_number);
 				model.addAttribute("tender_number",tender_number);
-				System.out.println(list);
-				model.addAttribute("list",s_list);
+				//System.out.println(copy_list);
+				model.addAttribute("s_list",s_list);
+				
+				System.out.println(s_list);
 			}
+			
+			/*for(int i=0;i<list.size();i++){
+				list.get(i).setMember_id(m_id);
+			}*/
+			
+			System.out.println(list);
+			//System.out.println(copy_list);
+			//System.out.println("밖의 s_list"+s_list);
 			
 			
 			String start_time = auction.getStart_date();
@@ -160,53 +216,74 @@ public class TenderController {
 					
 			int tender_no = 0;
 			String member_id =null;
+			List<SuccessVO> successList=service.selectSuccess();
+			System.out.println("=========================successlist 테스트======================="+successList);
+			
 			if(visitingTime==0){  
 				if(current_price!=0){
 					for(int i=0;i<list.size();i++){
 						if(list.get(i).getTender_price()==current_price){
-							 tender_no = list.get(i).getTender_no();
-							 member_id = list.get(i).getMember_id();
+							 tender_no =list.get(i).getTender_no();
+							 member_id =list.get(i).getMember_id();
+							 System.out.println("안의 member_id "+member_id);
 						}
 					}
 					
+					System.out.println("멤버아이디: "+member_id);
 					model.addAttribute("member_id",member_id);
 					
-					List<SuccessVO> successList=service.selectSuccess();
+					//List<SuccessVO> successList=service.selectSuccess();
+					int same_count=0;
 					if(successList.size()==0){
 						service.insertSuccess(tender_no);
 					}else{
 						for(int i=0;i<successList.size();i++){
 							if(tender_no!=0){
-								if(tender_no!=successList.get(i).getTender_no()){
-									service.insertSuccess(tender_no);
+								if(tender_no==successList.get(i).getTender_no()){
+									same_count++;
 								}
 							}
 						}
+						System.out.println("======================if문 위 same_count================="+same_count);
+						if(same_count==0){
+							service.insertSuccess(tender_no);
+						}
 					}	
 				}else{ //시간은 다됐는데 현재가=0  ==> 유찰 
-					service.updateAuctionResult(9);  
+					service.updateAuctionResult(auction_no);  
 				}
 			}else{
 				if(auction.getAuction_up()==current_price){
 					visitingTime=0;
 					model.addAttribute("visitingTime", visitingTime);
 					for(int i=0;i<list.size();i++){
+						//copy_list.get(i).setMember_id(m_id);
 						if(list.get(i).getTender_price()==current_price){
+							
 							 tender_no = list.get(i).getTender_no();
+							 member_id = list.get(i).getMember_id();
+							 System.out.println("안의 member_id "+member_id);
 						}
 					}
+					System.out.println("멤버아이디: "+member_id);
+					model.addAttribute("member_id",member_id);
 					
-					List<SuccessVO> successList=service.selectSuccess();
+					//List<SuccessVO> successList=service.selectSuccess();
+					int same_count=0;
 					if(successList.size()==0){
 						service.insertSuccess(tender_no);
 						
 					}else{
 						for(int i=0;i<successList.size();i++){
 							if(tender_no!=0){
-								if(tender_no!=successList.get(i).getTender_no()){
-									service.insertSuccess(tender_no);
+								if(tender_no==successList.get(i).getTender_no()){
+									same_count++;
+									
 								}
 							}
+						}
+						if(same_count==0){
+							service.insertSuccess(tender_no);
 						}
 					}	
 				}
@@ -215,14 +292,20 @@ public class TenderController {
 		}
 		
 		@RequestMapping(value="tenderform", method=RequestMethod.POST)
-		public String tenderformPOST(TenderVO tender, Model model, PayVO payvo) throws Exception{
-			tender.setMember_id("asdfg98");
-			tender.setAuction_no(9);
-			AuctionVO auction = service.selectAuctionProduct(9);
+		public String tenderformPOST(HttpServletRequest request,TenderVO tender, Model model, @RequestParam("auction_no") int auction_no) throws Exception{
+			HttpSession session = request.getSession();
+			MemberVO member= (MemberVO)session.getAttribute("login");
+			
+			tender.setMember_id(member.getMember_id());
+			//tender.setMember_id("asdf123");
+			System.out.println("==============post옥션번호: ============="+auction_no);
+			
+			tender.setAuction_no(auction_no);
+			AuctionVO auction = service.selectAuctionProduct(auction_no);
 			int current_price;
 			
-			if(service.selectCurrentPrice(9)!=null){
-				current_price=service.selectCurrentPrice(9);
+			if(service.selectCurrentPrice(auction_no)!=null){
+				current_price=service.selectCurrentPrice(auction_no);
 			}else{
 				current_price=0;
 			}
@@ -235,14 +318,12 @@ public class TenderController {
 				model.addAttribute("tender",tender);
 				return "/tender/tenderfinish";
 			}
-			
-			/*if(payvo.getPay_no()!=null){
-				
-			}*/
 		}
 		
 		@RequestMapping("tenderpay")
-		public void tenderpay(@RequestParam(value="tender_no") Integer tender_no, @RequestParam(value="member_id") String member_id, Model model) throws Exception{
+		public void tenderpay(@RequestParam(value="tender_no") Integer tender_no, @RequestParam(value="member_id") String member_id, @RequestParam("auction_title_img") String auction_title_img, Model model) throws Exception{
+			System.out.println("=============이미지 받아오기================"+auction_title_img);
+			model.addAttribute("auction_title_img",auction_title_img);
 			System.out.println("장바구니로 넘어오는가");
 			List<SuccessVO> successlist= service.selectSuccess();
 			System.out.println("낙찰리스트: "+successlist);
@@ -301,12 +382,16 @@ public class TenderController {
 			System.out.println(payvo);
 			
 			service.insertPayInfo(payvo);
+			//service.updateSuccess(payvo.getPay_no());
 			
 			List<PayVO> payinfolist =service.selectPayInfo();
+			/*if(payinfolist==null){
+				
+			}*/
 			for(int i=0;i<payinfolist.size();i++){
 				if(payinfolist.get(i).getSuccess_no()==payvo.getSuccess_no()){
-					payvo=payinfolist.get(i);
-				
+					payvo=payinfolist.get(i);  //pay_no이 seq이므로 insert할떄의 payvo는 pay_no을 null로 표시하기 때문에 전체적으로 뽑아 리스트에 담아 payvo에 저장해 데이터를 뷰로 넘긴다.
+					service.updateSuccess(payvo);
 					model.addAttribute("payvo",payvo);
 				}
 			}

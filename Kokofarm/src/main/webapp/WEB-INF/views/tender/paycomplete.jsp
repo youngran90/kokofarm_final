@@ -116,7 +116,7 @@
     
     <!-- ====================결제완료============================= -->
     <div id="paycompletemessage">
-      <form action="tenderform" method="post">
+      <form action="../">
         <div id="paycompletePdiv">
           <p id="paycompleteP"><strong>결제가 완료되었습니다.</strong></p>
         </div>

@@ -20,7 +20,7 @@ public interface TenderService {
 	public TenderVO selectTender(int tender_no) throws Exception;
 	public void insertPayInfo(PayVO payvo) throws Exception;
 	public List<PayVO> selectPayInfo() throws Exception;
-	public void updateSuccess(String pay_no) throws Exception; 
+	public void updateSuccess(PayVO payvo) throws Exception; 
 
 
 

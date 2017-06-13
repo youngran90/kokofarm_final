@@ -315,3 +315,14 @@ select {
 	width: 120px;
 	height: 40px;
 }
+
+#tendercompleteDiv{
+	/* margin-left: 1500px; */
+	margin-top: 150px;
+	font-size: 20px;
+}
+
+#firstP{
+	/* margin-left: 100; */
+}
+

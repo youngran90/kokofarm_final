@@ -14,7 +14,7 @@ public class AuctionVO implements Serializable{
 	private String auction_group;
 	private String auction_unit;
 	private String auction_area;
-	//private String auction_title_img;
+	private String auction_title_img;
 	public int getAuction_no() {
 		return auction_no;
 	}
@@ -81,13 +81,13 @@ public class AuctionVO implements Serializable{
 	public void setAuction_area(String auction_area) {
 		this.auction_area = auction_area;
 	}
-	/*public String getAuction_title_img() {
+	public String getAuction_title_img() {
 		return auction_title_img;
 	}
 	public void setAuction_title_img(String auction_title_img) {
 		this.auction_title_img = auction_title_img;
-	}*/
-	/*@Override
+	}
+	@Override
 	public String toString() {
 		return "AuctionVO [auction_no=" + auction_no + ", auction_name=" + auction_name + ", start_date=" + start_date
 				+ ", end_date=" + end_date + ", auction_up=" + auction_up + ", auction_down=" + auction_down
@@ -95,14 +95,5 @@ public class AuctionVO implements Serializable{
 				+ auction_group + ", auction_unit=" + auction_unit + ", auction_area=" + auction_area
 				+ ", auction_title_img=" + auction_title_img + "]";
 	}
-	*/
-	@Override
-	public String toString() {
-		return "AuctionVO [auction_no=" + auction_no + ", auction_name=" + auction_name + ", start_date=" + start_date
-				+ ", end_date=" + end_date + ", auction_up=" + auction_up + ", auction_down=" + auction_down
-				+ ", auction_content=" + auction_content + ", auction_result=" + auction_result + ", auction_group="
-				+ auction_group + ", auction_unit=" + auction_unit + ", auction_area=" + auction_area + "]";
-	}
-	
 	
 }

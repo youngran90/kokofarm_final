@@ -79,8 +79,8 @@ public class TenderDAOImpl implements TenderDAO {
 	}
 
 	@Override
-	public void updateSuccess(String pay_no) throws Exception {
-		session.update(namespace+".updateSuccess",pay_no);
+	public void updateSuccess(PayVO payvo) throws Exception {
+		session.update(namespace+".updateSuccess",payvo);
 		
 	}
 	

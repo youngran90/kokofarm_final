@@ -54,7 +54,7 @@
 	<select id="selectSuccessPay" resultType="SuccessPayVO" parameterType="TenderVO">
 	  select success_no, auction_group, auction_name, auction_unit, t.tender_price, t.auction_no, t.member_id
 		from tender t, success s, auction a
-		where t.tender_no = #{tender_no} and a.auction_no= #{auction_no}
+		where t.tender_no = #{tender_no} and a.auction_no= #{auction_no} and s.tender_no = #{tender_no}
 	</select>
 	
 	<!-- 한사람의 입찰 내역 뽑아내기 -->
@@ -76,8 +76,8 @@
 	</select>
 	
 	<!-- 낙찰테이블 경매 결과 업데이트 -->
-	<update id="updateSuccess" parameterType="String">
-	  update success set pay_state=#{pay_no}
+	<update id="updateSuccess" parameterType="PayVO">
+	  update success set pay_state=#{pay_no} where success_no=#{success_no}
 	</update>
 	
 	<!-- 상한가 뽑아내기 -->
