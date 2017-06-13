@@ -51,7 +51,7 @@ public class OrderProductController {
 		MemberVO member = (MemberVO)session.getAttribute("login");
 		
 		if(member == null){
-			return "/orderproduct/orderproduct";
+			return "/home";
 		}
 		
 			MemberVO memberVO = service.member_info(member.getMember_id());
@@ -71,6 +71,13 @@ public class OrderProductController {
 			
 			return "/orderproduct/orderproduct";
 	}
+	
+	@RequestMapping(value="/delete",method=RequestMethod.GET)
+	public String deleteGet(@RequestParam("product_no") String product_no) throws Exception{
+		service.delete(product_no);
+		return "redirect:/orderproduct/orderproduct";
+	}
+	
 	
 	@RequestMapping(value="/orderproduct", method=RequestMethod.POST)
 	public void orderproductPost(OrderFinishVO vo, OrderFinish_Member_Address addr,

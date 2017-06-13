@@ -155,18 +155,19 @@
             <tbody>
 		<form enctype="multipart/form-data" method="post" action="/cart/orderproduct" id="cartForm">
         <c:forEach var="cart_list" items="${listcart }" varStatus="status">
-           <td style="display: none"><input type="checkbox" id="dp" name="order_delivery_price" value="0" class="${status.count }dp"></td> <!-- 배송비 값 submit -->
-           <td style="display: none"><input type="checkbox" id="tp" name="order_total_price" value="0" class="${status.count }tp"></td> <!-- 금액 값 submit -->
-           <td style="display: none"><input type="checkbox" class="${status.count}opa" id="order_product_amount" name="order_product_amount" value="${cart_list.product_unit }" ></td>
-           <td style="display: none"><input type="checkbox" id="pn" name="order_product_name" value="${cart_list.product_name}" class="${status.count}pn"></td> <!-- 품명 submit -->   
-           <td style="display: none"><input type="checkbox" id="pp" name="order_product_price" value="${cart_list.product_price}" class="${status.count}pp"></td> <!-- 품명 submit -->
+           <td style="display: none;"><em class="${status.count}p_amount" id="p_amount">${cart_list.product_total}</em></td>
+           <td style="display: none;"><input type="checkbox" id="dp" name="order_delivery_price" value="0" class="${status.count }dp"></td> <!-- 배송비 값 submit -->
+           <td style="display: none;"><input type="checkbox" id="tp" name="order_total_price" value="0" class="${status.count }tp"></td> <!-- 금액 값 submit -->
+           <td style="display: none;"><input type="checkbox" class="${status.count}opa" id="order_product_amount" name="order_product_amount" value="${cart_list.product_unit }" ></td>
+           <td style="display: none;"><input type="checkbox" id="pn" name="order_product_name" value="${cart_list.product_name}" class="${status.count}pn"></td> <!-- 품명 submit -->   
+           <td style="display: none;"><input type="checkbox" id="pp" name="order_product_price" value="${cart_list.product_price}" class="${status.count}pp"></td> <!-- 품명 submit -->
               <tr>
               	<td class="text-center">
               		<input type="checkbox" id="${status.count }ac" name="product_no" value ="${cart_list.product_no }">
               	</td>
                 <td class="text-left">
 	                <a href="/product/detail_product?product_no=${cart_list.product_no} "><img class="img-thumbnail" title="${cart_list.product_name }" alt="${cart_list.product_name }" src="/resources/files/attach/${cart_list.product_mainimage} "></a>
-	             	<a href="/product/detail_product?product_no=${cart_list.product_no} " id="product_name">${cart_list.product_name }</a>
+	             	<a href="/product/detail_product?product_no=${cart_list.product_no} " id="product_name" class="${status.count}name">${cart_list.product_name }</a>
                 </td>
                 <td>
                 	<input type="button" name="delete" onclick="location.href='delete?product_no=${cart_list.product_no }'">
@@ -181,14 +182,14 @@
                 		</div>
                 		<div class="cnt_box">
 	                		<div class="cnt_top_box">
-	                			<button class="amount_up" type="button" value="${status.count}bu"></button>
+	                			<button class="amount_up" type="button" value="${status.count}bu" id="${status.count}bu"></button>
 	                		</div>
 	                		<div class="cnt_down_box">
-	                			<button class="amount_down" type="button" value="${status.count}bd"></button>
+	                			<button class="amount_down" type="button" value="${status.count}bd" id="${status.count}bd"></button>
 	                		</div>
                 		</div>
                 	</div>
-                	<button class="change" id="change" type="button" value="${status.count }bc" alt="수량변경"></button>
+                	<button class="change" id="${status.count}bc" type="button" value="${status.count }bc" alt="수량변경" ></button>
                 	
                 	<div class="input-group btn-block"></div>
                 </td>

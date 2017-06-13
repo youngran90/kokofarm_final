@@ -154,6 +154,19 @@
 			<version>2.8.8.1</version>
 		</dependency>
 
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>2.8.1</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>2.8.1</version>
+		</dependency>
+
+
 		<!-- img -->
 		<!-- https://mvnrepository.com/artifact/org.imgscalr/imgscalr-lib -->
 		<dependency>
@@ -196,6 +209,8 @@
 			<version>1.0.0.GA</version>
 
 		</dependency>
+
+
 	</dependencies>
 	<build>
 		<plugins>

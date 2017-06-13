@@ -57,6 +57,10 @@ public class CartController {
 		
 	HttpSession session = request.getSession();
 		MemberVO member = (MemberVO)session.getAttribute("login");
+
+		if(member == null){
+			return "/cart/cart";
+		}
 		
 		CartVO vo = new CartVO();
 		vo.setCart_no(cart_no);

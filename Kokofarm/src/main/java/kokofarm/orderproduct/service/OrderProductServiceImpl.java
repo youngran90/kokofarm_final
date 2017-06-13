@@ -103,6 +103,11 @@ public class OrderProductServiceImpl implements OrderProductService {
 		return dao.orderfinish_no(orderfinish_no);
 	}
 
+	@Override
+	public void delete(String product_no) throws Exception {
+		dao.delete(product_no);
+	}
+
 	
 	
 	

@@ -186,13 +186,17 @@ $(function(){
 							<td style="display: none;"><input type="checkbox" id="dp" name="order_delivery_price" value="${order_list.order_delivery_price}" class="${status.count }dp">${order_list.order_delivery_price}배송비</td>	<!-- 배송비 값 submit -->
 							<td style="display: none;"><input type="checkbox" id="order_product_amount" name="order_product_amount" value="${order_list.order_product_amount }" class="${status.count}opa">${order_list.order_product_amount }수량</td>
 							<td style="display: none;"><input type="checkbox" id="tp" name="order_total_price" value="${order_list.order_total_price}" class="${status.count }tp">${order_list.order_total_price}금액</td><!-- 금액 값 submit -->
-							<td style="display: none;"><input type="checkbox" id="pn" name="orderfinish_product_name" value="${order_list.product_name }" class="${status.count }pn">${order_list.product_name}제품이름</td><!-- 제품 이름 값 submit -->
+							<td style="display: none;"><input type="checkbox" id="pn" name="orderfinish_product_name" value="${order_list.product_name }" class="${status.count }pn">${order_list.product_name}</td><!-- 제품 이름 값 submit -->
 							<td style="display: none;"><input type="checkbox" id="pp" name="orderfinish_product_price" value="${order_list.product_price }" class="${status.count }pp">${order_list.product_price }제품가격</td><!-- 제품 가격 값 submit -->
 							<tbody>
 								<tr>
 									<td class="text-left">
 										<a href="/product/detail_product?product_no=${order_list.product_no}"><img class="img-thumbnail" title="${order_list.product_name }" alt="${order_list.product_name }" src="/resources/files/attach/${order_list.product_mainimage} "></a>
-										<a href="/product/detail_product?product_no=${order_list.product_no}" id="product_name">${order_list.product_name }</a></td>
+										<a href="/product/detail_product?product_no=${order_list.product_no}" id="product_name">${order_list.product_name }</a>
+										<c:if test="${order_list.product_total==0}">
+											<input type="button" name="delete" onclick="location.href='delete?product_no=${order_list.product_no }'"/>
+										</c:if>
+									</td>
 									<td class="text-center"><em class="delivery_price" id="${status.count }dp">${order_list.order_delivery_price }</em><b id="${status.count }dp_unit">원</b></td>
 									<td class="text-right"><em class="product_price" id="${status.count }pp">${order_list.product_price }</em><b>원</b></td>
 									<td class="text-center"><em class="order_product_amount" id="${status.count}opa">${order_list.order_product_amount }</em></td>

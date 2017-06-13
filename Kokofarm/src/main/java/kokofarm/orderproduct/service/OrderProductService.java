@@ -24,5 +24,7 @@ public interface OrderProductService {
 	public void product_update(int orderfinish_product_amount, String orderfinish_product_no) throws Exception;
 
 	public List<String> orderfinish_no(String orderfinish_no) throws Exception;
+	
+	public void delete(String product_no) throws Exception;
 
 }

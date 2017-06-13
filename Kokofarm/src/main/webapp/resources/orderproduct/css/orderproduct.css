@@ -335,8 +335,6 @@ select {
 	padding-right: 20px;
 }
 
-
-
 /* 결제 완료 페이지 CSS */
 .finish_area img {
 	height: 300px;
@@ -371,4 +369,11 @@ select {
 	font-size: 24px;
 	color: white;
 	margin-top: 20px;
+}
+
+/* 재고 수량 0일경우 삭제 버튼 나오게 */
+input[name=delete] {
+	width: 20px;
+	height: 20px;
+	background: url("/resources/cart/image/btn_cart_del.gif") no-repeat;
 }
