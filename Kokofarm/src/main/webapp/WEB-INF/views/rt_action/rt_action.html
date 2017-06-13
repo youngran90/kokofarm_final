@@ -1,0 +1,123 @@
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<style>
+.action_body {
+	padding-top: 20px;
+	margin-left: 10%;
+	margin-right: 10%;
+	border: 1px solid green;
+	width: 80%;
+	height: 800px;
+}
+
+.action_info {
+	margin-left: 10px;
+	border: 1px solid red;
+	height: 567px;
+	width: 49%;
+	float: left;
+}
+
+.action_time_price {
+	position: absolute;
+	left: 50%;
+	border: 1px solid blue;
+	height: 150px;
+	width: 38.3%;
+	margin-left: 10px;
+}
+
+#chat_area {
+	position: relative;
+	top: 165px;
+	border: 1px solid blue;
+	margin-left: 10px;
+	resize: none;
+}
+
+#chat_list {
+	position: relative;
+	top: 165px;
+	resize: none;
+}
+
+#chat_text {
+	position: relative;
+	top: 175px;
+	margin-left: 10px;
+	width: 35.5%;
+}
+
+#chat_enter {
+	position: relative;
+	top: 175px;
+	width: 12.5%;
+}
+
+.action_menu {
+	position: fixed;
+	width: 79%;
+}
+
+#action_btn {
+	border: 0px;
+	padding: 0px;
+	width: 100%;
+}
+
+#action_box {
+	height: 130px;
+	border: 1px solid black;
+}
+</style>
+<script type="text/javascript">
+	$(function() {
+		// cart open
+		$('#action_btn').click(function() {
+			if (!$(this).data('ch')) {
+				$(this).data('ch', 1).addClass('on');
+				$('.action_menu').animate({
+					bottom : '0'
+				}, 200);
+			} else {
+				$(this).data('ch', 0).removeClass('on');
+				if ($(this).isCilck == true) {
+					$('.action_menu').delay(1500).animate({
+						bottom : '-130px'
+					}, 200);
+				} else {
+					$('.action_menu').animate({
+						bottom : '-130px'
+					}, 200);
+				}
+				isCilck = false;
+			}
+		});
+	})
+	
+	
+	
+</script>
+</head>
+<body>
+
+	<div class="action_body" id="action_body">
+		<div class="action_info" id="action_info">여기는 경매 정보</div>
+		<div class="action_time_price" id="action_time_price">
+			경매 시간 &	현재가격
+		</div>
+		<div class="chat_body" id="chat_body">
+			<textarea id="chat_area" name="chat_area" rows="25" cols="65" readonly="readonly"/>
+			<textarea id="chat_list" name="chat_list" rows="25" cols="20" readonly="readonly"/>
+			<br> <input type="text" id="chat_text" name="chat_text">
+			<button id="chat_enter" name="chat_enter">입력</button>
+		</div>
+		<div class="action_menu" id="action_menu" style="bottom: -130px">
+			<button id="action_btn" id="action_btn">경매 열기</button>
+			<div id="action_box" id="action_box">aa</div>
+		</div>
+	</div>
+</body>
+</html>

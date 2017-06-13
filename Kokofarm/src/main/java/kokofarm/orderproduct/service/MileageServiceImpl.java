@@ -37,7 +37,9 @@ public class MileageServiceImpl implements MileageService {
 			int mileage_total = mileage+c_mileage;  // 수정된 현재 + 마일리지
 			vo.setMileage_saving(mileage); // 적립 내역
 			vo.setMileage_total(mileage_total); // 수정후
+			
 			System.out.println(vo.toString()+" @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+			
 			dao.insert_mileage(vo);
 			
 			milage_update(mileage_total, vo.getMember_id());

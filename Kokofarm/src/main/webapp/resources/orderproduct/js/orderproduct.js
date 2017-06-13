@@ -54,19 +54,20 @@ $(function() {
 						data : orderfinish, // 구매 리스트 + 개인정보 폼
 						dataType : 'html',
 						success : function(data) {
+							$.ajax({
+								type : "POST",
+								url : url02,
+								data : mileage, // 마일리지 폼
+								dataType : 'text',
+								success : function(data) {
+								} // 마일리지 ajax 종료(성공함수)
+							})// 마일리지 ajax 종료
 							alert("결제되었습니다.");
 							$(location).attr("href", "/orderproduct/orderfinish");
 						}// 구매 리스트 + 개인정보 ajax 종료 (성공함수)
 					})// 구매 리스트 + 개인정보 ajax종료
 
-					$.ajax({
-						type : "POST",
-						url : url02,
-						data : mileage, // 마일리지 폼
-						dataType : 'text',
-						success : function(data) {
-						} // 마일리지 ajax 종료(성공함수)
-					})// 마일리지 ajax 종료
+					
 
 					if (payments == "creditcard") {
 						var credit = $("input[name=creditcard_name]").val();
