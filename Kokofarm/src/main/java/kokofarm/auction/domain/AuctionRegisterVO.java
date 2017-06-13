@@ -15,6 +15,8 @@ public class AuctionRegisterVO implements Serializable{
 	private String auction_unit;
 	private String auction_area;
 	private String auction_content;
+	private String auction_regdate;
+	private String auction_hits;
 	private String auction_title_img;
 	private MultipartFile file;
 	
@@ -79,7 +81,18 @@ public class AuctionRegisterVO implements Serializable{
 	public void setAuction_content(String auction_content) {
 		this.auction_content = auction_content;
 	}
-	
+	public String getAuction_regdate() {
+		return auction_regdate;
+	}
+	public void setAuction_regdate(String auction_regdate) {
+		this.auction_regdate = auction_regdate;
+	}
+	public String getAuction_hits() {
+		return auction_hits;
+	}
+	public void setAuction_hits(String auction_hits) {
+		this.auction_hits = auction_hits;
+	}
 	public String getAuction_title_img() {
 		return auction_title_img;
 	}
@@ -97,9 +110,11 @@ public class AuctionRegisterVO implements Serializable{
 		return "AuctionRegisterVO [auction_no=" + auction_no + ", auction_name=" + auction_name + ", auction_group="
 				+ auction_group + ", start_date=" + start_date + ", end_date=" + end_date + ", auction_up=" + auction_up
 				+ ", auction_down=" + auction_down + ", auction_unit=" + auction_unit + ", auction_area=" + auction_area
-				+ ", auction_content=" + auction_content + ", auction_title_img=" + auction_title_img + ", file=" + file
-				+ "]";
+				+ ", auction_content=" + auction_content + ", auction_regdate=" + auction_regdate + ", auction_hits="
+				+ auction_hits + ", auction_title_img=" + auction_title_img + ", file=" + file + "]";
 	}
+	
+	
 	
 	
 	

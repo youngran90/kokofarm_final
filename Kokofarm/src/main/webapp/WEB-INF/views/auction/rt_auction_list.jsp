@@ -11,8 +11,8 @@
 <div class="container">
   <ul class="breadcrumb">
     <li><a href="http://localhost:8081/"><i class="fa fa-home"></i></a></li>
-    <li><a href="/auction/auction_list">일반 경매</a></li>
-    <li><a href="#">경매 상품</a></li>
+    <li><a href="/auction/rt_auction_list">실시간 경매</a></li>
+    <li><a href="#">실시간 경매 상품</a></li>
   </ul>
   <div class="row">
     <div id="column-left" class="col-sm-3 hidden-xs column-left">
@@ -214,7 +214,7 @@
     <!-- Special 끝 -->
     <!-- 리스트 시작 -->
     <div id="content" class="col-sm-9">
-      <h2 class="category-title">일반 경매</h2>
+      <h2 class="category-title">실시간 경매</h2>
       <!-- <div class="row category-banner">
         <div class="col-sm-12 category-image"><img src="image/banners/category-banner.jpg" alt="Desktops" title="Desktops" class="img-thumbnail" /></div>
         <div class="col-sm-12 category-desc">Lorem ipsum dolomagna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate.</div>
@@ -238,38 +238,31 @@
             </select>
           </div>
         </div> -->
-        <div style="margin-right:10px;">
-         <input type="text" style="border: 1px solid #EDEDED;">
-		 <button value="검색">검색</button>
-        </div>
         <div class="col-md-2 text-right sort-wrapper">
           <label class="control-label" for="input-sort"></label>
-          <div class="sort-inner">
-            <select id="input-sort" class="form-control" style="font-size: 13px; text-align: center; width: 226px;">
-	          <option value="ASC">과일</option>
-	          <option value="ASC">채소</option>
+          <!-- <div class="sort-inner">
+            <select id="input-sort" class="form-control" style="font-size: 12px; padding: 3px;">
               <option value="ASC">신규등록순</option>
               <option value="ASC">마감임박순</option>
               <option value="DESC">입찰자 (내림차순)</option>
               <option value="ASC">현재가 (내림차순)</option>
               <option value="DESC">현재가 (오름차순)</option>
             </select>
-          </div>
+          </div> -->
+          <input type="text">
+          <button value="검색">검색</button>
         </div>
       </div>
       <br><br><br>
       
      <div class="grid-list-wrapper">
-     <c:forEach items="${list}" var="AuctionRegisterVO">
+     <c:forEach items="${list}" var="RT_AuctionRegisterVO">
      	<div class="product-layout product-list col-xs-12">
      		<div class="product-thumb">
-     			<div class="image product-imageblock"><a href="/tender/tenderform?auction_no=${AuctionRegisterVO.auction_no}"><img src='/resources/files/attach/${AuctionRegisterVO.auction_title_img}' class="img-responsive"></a></div>
-     			<h4 class="product-name"> <a href="/tender/tenderform?auction_no=${AuctionRegisterVO.auction_no}">${AuctionRegisterVO.auction_name}</a></h4>
-     			<p class="price product-price" style="margin-right:10px;">
-     			<span style="font-size: 12px; color:#A6A6A6; font-weight: lighter; margin-right:5px;">상한가</span>${AuctionRegisterVO.auction_up}
-     			</p>
+     			<div class="image product-imageblock"><a href="/tender/tenderform?auction_no=${RT_AuctionRegisterVO.rt_auction_no}"><img src='/resources/files/attach/${RT_AuctionRegisterVO.rt_auction_title_img}' class="img-responsive"></a></div>
+     			<h4 class="product-name"> <a href="/tender/tenderform?auction_no=${RT_AuctionRegisterVO.rt_auction_no}">${RT_AuctionRegisterVO.rt_auction_name}</a></h4>
      			<p class="price product-price">
-     			<span style="font-size: 12px; color:#A6A6A6; font-weight: lighter; margin-right:5px;">하한가</span>${AuctionRegisterVO.auction_down}
+     			<span style="font-size: 12px; color:#A6A6A6; font-weight: lighter; margin-right:5px;">하한가</span>${RT_AuctionRegisterVO.rt_auction_down}
      			</p>
      			
      		</div>

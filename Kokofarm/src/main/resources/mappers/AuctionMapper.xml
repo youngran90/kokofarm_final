@@ -7,18 +7,20 @@
 
 	<insert id="register" parameterType="AuctionRegisterVO">
  		insert into auction(auction_no, auction_name, auction_group, start_date, end_date, auction_up,
- 							auction_down, auction_unit, auction_area, auction_content, auction_title_img
+ 							auction_down, auction_unit, auction_area, auction_content, auction_title_img,
+ 							auction_regdate
  							)
  			values(auction_no.nextval, #{auction_name}, #{auction_group},
  						to_date(#{start_date}, 'yyyy-mm-dd hh24:mi:ss'), 
  						to_date(#{end_date}, 'yyyy-mm-dd hh24:mi:ss'), #{auction_up}, #{auction_down},
- 						#{auction_unit}, #{auction_area}, #{auction_content}, #{auction_title_img}
+ 						#{auction_unit}, #{auction_area}, #{auction_content}, #{auction_title_img}, 
+ 						to_date(sysdate)
  				  )
  				 
  	</insert>
  	
  	<select id="list" resultType="AuctionRegisterVO">
- 		select auction_no, auction_name, auction_up, auction_down, auction_unit, auction_title_img
+ 		select auction_no, auction_name, auction_up, auction_down, auction_title_img
  		from auction 
  	</select>
  	
@@ -26,6 +28,25 @@
  		select * from auction where auction_no=#{auction_no}
  	</select>
  	
+ 	<insert id="rt_register" parameterType="RT_AuctionRegisterVO">
+ 		insert into rt_auction(rt_auction_no, rt_auction_name, rt_auction_group, rt_auction_date,
+ 							   rt_auction_down, rt_auction_unit, rt_auction_area, rt_auction_content,
+ 							   rt_auction_title_img, rt_auction_regdate
+ 							   )
+ 		values(#{rt_auction_no}, #{rt_auction_name}, #{rt_auction_group}, to_date(#{rt_auction_date}, 'yyyy-mm-dd hh24:mi:ss'), 
+ 			   #{rt_auction_down}, #{rt_auction_unit}, #{rt_auction_area}, #{rt_auction_content}, 
+ 			   #{rt_auction_title_img}, to_date(sysdate)
+ 		)					   
+ 	</insert>
+ 	
+ 	<select id="rt_list" resultType="RT_AuctionRegisterVO">
+ 		select rt_auction_no, rt_auction_name, rt_auction_down, rt_auction_title_img
+ 		from rt_auction 
+ 	</select>
+ 	
+ 	<select id="rt_detail" resultType="RT_AuctionRegisterVO">
+ 		select * from rt_auction where rt_auction_no=#{rt_auction_no}
+ 	</select>
 </mapper>  
 
 

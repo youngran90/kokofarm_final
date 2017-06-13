@@ -60,11 +60,21 @@ public class AuctionController {
 	    String attach_path = "resources/files/attach/";
 	         
 	         
-	    String auction_title_img = "A_"+originalName;
+	    String auction_title_img = "Auction_"+originalName;
 	    auction.setAuction_title_img(auction_title_img);
 	    //logger.info("auction_title_img : "+auction.getAuction_title_img());
+	    
+	    String auction_unit = request.getParameter("auction_unit");
+	    String auction_units = request.getParameter("auction_units");
+	    String unit = auction_unit+auction_units;
+	    auction.setAuction_unit(unit);
+	    
+	    String auction_location = request.getParameter("auction_location");
+	    String auction_area = request.getParameter("auction_area");
+	    String area = auction_location+" "+auction_area;
+	    auction.setAuction_area(area);
 	         
-	    service.regist(auction);
+	    service.register(auction);
 	    logger.info("auction_title_img : "+auction.getAuction_title_img());
 	         
 	    File auction_file = new File(root_path + attach_path, auction_title_img);
@@ -84,10 +94,10 @@ public class AuctionController {
 			String filename = "";
 			String CKEditorFuncNum = "";
 			
-			//String uuid = UUID.randomUUID().toString().replace("-", "");
 			
 			if(upload != null){
-				filename = "A_detail_" + upload.getOriginalFilename();
+				filename = "Auction_detail_" + upload.getOriginalFilename();
+				logger.info(filename);
 				fileBean.setFilename(filename);
 				CKEditorFuncNum = fileBean.getCKEditorFuncNum();
 				try{
@@ -104,12 +114,10 @@ public class AuctionController {
 			model.addAttribute("file_path", file_path);
 			model.addAttribute("CKEditorFuncNum", CKEditorFuncNum);
 			
-			return "auction/auction_list";
+			return "auction/auction_register";
 			
 		}
 	
-		
-		
 	@RequestMapping(value="/auction_list", method=RequestMethod.GET)
 	public void auctionListGET(AuctionRegisterVO auction, Model model)throws Exception{
 		model.addAttribute("list", service.list());
@@ -117,18 +125,66 @@ public class AuctionController {
 		logger.info("일반 경매 리스트_get");
 	}
 	
-	@RequestMapping(value="/auction_detail", method=RequestMethod.GET)
+	@RequestMapping(value="/tender_form", method=RequestMethod.GET)
 	public void detail(@RequestParam(value="auction_no") int auction_no, Model model)throws Exception{
 		model.addAttribute(service.detail(auction_no));
 		System.out.println(auction_no);
 	}
 	
-	/*@RequestMapping(value="/tender")*/
 	
 	
-	@RequestMapping(value="/RT_auction_register", method=RequestMethod.GET)
-	public void RT_auctionRegisterGET(RT_AuctionRegisterVO auction_rt, Model model)throws Exception{
+	
+	/*실시간 경매*/
+	@RequestMapping(value="/rt_auction_register", method=RequestMethod.GET)
+	public void RT_auctionRegisterGET(RT_AuctionRegisterVO rt_auction, Model model)throws Exception{
 		logger.info("실시간 경매 등록폼_get");
 	}
+	
+	@RequestMapping(value="/rt_auction_register", method=RequestMethod.POST)
+	public String RT_auctionRegisterPOST(RT_AuctionRegisterVO rt_auction, HttpServletRequest request)throws Exception{
+		logger.info("넘어오냐");
+		
+		
+		UUID uid = UUID.randomUUID();
+		String auction_no = "RT_Auction_"+uid.toString().replace("-", "");
+		rt_auction.setRt_auction_no(auction_no);
+		String set_d = request.getParameter("rt_auction_date");
+		String set_t = request.getParameter("rt_auction_time");
+		String setDate = set_d+" "+set_t;
+		rt_auction.setRt_auction_date(setDate);
+		System.out.println(auction_no);
+		System.out.println(setDate);
+		
+		logger.info(rt_auction.toString());
+		String originalName = rt_auction.getRt_file().getOriginalFilename();
+	    byte[] fileData = rt_auction.getRt_file().getBytes();
+	         
+	    HttpSession session = request.getSession();
+	    String root_path = session.getServletContext().getRealPath("/");
+	    String attach_path = "resources/files/attach/";
+	               
+	    String rt_auction_title_img = "RT_Auction_"+originalName;
+	    rt_auction.setRt_auction_title_img(rt_auction_title_img);
+	    //logger.info("auction_title_img : "+auction.getAuction_title_img());
+	         
+	    service.rt_register(rt_auction);
+	    logger.info("auction_title_img : "+rt_auction.getRt_auction_title_img());
+	         
+	    File auction_file = new File(root_path + attach_path, rt_auction_title_img);
+	    FileCopyUtils.copy(fileData, auction_file);
+	      
+		return "redirect:/auction/rt_auction_list";
+	}
 
+	@RequestMapping(value="/rt_auction_list", method=RequestMethod.GET)
+	public void RT_auctionListGET(RT_AuctionRegisterVO rt_auction, Model model)throws Exception{
+		model.addAttribute("list", service.rt_list());
+		
+		logger.info("실시간 경매 리스트_get");
+	}
+	
+	@RequestMapping(value="/", method=RequestMethod.GET)
+	public void RT_detail(@RequestParam(value="rt_auction_no") String rt_auction_no, Model model)throws Exception{
+		model.addAttribute(service.rt_detail(rt_auction_no));
+	}
 }

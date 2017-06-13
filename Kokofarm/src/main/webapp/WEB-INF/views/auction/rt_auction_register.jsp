@@ -6,31 +6,30 @@
 
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
-<link rel="stylesheet" href="//mugifly.github.io/jquery-simple-datetimepicker/jquery.simple-dtpicker.css">
-<script src="http://mugifly.github.io/jquery-simple-datetimepicker/jquery.simple-dtpicker.js"></script>
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
 <script type="text/javascript" src="/resources/ckeditor/ckeditor.js"></script>
 
-
 <script type="text/javascript">
+	/* datetimepicker */
 	$(function(){
-		$("#start_date").appendDtpicker({
+		$("#rt_auction_date").datepicker({
 			local:"ko",
-			dateFormat:"yyyy-MM-DD hh:mm:00"
-		});
-		$("#end_date").appendDtpicker({
-			local:"ko",
-			dateFormat:"yyyy-MM-DD hh:mm:00"
+			dateFormat:"yy-mm-dd",
+			dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+			monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+			maxDate: 5,
+			minDate: -1
 		});
 	});
 
+	/* CKEditor */
 	var ckeditor_config = {
 			resize_enabled : false,
 			enterMode : CKEDITOR.ENTER_BR,
 			shiftEnterMode : CKEDITOR.ENTER_P,
 			toolbarCanCollapse : true, 
 			removePlugins : "elementspath",
-			filebrowserUploadUrl : "/auction/file_upload",
+			filebrowserUploadUrl : '/auction/file_upload',
 			
 			toolbar : [['Source', '-', 'NewPage', 'Preview'],
 				['Cut', 'Copy', 'Paste', 'PasteText', '-', 'Undo', 'Redo'],
@@ -43,7 +42,7 @@
 	
 	var editor = null;
 	jQuery(function(){
-		editor = CKEDITOR.replace("auction_content", ckeditor_config);
+		editor = CKEDITOR.replace("rt_auction_content", ckeditor_config);
 	});
 	
 	function form_save(form){
@@ -56,8 +55,8 @@
 <div class="container">
     <ul class="breadcrumb">
         <li><a href="http://localhost:8081/"><i class="fa fa-home"></i></a></li>
-        <li><a href="/auction/auction_list">일반 경매</a></li>
-        <li><a href="#">일반 경매 등록</a></li>
+        <li><a href="/auction/rt_auction_list">실시간 경매</a></li>
+        <li><a href="#">실시간 경매 등록</a></li>
     </ul>
     <div class="row">
     <!-- LNB 시작 -->
@@ -90,13 +89,13 @@
                     <div class="form-group">
                         <label for="input-firstname" class="col-sm-2 control-label">상품명</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="auction_name" placeholder="상품명을 입력해주세요." name="auction_name">
+                            <input type="text" class="form-control" id="rt_auction_name" name="rt_auction_name" placeholder="상품명을 입력해주세요.">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="input-fax" class="col-sm-2 control-label">분류</label>
                         <div class="col-sm-10">
-                            <select id="auction_group" name="auction_group" style="height:32px; width:790px;">
+                            <select id="rt_auction_group" name="rt_auction_group" style="height:32px; width:790px;">
                             	<option>&nbsp;&nbsp;분류를 선택해주세요</option>
                             	<option value="과일">과일류</option>
                             	<option value="채소">채소류</option>
@@ -104,33 +103,28 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="input-lastname" class="col-sm-2 control-label">경매시작일</label>
+                        <label for="input-lastname" class="col-sm-2 control-label">경매일</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="start_date" name="start_date">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="input-email" class="col-sm-2 control-label">경매종료일</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="end_date" name="end_date">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="input-telephone" class="col-sm-2 control-label">상한가</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="auction_up" placeholder="상한가를 입력해주세요." name="auction_up">
+                        <select id="rt_auction_time" name="rt_auction_time" style="height: 32px; width: 159px; float: left;
+                        text-align: center;">
+                            	<option>&nbsp;&nbsp;시간을 선택해주세요</option>
+                            	<option value="10:00:00">오전 10시</option>
+                            	<option value="22:00:00">오후 10시</option>
+                            </select>
+                            <input type="text" class="form-control" id="rt_auction_date" name="rt_auction_date"
+                            style="height:32px; width:629px;">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="input-fax" class="col-sm-2 control-label">하한가</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="auction_down" placeholder="하한가를 입력해주세요." name="auction_down">
+                            <input type="text" class="form-control" id="rt_auction_down" placeholder="하한가를 입력해주세요." name="rt_auction_down">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="input-fax" class="col-sm-2 control-label">단위</label>
                         <div class="col-sm-10">  
-                        <select id="auction_units" name="auction_units" style="height:32px; width:99px; float:left; text-align: center;">
+                            <select id="auction_units" name="auction_units" style="height:32px; width:99px; float:left; text-align: center;">
                         	<option value="kg">kg</option>
                         	<option value="g">g</option>
                         	<option value="박스">박스</option>
@@ -143,7 +137,7 @@
                     <div class="form-group">
                         <label for="input-fax" class="col-sm-2 control-label">생산지/원산지</label>
                         <div class="col-sm-10">
-                        <select id="auction_location" name="auction_location" style="height:32px; width:150px; float:left;
+                            <select id="auction_location" name="auction_location" style="height:32px; width:150px; float:left;
                         text-align: center;">
                         	<option value="서울특별시">서울특별시</option>
                         	<option value="인천광역시">인천광역시</option>
@@ -162,16 +156,16 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="input-fax" class="col-sm-2 control-label"">대표이미지</label>
+                        <label for="input-fax" class="col-sm-2 control-label" style="height:32px;">대표이미지</label>
                         <div class="col-sm-10">
-                           <input type="file" id="auction_title_img" name="file" style="height:32px; width:787px;">
+                           <input type="file" id="rt_auction_title_img" name="rt_file" style="height:32px; width:790px;">
                         </div>
                         </div>
                     <!-- 에디터 끼워넣을 곳! -->
                     <div class="form-group">
                         <label for="input-fax" class="col-sm-2 control-label">상세내용</label>
                         <div class="col-sm-10">
-                          <textarea id="auction_content" name="auction_content"></textarea>
+                          <textarea id="rt_auction_content" name="rt_auction_content"></textarea>
                         </div>
                     </div>
                 </fieldset>

@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import kokofarm.auction.domain.AuctionRegisterVO;
+import kokofarm.auction.domain.RT_AuctionRegisterVO;
 import kokofarm.auction.persistence.AuctionDAO;
 
 @Service
@@ -15,20 +16,34 @@ public class AuctionServiceImpl implements AuctionService{
 	@Inject
 	private AuctionDAO dao;
 	
+	/*일반 경매*/
 	@Override
-	public void regist(AuctionRegisterVO auction) throws Exception {
+	public void register(AuctionRegisterVO auction) throws Exception {
 		dao.register(auction);
 		
 	}
-
+	@Override
+	public List<AuctionRegisterVO> list() throws Exception {
+		return dao.list();
+	}
 	@Override
 	public AuctionRegisterVO detail(int auction_no) throws Exception {
 		return dao.detail(auction_no);
 	}
 
+	
+	/*실시간 경매*/
 	@Override
-	public List<AuctionRegisterVO> list() throws Exception {
-		return dao.list();
+	public void rt_register(RT_AuctionRegisterVO rt_auction) throws Exception {
+		dao.rt_register(rt_auction);
+	}
+	@Override
+	public List<RT_AuctionRegisterVO> rt_list() throws Exception {
+		return dao.rt_list();
+	}
+	@Override
+	public RT_AuctionRegisterVO rt_detail(String rt_auction_no) throws Exception {
+		return dao.rt_detail(rt_auction_no);
 	}
 
 }

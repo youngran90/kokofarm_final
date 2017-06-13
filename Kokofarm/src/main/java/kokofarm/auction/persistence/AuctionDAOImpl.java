@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import kokofarm.auction.domain.AuctionRegisterVO;
+import kokofarm.auction.domain.RT_AuctionRegisterVO;
 
 @Repository
 public class AuctionDAOImpl implements AuctionDAO{
@@ -16,20 +17,33 @@ public class AuctionDAOImpl implements AuctionDAO{
 	private SqlSession session;
 	private static String namespace = "kokofarm.auction.mappers.auctionMapper";
 	
+	/*일반 경매*/
 	@Override
 	public void register(AuctionRegisterVO vo) throws Exception {
 		session.insert(namespace+".register", vo);
 	}
-
+	@Override
+	public List<AuctionRegisterVO> list() throws Exception {
+		return session.selectList(namespace+".list");
+	}
 	@Override
 	public AuctionRegisterVO detail(int auction_no) throws Exception {
 		return session.selectOne(namespace+".detail", auction_no);
 	}
 
-	@Override
-	public List<AuctionRegisterVO> list() throws Exception {
-		return session.selectList(namespace+".list");
-	}
+	
 
+	/*실시간 경매*/	
+	@Override
+	public void rt_register(RT_AuctionRegisterVO vo) throws Exception {
+		session.insert(namespace+".rt_register", vo);
+	}
+	public List<RT_AuctionRegisterVO> rt_list() throws Exception {
+		return session.selectList(namespace+".rt_list");
+	}
+	@Override
+	public RT_AuctionRegisterVO rt_detail(String rt_auction_no) throws Exception {
+		return session.selectOne(namespace+".rt_detail", rt_auction_no);
+	}
 
 }
