@@ -12,6 +12,11 @@ server.listen("8082",function(){
 });
 var emp_id;
 
+app.get('/', function(request, response) {
+	   emp_id = request.param("emp_id");
+	   response.sendfile(__dirname + '/htmlPage.html');
+	})
+
 function Sockets(){
 	this.sockets = {};
 }
@@ -28,13 +33,14 @@ Sockets.prototype.get = function(id, callback){
 	}
 }
 
-//웹서버 생성
+/*//웹서버 생성
 var server = http.createServer(function(request, response){
 	fs.readFile('rt_action.html', function(error, data){
 		response.writeHead('200', {'Content-Type' : 'text/html'});
 		response.end(data);
 	});
 });
+*/
 
 //server Socket 생성
 var roomList = [];

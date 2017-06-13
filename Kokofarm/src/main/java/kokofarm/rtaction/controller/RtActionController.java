@@ -23,5 +23,6 @@ public class RtActionController {
 		model.addAttribute("member_id", member.getMember_id());
 		
 		return "redirect:Http://106.242.203.68:8082";
+	
 	}
 }
