@@ -5,7 +5,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%@ include file= "../include/header.jsp" %>	
-
 <div class="container">
   <ul class="breadcrumb">
     <li><a href="/"><i class="fa fa-home"></i></a></li>
@@ -223,7 +222,7 @@
     <div id="content" class="col-sm-9">
       <h2 class="category-title">과일/채소</h2>
       <div class="row category-banner">
-        <div class="col-sm-12 category-image"><img src="" alt="product_banner" title="product_banner" class="img-thumbnail" style="width: 937px; height: 192px;" /></div>
+        <div class="col-sm-12 category-image"><img src="/resources/files/attach/product_banner.jpg" alt="product_banner" title="product_banner" class="img-thumbnail" style="width: 937px; height: 192px;" /></div>
         <div class="col-sm-12 category-desc">상품설명</div>
       </div>
       <div class="category-page-wrapper">
@@ -232,21 +231,21 @@
             <button type="button" id="list-view" class="btn btn-default list" data-toggle="tooltip" title="List"><i class="fa fa-th-list"></i></button>
             <button type="button" id="grid-view" class="btn btn-default grid" data-toggle="tooltip" title="Grid"><i class="fa fa-th"></i></button>
           </div>
-          <a href="#" id="compare-total">상품목록(0)</a> </div>
+          <a href="#" id="compare-total">상품목록</a> </div>
         
         <div class="col-md-2 text-right sort-wrapper">
           <label class="control-label" for="input-sort">Sort By :</label>
           <div class="sort-inner">
             <select id="input-sort" class="form-control">
               <option value="ASC" selected="selected">Default</option>
-              <option value="ASC">Name (A - Z)</option>
-              <option value="DESC">Name (Z - A)</option>
-              <option value="ASC">Price (Low &gt; High)</option>
-              <option value="DESC">Price (High &gt; Low)</option>
-              <option value="DESC">Rating (Highest)</option>
+              <!-- <option value="ASC">Name (A - Z)</option>
+              <option value="DESC">Name (Z - A)</option> -->
+              <option value="ASC">가격 높은순</option>
+              <option value="DESC">가격 낮은순</option>
+         <!--      <option value="DESC">Rating (Highest)</option>
               <option value="ASC">Rating (Lowest)</option>
               <option value="ASC">Model (A - Z)</option>
-              <option value="DESC">Model (Z - A)</option>
+              <option value="DESC">Model (Z - A)</option> -->
             </select>
           </div>
         </div>
@@ -283,35 +282,39 @@
       <div class="category-page-wrapper">
         <div class="result-inner">Showing 1 to 8 of 10 (2 Pages)</div>
         <div class="pagination-inner">
-         <!--  <ul class="pagination">
-            <li class="active"><span>1</span></li>
-            <li><a href="category.html">2</a></li>
-            <li><a href="category.html">&gt;</a></li>
-            <li><a href="category.html">&gt;</a></li>
-          </ul> -->
-          <ul class="pagination">
-							<li><a href="1">처음</a></li>
+         <ul class="pagination">
+<li><a href="/product/list_product${pageMaker.makeQuery(1) }">처음</a></li>
+
 							<c:if test="${pageMaker.prev}">
-								<li><a href="${pageMaker.startPage - 1}">&laquo;</a></li>
+								<li><a
+									href="/product/list_product${pageMaker.makeQuery(pageMaker.startPage - 1) }">&laquo;</a></li>
 							</c:if>
 
-							<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
+							<c:forEach begin="${pageMaker.startPage }"
+								end="${pageMaker.endPage }" var="idx">
 								<li
 									<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
-									<a href="${pageMaker.makeQuery(idx)}">${idx}</a>
+									<a href="/product/list_product${pageMaker.makeQuery(idx)}">${idx}</a>
 								</li>
 							</c:forEach>
 
+
 							<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-								<li><a href="${pageMaker.endPage +1}">&raquo;</a></li>
+								<li><a
+									href="/product/list_product${pageMaker.makeQuery(pageMaker.endPage +1) }">&raquo;</a></li>
 							</c:if>
-							<li><a href="${pageMaker.lastPage}">끝</a></li>
+<li><a href="/product/list_product${pageMaker.makeQuery(pageMaker.lastPage)}">끝</a></li>
 						</ul>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+
+
+
+
 
 <form id="jobForm">
   <input type='hidden' name="page" value=${pageMaker.cri.perPageNum}>
@@ -331,9 +334,6 @@
 		jobForm.attr("action","/product/list_product").attr("method", "get");
 		jobForm.submit();
 	});
-	
-	
-	
    
 </script>
 

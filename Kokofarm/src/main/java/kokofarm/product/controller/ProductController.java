@@ -9,7 +9,6 @@ import java.util.UUID;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.annotations.Param;
@@ -90,8 +89,8 @@ public class ProductController {
 
 	@RequestMapping(value="/list_product", method= {RequestMethod.GET, RequestMethod.POST})
 	public void listProduct(@Param("ca1") String ca1, 
-			@Param("ca2") String ca2, @Param("ca3") String ca3,  
-			InquiryVO inquiry,Model model)throws Exception{
+			@Param("ca2") String ca2, @Param("ca3") String ca3,  HttpServletRequest request,
+			 InquiryVO inquiry, @ModelAttribute("cri") Criteria cri, Model model)throws Exception{
 
 		logger.info("product..list...");
 		Map<String, String> map = new HashMap<String, String>();
@@ -99,11 +98,12 @@ public class ProductController {
 		map.put("ca2", ca2);
 		map.put("ca3", ca3);
 		model.addAttribute("list", service.list_product(map));
-	/*	PageMaker pageMaker = new PageMaker();
+	
+		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(service.Count_Product());
-		model.addAttribute("pageMaker", pageMaker);*/
-		
+		System.out.println(pageMaker.toString());
+		model.addAttribute("pageMaker", pageMaker);
 		
 	}
 	

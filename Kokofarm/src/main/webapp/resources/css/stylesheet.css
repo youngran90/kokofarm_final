@@ -1620,7 +1620,7 @@ ul.main-navigation > li.menu-last ul ul {
 .category_block .hitarea {
 	float: right;
 }
-.category_block .hitarea.expandable-hitarea {
+.category_block .hitarea {
 	height: 20px;
 	width: 20px;
 	z-index: 9;
@@ -1636,7 +1636,7 @@ ul.main-navigation > li.menu-last ul ul {
 	cursor: pointer;
 	position: static;
 }
-.category_block .hitarea.expandable-hitarea:before {
+.category_blocke {
 	font-family: 'FontAwesome';
 	content: '\f067';
 	color: #999999;
