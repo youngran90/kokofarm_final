@@ -26,39 +26,35 @@ $(document).ready(function(){
 			isCilck = false;
 		}
 	});
-	alert("Test04");
+	
+	alert("Test03");
 	/* Node.Js 소켓 통신 할 구분 */	
 	var socket = io.connect(); //소켓 연결
 	
 	socket.on('user',function(data){
 		$("#id").val(data);
-		$("#chat_area").val(data+"님이 참여 하셨습니다.<br>");
-		
-		$("#chat_list").val(data);
+		var list = "";
+		list += data+'\n';
+		$("#chat_list").val(list);
+	});
+	
+	socket.on('text',function(data){
+		$("#chat_area").append(data+'\n');
 	})
 	
+	$("#chat_enter").click(function(e){
+		socket.emit('send',{
+			name : $("#id").val(),
+			messeage : $("#chat_text").val()
+		});
+		$("#chat_text").val("");
+		e.preventDefault();
+	});
 	
-	$("#chat_enter").click(function(){
-		socket.emit('message',{
-			message : $("#chat_text").val(),
-			name : $("#id").val()
-		})
-		
-	})
-	
-	socket.on('message',function(data){
-		$("#chat_area").val("\n");
-		$("#chat_area").val(data.name+" : "+data.message+"\n");
-		
-	})
-	
-	/* keypress(function(event){
-		if( (event.keyCode || event.which) == 13){
-			event.preventDefault();
-			var text = encoderURIComponent()
-		}
-	}) */
- 
+	socket.on('receive',function(data){
+		$("#chat_area").append(data.messeage+'\n');
+	});
+	1
 
 });
 
@@ -67,6 +63,7 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
+<h4 class="test"></h4>
 <section class="action_body" id="action_body">
 		<div class="action_info" id="action_info">
 			여기는 경매 정보
@@ -126,6 +123,7 @@ $(document).ready(function(){
 	margin-right: 10px;
 	width : 405px;
 	height : 402px;
+	resize: none;
 	float : left;
 }
 

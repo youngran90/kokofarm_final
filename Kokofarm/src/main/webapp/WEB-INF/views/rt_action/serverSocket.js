@@ -1,52 +1,43 @@
-var fs = require('fs');
-var http = require('http');
-var socketio = require('socket.io');
+//모듈 추출
 var express = require('express');
 var app = express();
+var http = require('http');
+var fs = require('fs');
+var socketio = require('socket.io');
 
-
-//웹 서버를 만든다
+//웹 서버 만듦
 var server = http.createServer(app);
 
 server.listen("8082",function(){
-	console.log("코코팜 노드 서버 실행");
+	console.log("fofofarm 가동");
 });
 
-var member_id; //멤버 id
+var member_id;
+
+
+
 
 app.get('/', function(request, response) {
-	   member_id = request.param("member_id");
-	   response.sendfile(__dirname + '/rt_action.html');
+   console.log("으아아");
+   console.log("캬캬캬캬캬");
+   member_id = request.param("member_id");
+   response.sendfile(__dirname + '/rt_action.html');
 })
 
-var users = [];
+
+//소켓 서버를 만듦
 var io = socketio.listen(server);
-io.sockets.on('connection', function(socket){ //sockets => 서버소켓에 접속한 모든 소켓
+io.sockets.on('connection', function(socket) {
 	
-	//접속자 수를 클라이언트에 보낸다
-	users.push(member_id);
-	socket.emit('user',users);
+	console.log(socket.id);
 	
-	socket.on('message', function(data){
-		io.socket.emit('message', data);
+	socket.emit('user',member_id);
+	socket.emit('text',member_id+" 님 입장하셨습니다.");
+
+	socket.on('send',function(data){
+		socket.emit('receive',{
+			messeage : data.name + " :" + data.messeage
+		});
 	});
-	
-	
+   
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
