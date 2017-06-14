@@ -29,11 +29,11 @@ io.sockets.on('connection', function(socket) {
 	
 	console.log(socket.id);
 	
-	io.socket.emit('user',member_id);
-	io.socket.emit('text',member_id+" 님 입장하셨습니다.");
+	io.sockets.emit('user',member_id);
+	io.sockets.emit('text',member_id+" 님 입장하셨습니다.");
 
 	socket.on('send',function(data){
-		io.socket.emit('receive',{
+		io.sockets.emit('receive',{
 			messeage : data.name + " :" + data.messeage
 		});
 	});
