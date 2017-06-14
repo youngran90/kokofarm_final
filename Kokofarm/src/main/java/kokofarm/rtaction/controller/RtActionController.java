@@ -20,9 +20,11 @@ public class RtActionController {
 		HttpSession session = request.getSession();
 		MemberVO member = (MemberVO)session.getAttribute("login");
 		
+		if(member == null){
+			return "/member/login";
+		}
 		model.addAttribute("member_id", member.getMember_id());
-		
-		return "redirect:Http://106.242.203.68:8082";
+		return "redirect:Http://localhost:8082";
 	
 	}
 }

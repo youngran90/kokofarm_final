@@ -46,7 +46,9 @@ public class CartController {
 		if(member == null){
 			return "/cart/cart";
 		}
+		
 		model.addAttribute("listcart",service.cart_list(member.getMember_id()));
+		
 		return "/cart/cart";
 	}
 	
