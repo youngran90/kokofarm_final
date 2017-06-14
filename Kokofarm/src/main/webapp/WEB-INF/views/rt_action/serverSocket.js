@@ -8,7 +8,7 @@ var socketio = require('socket.io');
 //웹 서버 만듦
 var server = http.createServer(app);
 
-server.listen("8082",function(){
+server.listen("8083",function(){
 	console.log("fofofarm 가동");
 });
 
