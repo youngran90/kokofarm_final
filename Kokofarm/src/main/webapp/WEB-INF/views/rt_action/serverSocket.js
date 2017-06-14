@@ -18,8 +18,6 @@ var member_id;
 
 
 app.get('/', function(request, response) {
-   console.log("으아아");
-   console.log("캬캬캬캬캬");
    member_id = request.param("member_id");
    response.sendfile(__dirname + '/rt_action.html');
 })
@@ -31,11 +29,11 @@ io.sockets.on('connection', function(socket) {
 	
 	console.log(socket.id);
 	
-	socket.emit('user',member_id);
-	socket.emit('text',member_id+" 님 입장하셨습니다.");
+	io.socket.emit('user',member_id);
+	io.socket.emit('text',member_id+" 님 입장하셨습니다.");
 
 	socket.on('send',function(data){
-		socket.emit('receive',{
+		io.socket.emit('receive',{
 			messeage : data.name + " :" + data.messeage
 		});
 	});
