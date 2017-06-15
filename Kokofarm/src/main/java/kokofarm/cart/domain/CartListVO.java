@@ -8,46 +8,30 @@ public class CartListVO implements Serializable{
 	private int product_price;
 	private String product_unit;
 	private String product_mainimage;
+	private int product_total;
 	
 	public CartListVO() {
 		super();
 	}
 
 	public CartListVO(String product_no, String product_name, int product_price, String product_unit,
-			String product_mainimage) {
+			String product_mainimage, int product_total) {
 		super();
 		this.product_no = product_no;
 		this.product_name = product_name;
 		this.product_price = product_price;
 		this.product_unit = product_unit;
 		this.product_mainimage = product_mainimage;
-	}
-
-	public String getProduct_mainimage() {
-		return product_mainimage;
-	}
-
-	public void setProduct_mainimage(String product_mainimage) {
-		this.product_mainimage = product_mainimage;
-	}
-
-	public String getProduct_unit() {
-		return product_unit;
-	}
-
-	public void setProduct_unit(String product_unit) {
-		this.product_unit = product_unit;
+		this.product_total = product_total;
 	}
 
 	public String getProduct_no() {
 		return product_no;
 	}
 
-
 	public void setProduct_no(String product_no) {
 		this.product_no = product_no;
 	}
-
 
 	public String getProduct_name() {
 		return product_name;
@@ -65,11 +49,37 @@ public class CartListVO implements Serializable{
 		this.product_price = product_price;
 	}
 
+	public String getProduct_unit() {
+		return product_unit;
+	}
+
+	public void setProduct_unit(String product_unit) {
+		this.product_unit = product_unit;
+	}
+
+	public String getProduct_mainimage() {
+		return product_mainimage;
+	}
+
+	public void setProduct_mainimage(String product_mainimage) {
+		this.product_mainimage = product_mainimage;
+	}
+
+	public int getProduct_total() {
+		return product_total;
+	}
+
+	public void setProduct_total(int product_total) {
+		this.product_total = product_total;
+	}
+
 	@Override
 	public String toString() {
 		return "CartListVO [product_no=" + product_no + ", product_name=" + product_name + ", product_price="
-				+ product_price + ", product_unit=" + product_unit + ", product_mainimage=" + product_mainimage + "]";
+				+ product_price + ", product_unit=" + product_unit + ", product_mainimage=" + product_mainimage
+				+ ", product_total=" + product_total + "]";
 	}
+
 
 
 	

@@ -1,0 +1,177 @@
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+$(document).ready(function(){
+	
+	// cart open
+	$('#action_btn').click(function() {
+		if (!$(this).data('ch')) {
+			$(this).data('ch', 1).addClass('on');
+			$('.action_menu').animate({
+				bottom : '0'
+			}, 200);
+		} else {
+			$(this).data('ch', 0).removeClass('on');
+			if ($(this).isCilck == true) {
+				$('.action_menu').delay(1500).animate({
+					bottom : '-130px'
+				}, 200);
+			} else {
+				$('.action_menu').animate({
+					bottom : '-130px'
+				}, 200);
+			}
+			isCilck = false;
+		}
+	});
+	
+	alert("Test03");
+	/* Node.Js 소켓 통신 할 구분 */	
+	var socket = io.connect(); //소켓 연결
+	
+	socket.on('user',function(data){
+		$("#id").val(data);
+		var list = "";
+		list += data+'\n';
+		$("#chat_list").val(list);
+	});
+	
+	socket.on('text',function(data){
+		$("#chat_area").append(data+'\n');
+	})
+	
+	$("#chat_enter").click(function(e){
+		socket.emit('send',{
+			name : $("#id").val(),
+			messeage : $("#chat_text").val()
+		});
+		$("#chat_text").val("");
+		e.preventDefault();
+	});
+	
+	socket.on('receive',function(data){
+		$("#chat_area").append(data.messeage+'\n');
+	});
+	1
+
+});
+
+	
+	
+</script>
+</head>
+<body>
+<h4 class="test"></h4>
+<section class="action_body" id="action_body">
+		<div class="action_info" id="action_info">
+			여기는 경매 정보
+		</div>
+			<div class="action_time_price" id="action_time_price">
+				경매 시간 / 현재 가격
+			</div>
+				<div class="chat_body" id="chat_body">
+						<textarea id="chat_area" name="chat_area" rows="18" cols="50" readonly="readonly"></textarea>
+						<textarea id="chat_list" name="chat_list" rows="18" cols="14" readonly="readonly"></textarea><br>
+						<input type="text" id="id" name="id" disabled="disabled">
+						<input type="text" id="chat_text" name="chat_text" >
+						<button id="chat_enter" name="chat_enter">입력</button>
+				</div>
+		<div class="action_menu" id="action_menu" style="bottom: -130px">
+					<button id="action_btn" name="action_btn">경매 열기</button>
+				<div id="action_box" id="action_box">
+					aa
+				</div>
+		</div>
+	</section>
+		
+</body>
+</html>
+<style>
+.action_body {
+	padding-top: 20px;
+	margin-left: 10%;
+	margin-right: 10%;
+	border: 1px solid green;
+	width: 80%;
+	height: 800px;
+}
+
+.action_info {
+	margin-left: 10px;
+	border: 1px solid red;
+	height: 600px;
+	width: 49%;
+	float: left;
+}
+
+.action_time_price {
+	position: absolute;
+	left: 50%;
+	border: 1px solid blue;
+	height: 150px;
+	width: 38.3%;
+	margin-left: 10px;
+}
+
+#chat_area {
+	position: relative;
+	top: 165px;
+	border: 1px solid blue;
+	margin-left: 10px;
+	margin-right: 10px;
+	width : 405px;
+	height : 402px;
+	resize: none;
+	float : left;
+}
+
+#chat_list {
+	border: 1px solid green;
+	width : 155px;
+	height : 402px;
+	margin-right : 10px;
+	float : right;
+	position: relative;
+	top: 165px;
+	resize: none;
+}
+
+#id {
+	position: relative;
+	top: 175px;
+	margin-left: 10px;
+	width: 8%;
+	text-align: center;
+}
+
+#chat_text {
+	position: relative;
+	top: 175px;
+	width: 25.5%;
+}
+
+#chat_enter {
+	position: relative;
+	margin-left : 10px;
+	top: 175px;
+	width: 13%;
+}
+
+.action_menu {
+	position: fixed;
+	width: 79%;
+}
+
+#action_btn {
+	border: 0px;
+	padding: 0px;
+	width: 100%;
+}
+
+#action_box {
+	height: 130px;
+	border: 1px solid black;
+}
+</style>

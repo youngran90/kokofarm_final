@@ -83,5 +83,12 @@ public class OrderProductImpl implements OrderProductDAO {
 		session.delete(namespace+".orderproduct_delete",member_id);
 	}
 
+	@Override
+	public void delete(String product_no) throws Exception {
+		session.delete(namespace+".delete",product_no);
+		
+	}
 
+
+	
 }

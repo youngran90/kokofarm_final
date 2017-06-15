@@ -33,5 +33,6 @@ public interface OrderProductDAO {
 	
 	public void orderproduct_delete(String member_id) throws Exception;
 	
+	public void delete(String product_no) throws Exception;
 	
 }

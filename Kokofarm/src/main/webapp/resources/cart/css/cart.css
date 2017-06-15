@@ -41,7 +41,8 @@
 }
 
 /* 테이블 수량변경 버튼 */
-#change {
+.change {
+	
 	width: 65px;
 	height: 37px;
 	background:

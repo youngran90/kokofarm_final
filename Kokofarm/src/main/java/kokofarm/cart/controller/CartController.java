@@ -46,7 +46,9 @@ public class CartController {
 		if(member == null){
 			return "/cart/cart";
 		}
+		
 		model.addAttribute("listcart",service.cart_list(member.getMember_id()));
+		
 		return "/cart/cart";
 	}
 	
@@ -57,6 +59,10 @@ public class CartController {
 		
 	HttpSession session = request.getSession();
 		MemberVO member = (MemberVO)session.getAttribute("login");
+
+		if(member == null){
+			return "/cart/cart";
+		}
 		
 		CartVO vo = new CartVO();
 		vo.setCart_no(cart_no);
