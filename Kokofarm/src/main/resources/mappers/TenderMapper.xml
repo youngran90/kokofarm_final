@@ -80,6 +80,11 @@
 	  update success set pay_state=#{pay_no} where success_no=#{success_no}
 	</update>
 	
+	<!-- 낙찰 시 경매등록자에게 경매 결과 낙찰로 표기 -->
+	<update id="updateAuctionSuccess" parameterType="Integer">
+	  update auction set auction_result='낙찰' where auction_no=#{auction_no}
+	</update>
+	
 	<!-- 상한가 뽑아내기 -->
 	<!-- <select id="selectPriceUp" resultType="int" parameterType="String">
 	  select auction_up from auction where auction_no=#{auction_no}

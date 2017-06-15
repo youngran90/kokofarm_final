@@ -83,6 +83,12 @@ public class TenderDAOImpl implements TenderDAO {
 		session.update(namespace+".updateSuccess",payvo);
 		
 	}
+
+	@Override
+	public void updateAuctionSuccess(int auction_no) throws Exception {
+		session.update(namespace+".updateAuctionSuccess", auction_no);
+		
+	}
 	
 	
 	

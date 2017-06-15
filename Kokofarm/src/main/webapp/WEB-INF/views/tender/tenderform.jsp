@@ -62,9 +62,10 @@
 		  formObj.submit();
 	  });
 	  
-	  //$('#successPayButton').hide();
-	
-	  //check();
+	  $('#payLater').on('click',function(){
+		  formObj.attr("action","../mypage/auction_view");
+		  formObj.submit();
+	  })
 	
  })
  
@@ -405,7 +406,7 @@
               <label>상한가 :</label>
               <span> ${auction.auction_up}</span></li>
             <li>
-              <label>히한가 :</label>
+              <label>하한가 :</label>
               <span> ${auction.auction_down}</span></li>
             <li>
               <label>현재가 :</label>
@@ -512,6 +513,7 @@
              <form role="form" method="post">
 		       <input type="hidden" name="tender_no" value="${tender_no}">
 			   <input type="hidden" name="member_id" value="${member_id }">
+			   <input type="hidden" name="auction_no" value="${auction.auction_no}">
 			   <input type="hidden" name="auction_title_img" value="${auction.auction_title_img }">
 		       
 		       <%-- <c:choose>
@@ -532,7 +534,7 @@
 		        </c:otherwise>
 		       </c:choose> --%>
 		       
-		        <c:if test="${member_id==id}">
+		        <c:if test="${member_id==login.member_id}">
 		        <input type="submit" value="바로결제" id="payNow" style="background: #ef8829; color: white; float: left; margin-right: 10px; height: 30px;">
 		        <input type="submit" value="나중에 결제" id="payLater" style="height: 30px; background: white; color: black;">
 		        </c:if>

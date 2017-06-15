@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kokofarm.mypage.mappers.AuctionViewMapper">
+<cache />
+
+  <select id="selectTenderAll" resultType="TenderViewVO">
+    select * from tender
+  </select>
+  <!-- <select id="selectSuccessView" resultType="SuccessViewVO" parameterType="TenderViewVO">
+     select * from success s, tender t where s.tender_no=#{tender_no} and t.tender_no=#{tender_no} and t.member_id=#{member_id}
+  </select> -->
+  
+  <select id="selectSuccessView" resultType="SuccessViewVO">
+     select * from success
+  </select>
+  
+  <select id="selectTenderView" resultType="TenderViewVO" parameterType="String">
+    select * from tender where member_id =#{member_id} order by auction_no, tender_price desc
+  </select>
+  
+  <select id="selectAuctionAll" resultType="AuctionViewVO" parameterType="Integer">
+    select * from auction where auction_no =#{auction_no}
+  </select>
+
+</mapper>

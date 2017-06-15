@@ -20,7 +20,8 @@ public interface TenderDAO {
 	public TenderVO selectTender(int tender_no) throws Exception;
 	public void insertPayInfo(PayVO payvo) throws Exception;
 	public List<PayVO> selectPayInfo() throws Exception;
-	public void updateSuccess(PayVO payvo) throws Exception; 
+	public void updateSuccess(PayVO payvo) throws Exception;
+	public void updateAuctionSuccess(int auction_no) throws Exception;
 	//
 	/*
 	public TenderDto selectSuccess(@Param("a") String s, @Param("b") Integer i) throws Exception;

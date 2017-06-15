@@ -88,6 +88,11 @@ public class TenderServiceImpl implements TenderService {
 		dao.updateSuccess(payvo);
 		
 	}
+
+	@Override
+	public void updateAuctionSuccess(int auction_no) throws Exception {
+		dao.updateAuctionSuccess(auction_no);
+	}
 	
 	
 	

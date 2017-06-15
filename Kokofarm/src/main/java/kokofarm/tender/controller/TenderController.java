@@ -36,14 +36,17 @@ public class TenderController {
 		private TenderService service;
 		
 		@RequestMapping(value="tenderform", method=RequestMethod.GET)
-		public void tenderformGET(HttpServletRequest request,TenderVO tender, Model model, @RequestParam("auction_no") int auction_no) throws Exception{
+		public void tenderformGET(TenderVO tender, Model model, @RequestParam("auction_no") int auction_no) throws Exception{
+			//HttpServletRequest request = null;
 			//System.out.println("넘어오나요 "+auction_no);
 			
-			HttpSession session = request.getSession();
+			/*HttpSession session = request.getSession();
 			MemberVO member = (MemberVO)session.getAttribute("login");
-			String id= member.getMember_id();
-			System.out.println("세션아이디:::::::::::::::"+id);
-			model.addAttribute("id",id);
+			if(member!=null){
+				String id= member.getMember_id();
+				System.out.println("세션아이디:::::::::::::::"+id);
+				model.addAttribute("id",id);
+			}*/
 			
 			//상품이 뜨도록 로드
 			AuctionVO auction= service.selectAuctionProduct(auction_no);
@@ -236,6 +239,7 @@ public class TenderController {
 					int same_count=0;
 					if(successList.size()==0){
 						service.insertSuccess(tender_no);
+						service.updateAuctionSuccess(auction_no);
 					}else{
 						for(int i=0;i<successList.size();i++){
 							if(tender_no!=0){
@@ -247,6 +251,7 @@ public class TenderController {
 						System.out.println("======================if문 위 same_count================="+same_count);
 						if(same_count==0){
 							service.insertSuccess(tender_no);
+							service.updateAuctionSuccess(auction_no);
 						}
 					}	
 				}else{ //시간은 다됐는데 현재가=0  ==> 유찰 
@@ -272,6 +277,7 @@ public class TenderController {
 					int same_count=0;
 					if(successList.size()==0){
 						service.insertSuccess(tender_no);
+						service.updateAuctionSuccess(auction_no);
 						
 					}else{
 						for(int i=0;i<successList.size();i++){
@@ -284,6 +290,7 @@ public class TenderController {
 						}
 						if(same_count==0){
 							service.insertSuccess(tender_no);
+							service.updateAuctionSuccess(auction_no);
 						}
 					}	
 				}
@@ -397,4 +404,8 @@ public class TenderController {
 			}
 			
 		}
+		/*@RequestMapping("payend")
+		public String payend() throws Exception{
+			return "../mypage/auction_view";
+		}*/
 }

@@ -116,7 +116,7 @@
     
     <!-- ====================결제완료============================= -->
     <div id="paycompletemessage">
-      <form action="../">
+      <form action="../mypage/auction_view">
         <div id="paycompletePdiv">
           <p id="paycompleteP"><strong>결제가 완료되었습니다.</strong></p>
         </div>
