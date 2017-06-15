@@ -50,6 +50,11 @@ public class ReplyServiceImpl implements ReplyService {
 		return dao.countReply(product_no);
 	}
 
+	@Override
+	public int avgReply(String product_no) throws Exception {
+		return dao.avgReply(product_no);
+	}
+
 	
 	
 	

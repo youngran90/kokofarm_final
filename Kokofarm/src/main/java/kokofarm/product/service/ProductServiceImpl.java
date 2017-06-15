@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
+import kokofarm.product.domain.ProductListForm;
 import kokofarm.product.domain.ProductVO;
 import kokofarm.product.persistence.ProductDAO;
 import kokofarm.product.persistence.ReplyDAO;
@@ -32,8 +33,8 @@ public class ProductServiceImpl implements ProductService {
 
 	//전체출력
 	@Override
-	public List<ProductVO> list_product(Map<String, String>map) throws Exception {
-		return dao.list_Pro(map);
+	public List<ProductVO> list_product(ProductListForm ProductForm) throws Exception {
+		return dao.list_Pro(ProductForm);
 	}
 	
 

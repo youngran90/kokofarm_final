@@ -147,7 +147,9 @@
                 <a href="#" title="lorem ippsum dolor dummy">Clothing</a>
                 </h4>
                 <p class="price product-price">$122.00<span class="price-tax">Ex Tax: $100.00</span></p>
-                <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
+                <div class="rating"> <span class="fa fa-stack">
+                
+                 </span> </div>
               </div>
             </div>
           </div>
@@ -281,7 +283,35 @@
         
         <div class="col-sm-6">
           <h1 class="productpage-title">${product.product_name} </h1>
-          <div class="rating product"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span> <span class="review-count"> <a href="#" onClick="$('a[href=\'#tab-review\']').trigger('click'); return false;">1 reviews</a> / <a href="#" onClick="$('a[href=\'#tab-review\']').trigger('click'); return false;">Write a review</a></span>
+          <div class="rating product">
+           
+			 
+			 <c:choose>
+			  <c:when test="${reply_avg == 0}">
+			  <span>☆☆☆☆☆</span>
+       </c:when>
+       <c:when test="${reply_avg == 1}">
+        <b><span  style="color: #EF8829;">★</span><span>☆☆☆☆</span></b>
+       </c:when>
+       <c:when test="${reply_avg == 2}">
+         <b> <span  style="color: #EF8829;">★★</span><span>☆☆☆</span></b>
+       </c:when>
+       <c:when test="${reply_avg == 3}">
+        <b> <span  style="color: #EF8829;">★★★</span><span>☆☆</span></b>
+       </c:when>
+       <c:when test="${reply_avg == 4}">
+       <b> <span  style="color: #EF8829;">★★★★</span><span>☆</span></b>
+       </c:when>
+       <c:otherwise>
+       
+       </c:otherwise>
+       </c:choose>
+
+			 
+			 
+          <span class="review-count">  <c:if test="${reply_count != 0}">
+          <a href="#" onClick="$('a[href=\'#tab-review\']').trigger('click'); return false;">/ ${reply_count} reviews</a></c:if>
+          </span>
             <hr>
             <!-- AddThis Button BEGIN -->
             <div class="addthis_toolbox addthis_default_style"><a class="addthis_button_facebook_like" ></a> <a class="addthis_button_tweet"></a> <a class="addthis_button_pinterest_pinit"></a> <a class="addthis_counter addthis_pill_style"></a></div>
@@ -308,12 +338,16 @@
               <label>규격:</label>
               <span> ${product.product_unit}${product.unit}</span></li>
             <li>
+            <li>
+              <label>남은 수량:</label>
+              <span> ${product.product_total}</span></li>
+            <li>
               <label>수확일:</label>
               <span> <fmt:formatDate value="${product.product_harvestdate}"
 					pattern="yyyy년MM월dd일" /></span>
 			</li>
           </ul>
-					<button type="button" onclick="eadown()"; ><img src="/resources/image/minu.bt.png"  width="20px;"></button>
+					<button type="button" onclick="eadown();" ><img src="/resources/image/minu.bt.png"  width="20px;"></button>
 					<input id="ea" name="ea" value="1" readonly="readonly" type="text" size="1"
 						style="text-align: center;">
 					<button type="button" onclick="eaup()"><img src="/resources/image/plus_bt.png"  width="20px;"></button>
@@ -328,9 +362,12 @@
               <input type="hidden" name="product_id" value="48" />
               <div class="btn-group">
                 <!-- <button type="button" data-toggle="tooltip" class="btn btn-default wishlist" title="Add to Wish List" ><i class="fa fa-heart-o"></i></button> -->
-                <button type="button" id="button-cart" data-loading-text="Loading..." class="btn btn-primary btn-lg btn-block addtocart" onclick="gocart('${product.product_no}')">Add to Cart</button>
+                <button type="button" id="button-cart" data-loading-text="Loading..." class="btn btn-primary btn-lg btn-block addtocart" onclick="gocart('${product.product_no}')">장바구니 담기</button>
                 <button type="button" id="button-inquiry" data-loading-text="Loading..." class="btn btn-primary btn-lg btn-block addtocart" onclick="inquiry('${product.product_name}','${product.product_no}','${product.seller_no}')">1:1문의글쓰기</button>
-               <!--  <button type="button" data-toggle="tooltip" class="btn btn-default compare" title="Compare this Product" ><i class="fa fa-exchange"></i></button> -->
+             	<c:set var="seller" value="${product.seller_no}"></c:set>
+             	<c:if test="${login.seller_no eq seller && login.seller_no ne null}">
+                  <button type="button" id="button-inquiry" data-loading-text="Loading..." class="btn btn-primary btn-lg btn-block addtocart" onclick="product_delete('${product.product_no}')">제품삭제</button>
+              </c:if>
               </div>
             </div>
           </div>
@@ -356,7 +393,7 @@
 				   <h2>배송정보</h2>
 				     <div class="content_box">
 						<div class="deli_img">
-							<img src="/resources/image/deli_content.png" alt="" style="margin-bottom: 20px">
+							<img src="/resources/files/attach/deli_content.png" alt="" style="margin-bottom: 20px">
 						</div>
 						<div class="deli_inner">
 							<div class="deli_inner_L">
@@ -764,7 +801,20 @@ $(function(){
 			alert("로그인이 하셔야 작성 가능합니다.");
 			return false;
 		})
+		
+		function product_delete(product_no){
+			alert(product_no)
+			if (confirm("정말로 제품을 삭제하시겠습니까??") == true){    //확인
+			    location.href="/product/product_delete?product_no="+product_no;
+			}else{   //취소
+			    return false;
+			}
+			
+		}
  
+		
+	
+
 </script>
 
   <%@include file="../include/footer.jsp"%>

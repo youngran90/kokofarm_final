@@ -5,6 +5,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%@ include file= "../include/header.jsp" %>	
+
 <div class="container">
   <ul class="breadcrumb">
     <li><a href="/"><i class="fa fa-home"></i></a></li>
@@ -64,160 +65,13 @@
             </li>
           </ul>
         
-        
-        
         </div>
       </div>
-      <div class="panel panel-default filter">
-        <div class="panel-heading columnblock-title">Refine Search</div>
-        <div class="filter-block">
-          <div class="list-group"> <a class="list-group-item">Color</a>
-            <div class="list-group-item">
-              <div id="filter-group1">
-                <label class="checkbox">
-                  <input name="filter[]" type="checkbox" value="1" />
-                  Black (7)</label>
-                <label class="checkbox">
-                  <input name="filter[]" type="checkbox" value="2" />
-                  Blue (6)</label>
-                <label class="checkbox">
-                  <input name="filter[]" type="checkbox" value="3" />
-                  Red (6)</label>
-              </div>
-            </div>
-            <a class="list-group-item">Price</a>
-            <div class="list-group-item">
-              <div id="filter-group2">
-                <label class="checkbox">
-                  <input name="filter[]" type="checkbox" value="4" />
-                  $100-$300 (6)</label>
-                <label class="checkbox">
-                  <input name="filter[]" type="checkbox" value="5" />
-                  $301-$1000 (6)</label>
-              </div>
-            </div>
-            <a class="list-group-item">Size</a>
-            <div class="list-group-item">
-              <div id="filter-group3">
-                <label class="checkbox">
-                  <input name="filter[]" type="checkbox" value="6" />
-                  Big (3)</label>
-                <label class="checkbox">
-                  <input name="filter[]" type="checkbox" value="7" />
-                  Medium (3)</label>
-                <label class="checkbox">
-                  <input name="filter[]" type="checkbox" value="8" />
-                  Small (1)</label>
-              </div>
-            </div>
-          </div>
-          <div class="panel-footer text-right">
-            <button type="button" id="button-filter" class="btn btn-primary">Refine Search</button>
-          </div>
-        </div>
-      </div>
+      
       <div class="banner" >
-        <div class="item"> <a href="#"><img src="/resources/image/banners/LeftBanner.jpg" alt="Left Banner" class="img-responsive" /></a> </div>
+        <div class="item"> <a href="#"><img src="/resources/files/attach/banner.jpg" alt="Left Banner" class="img-responsive" /></a> </div>
       </div>
-     <!--  <h3 class="productblock-title">Specials</h3> -->
-      <div class="row special-grid product-grid" style="display: none">
-        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-grid-item">
-          <div class="product-thumb transition">
-            <div class="image product-imageblock"> <a href="#"><img src="" alt="women's clothing" title="women's clothing" class="img-responsive" /></a>
-              <div class="button-group">
-                <button type="button" class="addtocart-btn" >Add to Cart</button>
-              </div>
-            </div>
-            <div class="caption product-detail">
-              <h4 class="product-name"> <a href="product.html" title="women's clothing">Clothing</a> </h4>
-              <p class="price product-price"> <span class="price-new">$254.00</span><span class="price-tax">Ex Tax: $210.00</span> </p>
-            </div>
-            <div class="button-group">
-              <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List" ><i class="fa fa-heart-o"></i></button>
-              <button type="button" class="addtocart-btn" >Add to Cart</button>
-              <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product" ><i class="fa fa-exchange"></i></button>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-grid-item">
-          <div class="product-thumb transition">
-            <div class="image product-imageblock"> <a href="#"><img src="" alt="women's clothing" title="women's clothing" class="img-responsive" /></a>
-              <div class="button-group">
-                <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List" ><i class="fa fa-heart-o"></i></button>
-                <button type="button" class="addtocart-btn" >Add to Cart</button>
-                <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product" ><i class="fa fa-exchange"></i></button>
-              </div>
-            </div>
-            <div class="caption product-detail">
-              <h4 class="product-name"> <a href="product.html" title="women's clothing">Clothing</a> </h4>
-              <p class="price product-price"> <span class="price-new">$254.00</span><span class="price-tax">Ex Tax: $210.00</span> </p>
-            </div>
-            <div class="button-group">
-              <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List" ><i class="fa fa-heart-o"></i></button>
-              <button type="button" class="addtocart-btn" >Add to Cart</button>
-              <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product" ><i class="fa fa-exchange"></i></button>
-            </div>
-          </div>
-        </div><div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-grid-item">
-          <div class="product-thumb transition">
-            <div class="image product-imageblock"> <a href="#"><img src="" alt="women's clothing" title="women's clothing" class="img-responsive" /></a>
-              <div class="button-group">
-                <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List" ><i class="fa fa-heart-o"></i></button>
-                <button type="button" class="addtocart-btn" >Add to Cart</button>
-                <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product" ><i class="fa fa-exchange"></i></button>
-              </div>
-            </div>
-            <div class="caption product-detail">
-              <h4 class="product-name"> <a href="product.html" title="women's clothing">Clothing</a> </h4>
-              <p class="price product-price"> <span class="price-new">$254.00</span><span class="price-tax">Ex Tax: $210.00</span> </p>
-            </div>
-            <div class="button-group">
-              <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List" ><i class="fa fa-heart-o"></i></button>
-              <button type="button" class="addtocart-btn" >Add to Cart</button>
-              <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product" ><i class="fa fa-exchange"></i></button>
-            </div>
-          </div>
-        </div><div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-grid-item">
-          <div class="product-thumb transition">
-            <div class="image product-imageblock"> <a href="#"><img src="" alt="women's clothing" title="women's clothing" class="img-responsive" /></a>
-              <div class="button-group">
-                <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List" ><i class="fa fa-heart-o"></i></button>
-                <button type="button" class="addtocart-btn" >Add to Cart</button>
-                <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product" ><i class="fa fa-exchange"></i></button>
-              </div>
-            </div>
-            <div class="caption product-detail">
-              <h4 class="product-name"> <a href="product.html" title="women's clothing">Clothing</a> </h4>
-              <p class="price product-price"> <span class="price-new">$254.00</span><span class="price-tax">Ex Tax: $210.00</span> </p>
-            </div>
-            <div class="button-group">
-              <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List" ><i class="fa fa-heart-o"></i></button>
-              <button type="button" class="addtocart-btn" >Add to Cart</button>
-              <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product" ><i class="fa fa-exchange"></i></button>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-grid-item">
-          <div class="product-thumb transition">
-            <div class="image product-imageblock"> <a href="#"><img src="" alt="women's clothing" title="women's clothing" class="img-responsive" /></a>
-              <div class="button-group">
-                <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List" ><i class="fa fa-heart-o"></i></button>
-                <button type="button" class="addtocart-btn" >Add to Cart</button>
-                <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product" ><i class="fa fa-exchange"></i></button>
-              </div>
-            </div>
-            <div class="caption product-detail">
-              <h4 class="product-name"> <a href="product.html" title="women's clothing">Clothing</a> </h4>
-              <p class="price product-price"> <span class="price-new">$254.00</span><span class="price-tax">Ex Tax: $210.00</span> </p>
-            </div>
-            <div class="button-group">
-              <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List" ><i class="fa fa-heart-o"></i></button>
-              <button type="button" class="addtocart-btn" >Add to Cart</button>
-              <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product" ><i class="fa fa-exchange"></i></button>
-            </div>
-          </div>
-        </div>
-      </div>
+      
     </div>
     <div id="content" class="col-sm-9">
       <h2 class="category-title">과일/채소</h2>
@@ -231,22 +85,18 @@
             <button type="button" id="list-view" class="btn btn-default list" data-toggle="tooltip" title="List"><i class="fa fa-th-list"></i></button>
             <button type="button" id="grid-view" class="btn btn-default grid" data-toggle="tooltip" title="Grid"><i class="fa fa-th"></i></button>
           </div>
-          <a href="#" id="compare-total">상품목록</a> </div>
+          <span id="compare-total">상품목록(${count_product})</span> </div>
         
         <div class="col-md-2 text-right sort-wrapper">
           <label class="control-label" for="input-sort">Sort By :</label>
           <div class="sort-inner">
-            <select id="input-sort" class="form-control">
-              <option value="ASC" selected="selected">Default</option>
-              <!-- <option value="ASC">Name (A - Z)</option>
-              <option value="DESC">Name (Z - A)</option> -->
-              <option value="ASC">가격 높은순</option>
-              <option value="DESC">가격 낮은순</option>
-         <!--      <option value="DESC">Rating (Highest)</option>
-              <option value="ASC">Rating (Lowest)</option>
-              <option value="ASC">Model (A - Z)</option>
-              <option value="DESC">Model (Z - A)</option> -->
-            </select>
+          				<select  id="input_sort" name="input_sort" onchange="doInput_sort(this.value)">
+							<option value="" selected="selected">-----</option>
+							<option value="ph">가격 높은순</option>
+				            <option value="pl">가격 낮은순</option>
+				        	<option value="vc">판매인기순</option>
+							</select>
+          
           </div>
         </div>
       </div>
@@ -257,32 +107,34 @@
      <c:forEach var="product" items="${list}">
         <div class="product-layout product-list col-xs-12">
           <div class="product-thumb">
-            <div class="image product-imageblock"> <a href="/product/detail_product?product_no=${product.product_no}"> <img src='/resources/files/attach/${product.product_mainimage}' alt="women's clothing stores" title="lorem ippsum dolor dummy" class="img-responsive" width="220" height="294"/></a>
-              <div class="button-group">
-                <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
-                <button type="button" class="addtocart-btn">Add to Cart</button>
-                <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product"><i class="fa fa-exchange"></i></button>
+            <div class="image product-imageblock"> <a href="/product/detail_product?product_no=${product.product_no}"> <img src='/resources/files/attach/${product.product_mainimage}' alt="women's clothing stores" title="lorem ippsum dolor dummy" class="img-responsive"  style="width: 220px; height: 165px;"/></a>
+             <div class="button-group">
+                <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List" style="display: none"><i class="fa fa-heart-o"></i></button>
+                <button type="button" class="addtocart-btn" style="width: 200px" onclick="pay('${product.product_no}');"><b>장바구니 담기</b></button>
+                <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product" style="display: none"><i class="fa fa-exchange"></i></button>
               </div>
             </div>
             <div class="caption product-detail">
-              <h4 class="product-name"> <a href="product.html" title="lorem ippsum dolor dummy" style="font-size: 18px"><b>${product.product_name}</b></a> </h4>
+              <h4 class="product-name"> 
+              <a href="product.html" title="lorem ippsum dolor dummy" style="font-size: 18px"><b>${product.product_name}</b></a>
+              </h4>
                <p class="product-desc"> ${product.s_contents} </p>
-              <p class="price product-price"><sub>(${product.product_unit}${product.unit}당)</sub>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<fmt:formatNumber value="${product.product_price}" pattern="#,###"/>원</p>
+              <p class="price product-price" ><sub>${product.reply_count}reviews&nbsp;(${product.product_unit}${product.unit}당)</sub><span style="margin-left: 50px;"><font color="#38a9a5"><fmt:formatNumber value="${product.product_price}" pattern="#,###" />원</font></span></p>
               <p>
-              <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
             </div>
-            <div class="button-group">
-              <button type="button" class="addtocart-btn">Add to Cart</button>
-            </div>
+              <div class="button-group" style="margin-top: 50px">
+                <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List" style="display: none"><i class="fa fa-heart-o"></i></button>
+                <button type="button" class="addtocart-btn" style="width: 200px" onclick="pay('${product.product_no}');"><b>장바구니 담기</b></button>
+                <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product" style="display: none"><i class="fa fa-exchange"></i></button>
+              </div>
           </div>
             </div>
               </c:forEach>
             </div>
     
       <div class="category-page-wrapper">
-        <div class="result-inner">Showing 1 to 8 of 10 (2 Pages)</div>
-        <div class="pagination-inner">
-         <ul class="pagination">
+        <div class="pagination-in" style="margin-left: 30%">
+         <ul class="pagination" >
 <li><a href="/product/list_product${pageMaker.makeQuery(1) }">처음</a></li>
 
 							<c:if test="${pageMaker.prev}">
@@ -291,10 +143,11 @@
 							</c:if>
 
 							<c:forEach begin="${pageMaker.startPage }"
-								end="${pageMaker.endPage }" var="idx">
+								end="${pageMaker.endPage}" var="idx">
 								<li
 									<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
-									<a href="/product/list_product${pageMaker.makeQuery(idx)}">${idx}</a>
+									<a href="/product/list_product?page=${idx }">${idx}</a>
+									
 								</li>
 							</c:forEach>
 
@@ -303,7 +156,7 @@
 								<li><a
 									href="/product/list_product${pageMaker.makeQuery(pageMaker.endPage +1) }">&raquo;</a></li>
 							</c:if>
-<li><a href="/product/list_product${pageMaker.makeQuery(pageMaker.lastPage)}">끝</a></li>
+						<li><a href="/product/list_product${pageMaker.makeQuery(pageMaker.lastPage)}">마지막</a></li>
 						</ul>
         </div>
       </div>
@@ -317,25 +170,29 @@
 
 
 <form id="jobForm">
-  <input type='hidden' name="page" value=${pageMaker.cri.perPageNum}>
+  <input type='hidden' name="page">
   <input type='hidden' name="perPageNum" value=${pageMaker.cri.perPageNum}>
 </form>
 
 
 <script>
+
 	
-	$(".pagination li a").on("click", function(event){
-		event.preventDefault(); 
-		alert("in")
-		var targetPage = $(this).attr("href");
-		
-		var jobForm = $("#jobForm");
-		jobForm.find("[name='page']").val(targetPage);
-		jobForm.attr("action","/product/list_product").attr("method", "get");
-		jobForm.submit();
-	});
+	function pay(product_no){
+		alert(product_no);
+		location.href="/cart/cart_detail?num=1&product_no="+ product_no;
+	}
+
+	function doInput_sort(input_sort){
+		alert("셀렉트박스 변경");
+		alert(input_sort);
+		location.href="/product/list_product?input_sort="+ input_sort;
+	}
    
 </script>
+
+
+
 
 
   

@@ -36,5 +36,9 @@
 		where reply_no = #{reply_no}
 	</select>
 	
+	<select id="avgReply" resultType="int"  parameterType="String">
+		select  nvl(ROUND(AVG(reply_rating)),0) from Reply
+		where product_no = #{product_no}
+	</select>
 	
 	</mapper>

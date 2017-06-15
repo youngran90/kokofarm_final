@@ -18,4 +18,6 @@ public interface ReplyDAO {
 		public int countReply(String product_no)throws Exception;
 		
 		public String get_product_no(String reply_no)throws Exception;
+		
+		public int avgReply(String product_no)throws Exception;
 }

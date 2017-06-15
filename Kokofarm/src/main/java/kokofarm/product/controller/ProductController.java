@@ -2,9 +2,7 @@ package kokofarm.product.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 import javax.inject.Inject;
@@ -21,12 +19,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import kokofarm.basic.domain.Criteria;
 import kokofarm.basic.domain.FileBean;
 import kokofarm.basic.domain.PageMaker;
 import kokofarm.mypage.domain.InquiryVO;
+import kokofarm.product.domain.ProductListForm;
 import kokofarm.product.domain.ProductVO;
 import kokofarm.product.domain.ReplyVO;
 import kokofarm.product.service.ProductService;
@@ -89,21 +89,25 @@ public class ProductController {
 
 	@RequestMapping(value="/list_product", method= {RequestMethod.GET, RequestMethod.POST})
 	public void listProduct(@Param("ca1") String ca1, 
-			@Param("ca2") String ca2, @Param("ca3") String ca3,  HttpServletRequest request,
-			 InquiryVO inquiry, @ModelAttribute("cri") Criteria cri, Model model)throws Exception{
+		@Param("ca2") String ca2, @Param("ca3") String ca3,  HttpServletRequest request,
+		 InquiryVO inquiry, @ModelAttribute("cri") Criteria cri, @Param("input_sort") String input_sort,
+		 Model model)throws Exception{
 
-		logger.info("product..list...");
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("ca1", ca1);
-		map.put("ca2", ca2);
-		map.put("ca3", ca3);
-		model.addAttribute("list", service.list_product(map));
-	
+		logger.info("in");
+		ProductListForm ProductForm = new ProductListForm();
+		ProductForm.setCa1(ca1);
+		ProductForm.setCa2(ca2);
+		ProductForm.setCa3(ca3);
+		ProductForm.setInput_sort(input_sort);
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(service.Count_Product());
-		System.out.println(pageMaker.toString());
+		pageMaker.setTotalCount(service.Count_Product(),cri.getPage());
+		ProductForm.setPageMaker(pageMaker);
+		List<ProductVO>list = service.list_product(ProductForm);
+		model.addAttribute("count_product", service.Count_Product());
+		model.addAttribute("list",list);
 		model.addAttribute("pageMaker", pageMaker);
+		
 		
 	}
 	
@@ -118,10 +122,14 @@ public class ProductController {
 		model.addAttribute("product", productVo);
 		
 		int reply_count = re_service.countReply(product_no);
-		System.out.println(reply_count);
 		model.addAttribute("reply_count", reply_count);
 		
+		int reply_avg = re_service.avgReply(product_no);
+		model.addAttribute("reply_avg", reply_avg);
+		
 		replylist = re_service.list_Post(product_no);
+		
+		
 		model.addAttribute("replylist", replylist);
 	}
 		
@@ -158,5 +166,12 @@ public class ProductController {
 		return "product/Insert_product"; 
 		}
 	 
-
+	@RequestMapping(value ="/product_delete", method = RequestMethod.GET)
+	public String product_delete(@Param("product_no")String product_no)throws Exception {
+		 System.out.println(product_no);
+		service.delete_product(product_no);
+		
+		return "redirect:/product/list_product";
+	}
+	
 }

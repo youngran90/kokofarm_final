@@ -14,8 +14,37 @@ public class PageMaker {
   private boolean prev;
   private boolean next;
   private int lastPage;
+  private int cpage;
+  private int start;
+  private int end;
+  
+  
 
-  private int displayPageNum = 12;
+  public int getCpage() {
+	return cpage;
+}
+
+public void setCpage(int cpage) {
+	this.cpage = cpage;
+}
+
+public int getStart() {
+	return start;
+}
+
+public void setStart(int start) {
+	this.start = start;
+}
+
+public int getEnd() {
+	return end;
+}
+
+public void setEnd(int end) {
+	this.end = end;
+}
+
+private int displayPageNum = 12;
 
   private Criteria cri;
 
@@ -23,9 +52,9 @@ public class PageMaker {
     this.cri = cri;
   }
 
-  public void setTotalCount(int totalCount) {
+  public void setTotalCount(int totalCount,int cpage) {
     this.totalCount = totalCount;
-
+    this.cpage = cpage;
     calcData();
   }
 
@@ -47,6 +76,15 @@ public class PageMaker {
     
     lastPage = (totalCount / displayPageNum) +1;
    
+    int start = 0;
+	int end = 0;
+	
+	start = displayPageNum * (cpage - 1) + 1; // 시작위치
+	end = (displayPageNum * (cpage - 1)) + displayPageNum;
+	
+	this.start = start;
+	this.end = end;
+	
 
   }
 
@@ -116,4 +154,15 @@ public String makeQuery(int page) {
 		return "";
 	}
   }
+
+@Override
+public String toString() {
+	return "PageMaker [totalCount=" + totalCount + ", startPage=" + startPage + ", endPage=" + endPage + ", prev="
+			+ prev + ", next=" + next + ", lastPage=" + lastPage + ", cpage=" + cpage + ", start=" + start + ", end="
+			+ end + ", displayPageNum=" + displayPageNum + ", cri=" + cri + "]";
+}
+
+
+  
+  
 }

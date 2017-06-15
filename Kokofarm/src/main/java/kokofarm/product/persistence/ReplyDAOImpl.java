@@ -49,5 +49,10 @@ public class ReplyDAOImpl implements ReplyDAO {
 		return session.selectOne(namespace+".getProduct_no", reply_no);
 	}
 
+	@Override
+	public int avgReply(String product_no) throws Exception {
+		return session.selectOne(namespace+".avgReply", product_no);
+	}
+
 
 }

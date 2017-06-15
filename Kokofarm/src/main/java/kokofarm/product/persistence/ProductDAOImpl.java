@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import kokofarm.product.domain.ReplyVO;
+import kokofarm.product.domain.ProductListForm;
 import kokofarm.product.domain.ProductVO;
 
 @Repository
@@ -29,8 +30,8 @@ public class ProductDAOImpl implements ProductDAO {
 
 	//전체출력
 	@Override
-	public List<ProductVO> list_Pro(Map<String, String>map) throws Exception {
-	return session.selectList(namespace+".listProduct", map);
+	public List<ProductVO> list_Pro(ProductListForm ProductForm) throws Exception {
+	return session.selectList(namespace+".listProduct", ProductForm);
 	}
 	
 	
@@ -46,7 +47,7 @@ public class ProductDAOImpl implements ProductDAO {
 
 	@Override
 	public void delete_pro(String product_no) throws Exception {
-		session.delete(namespace+".deleteProduct", product_no);
+		session.update(namespace+".deleteProduct", product_no);
 
 	}
 

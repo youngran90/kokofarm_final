@@ -40,8 +40,8 @@ public class ProductVO implements Serializable{
 	public ProductVO(String product_no, String product_name, String product_unit, String unit, int product_total,
 			int product_price, String ca1, String ca2, String ca3, String product_area, String producer,
 			String seller_no, Timestamp product_uploaddate, Date product_harvestdate, String contents,
-			int review_number, int view_count, int reply_count,  String product_mainimage, String s_contents, String product_sellerimage,
-			MultipartFile file1, MultipartFile file2) {
+			int review_number, int view_count, int reply_count, String product_mainimage, String s_contents,
+			String product_sellerimage, MultipartFile file1, MultipartFile file2) {
 		super();
 		this.product_no = product_no;
 		this.product_name = product_name;
@@ -60,10 +60,10 @@ public class ProductVO implements Serializable{
 		this.contents = contents;
 		this.review_number = review_number;
 		this.view_count = view_count;
+		this.reply_count = reply_count;
 		this.product_mainimage = product_mainimage;
 		this.s_contents = s_contents;
 		this.product_sellerimage = product_sellerimage;
-		this.reply_count = reply_count;
 		this.file1 = file1;
 		this.file2 = file2;
 	}
@@ -169,6 +169,12 @@ public class ProductVO implements Serializable{
 	public void setView_count(int view_count) {
 		this.view_count = view_count;
 	}
+	public int getReply_count() {
+		return reply_count;
+	}
+	public void setReply_count(int reply_count) {
+		this.reply_count = reply_count;
+	}
 	public String getProduct_mainimage() {
 		return product_mainimage;
 	}
@@ -199,6 +205,7 @@ public class ProductVO implements Serializable{
 	public void setFile2(MultipartFile file2) {
 		this.file2 = file2;
 	}
+	
 	
 }
 	

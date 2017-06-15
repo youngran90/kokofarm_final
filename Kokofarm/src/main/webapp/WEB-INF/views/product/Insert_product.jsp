@@ -76,7 +76,8 @@ function submit1(){
  })
  
  var ckeditor_config = { 
-		resize_enabled : false, // 에디터 크기를 조절하지 않음 
+		height :700,
+		resize_enabled : false,
 		enterMode : CKEDITOR.ENTER_BR , // 엔터키를 <br> 로 적용함. 
 		shiftEnterMode : CKEDITOR.ENTER_P , // 쉬프트 + 엔터를 <p> 로 적용함. 
 		toolbarCanCollapse : true , removePlugins : "elementspath", // DOM 출력하지 않음 
@@ -96,6 +97,8 @@ function submit1(){
 
 var editor = null; jQuery(function() { // ckeditor 적용 
 	editor = CKEDITOR.replace( "contents" , ckeditor_config ); 
+	
+	
 	}); 
 
 
@@ -112,6 +115,8 @@ function onlyNumber(obj) {
 
     }); 
 }
+
+
 </script>
 
 
@@ -119,22 +124,15 @@ function onlyNumber(obj) {
 <div class="container">
     <ul class="breadcrumb">
         <li><a href="index.html"><i class="fa fa-home"></i></a></li>
-        <li><a href="#">Account</a></li>
-        <li><a href="register.html">Register</a></li>
+        <li><a href="/product/Insert_product">상품등록</a></li>
     </ul>
     <div class="row">
-        <div class="col-sm-3 hidden-xs column-left" id="column-left">
-            <div class="column-block">
-                <div class="columnblock-title">Account</div>
-                <div class="account-block">
-                    <div class="list-group"> <a class="list-group-item" href="login.html">Login</a> <a class="list-group-item" href="register.html">Register</a> <a class="list-group-item" href="forgetpassword.html">Forgotten Password</a> <a class="list-group-item" href="#">My Account</a> <a class="list-group-item" href="#">Address Book</a> <a class="list-group-item" href="#">Wish List</a> <a class="list-group-item" href="#">Order History</a> <a class="list-group-item" href="download">Downloads</a> <a class="list-group-item" href="#">Reward Points</a> <a class="list-group-item" href="#">Returns</a> <a class="list-group-item" href="#">Transactions</a> <a class="list-group-item" href="#">Newsletter</a><a class="list-group-item last" href="#">Recurring payments</a> </div>
-                </div>
-            </div>
         </div>
         <div class="col-sm-9" id="content">
             <h1>상품등록</h1>
             <P><strong></strong></P>
             <form id="registerForm" class="form-horizontal" role="form" method="post" action="Insert_product" enctype="multipart/form-data">
+                <input type="hidden" id="seller_no" name="seller_no" value="${login.seller_no}">
                 <fieldset id="account">
                     <legend>상품카테고리를 정확하게 입력해주세요</legend>
                     <div style="display: none;" class="form-group required">
@@ -142,7 +140,7 @@ function onlyNumber(obj) {
                         <div class="col-sm-10">
                             <div class="radio">
                                 <label>
-                                    <input type="radio" checked="checked" value="1" name="customer_group_id">
+                                    <input type="radio" checked="checked" value="" name="customer_group_id">
                                     Default</label>
                             </div>
                         </div>
@@ -150,7 +148,7 @@ function onlyNumber(obj) {
                     <div class="form-group required">
                         <label for="input-product_name" class="col-sm-2 control-label">상품 이름</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="product_name" placeholder="상품이름" value="1"  name="product_name">
+                            <input type="text" class="form-control" id="product_name" placeholder="상품이름" value=""  name="product_name">
                         </div>
                     </div>
                    
@@ -158,21 +156,21 @@ function onlyNumber(obj) {
                         <label for="input-category" class="col-sm-2 control-label">상품 분류</label>
                         <div class="col-sm-10">
 							<select  id="ca1" name="ca1">
-								  <option value="">-- 대분류 --</option>
-								  <option value="vegetable" selected="selected">야채</option>
+								  <option value="" selected="selected">-- 대분류 --</option>
+								  <option value="vegetable" >야채</option>
 								  <option value="fruit">과일</option>
 							</select>
 							<select id="ca2" name="ca2">
-								  <option value="">-- 중분류 --</option>
-								  <option class="vegetable" value="vs" selected="selected">쌈/야채</option>
+								  <option value=""  selected="selected">-- 중분류 --</option>
+								  <option class="vegetable" value="vs">쌈/야채</option>
 								  <option class="vegetable" value="vf">열매채소</option>
 								  <option class="vegetable" value="vr">뿌리채소</option>
 								  <option class="fruit" value="fs">과일</option>
 								
 							</select>
 							<select id="ca3" name="ca3">
-								  <option value="">-- 소분류 --</option>
-								  <option class="vs" value="vs_1" selected="selected">상추/깻잎</option>
+								  <option value="" selected="selected">-- 소분류 --</option>
+								  <option class="vs" value="vs_1" >상추/깻잎</option>
 								  <option class="vs" value="vs_2">치커리/케일</option>
 								  <option class="vs" value="vs_3">쑥갓/청겨자</option>
 								  <option class="vf" value="vf_1">가지/오이</option>
@@ -204,14 +202,14 @@ function onlyNumber(obj) {
                      <div class="form-group required">
                         <label for="input-product_price" class="col-sm-2 control-label">상품 가격</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="input-lastname" placeholder="단위 당  ex)10000 (1kg기준) " value="1" name="product_price"  onkeydown="onlyNumber(this)"/>
+                            <input type="text" class="form-control" id="input-lastname" placeholder="단위 당  ex)10000 (1kg기준) " value="" name="product_price"  onkeydown="onlyNumber(this)"/>
                         </div>
                     </div>
                     
                     <div class="form-group required">
                         <label for="input-product_unit" class="col-sm-2 control-label">단위</label>
                         <div class="col-sm-10">
-                            <input type=text id="product_unit" placeholder="단위당 수량" value="1"  name="product_unit" onkeydown="onlyNumber(this)"/>
+                            <input type=text id="product_unit" placeholder="단위당 수량" value=""  name="product_unit" onkeydown="onlyNumber(this)"/>
                         	<select id="unit" name="unit">
 								  <option value="kg">kg</option>
 								  <option value="g">g</option>
@@ -262,7 +260,7 @@ function onlyNumber(obj) {
                            <div class="form-group">
                         <label for="input-s_contents" class="col-sm-2 control-label">메인 간단 설명</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="s_contents" placeholder="메인이미지 옆 간단설명을 입력해주세요" value="1" name="s_contents">
+                            <input type="text" class="form-control" id="s_contents" placeholder="메인이미지 옆 간단설명을 입력해주세요" value="" name="s_contents">
                         </div>
                     </div>
                           <div class="form-group required">
@@ -273,7 +271,7 @@ function onlyNumber(obj) {
                         </div>
                   
                   <div class="form-group">
-			<label for="exampleInputEmail1" style="margin-left: 10%">상세파일</label>
+			<label for="exampleInputEmail1" >* 상품 상세 설명</label>
 			<textarea id="contents" name="contents"></textarea>
 		</div>
  	       </fieldset>
@@ -283,12 +281,12 @@ function onlyNumber(obj) {
                  <div class="bottons" style="margin-left: 30%;">
                    <input class="btn btn-primary"  type="button" value="상품저장" onclick="submit1()" >&nbsp;&nbsp; 
 				   <input class="btn btn-primary"  type="reset" value="취소" >
+				   
 				   </div>
                     </fieldset>
             </form>
         </div>
     </div>
-</div>
 
     
     

@@ -17,4 +17,6 @@ public interface ReplyService {
 	public void update_Post(ReplyVO vo)throws Exception;
 	
 	public int countReply(String product_no)throws Exception;
+	
+	public int avgReply(String product_no)throws Exception;
 }
