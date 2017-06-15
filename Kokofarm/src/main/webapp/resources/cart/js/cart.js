@@ -78,7 +78,33 @@
 								} 
 							}  
 						}); // 선택 이벤트 종료 
-						
+					
+					//재고 여부 확인
+						$("em[id=p_amount]").each(function(i){
+							var index = i + 1;
+							var amount = $("em[class="+index+"p_amount]").text(); // 재고량
+							var name = $("a[class="+index+"name]").text();
+							if( amount == 0){
+								alert("제품명 : "+name+"\n현재 재고량 : "+amount+"\n죄송합니다. 재고가 부족하여 구매하실수 없습니다. \n해당 품목을 삭제하여 주세요.");
+								$("input[class="+index+"dp]").val(0);
+								$("a[class="+index+"name]").css("text-decoration","line-through");
+								$("em[id="+index+"dp]").css("text-decoration","line-through");
+								$("em[id="+index+"pp]").css("text-decoration","line-through");
+								$("input[class="+index+"pa]").css("text-decoration","line-through");
+								$("input[class="+index+"pa]").attr("disabled",true);
+								$("button[id="+index+"bu]").attr("disabled",true);
+								$("button[id="+index+"bd]").attr("disabled",true);
+								$("button[id="+index+"bc]").attr("disabled",true);
+								$("em[id="+index+"tp]").css("text-decoration","line-through");
+								$("input[id="+index+"ac]").prop("checked",false);
+								$("input[class="+index+"dp]").prop("checked",false); //배송비
+								$("input[class="+index+"tp]").prop("checked",false); // 금액
+								$("input[class="+index+"opa]").prop("checked",false); // 수량
+								$("input[class="+index+"pn]").prop("checked",false); // 품명
+								$("input[class="+index+"pp]").prop("checked",false); // 각각의 제품 금액
+							}
+						})
+					
 						//체크박스 선택 없이 주문하기 눌렀을때...
 						$(".btn-primary").on('click',function(event) {
 							event.preventDefault();
@@ -334,6 +360,20 @@
 							var product_price_casting = product_price.replace(/[^0-9]/g,"");
 							var delivery_price = 0; // 배송비 담을 변수
 							
+							var amount = $("em[class="+index+"p_amount]").text(); // 재고량
+							
+							if(amount == 0){
+								
+								delivery_price = 0;
+								
+								if(index <= size){
+									result_delivery += delivery_price;
+								}
+								
+								$(".result_delivery").text(numberFormat(result_delivery)); // 배송비 총합 출력delivery_casting
+								
+							}else{
+								
 								if(parseInt(product_price_casting) >= 50000){
 									$(this).text("무료배송");
 									$("b[id="+index+"dp_unit]").text("");
@@ -344,9 +384,9 @@
 									delivery_price = 2500;
 									$("input[class="+index+"dp]").val(delivery_price);
 								}
-							
-							if(index <= size){
-								result_delivery += delivery_price;
+								if(index <= size){
+									result_delivery += delivery_price;
+								}
 							}
 							
 						})
@@ -359,8 +399,21 @@
 							var tp = $("em[id="+index+"tp]").text(); // 각 품목에대한 총 금액(문자열)
 							var tp_casting = tp.replace(/[^0-9]/g,""); //각 품목 총합의 천단위를 제거한다 
 							
-							if(index <= size){
-								result_sum += parseInt(tp_casting); // 총합구하는 구문
+							var amount = $("em[class="+index+"p_amount]").text(); // 재고량
+							
+							if(amount == 0 ){
+								
+								tp_casting = 0;
+								
+								if(index <= size){
+									result_sum += parseInt(tp_casting); // 총합구하는 구문
+								}
+								
+								$(".result_price").text(numberFormat(result_sum)); //주문금액 총합 출력
+							}else{
+								if(index <= size){
+									result_sum += parseInt(tp_casting); // 총합구하는 구문
+								}
 							}
 							
 						});
