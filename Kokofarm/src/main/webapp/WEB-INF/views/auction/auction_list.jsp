@@ -20,7 +20,7 @@
 
 	window.onload = function(){
 		var seller_no= '${login.seller_no}'
-		alert(seller_no);
+		
 	}
 </script>
 <!-- <div class="preloader loader" style="display: block; background:#f2f2f2;"> <img src="image/loader.gif"  alt="#"/></div> -->
