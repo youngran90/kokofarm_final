@@ -13,7 +13,6 @@ server.listen("8083",function(){
 });
 
 var member_id;
-
 app.get('/', function(request, response) {
    member_id = request.param("member_id");
    name = request.param("name");

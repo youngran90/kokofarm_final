@@ -38,11 +38,11 @@ public class RtAuctionController {
 		}
 		
 		RtAuctionInfoVO vo = service.rtauction_info("RT_Auction_f87efe7c6ba44b67b7b41f638ab54ca1");
-		String name = vo.getRt_action_name();
-		String down = vo.getRt_action_down();
-		String unit = vo.getRt_action_unit();
-		String img = vo.getRt_action_title_img();
-		
+		System.out.println(vo.toString());
+		String name = vo.getRt_auction_name();
+		String down = vo.getRt_auction_down();
+		String unit = vo.getRt_auction_unit();
+		String img = vo.getRt_auction_title_img();
 		
 		
 		model.addAttribute("member_id", member.getMember_id());

@@ -17,7 +17,7 @@ public class RtAuctionDAOImpl implements RtAuctionDAO{
 
 	@Override
 	public RtAuctionInfoVO rtauction_info(String rt_auction_no) throws Exception {
-		return session.selectOne(namespace+".rtauction_info", rt_auction_no);
+		return session.selectOne(namespace+".rtauctioninfo", rt_auction_no);
 	}
 	
 	

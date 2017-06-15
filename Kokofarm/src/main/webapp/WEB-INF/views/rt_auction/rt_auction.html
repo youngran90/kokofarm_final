@@ -36,6 +36,13 @@ $(document).ready(function(){
 		$("#id").val(data);
 	});
 	
+	socket.on('info',function(data){
+		$("#rt_name").text(data.name);
+		$("#rt_down").text(data.down);
+		$("#rt_unit").text(data.unit);
+		$("#rt_img").attr("src",data.img);
+	});
+	
 	socket.on('userlist',function(data){2
 			var list = data+'\n';
 			$("#chat_list").append(list);
@@ -79,7 +86,10 @@ $(document).ready(function(){
 <h4 class="test"></h4>
 <section class="action_body" id="action_body">
 		<div class="action_info" id="action_info">
-			여기는 경매 정보
+			<em id="rt_name"></em>
+			<img id="rt_img" alt="rt_img" src="">
+			<em id="rt_down"></em>
+			<em id="rt_unit"></em>
 		</div>
 			<div class="action_time_price" id="action_time_price">
 				경매 시간 / 현재 가격
