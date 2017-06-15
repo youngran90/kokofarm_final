@@ -1,8 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-  MemberVO vo = (MemberVO)session.getAttribute("login");
-%>    
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -15,13 +12,15 @@
 	}
 	#list_img{
 		/* border: 1px solid red; */
-		width: 900px;
-		height: 600px;
+		width: 650px;
+		height: 200px;
 	}
 </style>
 <script>
+
 	window.onload = function(){
-		
+		var seller_no= '${login.seller_no}'
+		alert(seller_no);
 	}
 </script>
 <!-- <div class="preloader loader" style="display: block; background:#f2f2f2;"> <img src="image/loader.gif"  alt="#"/></div> -->
