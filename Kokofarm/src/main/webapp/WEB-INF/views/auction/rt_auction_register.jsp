@@ -105,14 +105,14 @@
                     <div class="form-group">
                         <label for="input-lastname" class="col-sm-2 control-label">경매일</label>
                         <div class="col-sm-10">
-                        <select id="rt_auction_time" name="rt_auction_time" style="height: 32px; width: 159px; float: left;
+                        <select id="rt_auction_time" name="rt_auction_time" style="height: 32px; width: 169px; float: left;
                         text-align: center;">
-                            	<option>&nbsp;&nbsp;시간을 선택해주세요</option>
+                            	<option>시간을 선택해주세요</option>
                             	<option value="10:00:00">오전 10시</option>
                             	<option value="22:00:00">오후 10시</option>
                             </select>
                             <input type="text" class="form-control" id="rt_auction_date" name="rt_auction_date"
-                            style="height:32px; width:629px;">
+                            style="height:32px; width:619px;">
                         </div>
                     </div>
                     <div class="form-group">
@@ -124,20 +124,20 @@
                     <div class="form-group">
                         <label for="input-fax" class="col-sm-2 control-label">단위</label>
                         <div class="col-sm-10">  
-                            <select id="auction_units" name="auction_units" style="height:32px; width:99px; float:left; text-align: center;">
+                            <select id="rt_auction_units" name="rt_auction_units" style="height:32px; width:99px; float:left; text-align: center;">
                         	<option value="kg">kg</option>
                         	<option value="g">g</option>
                         	<option value="박스">박스</option>
                         	<option>기타</option>
                         </select>
-                            <input type="text" class="form-control" id="auction_unit" placeholder="단위를 자세히 입력해주세요." 
-                        name="auction_unit" style="width:689px; height:32px;"/>
+                            <input type="text" class="form-control" id="rt_auction_unit" placeholder="단위를 자세히 입력해주세요." 
+                        name="rt_auction_unit" style="width:689px; height:32px;"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="input-fax" class="col-sm-2 control-label">생산지/원산지</label>
                         <div class="col-sm-10">
-                            <select id="auction_location" name="auction_location" style="height:32px; width:150px; float:left;
+                            <select id="rt_auction_location" name="rt_auction_location" style="height:32px; width:150px; float:left;
                         text-align: center;">
                         	<option value="서울특별시">서울특별시</option>
                         	<option value="인천광역시">인천광역시</option>
@@ -152,7 +152,7 @@
                         	<option value="제주특별자치도">제주특별자치도</option>
                         </select>
                             <input type="text" class="form-control" placeholder="주소를 입력해주세요." 
-                            id="auction_area" name="auction_area" style="width:638px; height:32px;">
+                            id="rt_auction_area" name="rt_auction_area" style="width:638px; height:32px;">
                         </div>
                     </div>
                     <div class="form-group">

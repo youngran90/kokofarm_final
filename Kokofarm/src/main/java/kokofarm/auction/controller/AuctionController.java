@@ -9,26 +9,27 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import kokofarm.auction.domain.AuctionCri;
+import kokofarm.auction.domain.AuctionPage;
 import kokofarm.auction.domain.AuctionRegisterVO;
+import kokofarm.auction.domain.RT_AuctionCri;
 import kokofarm.auction.domain.RT_AuctionRegisterVO;
 import kokofarm.auction.service.AuctionService;
 import kokofarm.basic.domain.FileBean;
+import kokofarm.member.domain.MemberVO;
 
-import kokofarm.basic.util.MediaUtils;
-import kokofarm.basic.util.UploadFileUtils;
 
 @Controller
 @RequestMapping("/auction/*")
@@ -73,7 +74,11 @@ public class AuctionController {
 	    String auction_area = request.getParameter("auction_area");
 	    String area = auction_location+" "+auction_area;
 	    auction.setAuction_area(area);
-	         
+	    
+	    MemberVO member = (MemberVO)session.getAttribute("login");
+	    String seller_no = member.getSeller_no();
+	    auction.setSeller_no(seller_no);
+	    
 	    service.register(auction);
 	    logger.info("auction_title_img : "+auction.getAuction_title_img());
 	         
@@ -119,17 +124,30 @@ public class AuctionController {
 		}
 	
 	@RequestMapping(value="/auction_list", method=RequestMethod.GET)
-	public void auctionListGET(AuctionRegisterVO auction, Model model)throws Exception{
-		model.addAttribute("list", service.list());
+	public void auctionList(@ModelAttribute("cri")AuctionCri cri, AuctionRegisterVO auction, MemberVO member, Model model) throws Exception{
+		logger.info(cri.toString());
+		model.addAttribute("list", service.listCri(cri));
 		
-		logger.info("일반 경매 리스트_get");
+		AuctionPage auctionPage = new AuctionPage();
+		auctionPage.setCri(cri);
+		auctionPage.setTotalCount(service.CountPage(cri));
+		
+		model.addAttribute("auctionPage", auctionPage);
+		logger.info("페이징 + 일반경매리스트_GET");
+		
+		auction.setSeller_no(member.getSeller_no());
 	}
 	
 	@RequestMapping(value="/tender_form", method=RequestMethod.GET)
-	public void detail(@RequestParam(value="auction_no") int auction_no, Model model)throws Exception{
-		model.addAttribute(service.detail(auction_no));
+	public ModelAndView detail(@RequestParam(value="auction_no") int auction_no, HttpSession session, ModelAndView mav)throws Exception{
+		service.updateAuctionHits(auction_no, session);
+		mav.addObject(service.detail(auction_no));
+		mav.setViewName("/tender/tender_form");
+		
 		System.out.println(auction_no);
+		return mav;
 	}
+	
 	
 	
 	
@@ -148,12 +166,23 @@ public class AuctionController {
 		UUID uid = UUID.randomUUID();
 		String auction_no = "RT_Auction_"+uid.toString().replace("-", "");
 		rt_auction.setRt_auction_no(auction_no);
+		
 		String set_d = request.getParameter("rt_auction_date");
 		String set_t = request.getParameter("rt_auction_time");
 		String setDate = set_d+" "+set_t;
 		rt_auction.setRt_auction_date(setDate);
+		
+		String unit = request.getParameter("rt_auction_unit");
+		String units = request.getParameter("rt_auction_units");
+		rt_auction.setRt_auction_unit(unit+units);
+		
+		String location = request.getParameter("rt_auction_location");
+		String area = request.getParameter("rt_auction_area");
+		rt_auction.setRt_auction_area(location+" "+area);
+		
 		System.out.println(auction_no);
 		System.out.println(setDate);
+		
 		
 		logger.info(rt_auction.toString());
 		String originalName = rt_auction.getRt_file().getOriginalFilename();
@@ -177,11 +206,13 @@ public class AuctionController {
 	}
 
 	@RequestMapping(value="/rt_auction_list", method=RequestMethod.GET)
-	public void RT_auctionListGET(RT_AuctionRegisterVO rt_auction, Model model)throws Exception{
-		model.addAttribute("list", service.rt_list());
+	public void RT_auctionList(@ModelAttribute("cri")RT_AuctionCri cri, Model model)throws Exception{
+		logger.info(cri.toString());
+		model.addAttribute("list", service.rt_listCri(cri));
 		
 		logger.info("실시간 경매 리스트_get");
 	}
+	
 	
 	@RequestMapping(value="/", method=RequestMethod.GET)
 	public void RT_detail(@RequestParam(value="rt_auction_no") String rt_auction_no, Model model)throws Exception{

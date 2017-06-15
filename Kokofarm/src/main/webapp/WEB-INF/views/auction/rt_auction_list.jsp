@@ -4,6 +4,25 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>코코팜::경매상품</title>
+<style>
+	.product-imageblock {
+		width: 35%;
+	}
+	.product-name .rt_auction_name{
+		font-size: 25px; 
+		position: relative;
+		top: 5px;
+		
+	}
+	.product-name .rt_auction_name:hover{
+		color: #F26B18;
+	}
+	.auction_part:hover{
+		background: #F26B18;
+		color: white;
+	}
+	
+</style>
 
 <%@include file="../include/header.jsp"%>
 
@@ -219,13 +238,12 @@
         <div class="col-sm-12 category-image"><img src="image/banners/category-banner.jpg" alt="Desktops" title="Desktops" class="img-thumbnail" /></div>
         <div class="col-sm-12 category-desc">Lorem ipsum dolomagna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate.</div>
       </div> -->
-      <div class="category-page-wrapper">
+      <div class="category-page-wrapper" style="border-bottom: none;">
         <div class="col-md-6 list-grid-wrapper">
           <div class="btn-group btn-list-grid">
-            <button type="button" id="list-view" class="btn btn-default list" data-toggle="tooltip" title="List"><i class="fa fa-th-list"></i></button>
-            <button type="button" id="grid-view" class="btn btn-default grid" data-toggle="tooltip" title="Grid"><i class="fa fa-th"></i></button>
+ 			<button type="button" id="list-view" class="btn btn-default list" data-toggle="tooltip" title="List"><i class="fa fa-th-list" style="color: #F26B18;"></i></button>
           </div>
-          <a href="#" id="compare-total"></a> </div>
+          <!-- <a href="#" id="compare-total"></a> </div> -->
         <div class="col-md-1 text-right page-wrapper">
           <!-- <label class="control-label" for="input-limit">Show :</label>
           <div class="limit">
@@ -249,8 +267,7 @@
               <option value="DESC">현재가 (오름차순)</option>
             </select>
           </div> -->
-          <input type="text">
-          <button value="검색">검색</button>
+         
         </div>
       </div>
       <br><br><br>
@@ -259,12 +276,13 @@
      <c:forEach items="${list}" var="RT_AuctionRegisterVO">
      	<div class="product-layout product-list col-xs-12">
      		<div class="product-thumb">
-     			<div class="image product-imageblock"><a href="/tender/tenderform?auction_no=${RT_AuctionRegisterVO.rt_auction_no}"><img src='/resources/files/attach/${RT_AuctionRegisterVO.rt_auction_title_img}' class="img-responsive"></a></div>
-     			<h4 class="product-name"> <a href="/tender/tenderform?auction_no=${RT_AuctionRegisterVO.rt_auction_no}">${RT_AuctionRegisterVO.rt_auction_name}</a></h4>
+     			<div class="image product-imageblock"><img src='/resources/files/attach/${RT_AuctionRegisterVO.rt_auction_title_img}' class="img-responsive"></div>
+     			<p class="product-name" style="height: 50px;"> <a href="/tender/tenderform?auction_no=${RT_AuctionRegisterVO.rt_auction_no}"><span class="rt_auction_name">${RT_AuctionRegisterVO.rt_auction_name}</span></a></p>
+     			<p style="color: lightgray;">${RT_AuctionRegisterVO.rt_auction_content}</p>
      			<p class="price product-price">
      			<span style="font-size: 12px; color:#A6A6A6; font-weight: lighter; margin-right:5px;">하한가</span>${RT_AuctionRegisterVO.rt_auction_down}
      			</p>
-     			
+     			<button class="auction_part" style="position: relative; top: 50px;">참여하기</button>
      		</div>
      	</div>
      	
@@ -272,7 +290,7 @@
       
        </div>
       <!-- 페이징 처리 -->
-      <div class="category-page-wrapper">
+      <!-- <div class="category-page-wrapper">
         <div class="result-inner"></div>
         <div class="pagination-inner">
           <ul class="pagination">
@@ -282,10 +300,11 @@
             <li><a href="category.html">&gt;|</a></li>
           </ul>
         </div>
-      </div>
+      </div> -->
       <!-- 페이징 처리 끝 -->
     </div>
   </div>
+</div>
 </div>
 </div>
 <%@include file="../include/footer.jsp"%>

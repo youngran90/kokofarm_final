@@ -1,12 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+  MemberVO vo = (MemberVO)session.getAttribute("login");
+%>    
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>코코팜::경매상품</title>
 
 <%@include file="../include/header.jsp"%>
-
+<style>
+	.product-name .auction_name:hover{
+		color: #F26B18;
+	}
+	#list_img{
+		/* border: 1px solid red; */
+		width: 900px;
+		height: 600px;
+	}
+</style>
+<script>
+	window.onload = function(){
+		
+	}
+</script>
 <!-- <div class="preloader loader" style="display: block; background:#f2f2f2;"> <img src="image/loader.gif"  alt="#"/></div> -->
 <div class="container">
   <ul class="breadcrumb">
@@ -215,17 +232,17 @@
     <!-- 리스트 시작 -->
     <div id="content" class="col-sm-9">
       <h2 class="category-title">일반 경매</h2>
+      <button id="register_button"style="color: #F26B18">상품 등록</button>
       <!-- <div class="row category-banner">
         <div class="col-sm-12 category-image"><img src="image/banners/category-banner.jpg" alt="Desktops" title="Desktops" class="img-thumbnail" /></div>
         <div class="col-sm-12 category-desc">Lorem ipsum dolomagna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate.</div>
       </div> -->
-      <div class="category-page-wrapper">
+      <div class="category-page-wrapper" style="border-bottom: none;">
         <div class="col-md-6 list-grid-wrapper">
           <div class="btn-group btn-list-grid">
-            <button type="button" id="list-view" class="btn btn-default list" data-toggle="tooltip" title="List"><i class="fa fa-th-list"></i></button>
             <button type="button" id="grid-view" class="btn btn-default grid" data-toggle="tooltip" title="Grid"><i class="fa fa-th"></i></button>
           </div>
-          <a href="#" id="compare-total"></a> </div>
+          <!-- <a href="#" id="compare-total"></a> </div> -->
         <div class="col-md-1 text-right page-wrapper">
           <!-- <label class="control-label" for="input-limit">Show :</label>
           <div class="limit">
@@ -263,8 +280,8 @@
      <c:forEach items="${list}" var="AuctionRegisterVO">
      	<div class="product-layout product-list col-xs-12">
      		<div class="product-thumb">
-     			<div class="image product-imageblock"><a href="/tender/tenderform?auction_no=${AuctionRegisterVO.auction_no}"><img src='/resources/files/attach/${AuctionRegisterVO.auction_title_img}' class="img-responsive"></a></div>
-     			<h4 class="product-name"> <a href="/tender/tenderform?auction_no=${AuctionRegisterVO.auction_no}">${AuctionRegisterVO.auction_name}</a></h4>
+     			<div class="image product-imageblock"><a href="/tender/tenderform?auction_no=${AuctionRegisterVO.auction_no}"><img src='/resources/files/attach/${AuctionRegisterVO.auction_title_img}' class="img-responsive" id="list_img"></a></div>
+     			<h4 class="product-name"> <a href="/tender/tenderform?auction_no=${AuctionRegisterVO.auction_no}"><span class="auction_name">${AuctionRegisterVO.auction_name}</span></a></h4>
      			<p class="price product-price" style="margin-right:10px;">
      			<span style="font-size: 12px; color:#A6A6A6; font-weight: lighter; margin-right:5px;">상한가</span>${AuctionRegisterVO.auction_up}
      			</p>
@@ -279,20 +296,27 @@
       
        </div>
       <!-- 페이징 처리 -->
-      <div class="category-page-wrapper">
-        <div class="result-inner"></div>
+      <div class="category-page-wrapper" style="border-bottom: none;">
+        <!-- <div class="result-inner"></div> -->
         <div class="pagination-inner">
           <ul class="pagination">
-            <li class="active"><span>1</span></li>
-            <li><a href="category.html">2</a></li>
-            <li><a href="category.html">&gt;</a></li>
-            <li><a href="category.html">&gt;|</a></li>
+          <c:if test="${auctionPage.prev}">
+          	<li><a href="auction_list?page=${auctionPage.startPage-1}">&lt;</a></li>
+          </c:if>
+          <c:forEach begin="${auctionPage.startPage}" end="${auctionPage.endPage}" var="idx">
+          	<li <c:out value="${auctionPage.cri.page==idx?'class=active':''}"/>><a href="auction_list?page=${idx}">${idx}</a></li>
+          </c:forEach>
+          <c:if test="${auctionPage.next && auctionPage.endPage > 0}">
+          	<li><a href="auction_list?page=${auctionPage.endPage + 1}">&gt;</a></li>
+          </c:if>
+            <!-- <li><a href="category.html">&gt;|</a></li> -->
           </ul>
         </div>
       </div>
       <!-- 페이징 처리 끝 -->
     </div>
   </div>
+</div>
 </div>
 </div>
 <%@include file="../include/footer.jsp"%>

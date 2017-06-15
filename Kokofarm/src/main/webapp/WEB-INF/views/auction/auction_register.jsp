@@ -5,20 +5,24 @@
 <%@include file="../include/header.jsp"%>
 
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
 <link rel="stylesheet" href="//mugifly.github.io/jquery-simple-datetimepicker/jquery.simple-dtpicker.css">
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script>
+  var jq = jQuery.noConflict();
+</script>
 <script src="http://mugifly.github.io/jquery-simple-datetimepicker/jquery.simple-dtpicker.js"></script>
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
 <script type="text/javascript" src="/resources/ckeditor/ckeditor.js"></script>
 
 
 <script type="text/javascript">
-	$(function(){
-		$("#start_date").appendDtpicker({
+jq(function(){
+	jq("#start_date").appendDtpicker({
 			local:"ko",
 			dateFormat:"yyyy-MM-DD hh:mm:00"
 		});
-		$("#end_date").appendDtpicker({
+	jq("#end_date").appendDtpicker({
 			local:"ko",
 			dateFormat:"yyyy-MM-DD hh:mm:00"
 		});
@@ -42,7 +46,7 @@
 	
 	
 	var editor = null;
-	jQuery(function(){
+	jq(function(){
 		editor = CKEDITOR.replace("auction_content", ckeditor_config);
 	});
 	
@@ -50,7 +54,7 @@
 		editor.updateElement();
 	}
 	
-	window.parent.CKEDITOR.tools.callFunction('${CKEditorFuncNum}', '${file_path}');
+	window.parent.CKEDITOR.tools.callFunction('jq{CKEditorFuncNum}', 'jq{file_path}');
 </script>
 
 <div class="container">
@@ -162,7 +166,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="input-fax" class="col-sm-2 control-label"">대표이미지</label>
+                        <label for="input-fax" class="col-sm-2 control-label">대표이미지</label>
                         <div class="col-sm-10">
                            <input type="file" id="auction_title_img" name="file" style="height:32px; width:787px;">
                         </div>

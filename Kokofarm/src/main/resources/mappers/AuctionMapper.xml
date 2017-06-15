@@ -5,29 +5,44 @@
   
 <mapper namespace="kokofarm.auction.mappers.auctionMapper">
 
+
+	<!-- 일반 경매 -->
 	<insert id="register" parameterType="AuctionRegisterVO">
  		insert into auction(auction_no, auction_name, auction_group, start_date, end_date, auction_up,
  							auction_down, auction_unit, auction_area, auction_content, auction_title_img,
- 							auction_regdate
+ 							auction_regdate, seller_no
  							)
  			values(auction_no.nextval, #{auction_name}, #{auction_group},
  						to_date(#{start_date}, 'yyyy-mm-dd hh24:mi:ss'), 
  						to_date(#{end_date}, 'yyyy-mm-dd hh24:mi:ss'), #{auction_up}, #{auction_down},
  						#{auction_unit}, #{auction_area}, #{auction_content}, #{auction_title_img}, 
- 						to_date(sysdate)
+ 						to_date(sysdate), #{seller_no}
  				  )
  				 
  	</insert>
+  
+ 	<select id="listCri" resultType="AuctionRegisterVO">
+ 		<![CDATA[ select auction_no, auction_name, auction_up, auction_down, auction_content, auction_title_img
+			 from auction where auction_result is null]]>
+		<![CDATA[ order by auction_name ]]>
+ 		
+ 	</select>
  	
- 	<select id="list" resultType="AuctionRegisterVO">
- 		select auction_no, auction_name, auction_up, auction_down, auction_title_img
- 		from auction 
+ 	<select id="countPage" resultType="Integer">
+ 		<![CDATA[ select count(auction_no) from auction where auction_no > 0 ]]>		
  	</select>
  	
  	<select id="detail" resultType="AuctionRegisterVO">
  		select * from auction where auction_no=#{auction_no}
  	</select>
  	
+ 	<update id="updateAuctionHits" parameterType="Integer">
+ 		update auction set auction_hits = auction_hits + 1 
+ 		where auction_no = #{auction_no}
+ 	</update>
+ 	
+ 	
+ 	<!-- 실시간 경매 -->
  	<insert id="rt_register" parameterType="RT_AuctionRegisterVO">
  		insert into rt_auction(rt_auction_no, rt_auction_name, rt_auction_group, rt_auction_date,
  							   rt_auction_down, rt_auction_unit, rt_auction_area, rt_auction_content,
@@ -39,20 +54,16 @@
  		)					   
  	</insert>
  	
- 	<select id="rt_list" resultType="RT_AuctionRegisterVO">
- 		select rt_auction_no, rt_auction_name, rt_auction_down, rt_auction_title_img
- 		from rt_auction 
+ 	<select id="rt_listCri" resultType="RT_AuctionRegisterVO">
+ 		<![CDATA[ select rt_auction_no, rt_auction_name, rt_auction_down, rt_auction_content, rt_auction_title_img
+			 from rt_auction where trunc(rt_auction_date, 'DD') = trunc(sysdate) ]]>
+		<![CDATA[ order by rt_auction_no desc, rt_auction_regdate desc ]]>
  	</select>
  	
  	<select id="rt_detail" resultType="RT_AuctionRegisterVO">
  		select * from rt_auction where rt_auction_no=#{rt_auction_no}
  	</select>
 </mapper>  
-
-
-
-
-
 
 
 
