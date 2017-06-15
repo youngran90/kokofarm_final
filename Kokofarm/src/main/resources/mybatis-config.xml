@@ -12,7 +12,8 @@
     <package name="kokofarm.member.domain"/>    
     <package name="kokofarm.orderproduct.domain"/>    
     <package name="kokofarm.mypage.domain"/>
-    <package name="kokofarm.basic.domain"/>    
+    <package name="kokofarm.basic.domain"/>
+    <package name="kokofarm.rtauction.domain"/>    
   </typeAliases>
 
 
