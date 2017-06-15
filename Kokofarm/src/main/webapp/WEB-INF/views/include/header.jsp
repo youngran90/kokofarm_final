@@ -48,9 +48,9 @@ System.out.println("세션값" +vo);
 				
 	<%}	
 		if(vo !=null) {
-				if(vo.getMember_id().equals("ddong85")){ %>
+				if(vo.getSeller_no() != null){ %>
 					$(document).ready(function(){					
-						$('ul.main-navigation ul>li').eq(4).css("display","inline").next().css("display","inline");
+						$('ul.main-navigation ul>li').eq(4).css("display","inline").next().css("display","inline").next().css("display","inline");
 			 		});			 	
 			 	<%}
 				
@@ -214,7 +214,7 @@ System.out.println("세션값" +vo);
             <li><a href="/mypage/list_Inquiry" >1:1 문의</a></li>
             <li style="display: none;"><a href="/product/insert_product">셀러 판매물품 등록</a></li>
             <li style="display: none;"><a href="/auction/rt_auction_register" >셀러 실시간 물품 등록</a></li>
-            
+            <li style="display: none;"><a href="/mypage/auction_view" >경매</a></li>
             </ul>
         </li>
      <!--    <li><a href="blog.html" class="parent"  >Blog</a></li>
