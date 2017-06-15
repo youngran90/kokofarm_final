@@ -41,12 +41,16 @@
 				<beans:ref bean = "loginInterceptor"/>
 			</interceptor>
 		
-			<!-- <interceptor>
-				<mapping path="/member/join"/>
+			<interceptor>
+				<mapping path="/mypage/list_Inquiry"/>
+				<beans:ref bean="authInterceptor"/>
+							
+			</interceptor>
+					
+			<interceptor>
+				<mapping path="/tender/tenderform"/>
 				<beans:ref bean="authInterceptor"/>
 			</interceptor>
-		 -->
-	
-					
+								
 		</interceptors>
 </beans:beans>
