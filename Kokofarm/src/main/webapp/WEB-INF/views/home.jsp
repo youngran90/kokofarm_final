@@ -1,8 +1,16 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@page import="java.util.Map"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
+   <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+ 
+  <%@include file="include/header.jsp" %>
+   
+     
   <style>
-.mainbanner .addmainslider-btn{
+   .button-group-admin{
+	display: none;
+}
+ .button-group-admin .addmainslider-btn{
   background: #ef8829;
 	display: inline-block;
 	padding: 8px 17px;
@@ -11,35 +19,117 @@
 	width: auto;
 	color: #ffffff;
 	margin:0 2px;
+	position: relative;
+	left: 90%;
   }
+  
+  .button-group-admin .addmainProduct-btn{
+  background: #ef8829;
+	display: inline-block;
+	padding: 8px 17px;
+	font-weight:500;
+	float: none;
+	width: auto;
+	color: #ffffff;
+	margin:0 2px;
+	position: relative;
+	left: 1350px;
+  }
+  
+  
+  /* 적용 버튼 */
+  
+
+.button-group-admin{
+	position: relative;
+	right: 0px;
+	bottom : 0px;
+	width: 100%;
+	bottom: 0px;
+	margin-bottom: 20px;
+
+}
+
+/*  .mainbanner .button-group{
+	float: right;
+}  */
+   
+@media (max-width: 768px) {
+.button-group-admin{
+	border-left: none;
+}
+}
+ .button-group-admin button{
+	width: 60%;
+	border: none;
+	display: inline-block;
+	background-color: #eee;
+	color: #888;
+	text-align: center;
+}
+.button-group-admin button:hover {
+	background: #000;
+	color: #ffffff;
+	text-decoration: none;
+	cursor: pointer;
+}     
+
+
+
   </style>
+   
+    <script type="text/javascript">
+       $(function(){    	  
+    	   $("button.wishlist").css("display","none");
+    	   $("button.compare").css("display","none");
+    	   
+    	   $(".addmainslider-btn").on('click',function(){
+    		   openWin= window.open("/main/product_add","childForm","width=600, height=500, resizable = no, scrollbars = yes");
+    	   });
+    	   
+       });	
   
-  
-  <%@include file="include/header.jsp" %>
-  
-  
-  
+ 	<% 
+ 	MemberVO vo1 = (MemberVO)session.getAttribute("login");
+ 	if(vo1 !=null){
+ 	if(vo1.getMember_id().equals("ddong85")){
+ 		%>
+ 		$(document).ready(function(){
+ 			$(".button-group-admin").css("display","block");
+ 		});
+ 	
+ 	<%}
+ 	}
+ 	%>
+ 	    
+   </script> 
+   
+    
 <div class="mainbanner">
   <div id="main-banner" class="owl-carousel home-slider">
-    <div class="item"> <a href="#"><img src="../../../resources/image/banners/Main-Banner1.jpg" alt="main-banner1" class="img-responsive" /></a> </div>
-    <div class="item"> <a href="#"><img src="../../../resources/image/banners/Main-Banner2.jpg" alt="main-banner2" class="img-responsive" /></a> </div>
-    <div class="item"> <a href="#"><img src="../../../resources/image/banners/Main-Banner3.jpg" alt="main-banner3" class="img-responsive" /></a> </div>
+    <div class="item"> <a href="#"><img src="/resources/files/attach/여름과일기획전_메인배너.jpg" alt="main-banner1" class="img-responsive" /></a> </div>
+    <div class="item"> <a href="#"><img src="/resources/files/attach/토마토할인_메인배너.jpg" alt="main-banner2" class="img-responsive" /></a> </div>
+    <div class="item"> <a href="#"><img src="/resources/files/attach/수박_메인배너.jpg" alt="main-banner3" class="img-responsive" /></a> </div>
    </div>
-   <div class="button-group">
-  	 	 <button class="addmainslider-btn" type="button">addMainSlider</button>
+    <div class="button-group-admin">
+  	 	 <button class="addmainslider-btn" type="button">슬라이더 교체</button>
  	</div>
 </div>
 <div class="container">
   <div class="row">
   
     <div class="cms_banner ">
-      <div class="col-md-4 cms-banner-left"> <a href="#"><img alt="#" src="../../../resources/image/banners/subbanner1.jpg"></a> </div>
+      <div class="col-md-4 cms-banner-left"> <a href="#"><img alt="#" src="../../../resources/image/banners/subbanner1.jpg"></a>
+          </div>
       <div class="col-md-4 cms-banner-middle-top">
         <div class="md1"><a href="#"> <img alt="#" src="../../../resources/image/banners/subbanner2.jpg"></a> </div>
         <div class="md2"><a href="#"> <img alt="#" src="../../../resources/image/banners/subbanner2-1.jpg"></a></div>
       </div>
       <div class="col-md-4 cms-banner-right"> <a href="#"><img alt="#" src="../../../resources/image/banners/subbanner3.jpg"></a> </div>
     </div>
+  	 <div class="button-group-admin">
+  	 	 <button class="addmainslider-btn" type="button" style="right: 0px;">상품 교체 (위)</button>
+ 	</div>
   </div>
   <div class="row">
     <div id="content" class="col-sm-12">
@@ -543,8 +633,8 @@
           </div>
         </div>
       </div>
-      <div class="parallax">
-        <ul id="testimonial" class="row owl-carousel product-slider">
+      <!-- <div class="parallax">
+        	<ul id="testimonial" class="row owl-carousel product-slider">
           <li class="item">
             <div class="panel-default">
               <div class="testimonial-desc">Rem ipsum doLorem ipsum ut Rem ipsum doLorem ipsum ut labore et dolore malabore et dolore maipsum doLorem ipsum ut labore et dolore magna.Lorem ipsum doLorem ipsum dolor sit amet, consectetur adipisicing</div>
@@ -582,7 +672,7 @@
             </div>
           </li>
         </ul>
-      </div>
+      </div>  -->
       <div class="row">
         <div class="cms_banner">
           <div class="col-md-4 cms-banner-left"> <a href="#"><img alt="#" src="../../../resources/image/banners/subbanner5.jpg"></a> </div>
@@ -718,7 +808,7 @@
           </div>
         </div>
       </div>
-      <div class="blog">
+      <!-- <div class="blog">
         <div class="blog-heading">
           <h3>Latest Blogs</h3>
         </div>
@@ -776,7 +866,7 @@
             </li>
           </ul>
         </div>
-      </div>
+      </div> -->
       <div id="brand_carouse" class="owl-carousel brand-logo">
         <div class="item text-center"> <a href="#"><img src="../../../resources/image/brand/brand1.png" alt="Disney" class="img-responsive" /></a> </div>
         <div class="item text-center"> <a href="#"><img src="../../../resources/image/brand/brand2.png" alt="Dell" class="img-responsive" /></a> </div>

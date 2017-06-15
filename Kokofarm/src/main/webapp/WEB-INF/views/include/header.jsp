@@ -41,16 +41,19 @@ display: none;!important;
 MemberVO vo = (MemberVO)session.getAttribute("login");
 System.out.println("세션값" +vo);
 
-	if(vo==null){%>
-	
-	
+	if(vo==null){%>	
 	$(document).ready(function(){
 		$("#check_id").addClass("logout");
 			});
 				
-	<%}
-
+	<%}	
 		if(vo !=null) {
+				if(vo.getMember_id().equals("ddong85")){ %>
+					$(document).ready(function(){					
+						$('ul.main-navigation ul>li').eq(4).css("display","inline").next().css("display","inline");
+			 		});			 	
+			 	<%}
+				
 			
 %>$(document).ready(function(){
 	$("#check_id").removeClass("logout");
@@ -78,7 +81,7 @@ System.out.println("세션값" +vo);
           <div class="top-left pull-left">
             <div class="language">
               <form action="#" method="post" enctype="multipart/form-data" id="language">
-                <div class="btn-group">
+                <div class="btn-group" style="display: none;">
                   <button class="btn btn-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> <img src="/resources/image/flags/gb.png" alt="Korea" title="Korea">Korea <i class="fa fa-caret-down"></i></button>
                   <ul class="dropdown-menu">
                     <li><a href="#"><img src="/resources/image/flags/lb.png" alt="Korea" title="Korea"> Korea</a></li>
@@ -88,7 +91,7 @@ System.out.println("세션값" +vo);
               </form>
             </div>
             <div class="currency">
-              <form action="#" method="post" enctype="multipart/form-data" id="currency">
+              <form action="#" method="post" enctype="multipart/form-data" id="currency" style="display: none;">
                 <div class="btn-group">
                   <button class="btn btn-link dropdown-toggle" data-toggle="dropdown"> <strong>$</strong> <i class="fa fa-caret-down"></i> </button>
                   <ul class="dropdown-menu">
@@ -116,7 +119,7 @@ System.out.println("세션값" +vo);
                   				  <li><a href="/member/login">로그인</a></li>
                  		 </ul>
                 </li>
-                <li><a href="#" id="wishlist-total" title="Wish List (0)"><i class="fa fa-heart"></i><span>Wish List</span><span> (0)</span></a></li>
+                <!-- <li><a href="#" id="wishlist-total" title="Wish List (0)"><i class="fa fa-heart"></i><span>Wish List</span><span> (0)</span></a></li> -->
               </ul>
               <div class="search-box">
                           <input class="input-text" placeholder="search.." type="text">
@@ -134,7 +137,7 @@ System.out.println("세션값" +vo);
       <div class="col-sm-4 col-xs-6 header-left">
         <div class="shipping">
           <div class="shipping-img"></div>
-          <div class="shipping-text">+81(010)1234-7777<span class="shipping-detail">Week From 9:00am To 7:00pm</span></div>
+          <div class="shipping-text">(02)534-7777<br><span class="shipping-detail">Week From 9:00am To 7:00pm</span></div>
         </div>
       </div>
       <div class="col-sm-4 col-xs-12 header-middle">
@@ -143,7 +146,7 @@ System.out.println("세션값" +vo);
         </div>
       </div>
       <div class="col-sm-4 col-xs-12 header-right">
-        <div id="cart" class="btn-group btn-block">
+        <div id="cart" class="btn-group btn-block" style="display: none;">
           <button type="button" class="btn btn-inverse btn-block btn-lg dropdown-toggle cart-dropdown-button"> <span id="cart-total"><span class="cart-title">Shopping Cart</span><br>
           0 item(s) - $0.00</span> </button>
           <ul class="dropdown-menu pull-right cart-dropdown-menu">
@@ -197,22 +200,22 @@ System.out.println("세션값" +vo);
       <button type="button" class="btn btn-navbar navbar-toggle" ><i class="fa fa-bars"></i></button>
     </div>
     <div class="navbar-collapse">
-      <ul class="main-navigation">
+      <ul class="main-navigation"> 
         <li><a href="/"   class="parent"  >홈</a> </li>
         <li><a href="/product/list_product"   class="parent"  >과일/채소</a> </li>
         <li><a href="/auction/auction_list"   class="parent"  >일반경매</a> </li>
-         <li><a href="#"   class="parent" >실시간경매</a> </li>
+         <li><a href="/auction/rt_auction_list"   class="parent" >실시간경매</a> </li>
         <li><a href="#"   class="parent"  >고객센터</a> </li>
-        <li><a href="#" class="active parent">MyPage</a>
+        <li><a href="/mypage/list_Inquiry" class="active parent">MyPage</a>
           <ul>
             <li><a href="category.html">주문배송조회</a></li>
-            <li><a href="cart.html">장바구니</a></li>
-            <li><a href="checkout.html">Checkout Page</a></li>
-            <li><a href="blog.html" >Blog Page</a></li>
-            <li><a href="singale-blog.html" >Singale Blog Page</a></li>
-            <li><a href="register.html">Register Page</a></li>
-            <li><a href="contact.html">Contact Page</a></li>
-          </ul>
+            <li><a href="/cart/cart">장바구니</a></li>
+            <li><a href="checkout.html">결제 페이지</a></li>
+            <li><a href="/mypage/list_Inquiry" >1:1 문의</a></li>
+            <li style="display: none;"><a href="/product/insert_product">셀러 판매물품 등록</a></li>
+            <li style="display: none;"><a href="/auction/rt_auction_register" >셀러 실시간 물품 등록</a></li>
+            
+            </ul>
         </li>
      <!--    <li><a href="blog.html" class="parent"  >Blog</a></li>
         <li><a href="about-us.html" >About us</a></li>

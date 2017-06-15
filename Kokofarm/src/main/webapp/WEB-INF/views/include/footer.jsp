@@ -6,7 +6,7 @@
       <div class="footer-top-cms">
         <div class="col-sm-7">
           <div class="newslatter">
-            <form>
+            <form style="display: none;">
               <h5>Newsletter</h5>
               <div class="input-group">
                 <input type="text" class=" form-control" placeholder="Email Here......">
@@ -19,11 +19,10 @@
           <div class="footer-social">
             <h5>Social</h5>
             <ul>
-              <li class="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
-              <li class="linkedin"><a href="#"><i class="fa fa-linkedin"></i></a></li>
-              <li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
-              <li class="gplus"><a href="#"><i class="fa fa-google-plus"></i></a></li>
-              <li class="youtube"><a href="#"><i class="fa fa-youtube-play"></i></a></li>
+              <li class="facebook"><a href="https://www.facebook.com" target="_blank"><i class="fa fa-facebook"></i></a></li>
+              <li class="twitter"><a href="https://twitter.com" target="_blank"><i class="fa fa-twitter"></i></a></li>
+              <li class="gplus"><a href="https://plus.google.com" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+              <li class="youtube"><a href="https://www.youtube.com" target="_blank"><i class="fa fa-youtube-play"></i></a></li>
             </ul>
           </div>
         </div>
@@ -62,11 +61,11 @@
           <div class="footer-contact">
             <h5 class="contact-title footer-title">Contact Us</h5>
             <ul class="ul-wrapper">
-              <li><i class="fa fa-map-marker"></i><span class="location2"> Warehouse & Offices,<br>
-                12345 Street name, California<br>
-                USA</span></li>
-              <li><i class="fa fa-envelope"></i><span class="mail2"><a href="#">info@localhost.com</a></span></li>
-              <li><i class="fa fa-mobile"></i><span class="phone2">+91 0987-654-321</span></li>
+              <li><i class="fa fa-map-marker"></i><span class="location2"> 서울시 금천구 가산동,<br>
+                371-47 이노플렉스	 1차 2층<br>
+                </span></li>
+              <li><i class="fa fa-envelope"></i><span class="mail2"><a href="#">Kosta@korea	.com</a></span></li>
+              <li><i class="fa fa-mobile"></i><span class="phone2">+82 10 3333-3333</span></li>
             </ul>
           </div>
         </div>
@@ -76,7 +75,7 @@
   <a id="scrollup">Scroll</a> </footer>
 <div class="footer-bottom">
   <div class="container">
-    <div class="copyright">Powered By &nbsp;<a class="yourstore" href="http://www.lionode.com/">lionode &copy; 2017 </a> </div>
+    <div class="copyright">Powered By &nbsp;<a class="yourstore" href="#">KokoFarm &copy; 2017 </a> </div>
     <div class="footer-bottom-cms">
       <div class="footer-payment">
         <ul>
