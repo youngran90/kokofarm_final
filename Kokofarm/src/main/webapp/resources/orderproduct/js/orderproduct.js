@@ -15,7 +15,6 @@ $(function() {
 		$("input[name=pay_bank]").val(bankaccount);
 	}) // 은행 이름
 	
-	alert("뭐야 왜 그래...03");
 	var db_id = $("select[name=mobileReceiver1]").attr("id");
 	$("#button-confirm").on('click', function() {
 		var payments = $("input[name=pay]:checked").val();// 결제방법
@@ -30,7 +29,11 @@ $(function() {
 				var db_price = parseInt($(this).text());
 				
 				if(db_price < opa){// 13 < 7
-					alert(name+" : 재고부족");
+					var check = confirm("제품명 : "+name+"\n현재 재고량 : "+db_price+"\n죄송합니다. 재고가 부족하여 구매하실수 없습니다. " +
+							"\n\n해당 제품을 삭제후 구매하시거나 \n장바구니로 가셔서 해당 품목을 삭제후 구매해 주세요.\n  <  확인을 누르면 장바구니로 이동합니다.  >");
+					if(check){
+						location.href="/cart/cart";
+					}
 					return false;
 					$(location).attr("href", "/orderproduct/orderproduct");
 				}else{
@@ -51,19 +54,20 @@ $(function() {
 						data : orderfinish, // 구매 리스트 + 개인정보 폼
 						dataType : 'html',
 						success : function(data) {
+							$.ajax({
+								type : "POST",
+								url : url02,
+								data : mileage, // 마일리지 폼
+								dataType : 'text',
+								success : function(data) {
+								} // 마일리지 ajax 종료(성공함수)
+							})// 마일리지 ajax 종료
 							alert("결제되었습니다.");
 							$(location).attr("href", "/orderproduct/orderfinish");
 						}// 구매 리스트 + 개인정보 ajax 종료 (성공함수)
 					})// 구매 리스트 + 개인정보 ajax종료
 
-					$.ajax({
-						type : "POST",
-						url : url02,
-						data : mileage, // 마일리지 폼
-						dataType : 'text',
-						success : function(data) {
-						} // 마일리지 ajax 종료(성공함수)
-					})// 마일리지 ajax 종료
+					
 
 					if (payments == "creditcard") {
 						var credit = $("input[name=creditcard_name]").val();
