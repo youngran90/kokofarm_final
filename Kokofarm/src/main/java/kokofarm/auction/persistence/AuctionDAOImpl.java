@@ -51,7 +51,7 @@ public class AuctionDAOImpl implements AuctionDAO{
 	}
 	@Override
 	public void updateAuctionHits(int auction_no) throws Exception {
-		session.update(namespace+".updateHits", auction_no);
+		session.update(namespace+".updateAuctionHits", auction_no);
 	}
 	
 	
@@ -80,7 +80,11 @@ public class AuctionDAOImpl implements AuctionDAO{
 	public RT_AuctionRegisterVO rt_detail(String rt_auction_no) throws Exception {
 		return session.selectOne(namespace+".rt_detail", rt_auction_no);
 	}
-	
+//	@Override
+//	public int rt_count(RT_AuctionRegisterVO vo) throws Exception {
+//		return session.selectOne(namespace+".rt_count", vo);
+//	}
+//	
 
 	
 	

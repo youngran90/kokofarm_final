@@ -13,7 +13,24 @@
 	#list_img{
 		/* border: 1px solid red; */
 		width: 650px;
-		height: 200px;
+		height: 150px;
+	}
+	#register_button{
+		border: none;
+		font-weight: bold;
+		background: #F26B18;
+		color: #FFFFFF;
+		width: 100px;
+		height: 30px;
+		position: relative;
+		left: 840px;
+		top: -27px;
+	}
+	#register_button:hover{
+		border: solid 1px #F26B18;
+		background: #FFFFFF;
+		color: #F26B18;
+		font-weight: bold;
 	}
 </style>
 <script>
@@ -21,7 +38,26 @@
 	window.onload = function(){
 		var seller_no= '${login.seller_no}'
 		
+		if(seller_no==''){
+			$('#register_button').hide();
+		}else{
+			$('#register_button').show();
+		}
 	}
+	
+	function move_register(){
+		window.location.href="auction_register";
+	}
+
+	function searchingAuction(){
+				
+					self.location = "auction_list"
+					+ '${auctionPage.makeQuery(1)}'
+					+ "&searchType="
+					+ $("select option:selected").val()
+					+ "&keyword=" + encodeURIComponent($('#keywordInput').val());
+				
+			};
 </script>
 <!-- <div class="preloader loader" style="display: block; background:#f2f2f2;"> <img src="image/loader.gif"  alt="#"/></div> -->
 <div class="container">
@@ -230,8 +266,8 @@
     <!-- Special 끝 -->
     <!-- 리스트 시작 -->
     <div id="content" class="col-sm-9">
-      <h2 class="category-title">일반 경매</h2>
-      <button id="register_button"style="color: #F26B18">상품 등록</button>
+      <h2 class="category-title" style="font-weight: bold; position: relative; top: 1px;">일반 경매</h2>
+      <button id="register_button" onclick="move_register()">상품 등록</button>
       <!-- <div class="row category-banner">
         <div class="col-sm-12 category-image"><img src="image/banners/category-banner.jpg" alt="Desktops" title="Desktops" class="img-thumbnail" /></div>
         <div class="col-sm-12 category-desc">Lorem ipsum dolomagna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate.</div>
@@ -254,19 +290,24 @@
             </select>
           </div>
         </div> -->
-        <div style="margin-right:10px;">
-         <input type="text" style="border: 1px solid #EDEDED;">
-		 <button value="검색">검색</button>
+        <div>
+        <select name="searchType" style="display: none;">
+         	<option value="t" selected
+         		<c:out value="${cri.searchType eq 't'?'selected':''}"/>>
+         		auction_name</option>
+         </select>
+         <input type="text" name="keyword" id="keywordInput" value="${cri.keyword}" style="border: 1px solid #EDEDED;">
+		 <button id="search" onclick="searchingAuction()">검색</button>
         </div>
         <div class="col-md-2 text-right sort-wrapper">
           <label class="control-label" for="input-sort"></label>
           <div class="sort-inner">
-            <select id="input-sort" class="form-control" style="font-size: 13px; text-align: center; width: 226px;">
+            <select id="input-sort" class="form-control" style="font-size: 13px; text-align: center; width: 226px;
+            position: relative; left: 10px;">
 	          <option value="ASC">과일</option>
 	          <option value="ASC">채소</option>
               <option value="ASC">신규등록순</option>
               <option value="ASC">마감임박순</option>
-              <option value="DESC">입찰자 (내림차순)</option>
               <option value="ASC">현재가 (내림차순)</option>
               <option value="DESC">현재가 (오름차순)</option>
             </select>
@@ -317,6 +358,8 @@
   </div>
 </div>
 </div>
+
 </div>
+
 <%@include file="../include/footer.jsp"%>
 </body>

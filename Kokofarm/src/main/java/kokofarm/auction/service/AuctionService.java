@@ -16,12 +16,13 @@ public interface AuctionService {
 	public List<AuctionRegisterVO> listCri(AuctionCri cri) throws Exception;
 	public int CountPage(AuctionCri cri)throws Exception;
 	public AuctionRegisterVO detail(int auction_no) throws Exception;
-	public void updateAuctionHits(int auction_no, HttpSession session)throws Exception;
-	
+	public void updateAuctionHits(int auction_no)throws Exception;
+
 	
 	/*실시간 경매*/
 	public void rt_register(RT_AuctionRegisterVO rt_auction) throws Exception;
 	public List<RT_AuctionRegisterVO> rt_list() throws Exception;
 	public List<RT_AuctionRegisterVO> rt_listCri(RT_AuctionCri cri) throws Exception;
 	public RT_AuctionRegisterVO rt_detail(String rt_auction_no) throws Exception;
+	/*public int rt_count(RT_AuctionRegisterVO vo) throws Exception;*/
 }

@@ -24,5 +24,5 @@ public interface AuctionDAO {
 	public List<RT_AuctionRegisterVO> rt_listPage(int page) throws Exception;
 	public List<RT_AuctionRegisterVO> rt_listCri(RT_AuctionCri cri) throws Exception;
 	public RT_AuctionRegisterVO rt_detail(String rt_auction_no) throws Exception;
-	
+	/*public int rt_count(RT_AuctionRegisterVO vo) throws Exception;*/
 }

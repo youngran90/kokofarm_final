@@ -50,6 +50,69 @@
 	}
 	
 	window.parent.CKEDITOR.tools.callFunction('${CKEditorFuncNum}', '${file_path}');
+	
+	window.onload = function(){
+		var auction_full = '${list.rt_auction_date}'
+		
+		/* alert(auction_full); */
+		
+			
+		var set_time = ${set_time};
+		/* alert(set_time); */
+			if(set_time>10){
+				$("#am").click(function(){}).prop("disabled", true);
+				return;
+			}else if(set_time>22){
+				$('#pm').click(function(){}).prop("disabled", true);
+				return;
+			}
+		}
+	
+	
+	function register(){
+		var name=$('#rt_auction_name').val();
+		var group=$('#rt_auction_group').val();
+		var time=$('#rt_auction_time').val();
+		var date=$('#rt_auction_date').val();
+		var down=$('#rt_auction_down').val();
+		var unit=$('#rt_auction_unit').val();
+		var units=$('#rt_auction_units').val();
+		var location=$('#rt_auction_location').val();
+		var area=$('#rt_auction_area').val();
+		var title=$('#rt_auction_title_img').val();
+		var content=$('#rt_auction_content').val();
+		
+		if(name==''){
+			alert("상품명을 입력하세요.");
+			return;
+		}else if(group==''){
+			alert("분류를 선택하세요.");
+			return;
+		}else if(time==''){
+			alert("경매시간을 선택하세요.");
+			return;
+		}else if(date==''){
+			alert("경매날짜를 선택하세요.");
+			return;
+		}else if(down==''){
+			alert("상품의 하한가를 입력하세요.");
+			return;
+		}
+		else if(auction_unit==''){
+			alert("상품의 상세단위를 입력하세요.");
+			return;
+		}else if(auction_area==''){
+			alert("상세주소를 입력하세요");
+			return;
+		}else if(title==''){
+			alert("상품의 대표이미지를 선택하세요.");
+			return;
+		}else{
+			alert("경매가 등록되었습니다.")
+			document.getElementById('rt_auction_register').submit();
+		}
+	}
+	
 </script>
 
 <div class="container">
@@ -71,11 +134,11 @@
     <!-- LNB 끝 -->    
     <!-- Content 시작 -->
         <div class="col-sm-9" id="content">
-            <h1>일반 경매</h1>
+            <h1>실시간 경매</h1>
             <!-- <p>If you already have an account with us, please login at the <a href="login">login page</a>.</p> -->
-            <form class="form-horizontal" enctype="multipart/form-data" method="post">
+            <form class="form-horizontal" id="rt_auction_register" enctype="multipart/form-data" method="post" action="rt_auction_register">
                 <fieldset id="account">
-                    <legend>일반 경매 상품 등록</legend>
+                    <legend>실시간 경매 상품 등록</legend>
                     <div style="display: none;" class="form-group required">
                         <label class="col-sm-2 control-label">Customer Group</label>
                         <div class="col-sm-10">
@@ -108,8 +171,8 @@
                         <select id="rt_auction_time" name="rt_auction_time" style="height: 32px; width: 169px; float: left;
                         text-align: center;">
                             	<option>시간을 선택해주세요</option>
-                            	<option value="10:00:00">오전 10시</option>
-                            	<option value="22:00:00">오후 10시</option>
+                            	<option value="10:00:00" id="am">오전 10시</option>
+                            	<option value="22:00:00" id="pm">오후 10시</option>
                             </select>
                             <input type="text" class="form-control" id="rt_auction_date" name="rt_auction_date"
                             style="height:32px; width:619px;">
@@ -124,20 +187,20 @@
                     <div class="form-group">
                         <label for="input-fax" class="col-sm-2 control-label">단위</label>
                         <div class="col-sm-10">  
-                            <select id="rt_auction_units" name="rt_auction_units" style="height:32px; width:99px; float:left; text-align: center;">
+                            <select id="rt_auction_units" name="rt_auction_units" style="height:32px; width: 169px; float:left; text-align: center;">
                         	<option value="kg">kg</option>
                         	<option value="g">g</option>
                         	<option value="박스">박스</option>
                         	<option>기타</option>
                         </select>
                             <input type="text" class="form-control" id="rt_auction_unit" placeholder="단위를 자세히 입력해주세요." 
-                        name="rt_auction_unit" style="width:689px; height:32px;"/>
+                        name="rt_auction_unit" style="width:619px; height:32px;"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="input-fax" class="col-sm-2 control-label">생산지/원산지</label>
                         <div class="col-sm-10">
-                            <select id="rt_auction_location" name="rt_auction_location" style="height:32px; width:150px; float:left;
+                            <select id="rt_auction_location" name="rt_auction_location" style="height:32px; width: 169px; float:left;
                         text-align: center;">
                         	<option value="서울특별시">서울특별시</option>
                         	<option value="인천광역시">인천광역시</option>
@@ -152,7 +215,7 @@
                         	<option value="제주특별자치도">제주특별자치도</option>
                         </select>
                             <input type="text" class="form-control" placeholder="주소를 입력해주세요." 
-                            id="rt_auction_area" name="rt_auction_area" style="width:638px; height:32px;">
+                            id="rt_auction_area" name="rt_auction_area" style="width:619px; height:32px;">
                         </div>
                     </div>
                     <div class="form-group">
@@ -171,7 +234,7 @@
                 </fieldset>
            
                 <div class="buttons" style="text-align:right">
-                    <input type="submit" class="btn btn-primary" value="등록하기">
+                    <input type="button" class="btn btn-primary" value="등록하기" onclick="register()">
                 </div>
             </form>
         </div>

@@ -55,6 +55,53 @@ jq(function(){
 	}
 	
 	window.parent.CKEDITOR.tools.callFunction('jq{CKEditorFuncNum}', 'jq{file_path}');
+	
+	function register(){
+		var name=$('#auction_name').val();
+		var group=$('#auction_group').val();
+		var start_date=$('#start_date').val();
+		var end_date=$('#end_date').val();
+		var up=$('#auction_up').val();
+		var down=$('#auction_down').val();
+		var unit=$('#auction_unit').val();
+		var units=$('#auction_units').val();
+		var location=$('#auction_location').val();
+		var area=$('#auction_area').val();
+		var title=$('#auction_title_img').val();
+		var content=$('#auction_content').val();
+		
+		if(name==''){
+			alert("상품명을 입력하세요.");
+			return;
+		}else if(group==''){
+			alert("분류를 선택하세요.");
+			return;
+		}else if(start_date==''){
+			alert("경매시작일을 선택하세요.");
+			return;
+		}else if(end_date==''){
+			alert("경매종료일을 선택하세요.");
+			return;
+		}else if(up==''){
+			alert("상품의 상한가를 입력하세요.");
+			return;
+		}else if(down==''){
+			alert("상품의 하한가를 입력하세요.");
+		}
+		else if(auction_unit==''){
+			alert("상품의 상세단위를 입력하세요.");
+			return;
+		}else if(auction_area==''){
+			alert("상세주소를 입력하세요");
+			return;
+		}else if(title==''){
+			alert("상품의 대표이미지를 선택하세요.");
+			return;
+		}else{
+			alert("경매가 등록되었습니다.")
+			document.getElementById('auction_register').submit();
+		}
+	}
 </script>
 
 <div class="container">
@@ -78,7 +125,7 @@ jq(function(){
         <div class="col-sm-9" id="content">
             <h1>일반 경매</h1>
             <!-- <p>If you already have an account with us, please login at the <a href="login">login page</a>.</p> -->
-            <form class="form-horizontal" enctype="multipart/form-data" method="post">
+            <form class="form-horizontal" id="auction_register" enctype="multipart/form-data" method="post" action="auction_register">
                 <fieldset id="account">
                     <legend>일반 경매 상품 등록</legend>
                     <div style="display: none;" class="form-group required">
@@ -134,20 +181,20 @@ jq(function(){
                     <div class="form-group">
                         <label for="input-fax" class="col-sm-2 control-label">단위</label>
                         <div class="col-sm-10">  
-                        <select id="auction_units" name="auction_units" style="height:32px; width:99px; float:left; text-align: center;">
+                        <select id="auction_units" name="auction_units" style="height:32px; width: 169px; float:left; text-align: center;">
                         	<option value="kg">kg</option>
                         	<option value="g">g</option>
                         	<option value="박스">박스</option>
                         	<option>기타</option>
                         </select>
                             <input type="text" class="form-control" id="auction_unit" placeholder="단위를 자세히 입력해주세요." 
-                        name="auction_unit" style="width:689px; height:32px;"/>
+                        name="auction_unit" style="width:619px; height:32px;"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="input-fax" class="col-sm-2 control-label">생산지/원산지</label>
                         <div class="col-sm-10">
-                        <select id="auction_location" name="auction_location" style="height:32px; width:150px; float:left;
+                        <select id="auction_location" name="auction_location" style="height:32px; width: 169px; float:left;
                         text-align: center;">
                         	<option value="서울특별시">서울특별시</option>
                         	<option value="인천광역시">인천광역시</option>
@@ -162,7 +209,7 @@ jq(function(){
                         	<option value="제주특별자치도">제주특별자치도</option>
                         </select>
                             <input type="text" class="form-control" placeholder="주소를 입력해주세요." 
-                            id="auction_area" name="auction_area" style="width:638px; height:32px;">
+                            id="auction_area" name="auction_area" style="width:619px; height:32px;">
                         </div>
                     </div>
                     <div class="form-group">
@@ -181,7 +228,7 @@ jq(function(){
                 </fieldset>
            
                 <div class="buttons" style="text-align:right">
-                    <input type="submit" class="btn btn-primary" value="등록하기">
+                    <input type="button" class="btn btn-primary" value="등록하기" onclick="register()">
                 </div>
             </form>
         </div>

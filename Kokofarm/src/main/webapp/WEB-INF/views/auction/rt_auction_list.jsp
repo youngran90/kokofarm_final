@@ -21,8 +21,50 @@
 		background: #F26B18;
 		color: white;
 	}
-	
+	#register_button{
+		border: none;
+		font-weight: bold;
+		background: #F26B18;
+		color: #FFFFFF;
+		width: 100px;
+		height: 30px;
+		position: relative;
+		left: 840px;
+		top: -27px;
+	}
+	#register_button:hover{
+		border: solid 1px #F26B18;
+		background: #FFFFFF;
+		color: #F26B18;
+		font-weight: bold;
+	}
 </style>
+<script>
+	
+window.onload = function(){
+	var seller_no= '${login.seller_no}'
+	
+	if(seller_no==''){
+		$('#register_button').hide();
+	}else{
+		$('#register_button').show();
+	}
+	
+	var auction_no='${auction_info.rt_auction_no}'
+	/* alert('auction_no'); */
+	if(auction_no==''){
+		var auction_txt = '<p>등록된 경매 상품이 없습니다.</p>';
+		$('#auction_txt').html(auction_txt);
+	}
+
+}
+
+function move_register(){
+	window.location.href="rt_auction_register";
+}
+
+</script>
+
 
 <%@include file="../include/header.jsp"%>
 
@@ -233,7 +275,8 @@
     <!-- Special 끝 -->
     <!-- 리스트 시작 -->
     <div id="content" class="col-sm-9">
-      <h2 class="category-title">실시간 경매</h2>
+      <h2 class="category-title" style="font-weight: bold;">실시간 경매</h2>
+      <button id="register_button" onclick="move_register()">상품 등록</button>
       <!-- <div class="row category-banner">
         <div class="col-sm-12 category-image"><img src="image/banners/category-banner.jpg" alt="Desktops" title="Desktops" class="img-thumbnail" /></div>
         <div class="col-sm-12 category-desc">Lorem ipsum dolomagna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate.</div>
@@ -276,6 +319,7 @@
      <c:forEach items="${list}" var="RT_AuctionRegisterVO">
      	<div class="product-layout product-list col-xs-12">
      		<div class="product-thumb">
+     		<div id="auction_txt"></div>
      			<div class="image product-imageblock"><img src='/resources/files/attach/${RT_AuctionRegisterVO.rt_auction_title_img}' class="img-responsive"></div>
      			<p class="product-name" style="height: 50px;"> <a href="/tender/tenderform?auction_no=${RT_AuctionRegisterVO.rt_auction_no}"><span class="rt_auction_name">${RT_AuctionRegisterVO.rt_auction_name}</span></a></p>
      			<p style="color: lightgray;">${RT_AuctionRegisterVO.rt_auction_content}</p>

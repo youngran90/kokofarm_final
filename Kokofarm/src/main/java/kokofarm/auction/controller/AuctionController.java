@@ -2,6 +2,8 @@ package kokofarm.auction.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.UUID;
 
 import javax.annotation.Resource;
@@ -124,9 +126,14 @@ public class AuctionController {
 		}
 	
 	@RequestMapping(value="/auction_list", method=RequestMethod.GET)
-	public void auctionList(@ModelAttribute("cri")AuctionCri cri, AuctionRegisterVO auction, MemberVO member, Model model) throws Exception{
+	public void auctionList(@ModelAttribute("cri")AuctionCri cri, AuctionRegisterVO auction, 
+			MemberVO member, Model model) throws Exception{
 		logger.info(cri.toString());
+		int auction_no = auction.getAuction_no();
+		/*service.updateAuctionHits(auction_no);*/
+
 		model.addAttribute("list", service.listCri(cri));
+		
 		
 		AuctionPage auctionPage = new AuctionPage();
 		auctionPage.setCri(cri);
@@ -135,12 +142,13 @@ public class AuctionController {
 		model.addAttribute("auctionPage", auctionPage);
 		logger.info("페이징 + 일반경매리스트_GET");
 		
+		
 		auction.setSeller_no(member.getSeller_no());
 	}
 	
 	@RequestMapping(value="/tender_form", method=RequestMethod.GET)
 	public ModelAndView detail(@RequestParam(value="auction_no") int auction_no, HttpSession session, ModelAndView mav)throws Exception{
-		service.updateAuctionHits(auction_no, session);
+		service.updateAuctionHits(auction_no);
 		mav.addObject(service.detail(auction_no));
 		mav.setViewName("/tender/tender_form");
 		
@@ -156,12 +164,20 @@ public class AuctionController {
 	@RequestMapping(value="/rt_auction_register", method=RequestMethod.GET)
 	public void RT_auctionRegisterGET(RT_AuctionRegisterVO rt_auction, Model model)throws Exception{
 		logger.info("실시간 경매 등록폼_get");
+		
+		Calendar calendar = Calendar.getInstance();
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String vistiTime = format.format(calendar.getTime());
+		System.out.println("현재시간 : "+vistiTime);
+		
+		int hour = Integer.parseInt(vistiTime.substring(11,13));
+		model.addAttribute("set_time", hour);
+		
 	}
 	
 	@RequestMapping(value="/rt_auction_register", method=RequestMethod.POST)
 	public String RT_auctionRegisterPOST(RT_AuctionRegisterVO rt_auction, HttpServletRequest request)throws Exception{
 		logger.info("넘어오냐");
-		
 		
 		UUID uid = UUID.randomUUID();
 		String auction_no = "RT_Auction_"+uid.toString().replace("-", "");
@@ -206,9 +222,10 @@ public class AuctionController {
 	}
 
 	@RequestMapping(value="/rt_auction_list", method=RequestMethod.GET)
-	public void RT_auctionList(@ModelAttribute("cri")RT_AuctionCri cri, Model model)throws Exception{
+	public void RT_auctionList(@ModelAttribute("cri")RT_AuctionCri cri, RT_AuctionRegisterVO vo, Model model)throws Exception{
 		logger.info(cri.toString());
 		model.addAttribute("list", service.rt_listCri(cri));
+		
 		
 		logger.info("실시간 경매 리스트_get");
 	}
