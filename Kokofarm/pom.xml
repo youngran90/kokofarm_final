@@ -35,12 +35,7 @@
 
 
 
-		<!-- https://mvnrepository.com/artifact/org.springframework/spring-context-support -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context-support</artifactId>
-			<version>4.3.2.RELEASE</version>
-		</dependency>
+		
 
 		<!-- AspectJ -->
 		<dependency>
@@ -129,7 +124,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
-			<version>4.3.3.RELEASE</version>
+			<version>4.3.2.RELEASE</version>
 		</dependency>
 
 		<dependency>
@@ -248,14 +243,25 @@
 			<artifactId>json-simple</artifactId>
 			<version>1.1</version>
 		</dependency>
-
-		<!-- 자바 이메일 보내기 라이브러리 -->
-		<dependency>
+		
+		
+			<!-- 자바 이메일 보내기 라이브러리 -->
+	<dependency>
 			<groupId>javax.mail</groupId>
 			<artifactId>mail</artifactId>
-			<version>1.4</version>
-		</dependency>
+			<version>1.4.7</version>
+		</dependency> 
+		
+		
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-context-support -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>4.3.2.RELEASE</version>
+		</dependency> 
+		
 
+	
 
 	</dependencies>
 	<build>
