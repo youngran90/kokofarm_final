@@ -16,18 +16,17 @@ $(document).ready(function(){
 			$(this).data('ch', 0).removeClass('on');
 			if ($(this).isCilck == true) {
 				$('.action_menu').delay(1500).animate({
-					bottom : '-130px'
+					bottom : '-80px'
 				}, 200);
 			} else {
 				$('.action_menu').animate({
-					bottom : '-130px'
+					bottom : '-80px'
 				}, 200);
 			}
 			isCilck = false;
 		}
 	});
 	
-	alert("Test06");
 	/* Node.Js 소켓 통신 할 구분 */	
 	var socket = io.connect(); //소켓 연결
 	$("#chat_text").focus();
@@ -37,19 +36,29 @@ $(document).ready(function(){
 	});
 	
 	socket.on('info',function(data){
-		$("#rt_name").text(data.name);
+		$("#rt_name").text(data.product_n);
 		$("#rt_down").text(data.down);
 		$("#rt_unit").text(data.unit);
 		$("#rt_img").attr("src",data.img);
 	});
 	
-	socket.on('userlist',function(data){2
-			var list = data+'\n';
+	socket.on('userlist',function(data){
+		$("#chat_list").empty();
+		$.each(data, function(key,value){
+			var list = "&nbsp;"+value+'\n';
 			$("#chat_list").append(list);
+		});
+			
 	});
 	
 	socket.on('text',function(data){
-		$("#chat_area").append(data+'\n');
+		var income = "<strong id=income>&nbsp;"+data +"</strong><br>";
+		$("#chat_area").append(income);
+	})
+	
+	socket.on('disconnected',function(data){
+		var out = "<strong id=out>&nbsp;"+data +"<br>";
+		$("#chat_area").append(out);
 	})
 	
 	$("#chat_text").keypress(function(e){
@@ -72,13 +81,43 @@ $(document).ready(function(){
 	});
 	
 	socket.on('receive',function(data){
-		$("#chat_area").append(data.name+"  : "+data.messeage+'\n');
+		var messeage = '&nbsp;[ '+data.name+' 님의 말 ] '+data.messeage+'<br>';		
+		$("#chat_area").append(messeage);
+		if($('#area').prop('scrollHeight') > $('#area').height()){
+			 $('#area').scrollTop($('#area').prop('scrollHeight'));
+		}
+		
 	});
 	
-
-});
-
+	/* 경매 시간 구하기 */
+	var now = new Date();
+	var minute = 5;
+	var second = 0;
 	
+	var timer = setInterval(function(){
+		$("#minute").text(minute);
+		$("#second").text(second);
+		
+		if(minute == 0 && second ==0 ){
+			alert("경매가 종료 되었습니다.");
+			var hour = now.ge
+			$("#finish_time").text(now);
+			clearInterval(timer); //타이머 종료 
+		}else{
+			second--;
+			
+			// 분처리
+			if(second < 0){
+				minute--;
+				second = 59;
+			}
+		}	
+	}, 1000); //초단위로 변동
+	
+	
+});
+	
+
 	
 </script>
 </head>
@@ -86,25 +125,41 @@ $(document).ready(function(){
 <h4 class="test"></h4>
 <section class="action_body" id="action_body">
 		<div class="action_info" id="action_info">
+			<img id="rt_img" alt="rt_img" src=""><br>
 			<em id="rt_name"></em>
-			<img id="rt_img" alt="rt_img" src="">
 			<em id="rt_down"></em>
 			<em id="rt_unit"></em>
 		</div>
 			<div class="action_time_price" id="action_time_price">
-				경매 시간 / 현재 가격
+				<div id="time">
+					<em id="minute"></em>
+					<em id="second"></em>
+				</div>
+				<div id="rt_auction_finish_time">
+					<em id="finish_time"></em>
+				</div>
+				<em id="tender_name"></em>
+				<em id="tender_price"></em>
 			</div>
 				<div class="chat_body" id="chat_body">
-						<textarea id="chat_area" name="chat_area" rows="18" cols="50" readonly="readonly"></textarea>
+					<div id="area" class="area" style="overflow: auto;">
+						<div id="chat_area" class="chat_area"></div>
+					</div>
 						<textarea id="chat_list" name="chat_list" rows="18" cols="14" readonly="readonly"></textarea><br>
-						<input type="text" id="id" name="id" disabled="disabled">
-						<input type="text" id="chat_text" name="chat_text" >
-						<button id="chat_enter" name="chat_enter">입력</button>
 				</div>
-		<div class="action_menu" id="action_menu" style="bottom: -130px">
-					<button id="action_btn" name="action_btn">경매 열기</button>
+				<div class="chat_input" id="chat_input">
+					<input type="text" id="id" name="id" disabled="disabled">
+					<input type="text" id="chat_text" name="chat_text" >
+					<button id="chat_enter" name="chat_enter">입력</button>
+				</div>
+		<div class="action_menu" id="action_menu" style="bottom: -80px">
+					<button id="action_btn" name="action_btn">입찰</button>
 				<div id="action_box" id="action_box">
-					aa
+					<button id="1000" value="1000">1000</button>
+					<button id="5000" value="5000">5000</button>
+					<button id="10000" value="10000">10000</button>
+					<input type="text" id=rt_tender>
+					<button id="tender_btn">입찰</button>
 				</div>
 		</div>
 	</section>
@@ -112,6 +167,20 @@ $(document).ready(function(){
 </body>
 </html>
 <style>
+#rt_img{
+	width: 500px;
+	height: 500px;
+}
+#1000{
+	width: 400px;
+	height: 50px;
+}
+#income{
+	color: green;
+}
+#out{
+	color: red;
+}
 .action_body {
 	padding-top: 20px;
 	margin-left: 10%;
@@ -138,7 +207,7 @@ $(document).ready(function(){
 	margin-left: 10px;
 }
 
-#chat_area {
+#area {
 	position: relative;
 	top: 165px;
 	border: 1px solid blue;
@@ -146,9 +215,7 @@ $(document).ready(function(){
 	margin-right: 10px;
 	width : 405px;
 	height : 402px;
-	resize: none;
 	float : left;
-	overflow: auto;
 }
 
 #chat_list {
@@ -160,27 +227,30 @@ $(document).ready(function(){
 	position: relative;
 	top: 165px;
 	resize: none;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+#chat_input{
+	position: relative;
+	top: 175px;
+	float : left;
+	margin-left: 10px;
+	width: 48.3%;
 }
 
 #id {
-	position: relative;
-	top: 175px;
-	margin-left: 10px;
-	width: 8%;
+	width: 20%;
 	text-align: center;
 }
 
 #chat_text {
-	position: relative;
-	top: 175px;
-	width: 25.5%;
+	width: 48.7%;
 }
 
 #chat_enter {
-	position: relative;
-	margin-left : 10px;
-	top: 175px;
-	width: 13%;
+	margin-left : 15px;
+	width: 26.5%;
 }
 
 .action_menu {
@@ -195,7 +265,8 @@ $(document).ready(function(){
 }
 
 #action_box {
-	height: 130px;
+	height: 80px;
 	border: 1px solid black;
+	background-color: #e4e4e4;
 }
 </style>
