@@ -50,9 +50,12 @@ public class RtAuctionController {
 		model.addAttribute("unit", unit);
 		model.addAttribute("img", img);
 		
-		return "redirect://localhost:8083";
+		
+		//return "redirect://localhost:8083";
 		//return "redirect:http://192.168.0.172:8083"; // 학원에서 할때 학원 서버
 		//return "redirect:http://106.242.203.68:8083"; //집에서 할때 학원 서버
+		return "redirect:http://192.168.0.172:8083"; // 학원에서 내껄로 접속할때
+		
 		
 	}
 }
