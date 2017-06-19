@@ -27,10 +27,12 @@ $(function() {
 				var opa = parseInt($("input[class="+index+"opa]").val());
 				var name= $("input[class="+index+"pn]").val();
 				var db_price = parseInt($(this).text());
-				
+				var pp= $("input[id="+index+"ac]").val();
 				if(db_price < opa){// 13 < 7
 					var check = confirm("제품명 : "+name+"\n현재 재고량 : "+db_price+"\n죄송합니다. 재고가 부족하여 구매하실수 없습니다. " +
 							"\n\n해당 제품을 삭제후 구매하시거나 \n장바구니로 가셔서 해당 품목을 삭제후 구매해 주세요.\n  <  확인을 누르면 장바구니로 이동합니다.  >");
+					var tag = "<input type='button' name='delete' onclick="+"location.href='delete?product_no="+pp+"'>";
+					$("span[class="+index+"pnd]").append(tag);		
 					if(check){
 						location.href="/cart/cart";
 					}
@@ -47,34 +49,33 @@ $(function() {
 					var url02 = "/orderproduct/mileage";
 
 					var url03 = "/orderproduct/payment";
-					
-					$.ajax({
-						type : 'POST',
-						url : url01,
-						data : orderfinish, // 구매 리스트 + 개인정보 폼
-						dataType : 'html',
-						success : function(data) {
-							$.ajax({
-								type : "POST",
-								url : url02,
-								data : mileage, // 마일리지 폼
-								dataType : 'text',
-								success : function(data) {
-								} // 마일리지 ajax 종료(성공함수)
-							})// 마일리지 ajax 종료
-							alert("결제되었습니다.");
-							$(location).attr("href", "/orderproduct/orderfinish");
-						}// 구매 리스트 + 개인정보 ajax 종료 (성공함수)
-					})// 구매 리스트 + 개인정보 ajax종료
-
-					
 
 					if (payments == "creditcard") {
 						var credit = $("input[name=creditcard_name]").val();
 						var month = $("input[name=pay_month]").val();
 						if (credit == "none" || month == "none") {
 							alert("카드 / 기간을 선택해주세요.");
+							
 						} else {
+							$.ajax({
+								type : 'POST',
+								url : url01,
+								data : orderfinish, // 구매 리스트 + 개인정보 폼
+								dataType : 'html',
+								success : function(data) {
+									$.ajax({
+										type : "POST",
+										url : url02,
+										data : mileage, // 마일리지 폼
+										dataType : 'text',
+										success : function(data) {
+										} // 마일리지 ajax 종료(성공함수)
+									})// 마일리지 ajax 종료
+									alert("결제되었습니다.");
+									$(location).attr("href", "/orderproduct/orderfinish");
+								}// 구매 리스트 + 개인정보 ajax 종료 (성공함수)
+							})// 구매 리스트 + 개인정보 ajax종료
+							
 							var pay = $("#creditcard").serialize();
 							$.ajax({
 								type : 'POST',
@@ -86,6 +87,24 @@ $(function() {
 							})
 						}
 					} else if (payments == "kakaopay") {
+						$.ajax({
+							type : 'POST',
+							url : url01,
+							data : orderfinish, // 구매 리스트 + 개인정보 폼
+							dataType : 'html',
+							success : function(data) {
+								$.ajax({
+									type : "POST",
+									url : url02,
+									data : mileage, // 마일리지 폼
+									dataType : 'text',
+									success : function(data) {
+									} // 마일리지 ajax 종료(성공함수)
+								})// 마일리지 ajax 종료
+								alert("결제되었습니다.");
+								$(location).attr("href", "/orderproduct/orderfinish");
+							}// 구매 리스트 + 개인정보 ajax 종료 (성공함수)
+						})// 구매 리스트 + 개인정보 ajax종료
 						var pay = $("#kakaopay").serialize();
 						$.ajax({
 							type : 'POST',
@@ -98,6 +117,24 @@ $(function() {
 							}// 신용카드 정보 (성공함수)
 						})
 					} else if (payments == "naverpay") {
+						$.ajax({
+							type : 'POST',
+							url : url01,
+							data : orderfinish, // 구매 리스트 + 개인정보 폼
+							dataType : 'html',
+							success : function(data) {
+								$.ajax({
+									type : "POST",
+									url : url02,
+									data : mileage, // 마일리지 폼
+									dataType : 'text',
+									success : function(data) {
+									} // 마일리지 ajax 종료(성공함수)
+								})// 마일리지 ajax 종료
+								alert("결제되었습니다.");
+								$(location).attr("href", "/orderproduct/orderfinish");
+							}// 구매 리스트 + 개인정보 ajax 종료 (성공함수)
+						})// 구매 리스트 + 개인정보 ajax종료
 						var pay = $("#naverpay").serialize();
 						$.ajax({
 							type : 'POST',
@@ -113,6 +150,25 @@ $(function() {
 						if (bank == "none" || name == "") {
 							alert("계좌 / 이름을 작성해주세요.");
 						} else {
+							$.ajax({
+								type : 'POST',
+								url : url01,
+								data : orderfinish, // 구매 리스트 + 개인정보 폼
+								dataType : 'html',
+								success : function(data) {
+									$.ajax({
+										type : "POST",
+										url : url02,
+										data : mileage, // 마일리지 폼
+										dataType : 'text',
+										success : function(data) {
+										} // 마일리지 ajax 종료(성공함수)
+									})// 마일리지 ajax 종료
+									alert("결제되었습니다.");
+									$(location).attr("href", "/orderproduct/orderfinish");
+								}// 구매 리스트 + 개인정보 ajax 종료 (성공함수)
+							})// 구매 리스트 + 개인정보 ajax종료
+							
 							var pay = $("#payment").serialize();
 							$.ajax({
 								type : 'POST',

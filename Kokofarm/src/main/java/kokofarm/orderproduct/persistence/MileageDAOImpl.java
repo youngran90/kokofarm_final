@@ -1,6 +1,7 @@
 package kokofarm.orderproduct.persistence;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -8,6 +9,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import kokofarm.orderproduct.domain.MileageListVO;
 import kokofarm.orderproduct.domain.MileageVO;
 
 @Repository
@@ -44,6 +46,11 @@ public class MileageDAOImpl implements MileageDAO {
 		map.put("mileage_member_id", member_id);
 		
 		session.update(namespace+".update",map);
+	}
+
+	@Override
+	public List<MileageListVO> mileage_view(String member_id) throws Exception {
+		return session.selectList(namespace+".mileage_view", member_id);
 	}
 
 	

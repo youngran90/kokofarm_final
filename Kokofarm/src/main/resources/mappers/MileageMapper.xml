@@ -26,6 +26,12 @@
 		update mileage set mileage_current = #{mileage_current} where mileage_member_id = #{mileage_member_id}
 	</update>
 	
+	<select id="mileage_view" resultType="MileageListVO">
+		select orderfinish_no, mileage_use, mileage_saving, mileage_total, mileage_date 
+		from mileage
+		where mileage_member_id = #{mileage_member_id}
+		order by mileage_date desc
+	</select>
 </mapper>
 
 

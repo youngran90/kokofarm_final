@@ -1,27 +1,23 @@
 package kokofarm.orderproduct.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import kokofarm.cart.controller.CartController;
 import kokofarm.member.domain.MemberVO;
+import kokofarm.orderproduct.domain.MileageListVO;
 import kokofarm.orderproduct.domain.MileageVO;
 import kokofarm.orderproduct.domain.OrderFinishVO;
 import kokofarm.orderproduct.domain.OrderFinish_Member_Address;
@@ -183,5 +179,15 @@ public class OrderProductController {
 		return "/home";
 	}
 	
+	@RequestMapping(value="/mileage_view", method=RequestMethod.GET)
+	public String mileage_viewGET(Model model, HttpServletRequest request) throws Exception{
+		HttpSession session = request.getSession();
+		MemberVO member = (MemberVO)session.getAttribute("login");
+		
+		List<MileageListVO> list = m_service.mileage_view(member.getMember_id());
+		model.addAttribute("list", list);
+		model.addAttribute("current", m_service.mileage_current(member.getMember_id()));
+		return "mypage/mileage_view";
+	}
 	
 } 

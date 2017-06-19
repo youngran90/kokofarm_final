@@ -9,6 +9,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import kokofarm.orderproduct.domain.MileageListVO;
 import kokofarm.orderproduct.domain.MileageVO;
 import kokofarm.orderproduct.persistence.MileageDAO;
 import kokofarm.orderproduct.persistence.OrderProductDAO;
@@ -65,6 +66,11 @@ public class MileageServiceImpl implements MileageService {
 	@Override
 	public void update(int mileage_current, String member_id) throws Exception {
 		dao.update(mileage_current, member_id);
+	}
+
+	@Override
+	public List<MileageListVO> mileage_view(String member_id) throws Exception {
+		return dao.mileage_view(member_id);
 	}
 	
 	

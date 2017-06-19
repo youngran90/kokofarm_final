@@ -80,17 +80,17 @@ public class OrderProductServiceImpl implements OrderProductService {
 		return dao.member_info(member_id);
 	}
 	
-	@Transactional
 	@Override
 	public void payment_insert(OrderFinish_Payment_Info info) throws Exception {
 		dao.payment_insert(info);
-		dao.cart_delete(info.getMember_id());
-		dao.orderproduct_delete(info.getMember_id());
 	}
-
+	
+	@Transactional
 	@Override
 	public void orderfinish_insert(OrderFinishVO vo) throws Exception {
 		dao.orderfinish_insert(vo);
+		dao.cart_delete(vo.getOrderfinish_member_id());
+		dao.orderproduct_delete(vo.getOrderfinish_member_id());
 	}
 
 	@Override

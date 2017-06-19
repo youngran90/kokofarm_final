@@ -193,9 +193,10 @@ $(function(){
 									<td class="text-left">
 										<a href="/product/detail_product?product_no=${order_list.product_no}"><img class="img-thumbnail" title="${order_list.product_name }" alt="${order_list.product_name }" src="/resources/files/attach/${order_list.product_mainimage} "></a>
 										<a href="/product/detail_product?product_no=${order_list.product_no}" id="product_name">${order_list.product_name }</a>
-										<c:if test="${order_list.product_total==0}">
+										<span  class="${status.count}pnd"></span>
+										<%-- <c:if test="${order_list.product_total==0}">
 											<input type="button" name="delete" onclick="location.href='delete?product_no=${order_list.product_no }'"/>
-										</c:if>
+										</c:if> --%>
 									</td>
 									<td class="text-center"><em class="delivery_price" id="${status.count }dp">${order_list.order_delivery_price }</em><b id="${status.count }dp_unit">원</b></td>
 									<td class="text-right"><em class="product_price" id="${status.count }pp">${order_list.product_price }</em><b>원</b></td>
