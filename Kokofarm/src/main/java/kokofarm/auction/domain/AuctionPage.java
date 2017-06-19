@@ -14,6 +14,7 @@ public class AuctionPage {
 	private boolean prev;
 	private boolean next;
 	
+
 	private int displayPageNum = 5; //화면에 보여질 페이징번호
 	private AuctionCri cri;
 	
@@ -62,8 +63,8 @@ public class AuctionPage {
 		return cri;
 	}
 	public void calcData(){
-		endPage = (int)(Math.ceil(cri.getPage()/(double)displayPageNum) * displayPageNum);
-		startPage = (endPage-displayPageNum)+1;
+		endPage = (int)((Math.ceil(cri.getPage()/(double)displayPageNum) * displayPageNum)-1);
+		startPage = ((endPage+1)-displayPageNum)+1;
 		
 		int tempEndPage = (int)(Math.ceil(totalCount/(double)cri.getPerPageNum()));
 		if(endPage>tempEndPage){

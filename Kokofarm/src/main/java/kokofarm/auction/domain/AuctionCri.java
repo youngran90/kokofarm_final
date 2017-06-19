@@ -5,7 +5,7 @@ public class AuctionCri {
 	private int perPageNum; //보여질 데이터 갯수
 	private String searchType;
 	private String keyword;
-	
+
 	public AuctionCri(){
 		this.page = 1;
 		this.perPageNum = 12;
@@ -56,14 +56,6 @@ public class AuctionCri {
 
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
-	}
-
-	
-	
-	@Override
-	public String toString() {
-		return "AuctionCri [page=" + page + ", perPageNum=" + perPageNum + ", searchType=" + searchType + ", keyword="
-				+ keyword + "]";
 	}
 
 

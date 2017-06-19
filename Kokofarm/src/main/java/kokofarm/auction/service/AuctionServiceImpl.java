@@ -6,9 +6,12 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import kokofarm.auction.domain.AuctionCri;
 import kokofarm.auction.domain.AuctionRegisterVO;
+import kokofarm.auction.domain.AuctionSort;
 import kokofarm.auction.domain.RT_AuctionCri;
 import kokofarm.auction.domain.RT_AuctionRegisterVO;
 import kokofarm.auction.persistence.AuctionDAO;
@@ -33,17 +36,20 @@ public class AuctionServiceImpl implements AuctionService{
 		return dao.listCri(cri);
 	}
 	@Override
+	public List<AuctionRegisterVO> listSort(AuctionSort sort) throws Exception {
+		return dao.listSort(sort);
+	}
+	@Override
 	public int CountPage(AuctionCri cri) throws Exception {
 		return dao.countPage(cri);
 	}
 	@Override
+	@Transactional
 	public AuctionRegisterVO detail(int auction_no) throws Exception {
+		dao.updateAuctionHits(auction_no);
 		return dao.detail(auction_no);
 	}
-	@Override
-	public void updateAuctionHits(int auction_no) throws Exception {
-		dao.updateAuctionHits(auction_no);
-	}
+	
 	
 	/*실시간 경매*/
 	@Override

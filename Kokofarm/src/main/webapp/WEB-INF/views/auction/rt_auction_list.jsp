@@ -50,17 +50,35 @@ window.onload = function(){
 		$('#register_button').show();
 	}
 	
-	var auction_no='${auction_info.rt_auction_no}'
-	/* alert('auction_no'); */
+	var auction_no='${list}'
+	/* alert(auction_no); */
 	if(auction_no==''){
 		var auction_txt = '<p>등록된 경매 상품이 없습니다.</p>';
-		$('#auction_txt').html(auction_txt);
+		$('#auction_txt').html(auction_txt); 
 	}
-
+	
 }
 
 function move_register(){
 	window.location.href="rt_auction_register";
+
+}
+
+function move_detail(){
+	var set_time = ${set_time};
+	var set_min = ${set_min};
+	
+	alert(set_time+set_min);
+	alert("경매에 참여하시겠습니까");
+	if (set_time = 9 && 50 <= set_min){ //9:50 ~ 9:59
+		$("#rt_reg_btn").click(function(){}).prop("disabled", false);
+	}else if(set_time = 10 && set_min > 10){ //10:00 ~ 10:10
+		$("#rt_reg_btn").click(function(){}).prop("disabled", false);
+	}else{
+		alert("경매 참여 가능시간이 아닙니다.");
+		$("#rt_reg_btn").click(function(){}).prop("disabled", true);
+	}
+	
 }
 
 </script>
@@ -321,12 +339,13 @@ function move_register(){
      		<div class="product-thumb">
      		<div id="auction_txt"></div>
      			<div class="image product-imageblock"><img src='/resources/files/attach/${RT_AuctionRegisterVO.rt_auction_title_img}' class="img-responsive"></div>
-     			<p class="product-name" style="height: 50px;"> <a href="/tender/tenderform?auction_no=${RT_AuctionRegisterVO.rt_auction_no}"><span class="rt_auction_name">${RT_AuctionRegisterVO.rt_auction_name}</span></a></p>
+     			<p class="product-name" style="height: 50px;"><span class="rt_auction_name">${RT_AuctionRegisterVO.rt_auction_name}</span></a></p>
      			<p style="color: lightgray;">${RT_AuctionRegisterVO.rt_auction_content}</p>
      			<p class="price product-price">
      			<span style="font-size: 12px; color:#A6A6A6; font-weight: lighter; margin-right:5px;">하한가</span>${RT_AuctionRegisterVO.rt_auction_down}
      			</p>
-     			<button class="auction_part" style="position: relative; top: 50px;">참여하기</button>
+     			<button id="rt_reg_btn" class="auction_part" onclick="move_detail()"
+     			style="position: relative; top: 50px;">참여하기</button>
      		</div>
      	</div>
      	

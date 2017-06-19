@@ -302,21 +302,22 @@
         <div class="col-md-2 text-right sort-wrapper">
           <label class="control-label" for="input-sort"></label>
           <div class="sort-inner">
-            <select id="input-sort" class="form-control" style="font-size: 13px; text-align: center; width: 226px;
+            <select id="auction-sort" class="form-control" style="font-size: 13px; text-align: center; width: 226px;
             position: relative; left: 10px;">
-	          <option value="ASC">과일</option>
-	          <option value="ASC">채소</option>
-              <option value="ASC">신규등록순</option>
-              <option value="ASC">마감임박순</option>
-              <option value="ASC">현재가 (내림차순)</option>
-              <option value="DESC">현재가 (오름차순)</option>
+	          <option id="fruits">과일</option>
+	          <option id="vegetable">채소</option>
+              <option id="new_reg">신규등록순</option>
+              <option id="end_impend">마감임박순</option>
             </select>
           </div>
         </div>
       </div>
       <br><br><br>
+      <script type="text/javascript">
+      	
+      </script>
       
-     <div class="grid-list-wrapper">
+     <div class="grid-list-wrapper" style="width: 960px;">
      <c:forEach items="${list}" var="AuctionRegisterVO">
      	<div class="product-layout product-list col-xs-12">
      		<div class="product-thumb">
@@ -341,10 +342,10 @@
         <div class="pagination-inner">
           <ul class="pagination">
           <c:if test="${auctionPage.prev}">
-          	<li><a href="auction_list?page=${auctionPage.startPage-1}">&lt;</a></li>
+          	<li><a href="auction_list${auctionPage.makeSearch(auctionPage.startPage - 1)}">&lt;</a></li> 
           </c:if>
           <c:forEach begin="${auctionPage.startPage}" end="${auctionPage.endPage}" var="idx">
-          	<li <c:out value="${auctionPage.cri.page==idx?'class=active':''}"/>><a href="auction_list?page=${idx}">${idx}</a></li>
+          	<li <c:out value="${auctionPage.cri.page == idx?'class=active':''}"/>><a href="auction_list?page=${idx}">${idx}</a></li>
           </c:forEach>
           <c:if test="${auctionPage.next && auctionPage.endPage > 0}">
           	<li><a href="auction_list?page=${auctionPage.endPage + 1}">&gt;</a></li>

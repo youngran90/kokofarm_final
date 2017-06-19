@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -26,6 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 import kokofarm.auction.domain.AuctionCri;
 import kokofarm.auction.domain.AuctionPage;
 import kokofarm.auction.domain.AuctionRegisterVO;
+import kokofarm.auction.domain.AuctionSort;
 import kokofarm.auction.domain.RT_AuctionCri;
 import kokofarm.auction.domain.RT_AuctionRegisterVO;
 import kokofarm.auction.service.AuctionService;
@@ -66,6 +68,9 @@ public class AuctionController {
 	    String auction_title_img = "Auction_"+originalName;
 	    auction.setAuction_title_img(auction_title_img);
 	    //logger.info("auction_title_img : "+auction.getAuction_title_img());
+	    
+	    String select_time = request.getParameter("selectedTime");
+	    logger.info(select_time);
 	    
 	    String auction_unit = request.getParameter("auction_unit");
 	    String auction_units = request.getParameter("auction_units");
@@ -126,15 +131,12 @@ public class AuctionController {
 		}
 	
 	@RequestMapping(value="/auction_list", method=RequestMethod.GET)
-	public void auctionList(@ModelAttribute("cri")AuctionCri cri, AuctionRegisterVO auction, 
+	public void auctionList(@ModelAttribute("cri")AuctionCri cri, AuctionRegisterVO auction,
 			MemberVO member, Model model) throws Exception{
 		logger.info(cri.toString());
-		int auction_no = auction.getAuction_no();
-		/*service.updateAuctionHits(auction_no);*/
 
 		model.addAttribute("list", service.listCri(cri));
-		
-		
+	
 		AuctionPage auctionPage = new AuctionPage();
 		auctionPage.setCri(cri);
 		auctionPage.setTotalCount(service.CountPage(cri));
@@ -142,18 +144,14 @@ public class AuctionController {
 		model.addAttribute("auctionPage", auctionPage);
 		logger.info("페이징 + 일반경매리스트_GET");
 		
-		
-		auction.setSeller_no(member.getSeller_no());
+		auction.setSeller_no(member.getSeller_no()); //사업자번호 받아오기
 	}
 	
 	@RequestMapping(value="/tender_form", method=RequestMethod.GET)
-	public ModelAndView detail(@RequestParam(value="auction_no") int auction_no, HttpSession session, ModelAndView mav)throws Exception{
-		service.updateAuctionHits(auction_no);
-		mav.addObject(service.detail(auction_no));
-		mav.setViewName("/tender/tender_form");
+	public void detail(@RequestParam(value="auction_no") int auction_no, HttpSession session, Model model)throws Exception{
 		
+		model.addAttribute(service.detail(auction_no));
 		System.out.println(auction_no);
-		return mav;
 	}
 	
 	
@@ -171,7 +169,9 @@ public class AuctionController {
 		System.out.println("현재시간 : "+vistiTime);
 		
 		int hour = Integer.parseInt(vistiTime.substring(11,13));
+		int minute = Integer.parseInt(vistiTime.substring(14,16));
 		model.addAttribute("set_time", hour);
+		model.addAttribute("set_min", minute);
 		
 	}
 	
@@ -202,21 +202,42 @@ public class AuctionController {
 		
 		logger.info(rt_auction.toString());
 		String originalName = rt_auction.getRt_file().getOriginalFilename();
+		String originalName01 = rt_auction.getRt_file2().getOriginalFilename();
+		String originalName02 = rt_auction.getRt_file3().getOriginalFilename();
 	    byte[] fileData = rt_auction.getRt_file().getBytes();
+	    byte[] fileData2 = rt_auction.getRt_file2().getBytes();
+	    byte[] fileData3 = rt_auction.getRt_file3().getBytes();
 	         
 	    HttpSession session = request.getSession();
 	    String root_path = session.getServletContext().getRealPath("/");
 	    String attach_path = "resources/files/attach/";
 	               
 	    String rt_auction_title_img = "RT_Auction_"+originalName;
+	    String rt_auction_title_img01 = "RT_Auction_2"+originalName01;
+	    String rt_auction_title_img02 = "RT_Auction_3"+originalName02;
+	    
 	    rt_auction.setRt_auction_title_img(rt_auction_title_img);
+	    rt_auction.setRt_auction_title_img01(rt_auction_title_img01);
+	    rt_auction.setRt_auction_title_img02(rt_auction_title_img02);
 	    //logger.info("auction_title_img : "+auction.getAuction_title_img());
+	    
+	    MemberVO member = (MemberVO)session.getAttribute("login");
+	    String seller_no = member.getSeller_no();
+	    rt_auction.setSeller_no(seller_no);
 	         
 	    service.rt_register(rt_auction);
 	    logger.info("auction_title_img : "+rt_auction.getRt_auction_title_img());
+	    logger.info("auction_title_img01 : "+rt_auction.getRt_auction_title_img01());
+	    logger.info("auction_title_img02 : "+rt_auction.getRt_auction_title_img02());
+	    logger.info("seller_no : " + rt_auction.getSeller_no());
+	    
 	         
 	    File auction_file = new File(root_path + attach_path, rt_auction_title_img);
+	    File auction_file2 = new File(root_path + attach_path, rt_auction_title_img01);
+	    File auction_file3 = new File(root_path + attach_path, rt_auction_title_img02);
 	    FileCopyUtils.copy(fileData, auction_file);
+	    FileCopyUtils.copy(fileData2, auction_file2);
+	    FileCopyUtils.copy(fileData3, auction_file3);
 	      
 		return "redirect:/auction/rt_auction_list";
 	}
@@ -226,12 +247,21 @@ public class AuctionController {
 		logger.info(cri.toString());
 		model.addAttribute("list", service.rt_listCri(cri));
 		
+		Calendar calendar = Calendar.getInstance();
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String vistiTime = format.format(calendar.getTime());
+		System.out.println("현재시간 : "+vistiTime);
+		
+		int hour = Integer.parseInt(vistiTime.substring(11,13));
+		int minute = Integer.parseInt(vistiTime.substring(14,16));
+		model.addAttribute("set_time", hour);
+		model.addAttribute("set_min", minute);
 		
 		logger.info("실시간 경매 리스트_get");
 	}
 	
 	
-	@RequestMapping(value="/", method=RequestMethod.GET)
+	@RequestMapping(value="/rt_auction/rt_auction", method=RequestMethod.GET)
 	public void RT_detail(@RequestParam(value="rt_auction_no") String rt_auction_no, Model model)throws Exception{
 		model.addAttribute(service.rt_detail(rt_auction_no));
 	}

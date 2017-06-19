@@ -4,29 +4,83 @@
 <title>코코팜::상품등록</title>
 <%@include file="../include/header.jsp"%>
 
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
-<link rel="stylesheet" href="//mugifly.github.io/jquery-simple-datetimepicker/jquery.simple-dtpicker.css">
-
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" /> 
+<script src="http://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script>
-  var jq = jQuery.noConflict();
-</script>
-<script src="http://mugifly.github.io/jquery-simple-datetimepicker/jquery.simple-dtpicker.js"></script>
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
 <script type="text/javascript" src="/resources/ckeditor/ckeditor.js"></script>
 
-
 <script type="text/javascript">
-jq(function(){
-	jq("#start_date").appendDtpicker({
-			local:"ko",
-			dateFormat:"yyyy-MM-DD hh:mm:00"
+$(function(){
+	$("#start_date").datepicker({
+		local:"ko",
+	      dateFormat:"yy-mm-dd",
+	      dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+	      monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+	      maxDate: 5,
+	      minDate: -1
 		});
-	jq("#end_date").appendDtpicker({
-			local:"ko",
-			dateFormat:"yyyy-MM-DD hh:mm:00"
+	$("#end_date").datepicker({
+		local:"ko",
+	      dateFormat:"yy-mm-dd",
+	      dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+	      monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+	      maxDate: 5,
+	      minDate: -1
 		});
-	});
+});
+	
+	
+function register(){
+	var name=$('#auction_name').val();
+	var group=$('#auction_group').val();
+	var start_date=$('#start_date').val();
+	var end_date=$('#end_date').val();
+	var up=$('#auction_up').val();
+	var down=$('#auction_down').val();
+	var unit=$('#auction_unit').val();
+	var units=$('#auction_units').val();
+	var location=$('#auction_location').val();
+	var area=$('#auction_area').val();
+	var title=$('#auction_title_img').val();
+	var content=$('#auction_content').val();
+	
+	if(name==''){
+		alert("상품명을 입력하세요.");
+		return;
+	}else if(group==''){
+		alert("분류를 선택하세요.");
+		return;
+	}else if(start_date==''){
+		alert("경매시작일을 선택하세요.");
+		return;
+	}else if(end_date==''){
+		alert("경매종료일을 선택하세요.");
+		return;
+	}else if(up==''){
+		alert("상품의 상한가를 입력하세요.");
+		return;
+	}else if(down==''){
+		alert("상품의 하한가를 입력하세요.");
+	}
+	else if(auction_unit==''){
+		alert("상품의 상세단위를 입력하세요.");
+		return;
+	}else if(auction_area==''){
+		alert("상세주소를 입력하세요");
+		return;
+	}else if(title==''){
+		alert("상품의 대표이미지를 선택하세요.");
+		return;
+	}else{
+		alert("경매가 등록되었습니다.")
+		document.getElementById('auction_register').submit();
+	}
+};
+
+
+
 
 	var ckeditor_config = {
 			resize_enabled : false,
@@ -36,17 +90,19 @@ jq(function(){
 			removePlugins : "elementspath",
 			filebrowserUploadUrl : "/auction/file_upload",
 			
-			toolbar : [['Source', '-', 'NewPage', 'Preview'],
-				['Cut', 'Copy', 'Paste', 'PasteText', '-', 'Undo', 'Redo'],
-				['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript'],
-				['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
-				['Image', 'Flash', 'Table', 'SpecialChar', 'Link', 'Unlink']
-			]
+			toolbar : [ [ 'Source', '-' , 'NewPage', 'Preview' ],
+				[ 'Cut', 'Copy', 'Paste', 'PasteText', '-', 'Undo', 'Redo' ], 
+				[ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript'],
+				[ 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock' ],
+				'/',
+				[ 'Styles', 'Format', 'Font', 'FontSize' ], 
+				[ 'TextColor', 'BGColor' ], 
+				[ 'Image', 'Flash', 'Table' , 'SpecialChar' , 'Link', 'Unlink'] 
+			]		
 		};
-	
-	
+			
 	var editor = null;
-	jq(function(){
+	jQuery(function(){
 		editor = CKEDITOR.replace("auction_content", ckeditor_config);
 	});
 	
@@ -54,54 +110,8 @@ jq(function(){
 		editor.updateElement();
 	}
 	
-	window.parent.CKEDITOR.tools.callFunction('jq{CKEditorFuncNum}', 'jq{file_path}');
+	window.parent.CKEDITOR.tools.callFunction('${CKEditorFuncNum}', '${file_path}');
 	
-	function register(){
-		var name=$('#auction_name').val();
-		var group=$('#auction_group').val();
-		var start_date=$('#start_date').val();
-		var end_date=$('#end_date').val();
-		var up=$('#auction_up').val();
-		var down=$('#auction_down').val();
-		var unit=$('#auction_unit').val();
-		var units=$('#auction_units').val();
-		var location=$('#auction_location').val();
-		var area=$('#auction_area').val();
-		var title=$('#auction_title_img').val();
-		var content=$('#auction_content').val();
-		
-		if(name==''){
-			alert("상품명을 입력하세요.");
-			return;
-		}else if(group==''){
-			alert("분류를 선택하세요.");
-			return;
-		}else if(start_date==''){
-			alert("경매시작일을 선택하세요.");
-			return;
-		}else if(end_date==''){
-			alert("경매종료일을 선택하세요.");
-			return;
-		}else if(up==''){
-			alert("상품의 상한가를 입력하세요.");
-			return;
-		}else if(down==''){
-			alert("상품의 하한가를 입력하세요.");
-		}
-		else if(auction_unit==''){
-			alert("상품의 상세단위를 입력하세요.");
-			return;
-		}else if(auction_area==''){
-			alert("상세주소를 입력하세요");
-			return;
-		}else if(title==''){
-			alert("상품의 대표이미지를 선택하세요.");
-			return;
-		}else{
-			alert("경매가 등록되었습니다.")
-			document.getElementById('auction_register').submit();
-		}
-	}
 </script>
 
 <div class="container">
@@ -125,7 +135,7 @@ jq(function(){
         <div class="col-sm-9" id="content">
             <h1>일반 경매</h1>
             <!-- <p>If you already have an account with us, please login at the <a href="login">login page</a>.</p> -->
-            <form class="form-horizontal" id="auction_register" enctype="multipart/form-data" method="post" action="auction_register">
+            <form class="form-horizontal" enctype="multipart/form-data" method="post" id="auction_register" action="auction_register">
                 <fieldset id="account">
                     <legend>일반 경매 상품 등록</legend>
                     <div style="display: none;" class="form-group required">
@@ -157,13 +167,33 @@ jq(function(){
                     <div class="form-group">
                         <label for="input-lastname" class="col-sm-2 control-label">경매시작일</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="start_date" name="start_date">
+                            <input type="text" class="form-control" id="start_date" name="start_date" placeholder="날짜를 선택해주세요."
+                            style="width: 389px; float: left; margin-right: 10px;">
+                            <select id="selectedTime">
+                            	<option id="am" value="am">오전</option>
+                            	<option id="pm" value="pm">오후</option>
+                            </select>
+                            <select>
+                            	<option>01</option><option>02</option>
+                            	<option>03</option><option>04</option>
+                            	<option>05</option><option>06</option>
+                            	<option>07</option><option>08</option>
+                            	<option>09</option><option>10</option>
+                            	<option>11</option><option>12</option>
+                            </select>
+                            <select>
+                            	<option>00</option><option>05</option><option>10</option>
+                            	<option>15</option><option>20</option><option>25</option>
+                            	<option>30</option><option>35</option><option>40</option>
+                            	<option>45</option><option>50</option><option>55</option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="input-email" class="col-sm-2 control-label">경매종료일</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="end_date" name="end_date">
+                            <input type="text" class="form-control" id="end_time" name="end_time">
                         </div>
                     </div>
                     <div class="form-group">
@@ -194,7 +224,7 @@ jq(function(){
                     <div class="form-group">
                         <label for="input-fax" class="col-sm-2 control-label">생산지/원산지</label>
                         <div class="col-sm-10">
-                        <select id="auction_location" name="auction_location" style="height:32px; width: 169px; float:left;
+                        <select id="auction_location" name="auction_location" style="height:32px; width:150px; float:left;
                         text-align: center;">
                         	<option value="서울특별시">서울특별시</option>
                         	<option value="인천광역시">인천광역시</option>
@@ -209,7 +239,7 @@ jq(function(){
                         	<option value="제주특별자치도">제주특별자치도</option>
                         </select>
                             <input type="text" class="form-control" placeholder="주소를 입력해주세요." 
-                            id="auction_area" name="auction_area" style="width:619px; height:32px;">
+                            id="auction_area" name="auction_area" style="width:638px; height:32px;">
                         </div>
                     </div>
                     <div class="form-group">

@@ -4,6 +4,7 @@ import java.util.List;
 
 import kokofarm.auction.domain.AuctionCri;
 import kokofarm.auction.domain.AuctionRegisterVO;
+import kokofarm.auction.domain.AuctionSort;
 import kokofarm.auction.domain.RT_AuctionCri;
 import kokofarm.auction.domain.RT_AuctionRegisterVO;
 
@@ -14,6 +15,7 @@ public interface AuctionDAO {
 	public List<AuctionRegisterVO> list() throws Exception;
 	public List<AuctionRegisterVO> listPage(int page) throws Exception;
 	public List<AuctionRegisterVO> listCri(AuctionCri cri) throws Exception;
+	public List<AuctionRegisterVO> listSort(AuctionSort sort) throws Exception;
 	public int countPage(AuctionCri cri) throws Exception;
 	public AuctionRegisterVO detail(int auction_no) throws Exception;
 	public void updateAuctionHits(int auction_no) throws Exception;

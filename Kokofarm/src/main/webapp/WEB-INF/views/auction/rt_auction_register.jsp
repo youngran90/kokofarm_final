@@ -4,23 +4,65 @@
 <title>코코팜::상품등록</title>
 <%@include file="../include/header.jsp"%>
 
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
 <script type="text/javascript" src="/resources/ckeditor/ckeditor.js"></script>
 
 <script type="text/javascript">
-	/* datetimepicker */
-	$(function(){
-		$("#rt_auction_date").datepicker({
-			local:"ko",
-			dateFormat:"yy-mm-dd",
-			dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-			monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-			maxDate: 5,
-			minDate: -1
-		});
-	});
+/* datetimepicker */
+$(function(){
+   $("#rt_auction_date").datepicker({
+      local:"ko",
+      dateFormat:"yy-mm-dd",
+      dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+      monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+      maxDate: 5,
+      minDate: -1
+   });
+});
+
+
+/* register alert */
+function register(){
+	var rt_auction_name=$('#rt_auction_name').val();
+	var	rt_auction_group=$('#rt_auction_group').val();
+	var rt_auction_time=$('#rt_auction_time').val();
+	var rt_auction_date=$('#rt_auction_date').val();
+	var rt_auction_down=$('#rt_auction_down').val();
+	var rt_auction_unit=$('#rt_auction_unit').val();
+	var rt_auction_units=$('#rt_auction_units').val();
+	var rt_auction_location=$('#rt_auction_location').val();
+	var rt_auction_area=$('#rt_auction_area').val();
+	var rt_auction_title=$('#rt_auction_title_img').val();
+	var rt_auction_content=$('#rt_auction_content').val();
+	
+	if(rt_auction_name==''){
+		alert("상품명을 입력하세요.");
+		return;
+	}else if(rt_auction_time==''){
+		alert("경매시간을 선택하세요.");
+		return;
+	}else if(rt_auction_date==''){
+		alert("경매날짜를 선택하세요.");
+		return;
+	}else if(rt_auction_down==''){
+		alert("상품의 하한가를 입력하세요.");
+		return;
+	}else if(rt_auction_unit==''){
+		alert("상품의 상세단위를 입력하세요.");
+		return;
+	}else if(rt_auction_area==''){
+		alert("상세주소를 입력하세요");
+		return;
+	}else if(rt_auction_title==''){
+		alert("상품의 대표이미지를 선택하세요.");
+		return;
+	}else{
+		alert("경매가 등록되었습니다.");
+		document.getElementById('auction_register').submit();
+	}
+};
 
 	/* CKEditor */
 	var ckeditor_config = {
@@ -51,67 +93,7 @@
 	
 	window.parent.CKEDITOR.tools.callFunction('${CKEditorFuncNum}', '${file_path}');
 	
-	window.onload = function(){
-		var auction_full = '${list.rt_auction_date}'
-		
-		/* alert(auction_full); */
-		
-			
-		var set_time = ${set_time};
-		/* alert(set_time); */
-			if(set_time>10){
-				$("#am").click(function(){}).prop("disabled", true);
-				return;
-			}else if(set_time>22){
-				$('#pm').click(function(){}).prop("disabled", true);
-				return;
-			}
-		}
 	
-	
-	function register(){
-		var name=$('#rt_auction_name').val();
-		var group=$('#rt_auction_group').val();
-		var time=$('#rt_auction_time').val();
-		var date=$('#rt_auction_date').val();
-		var down=$('#rt_auction_down').val();
-		var unit=$('#rt_auction_unit').val();
-		var units=$('#rt_auction_units').val();
-		var location=$('#rt_auction_location').val();
-		var area=$('#rt_auction_area').val();
-		var title=$('#rt_auction_title_img').val();
-		var content=$('#rt_auction_content').val();
-		
-		if(name==''){
-			alert("상품명을 입력하세요.");
-			return;
-		}else if(group==''){
-			alert("분류를 선택하세요.");
-			return;
-		}else if(time==''){
-			alert("경매시간을 선택하세요.");
-			return;
-		}else if(date==''){
-			alert("경매날짜를 선택하세요.");
-			return;
-		}else if(down==''){
-			alert("상품의 하한가를 입력하세요.");
-			return;
-		}
-		else if(auction_unit==''){
-			alert("상품의 상세단위를 입력하세요.");
-			return;
-		}else if(auction_area==''){
-			alert("상세주소를 입력하세요");
-			return;
-		}else if(title==''){
-			alert("상품의 대표이미지를 선택하세요.");
-			return;
-		}else{
-			alert("경매가 등록되었습니다.")
-			document.getElementById('rt_auction_register').submit();
-		}
-	}
 	
 </script>
 
@@ -136,7 +118,7 @@
         <div class="col-sm-9" id="content">
             <h1>실시간 경매</h1>
             <!-- <p>If you already have an account with us, please login at the <a href="login">login page</a>.</p> -->
-            <form class="form-horizontal" id="rt_auction_register" enctype="multipart/form-data" method="post" action="rt_auction_register">
+            <form class="form-horizontal" enctype="multipart/form-data" method="post" id="auction_register" action="rt_auction_register">
                 <fieldset id="account">
                     <legend>실시간 경매 상품 등록</legend>
                     <div style="display: none;" class="form-group required">
@@ -223,7 +205,19 @@
                         <div class="col-sm-10">
                            <input type="file" id="rt_auction_title_img" name="rt_file" style="height:32px; width:790px;">
                         </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="input-fax" class="col-sm-2 control-label" style="height:32px;">상세이미지1</label>
+                        <div class="col-sm-10">
+                           <input type="file" id="rt_auction_title_img01" name="rt_file2" style="height:32px; width:790px;">
                         </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="input-fax" class="col-sm-2 control-label" style="height:32px;">상세이미지2</label>
+                        <div class="col-sm-10">
+                           <input type="file" id="rt_auction_title_img02" name="rt_file3" style="height:32px; width:790px;">
+                        </div>
+                    </div>
                     <!-- 에디터 끼워넣을 곳! -->
                     <div class="form-group">
                         <label for="input-fax" class="col-sm-2 control-label">상세내용</label>

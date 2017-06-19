@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import kokofarm.auction.domain.AuctionCri;
 import kokofarm.auction.domain.AuctionRegisterVO;
+import kokofarm.auction.domain.AuctionSort;
 import kokofarm.auction.domain.RT_AuctionCri;
 import kokofarm.auction.domain.RT_AuctionRegisterVO;
 
@@ -14,9 +15,10 @@ public interface AuctionService {
 	public void register(AuctionRegisterVO auction) throws Exception;
 	public List<AuctionRegisterVO> list() throws Exception;
 	public List<AuctionRegisterVO> listCri(AuctionCri cri) throws Exception;
+	public List<AuctionRegisterVO> listSort(AuctionSort sort)throws Exception;
 	public int CountPage(AuctionCri cri)throws Exception;
 	public AuctionRegisterVO detail(int auction_no) throws Exception;
-	public void updateAuctionHits(int auction_no)throws Exception;
+	/*public void updateAuctionHits()throws Exception;*/
 
 	
 	/*실시간 경매*/
