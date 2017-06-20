@@ -252,7 +252,7 @@ $( document ).ready( function() {
         <li><a href="/product/list_product"   class="parent"  >과일/채소</a> </li>
         <li><a href="/auction/auction_list"   class="parent"  >일반경매</a> </li>
          <li><a href="/auction/rt_auction_list"   class="parent" >실시간경매</a> </li>
-        <li><a href="#"   class="parent"  >고객센터</a> </li>
+        <li><a href="/center/customer_view"   class="parent"  >고객센터</a> </li>
         <li><a href="/mypage/list_Inquiry" class="active parent">MyPage</a>
           <ul>
             <li><a href="category.html">주문배송조회</a></li>
