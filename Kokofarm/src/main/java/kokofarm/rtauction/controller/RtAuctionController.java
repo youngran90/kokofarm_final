@@ -47,6 +47,7 @@ public class RtAuctionController {
 		String content = vo.getRt_auction_content();
 		String area = vo.getRt_auction_area();
 		String seller_no = vo.getSeller_no();
+		String rt_auction_no = vo.getRt_auction_no();
 		
 		model.addAttribute("member_id", member.getMember_id());
 		model.addAttribute("name", name);
@@ -58,6 +59,7 @@ public class RtAuctionController {
 		model.addAttribute("content", content);
 		model.addAttribute("area", area);
 		model.addAttribute("seller_no", seller_no);
+		model.addAttribute("rt_auction_no", rt_auction_no);
 		
 		//return "redirect://localhost:8083";
 		//return "redirect:http://192.168.0.172:8083"; // 학원에서 할때 학원 서버

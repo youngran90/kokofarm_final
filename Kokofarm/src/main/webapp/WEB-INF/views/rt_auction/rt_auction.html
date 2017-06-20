@@ -2,6 +2,7 @@
 <title>실시간 경매</title>
 <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 <script src="/socket.io/socket.io.js"></script>
+
 <script>
 $(document).ready(function(){
 ////////////////////////////////////////////////////////////////
@@ -42,9 +43,13 @@ $(document).ready(function(){
 		$("#rt_img").attr("src",data.img);
 		$("#rt_img01").attr("src",data.img01);
 		$("#rt_img02").attr("src",data.img02);
+		$("#rt_content").empty();
 		$("#rt_content").append(data.content);
 		$("#rt_area").text(data.area);
 		$("#rt_seller").text(data.seller_no);
+		$("#rt_auction_no").text(data.rt_auction_no);
+		
+		$("#r_no").val(data.rt_auction_no); //폼 태그 값 지정`
 	});
 	
 	socket.on('user',function(data){//세션을 받는다
@@ -60,7 +65,9 @@ $(document).ready(function(){
 		//입장알림
 		var income = "<strong id=income>&nbsp;"+data.nickname+" 님 입장하셨습니다.</strong><br>";
 		$("#chat_area").append(income);
-		
+		if($('#area').prop('scrollHeight') > $('#area').height()){
+			 $('#area').scrollTop($('#area').prop('scrollHeight'));
+		}
 		//유저 리스트 업데이트
 		userUpdate(data.userList);
 	});
@@ -69,6 +76,9 @@ $(document).ready(function(){
 	socket.on('exit',function(data){
 		var out = "<strong id=out>&nbsp;"+data.msg+"</strong><br>";
 		$("#chat_area").append(out);
+		if($('#area').prop('scrollHeight') > $('#area').height()){
+			 $('#area').scrollTop($('#area').prop('scrollHeight'));
+		}
 	});
 	
 	
@@ -96,7 +106,7 @@ $(document).ready(function(){
 	
 	// 주고받는 메세지
 	socket.on('send',function(data){
-		var messeage = '&nbsp;[ '+data.nickname+' 님의 말 ] '+data.msg+'<br>';		
+		var messeage = '&nbsp;[ '+data.nickname+' ] '+data.msg+'<br>';	
 		$("#chat_area").append(messeage);
 		if($('#area').prop('scrollHeight') > $('#area').height()){
 			 $('#area').scrollTop($('#area').prop('scrollHeight'));
@@ -126,9 +136,24 @@ $(document).ready(function(){
 			$("#second").text(second);
 			
  			if(minute == 0 && second == 0 ){
- 				alert("경매가 종료 되었습니다.");
  				$("#rt_finish_time").text("경매 낙찰 시간");
  				$("#finish_time").text(now);
+ 				$("#btn_menu button").attr('disabled',true);
+ 				$("#btn_menu input").attr('readonly',true);
+ 				
+ 				$("#r_id").val($("#tender_name").text());
+ 				$("#r_price").val($("#tender_price").text());
+ 				$("#r_date").val($("#finish_time").text());
+ 				
+ 				//경매 종료시 전달하는 소켓
+ 				socket.emit('finish',{
+ 					no :$("#r_no").val() ,
+ 					price :$("#tender_price").text() ,
+ 					id : $("#tender_name").text() ,
+ 					time : $("#finish_time").text()
+ 				});
+ 				
+ 				alert("경매가 종료 되었습니다.");
 				clearInterval(timer); //타이머 종료 
 				
 			}else{
@@ -141,6 +166,27 @@ $(document).ready(function(){
 				}
 			}	
 		}, 1000); //1초단위로 변동
+		
+
+	 	// 경매종료 후 전달한걸 받는다.
+			socket.on('finish',function(data){
+				if(data.id == $("#r_id").val()){
+					var check = confirm(
+							"경매번호 : " + data.no +
+							"\n낙찰가 : " + data.price +
+							"\n낙찰자 : " + data.id +
+							"\n경매종료시간 : " + data.time +
+							"\n 축하드립니다. 입찰하신 경매에 낙찰 되셨습니다.");
+					if(check){
+						alert("결제 완료");
+					}
+				}else{
+					alert("낙찰에 실패 하셨습니다.");
+				}
+				
+		});
+		
+		//////////////// 경매 종료
 		
 		// 날짜 포멧 만들어주는 함수  YYYY-MM-DD HH:MM:SS
 		function finish_auction(now){
@@ -198,7 +244,6 @@ $(document).ready(function(){
 		var price_c = numberFormat(price);
 		$("#tender_price").text(price_c);
 	});
-	
 	
 	// 5천원 클릭 소켓 전송
 	$("#5000").on('click',function(e){
@@ -372,16 +417,23 @@ $(document).ready(function(){
         }
     });
 	
-	
-	
-	
 });
 </script>
 </head>
 <body>
-<h4 class="test"></h4>
+<form id="rt_acution_finish" method="POST">
+	<input id="r_no" value="">
+	<input id="r_id" value="">
+	<input id="r_price" value="">
+	<input id="r_date" value="">
+</form>
 <section class="auction_body" id="auction_body">
 		<div class="auction_info" id="auction_info">
+		<div class= "slider_background">
+			<div class="no_info">
+				<strong id="rt_auction_no_box">경매 번호</strong>
+				<strong id="rt_auction_no"></strong>
+			</div>
 			<ul id="slider">
 				<li><img id="rt_img" alt="rt_img" src=""></li>
 				<li><img id="rt_img01" alt="rt_img01" src=""></li>
@@ -389,59 +441,24 @@ $(document).ready(function(){
 			</ul>
 			<button type="button" id="prev_btn" class="btn"></button>
 			<button type="button" id="next_btn" class="btn"></button>
+		</div>
 			
 			<div class="auction_content" id="auction_centent">
 				<strong id="name">상 품 명</strong><strong id="rt_name"></strong>
 				<strong id="product_area">생 산 지</strong><strong id="rt_area"></strong><br>
 				<strong id="standard">규 격</strong><strong id="rt_standard"></strong>
 				<strong id="seller">판 매 자</strong><strong id="rt_seller"></strong><br>
-				<strong id="rt_content">상 품 설 명</strong>
+				<strong id="content">상 품 설 명</strong>
+				<div class="rt_content" id="rt_content">
+				
+				</div>
 			</div>
 		</div>
-		<style>
-			#name{
-				font-size: 25px;
-				margin-right: 25px;
-			}
-			
-			#rt_name{
-				font-size: 35px;
-				color: #38a9a5;
-			}
-			#product_area{
-				font-size: 25px;
-				margin-left: 25px;
-				margin-right: 20px;
-			}
-			#rt_area{
-				font-size: 35px;
-				color: #38a9a5;
-			}
-			#standard{
-				font-size: 25px;
-				margin-right: 25px;
-			}
-			#rt_standard{
-				font-size: 35px;
-				color: #38a9a5;
-			}
-			#seller{
-				font-size: 25px;
-				margin-left: 25px;
-				margin-right: 20px;
-			}
-			#rt_seller{
-				font-size: 35px;
-				color: #38a9a5;
-			}
-			
-		</style>
-		
 			<div class="auction_time_price" id="auction_time_price">
 				<div id="time">
 					<strong id=rt_time>남은 시간</strong>
-					<strong id="minute">10</strong><em>분</em>
-					<strong id="second">0</strong><em>초</em>
+					<strong id="minute">0</strong><em>분</em>
+					<strong id="second">10</strong><em>초</em>
 				</div>
 				<div id="rt_auction_finish_time">
 					<strong id=rt_finish_time></strong>
@@ -456,7 +473,7 @@ $(document).ready(function(){
 					<div id="area" class="area" style="overflow: auto;">
 						<div id="chat_area" class="chat_area"></div>
 					</div>
-						<textarea id="chat_list" name="chat_list" rows="18" cols="14" readonly="readonly"></textarea><br>
+						<textarea id="chat_list" name="chat_list" rows="18" cols="11" readonly="readonly"></textarea><br>
 				</div>
 				<div class="chat_input" id="chat_input">
 					<input type="text" id="id" name="id" value="" readonly="readonly">
@@ -476,11 +493,62 @@ $(document).ready(function(){
 				</div>
 		</div>
 	</section>
-		
 </body>
 </html>
+
 <style>
+/* 경매번호 */
+.slider_background{
+	height: 400px;
+	background-color:;
+}
+.no_info{
+	padding : 20px 0 10px 30px;
+}
+#rt_auction_no{
+	margin-left: 10px;
+	color : #38a9a5;
+}
+
 /* 제품 내용 */
+#name{
+	font-size: 20px;
+	margin-right: 25px;
+}
+#rt_name{
+	font-size: 30px;
+	color: #38a9a5;
+}
+#product_area{
+	font-size: 20px;
+	margin-left: 25px;
+	margin-right: 20px;
+}
+#rt_area{
+	font-size: 30px;
+	color: #38a9a5;
+}
+#standard{
+	font-size: 20px;
+	margin-right: 25px;
+}
+#rt_standard{
+	font-size: 30px;
+	color: #38a9a5;
+}
+#seller{
+	font-size: 20px;
+	margin-left: 25px;
+	margin-right: 20px;
+}
+#rt_seller{
+	font-size: 30px;
+	color: #38a9a5;
+}
+#content{
+	font-size: 20px;
+	margin-right: 25px;
+}
 #prev_btn{
 	background-image: url(/btn_img01);
 	background-repeat: no-repeat;
@@ -488,12 +556,11 @@ $(document).ready(function(){
 	margin-left : 40%;
 }
 #next_btn{
-	margin-left : 3%;
+	margin-left : 5%;
 	background-image: url(/btn_img02);
 	background-repeat: no-repeat;
 	background-size: 30px;
 }
-
 .btn {
 	margin-top : 10px;
 	width : 30px;
@@ -507,29 +574,27 @@ $(document).ready(function(){
 	margin:0 auto;
 	padding:0;
 	list-style:none;
-	width:550px;
-	height:350px;
+	width:450px;
+	height:300px;
 	overflow-x:hidden
 }
 #slider li {
 	display:none;
 	position:absolute;
 	left:0;
-	top:0
+	top:0;
 }
 #slider img {
-	width:550px;
-	height:350px
+	width:450px;
+	height:300px
 }
-
 .auction_info {
 	margin-left: 10px;
 	border: 1px solid red;
-	height: 600px;
-	width: 49%;
+	height: 650px;
+	width: 45%;
 	float: left;
 }
-
 .auction_content {
 	margin-left: 20px;
 	height: 200px;
@@ -538,56 +603,43 @@ $(document).ready(function(){
 
 /* 경매 입찰 관련 CSS */
 #time{
-	text-align: center;
+	margin-left: 25px;
+	margin-bottom: 10px;
 }
-
 #time em{
 	margin-left : 5px;
 	font-size: 35px;
 }
-
 #rt_time{
 	font-size: 25px;
 	margin-right: 10px;
 }
-
 #minute{
 	color : #38a9a5;
 	font-size: 55px;
 }
-
 #second{
 	color : #38a9a5;
 	font-size: 55px;
 	margin-left: 10px;
 }
-
 #rt_auction_finish_time{
+	margin-left : 25px;
 	font-size: 25px;
 }
-
 #rt_finish_time{
-	position : relative;
-	left : 20%;
 	font-size: 25px;
 }
-
-#finish_time{
-	position : relative;
-	left : 20%;
-}
-
 #rt_auction_person{
-	text-align: center;
-	margin-left : 5px;
+	margin-top : 10px;
+	margin-left : 20px;
 	font-size: 35px;
 }
-
 #rt_auction_person strong{
 	color : #e2704b;
 	font-size: 25px;
 	margin-right: 20px;
-	margin-left : 10px;
+	margin-left: 5px;
 }
 #rt_auction_person em{
 	margin-right: 5px;
@@ -601,7 +653,6 @@ $(document).ready(function(){
 	position: fixed;
 	width: 79%;
 }
-
 #auction_btn {
 	border: 0px;
 	padding: 0px;
@@ -612,7 +663,6 @@ $(document).ready(function(){
   	font-size: 20px;
   	border-radius: 5px;
 }
-
 #auction_box {
 	height: 80px;
 	background-color: #eaedf1;
@@ -623,7 +673,6 @@ $(document).ready(function(){
 	border-left: 2px solid #7fb1bf;
 	border-top: 2px solid #7fb1bf;
 }
-
 #auction_box button{
 	color: white;
 	position : relative;
@@ -634,7 +683,6 @@ $(document).ready(function(){
   	background-color: #7fb1bf;
   	border-radius: 5px;
 }
-
 #auction_box input{
 	position : relative;
 	top : 12px;
@@ -642,15 +690,12 @@ $(document).ready(function(){
 	height: 48px;
 	border-radius: 5px;
 }
-
-
 #income{
 	color: green;
 }
 #out{
 	color: red;
 }
-
 .auction_body {
 	padding-top: 20px;
 	margin-left: 10%;
@@ -658,61 +703,50 @@ $(document).ready(function(){
 	width: 80%;
 	height: 700px;
 }
-
-
-
 .auction_time_price {
 	position: absolute;
-	left: 50%;
-	height: 150px;
-	width: 38.3%;
-	margin-left: 10px;
+	left: 48%;
+	border : 1px solid red;
+	height: 180px;
+	width: 38%;
 }
-
 #area {
 	position: relative;
-	top: 165px;
+	top: 200px;
 	border: 1px solid blue;
-	margin-left: 10px;
-	margin-right: 10px;
-	width : 405px;
+	margin-left: 15px;
+	width : 355px;
 	height : 402px;
 	float : left;
 }
-
 #chat_list {
 	border: 1px solid green;
-	width : 155px;
 	height : 402px;
-	margin-right : 10px;
-	float : right;
+	margin-left : 25px;
+	float : left;
 	position: relative;
-	top: 165px;
+	top: 200px;
 	resize: none;
 	font-size: 20px;
 	font-weight: bold;
 }
-
 #chat_input{
 	position: relative;
-	top: 175px;
+	top: 220px;
 	float : left;
-	margin-left: 10px;
+	margin-left: 15px;
 	width: 48.3%;
 }
-
 #id {
 	width: 20%;
 	text-align: center;
 }
-
 #chat_text {
-	width: 48.7%;
+	width: 48%;
 }
-
 #chat_enter {
-	margin-left : 15px;
-	width: 26.5%;
+	margin-left : 19px;
+	width: 26%;
 }
 
 </style>

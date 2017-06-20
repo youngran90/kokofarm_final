@@ -21,6 +21,7 @@ var down;
 var unit;
 var content;
 var area;
+var rt_auction_no;
 
 app.get('/btn_img01',function (req,res){     
     var filename = 'btn1.PNG';
@@ -111,16 +112,21 @@ app.get('/', function(request, response) {
 	content = request.param("content");
 	area = request.param("area");
 	seller_no =request.param("seller_no");
+	rt_auction_no = request.param("rt_auction_no");
 	response.sendfile(__dirname + '/rt_auction.html');
 })
 1
 var userList = []; // 접속한 사용자를 저장할 배열
+var socketList = {}; // 소켓 id담을 객체
+
 // 소켓 서버를 만듦
 var io = socketio.listen(server);
 
 io.sockets.on('connection', function(socket) {
 	var joinedUser = false;
 	var nickname = member_id;
+	
+	socketList[member_id]=socket.id;
 	
 	io.sockets.emit('info',{ 
 		product_n : product_n, 
@@ -129,6 +135,7 @@ io.sockets.on('connection', function(socket) {
 		content : content,
 		area : area,
 		seller_no : seller_no,
+		rt_auction_no : rt_auction_no,
 		img : '/img',
 		img01 : '/img01',
 		img02 : '/img02'
@@ -226,11 +233,25 @@ io.sockets.on('connection', function(socket) {
 		});
 	 });
 	 
-	 
-	 
-	 
-	 
-	 
+	 //////////////////////////////////////////
+	 //경매 종료시 넘어오는 소켓 
+	 // 넘어 오는 정보 
+	 // 경매번호
+	 // 낙찰자
+	 // 낙찰금액
+	 // 경매 종료시간
+	 socket.on('finish',function(data){
+
+		for(var i=0; i<userList.length; i++){
+			if(data.id==userList[i]){
+				console.log(userList[i]);
+			}else{
+				console.log(userList[i]);
+			}
+			
+		}
+	 });
+	
 	 
 	 
 	 
