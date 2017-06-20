@@ -8,13 +8,6 @@
 <%@include file="../include/header.jsp" %>
 
 <script>
-	window.onload = fuction(){
-		var seller_id = '${login.seller_id}'
-		if(seller_in!=""){
-			alert(seller_id);
-		}
-	}
-	
 	
 	function move_admin(){
 		window.location.herf="admin_view";
