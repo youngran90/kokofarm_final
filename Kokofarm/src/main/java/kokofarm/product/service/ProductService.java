@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import kokofarm.mypage.domain.graphVO;
+import kokofarm.product.domain.PagingMaker;
 import kokofarm.product.domain.ProductListForm;
 import kokofarm.product.domain.ProductVO;
 
@@ -11,7 +13,7 @@ public interface ProductService {
 
 	public void insert_product(ProductVO product)throws Exception;
 	
-	public List<ProductVO> list_product(ProductListForm ProductForm)throws Exception;
+	public List<ProductVO> list_product(PagingMaker ProductForm)throws Exception;
 		
 	public int Count_Product()throws Exception;
 	
@@ -23,6 +25,5 @@ public interface ProductService {
     
     public void view_count(String product_no)throws Exception;
 
- 
 
 }

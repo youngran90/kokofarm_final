@@ -10,6 +10,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import kokofarm.product.domain.ReplyVO;
+import kokofarm.mypage.domain.graphVO;
+import kokofarm.product.domain.PagingMaker;
 import kokofarm.product.domain.ProductListForm;
 import kokofarm.product.domain.ProductVO;
 
@@ -30,7 +32,7 @@ public class ProductDAOImpl implements ProductDAO {
 
 	//전체출력
 	@Override
-	public List<ProductVO> list_Pro(ProductListForm ProductForm) throws Exception {
+	public List<ProductVO> list_Pro(PagingMaker ProductForm) throws Exception {
 	return session.selectList(namespace+".listProduct", ProductForm);
 	}
 	
@@ -68,5 +70,6 @@ public class ProductDAOImpl implements ProductDAO {
 		map.put("amount", amount);
 		session.update(namespace+".update_reply_count", map);
 	}
+	
 
 }

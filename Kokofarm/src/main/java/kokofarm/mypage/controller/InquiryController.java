@@ -1,5 +1,7 @@
 package kokofarm.mypage.controller;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -11,15 +13,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import kokofarm.basic.domain.Criteria;
-import kokofarm.basic.domain.PageMaker;
 import kokofarm.member.domain.MemberVO;
 import kokofarm.mypage.domain.InquiryVO;
+import kokofarm.mypage.domain.graphVO;
+import kokofarm.mypage.service.GraphService;
 import kokofarm.mypage.service.InquiryService;
 
 @Controller
@@ -28,6 +29,10 @@ public class InquiryController {
 	
 	@Inject
 	private InquiryService service;
+	
+	@Inject
+	private GraphService g_service;
+	
 	
 	private static final Logger logger = LoggerFactory.getLogger(InquiryController.class); 
 	
@@ -55,7 +60,7 @@ public class InquiryController {
 }
 	
 	@RequestMapping(value="/list_Inquiry", method= RequestMethod.GET)
-	public void listInquiry(InquiryVO inquiry, Model model, HttpServletRequest request)throws Exception{
+	public void listInquiry(InquiryVO inquiry, Model model, HttpServletRequest request,@Param("action")String action)throws Exception{
 		
 		logger.info("inquiry..list...");
 		
@@ -69,14 +74,12 @@ public class InquiryController {
 		}
 		
 		List<InquiryVO> inquirylist =  service.list_Inquiry(member_id);
-		System.out.println("1"+inquirylist.toString());
-		
 		List<InquiryVO> inquirylist_s =  service.list_Inquiry_s(seller_no);
-		System.out.println("2"+inquirylist_s.toString());
 		
-
-		model.addAttribute("inquirylist",inquirylist);
-		model.addAttribute("inquirylist_s",inquirylist_s);
+		model.addAttribute("inquirylist",inquirylist); //구매자용 1:1
+		model.addAttribute("inquirylist_s",inquirylist_s); //판매자용 1:1
+		
+		
 	}
 	
 	
@@ -117,6 +120,59 @@ public class InquiryController {
 		return "/mypage/inquiry_reply";
 	}
 
+	@RequestMapping(value="/graph" , method=RequestMethod.GET)
+	public String graph(HttpServletRequest request ,Model model, @Param("action") String action)throws Exception{
+		
+		MemberVO member = (MemberVO)request.getSession().getAttribute("login");
+		String member_id = member.getMember_id();
+		
+		List<graphVO> list = g_service.v_product_no();
+		model.addAttribute("list", list); //가장 판매율 높은 3가지 상품
+		
+		List<graphVO> list1 = new ArrayList<>();
+		List<graphVO> list2 = new ArrayList<>();
+		graphVO gh = new graphVO();
+		list1 = g_service.sum_graph(member_id);
+		int max = 0;
+		System.out.println("size  :  "+ list1.size() );
+			for(int i=0 ;i<list1.size(); i++){
+				if(max < list1.get(i).getSum()){
+					max = list1.get(i).getSum();
+				};
+			
+				if(list1.get(i).getO_date().indexOf("01") >0){
+					gh.setSum1(list1.get(i).getSum());
+				}else if(list1.get(i).getO_date().equals("17-02")){
+					gh.setSum2(list1.get(i).getSum());
+				}else if(list1.get(i).getO_date().equals("17-03")){
+					gh.setSum3(list1.get(i).getSum());
+				}else if(list1.get(i).getO_date().equals("17-04")){
+					gh.setSum4(list1.get(i).getSum());
+				}else if(list1.get(i).getO_date().equals("17-05")){
+					gh.setSum5(list1.get(i).getSum());
+				}else if(list1.get(i).getO_date().equals("17-06")){
+					gh.setSum6(list1.get(i).getSum());
+				}else if(list1.get(i).getO_date().equals("17-07")){
+					gh.setSum7(list1.get(i).getSum());
+				}else if(list1.get(i).getO_date().equals("17-08")){
+					gh.setSum8(list1.get(i).getSum());
+				}else if(list1.get(i).getO_date().equals("17-09")){
+					gh.setSum9(list1.get(i).getSum());
+				}else if(list1.get(i).getO_date().equals("17-10")){
+					gh.setSum10(list1.get(i).getSum());
+				}else if(list1.get(i).getO_date().equals("17-11")){
+					gh.setSum11(list1.get(i).getSum());
+				}else if(list1.get(i).getO_date().equals("17-12")){
+					gh.setSum12(list1.get(i).getSum());
+				}
+		}
+			System.out.println(max);
+		 double max1 = max*1.2;
+		model.addAttribute("action", action);
+		model.addAttribute("max", max1);
+		model.addAttribute("gh", gh); //로그인한 사람 별 월별 총 구매액
+		return "mypage/graph_view";
+	}
 	
 	@RequestMapping(value="/Insert_inquiry_reply", method=RequestMethod.POST)
 	@ResponseBody
@@ -137,6 +193,13 @@ public class InquiryController {
 		inquiry.setInquiry_no(inquiry_no);
 		inquiry.setInquiry_reply(inquiry_reply);
 		service.Insert_InquiryReply(inquiry);
-		
 	}
+	
+	@RequestMapping(value="/mypage_main", method=RequestMethod.GET)
+	public String Mypage()throws Exception{
+		
+		return "mypage/Mypage";
+	}
+	
+	
 }

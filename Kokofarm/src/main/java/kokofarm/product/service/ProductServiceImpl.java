@@ -1,15 +1,14 @@
 package kokofarm.product.service;
 
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Transactional;
 
+import kokofarm.mypage.domain.graphVO;
+import kokofarm.product.domain.PagingMaker;
 import kokofarm.product.domain.ProductListForm;
 import kokofarm.product.domain.ProductVO;
 import kokofarm.product.persistence.ProductDAO;
@@ -23,7 +22,7 @@ public class ProductServiceImpl implements ProductService {
 	
 	@Inject
 	private ReplyDAO replyDao;
-
+	
 	@Override
 	public void insert_product(ProductVO product) throws Exception {
 	/*	String uuid = create_UUID();
@@ -33,7 +32,7 @@ public class ProductServiceImpl implements ProductService {
 
 	//전체출력
 	@Override
-	public List<ProductVO> list_product(ProductListForm ProductForm) throws Exception {
+	public List<ProductVO> list_product(PagingMaker ProductForm) throws Exception {
 		return dao.list_Pro(ProductForm);
 	}
 	
@@ -63,12 +62,6 @@ public class ProductServiceImpl implements ProductService {
 	public void view_count(String product_no) throws Exception {
 		dao.view_count(product_no);
 	}
-
-
-
-	
-
-	
 
 
 }

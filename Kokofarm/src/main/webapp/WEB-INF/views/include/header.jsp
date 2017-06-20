@@ -1,7 +1,8 @@
 <%@page import="kokofarm.member.domain.MemberVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,6 +34,29 @@
 #top-links li .logout {
 display: none;!important;
 }
+
+  body {
+        margin: 0px;
+        padding: 0px;
+      }
+      .jbTitle {
+        text-align: center;
+        font-size: 15px;
+      }
+      .jbMenu {
+        text-align: center;
+        padding: 10px 0px;
+        background-color: white;
+        width: 100%;
+        z-index: 1;
+      }
+      .jbContent {
+        height: 2000px;
+      }
+      .jbFixed {
+        position: fixed;
+        top: 0px;
+      }
 </style>
 
 <script type="text/javascript">
@@ -59,14 +83,35 @@ System.out.println("세션값" +vo);
 	$("#check_id").removeClass("logout");
 	$(".dropdown-menu-right a").eq(0).attr("href","/member/myPage");
 	 $(".dropdown-menu-right a").eq(0).text("마이페이지");
-	 
 	 $(".dropdown-menu-right a").eq(1).attr("href","/member/logout").text("로그아웃");
 	
-	
-	
-	});
+		 	});
 <%}%>
 	
+function show(){
+	var A = document.getElementById("A");
+	var B = $("#B").text();
+     if(A.style.display == "none"){
+		 A.style.display = "block";
+		$("#B").text("접기▲");
+	}else{
+		A.style.display = "none";
+		$("#B").text("시세현황보기▼");
+	}
+}
+
+$( document ).ready( function() {
+  var jbOffset = $( '.jbMenu' ).offset();
+  $( window ).scroll( function() {
+    if ( $( document ).scrollTop() > jbOffset.top ) {
+      $( '.jbMenu' ).addClass( 'jbFixed' );
+    }
+    else {
+      $( '.jbMenu' ).removeClass( 'jbFixed' );
+    }
+  });
+} );
+</script>
 	
 	</script>
 
@@ -109,6 +154,7 @@ System.out.println("세션값" +vo);
               </form>
             </div>
           </div>
+          
           <div class="top-right pull-right">
             <div id="top-links" class="nav pull-right">
               <ul class="list-inline">
@@ -194,6 +240,7 @@ System.out.println("세션값" +vo);
     </div>
   </div>
 </header>
+<div class="jbMenu">
 <nav id="menu" class="navbar">
   <div class="nav-inner container">
     <div class="navbar-header"><span id="category" class="visible-xs">Categories</span>
@@ -224,3 +271,20 @@ System.out.println("세션값" +vo);
     </div>
   </div>
 </nav>
+
+
+<div style=" margin-left: 3%;">
+<button type="button"  id="B" onclick="show();" data-loading-text="Loading..." class="btn btn-primary btn-lg btn-block addtocart" style="margin-left: 75%; " >시세현황보기▼</button>
+	<div id="A" style="display: none;">
+		<div style="display: inline-table;">
+          <iframe src="/product/getdate" name=ce width=600 height=190 frameborder=0 style="border-width:0px; border-color:white; border-style:solid;" ></iframe>
+          </div>
+          
+          <div style="display: inline-table;">
+          <iframe src="/product/getdate1" name=ce width=600 height=190 frameborder=0 style="border-width:0px; border-color:white; border-style:solid;" ></iframe>
+          </div>
+        </div>
+    </div>
+          </div>
+
+

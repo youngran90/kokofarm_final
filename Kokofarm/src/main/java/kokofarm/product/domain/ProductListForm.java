@@ -9,7 +9,23 @@ public class ProductListForm {
 		private String ca3;
 		private PageMaker pageMaker;
 	    private String input_sort = "ph";
+	    private String searchText;
+	    private String searchOption;
 	    
+	    
+	    
+		public String getSearchText() {
+			return searchText;
+		}
+		public void setSearchText(String searchText) {
+			this.searchText = searchText;
+		}
+		public String getSearchOption() {
+			return searchOption;
+		}
+		public void setSearchOption(String searchOption) {
+			this.searchOption = searchOption;
+		}
 		public String getInput_sort() {
 			return input_sort;
 		}

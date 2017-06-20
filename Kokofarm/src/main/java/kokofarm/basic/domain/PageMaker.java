@@ -17,6 +17,8 @@ public class PageMaker {
   private int cpage;
   private int start;
   private int end;
+  private int displayPageNum = 4;
+  private Criteria cri;
   
   
 
@@ -43,10 +45,6 @@ public int getEnd() {
 public void setEnd(int end) {
 	this.end = end;
 }
-
-private int displayPageNum = 12;
-
-  private Criteria cri;
 
   public void setCri(Criteria cri) {
     this.cri = cri;

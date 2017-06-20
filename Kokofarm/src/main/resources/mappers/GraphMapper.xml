@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="kokofarm.mappers.graphMapper">
+
+<select id="v_product_no" resultType="graphVO">
+	select ORDERFINISH_PRODUCT_Name, count(ORDERFINISH_PRODUCT_NO) as sell_count
+	from order_finish 
+	group by ORDERFINISH_PRODUCT_NO, ORDERFINISH_PRODUCT_Name
+	order by count(ORDERFINISH_PRODUCT_NO) desc
+</select>
+
+<select id="sum_graph" resultType="graphVO" parameterType="String">
+	select to_char(ORDERFINISH_DATE, 'yy-MM')as o_date, sum(ORDERFINISH_FINAL_PRICE)as sum
+	from order_finish 
+  where ORDERFINISH_MEMBER_ID = #{member_id}
+	group by to_char(ORDERFINISH_DATE, 'yy-MM')
+  order by  to_char(ORDERFINISH_DATE, 'yy-MM') asc
+</select>
+	
+</mapper>  
+
+
+
+
+
+

@@ -1,15 +1,26 @@
 package kokofarm.product.controller;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.annotations.Param;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -19,16 +30,18 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import kokofarm.basic.domain.Criteria;
 import kokofarm.basic.domain.FileBean;
 import kokofarm.basic.domain.PageMaker;
 import kokofarm.mypage.domain.InquiryVO;
+import kokofarm.mypage.domain.graphVO;
+import kokofarm.product.domain.PagingMaker;
 import kokofarm.product.domain.ProductListForm;
 import kokofarm.product.domain.ProductVO;
 import kokofarm.product.domain.ReplyVO;
+import kokofarm.product.domain.dailyPrice;
 import kokofarm.product.service.ProductService;
 import kokofarm.product.service.ReplyService;
 
@@ -88,27 +101,23 @@ public class ProductController {
 	}
 
 	@RequestMapping(value="/list_product", method= {RequestMethod.GET, RequestMethod.POST})
-	public void listProduct(@Param("ca1") String ca1, 
-		@Param("ca2") String ca2, @Param("ca3") String ca3,  HttpServletRequest request,
-		 InquiryVO inquiry, @ModelAttribute("cri") Criteria cri, @Param("input_sort") String input_sort,
-		 Model model)throws Exception{
+	public void listProduct(HttpServletRequest request, Model model, @ModelAttribute("ProductForm") PagingMaker ProductForm)throws Exception{
 
-		logger.info("in");
-		ProductListForm ProductForm = new ProductListForm();
-		ProductForm.setCa1(ca1);
-		ProductForm.setCa2(ca2);
-		ProductForm.setCa3(ca3);
-		ProductForm.setInput_sort(input_sort);
-		PageMaker pageMaker = new PageMaker();
-		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(service.Count_Product(),cri.getPage());
-		ProductForm.setPageMaker(pageMaker);
+		System.out.println("Here is listController");
+		String text = "%"+ProductForm.getSearchText()+"%";
+		ProductForm.setSearchText(text);
+		System.out.println(ProductForm.toString());
+		
+		ProductForm.setTotalCount(service.Count_Product());
+		
+		ProductForm.calcData();
 		List<ProductVO>list = service.list_product(ProductForm);
+		
+		System.out.println(list.toString());
 		model.addAttribute("count_product", service.Count_Product());
 		model.addAttribute("list",list);
-		model.addAttribute("pageMaker", pageMaker);
-		
-		
+		model.addAttribute("ProductForm", ProductForm);
+     		
 	}
 	
 	
@@ -174,4 +183,157 @@ public class ProductController {
 		return "redirect:/product/list_product";
 	}
 	
+	@RequestMapping(value ="/getdate", method = RequestMethod.GET)
+	public String getdate(HttpServletResponse response, Model model)throws Exception {
+		System.out.println("insert getdate");
+		GregorianCalendar today = new GregorianCalendar ( ); 
+		int year = today.get ( today.YEAR ); 
+		int month = today.get ( today.MONTH ) + 1; 
+		int date = today.get ( today.DATE );
+		
+		 String page = "http://www.kamis.or.kr/service/price/xml.do?action=dailyPriceByCategoryList&p_cert_key=11b8b641-7c0f-4303-a422-7af6301b8ab4&p_cert_id=youngran90&p_convert_kg_yn=Y&p_returntype=json";
+		//구분
+		 String buyer_do = "&p_product_cls_code=01"; //도매
+		 String buyer_so = "&p_product_cls_code=02"; //소매
+		
+		//부류코드
+		 String vege = "&p_item_category_code=200"; //채소류
+		 String fruit = "&p_item_category_code=400"; //과일류
+		 
+		//지역
+		 String seoul = "&p_country_code=1101";
+		 
+		 //조회날짜
+		// String today_date = "&p_regday="+year +"-"+ month + "-" + date; //당일날짜
+		 String t_date = "16";
+		 String today_date = "&p_regday="+year +"-"+ month + "-" + t_date; //당일날짜
+		 
+		 //소매 채소
+		 String urlstr = page+ buyer_so + vege + seoul + today_date;
+         
+         URL url = new URL(urlstr);
+         BufferedReader bf;
+         String line;
+         String result="";
+
+         //날씨 정보를 받아온다.
+         bf = new BufferedReader(new InputStreamReader(url.openStream()));
+
+         //버퍼에 있는 정보를 문자열로 변환.
+         while((line=bf.readLine())!=null){
+             result=result.concat(line);
+         }
+
+		 JSONParser jsonparser = new JSONParser();
+         JSONObject jsonobject = (JSONObject)jsonparser.parse(result);
+         JSONObject json =  (JSONObject) jsonobject.get("data");
+         JSONArray array = (JSONArray)json.get("item");
+         
+         List<dailyPrice> price_list = new ArrayList<dailyPrice>();
+         for(int i = 0 ; i < array.size(); i++){
+        	 dailyPrice price = new dailyPrice();
+             JSONObject entity = (JSONObject)array.get(i);
+             String item_name = (String) entity.get("item_name");
+             price.setItem_name(item_name);
+             
+             String kind_name = (String) entity.get("kind_name");
+             price.setKind_name(kind_name);
+             
+             String rank = (String)entity.get("rank");
+             price.setRank(rank);
+             
+             String dpr1 = (String) entity.get("dpr1")+"원";
+             price.setDpr1(dpr1);
+             
+             String dpr2 = (String) entity.get("dpr2")+"원";
+             price.setDpr2(dpr2);
+             
+             String dpr3 = (String) entity.get("dpr3")+"원";
+             price.setDpr3(dpr3);
+             price_list.add(price);
+		 }
+         model.addAttribute("today", month+"/" +t_date);
+         model.addAttribute("price_list", price_list);
+         
+     	return "/main/dailyPrice";
+    	
+	}
+	
+	@RequestMapping(value ="/getdate1", method = RequestMethod.GET)
+	public String getdate1(HttpServletResponse response, Model model)throws Exception {
+		System.out.println("insert getdate");
+		GregorianCalendar today = new GregorianCalendar ( ); 
+		int year = today.get ( today.YEAR ); 
+		int month = today.get ( today.MONTH ) + 1; 
+		int date = today.get ( today.DATE );
+		
+		 String page = "http://www.kamis.or.kr/service/price/xml.do?action=dailyPriceByCategoryList&p_cert_key=11b8b641-7c0f-4303-a422-7af6301b8ab4&p_cert_id=youngran90&p_convert_kg_yn=Y&p_returntype=json";
+		//구분
+		 String buyer_do = "&p_product_cls_code=01"; //도매
+		 String buyer_so = "&p_product_cls_code=02"; //소매
+		
+		//부류코드
+		 String fruit = "&p_item_category_code=400"; //과일류
+		 
+		//지역
+		 String seoul = "&p_country_code=1101";
+		 
+		 //조회날짜
+		// String today_date = "&p_regday="+year +"-"+ month + "-" + date; //당일날짜
+		 String t_date = "16";
+		 String today_date = "&p_regday="+year +"-"+ month + "-" + t_date; //당일날짜
+		 
+		 //소매 채소
+		 String urlstr = page+ buyer_so + fruit + seoul + today_date;
+         
+         URL url = new URL(urlstr);
+         BufferedReader bf;
+         String line;
+         String result="";
+
+         //날씨 정보를 받아온다.
+         bf = new BufferedReader(new InputStreamReader(url.openStream()));
+
+         //버퍼에 있는 정보를 문자열로 변환.
+         while((line=bf.readLine())!=null){
+             result=result.concat(line);
+         }
+
+		 JSONParser jsonparser = new JSONParser();
+         JSONObject jsonobject = (JSONObject)jsonparser.parse(result);
+         JSONObject json =  (JSONObject) jsonobject.get("data");
+         JSONArray array = (JSONArray)json.get("item");
+         
+         List<dailyPrice> price_list = new ArrayList<dailyPrice>();
+         for(int i = 0 ; i < array.size(); i++){
+        	 dailyPrice price = new dailyPrice();
+             JSONObject entity = (JSONObject)array.get(i);
+             String item_name = (String) entity.get("item_name");
+             price.setItem_name(item_name);
+             
+             String kind_name = (String) entity.get("kind_name");
+             price.setKind_name(kind_name);
+             
+             String rank = (String)entity.get("rank");
+             price.setRank(rank);
+             
+             String dpr1 = (String) entity.get("dpr1")+"원";
+             price.setDpr1(dpr1);
+             
+             String dpr2 = (String) entity.get("dpr2")+"원";
+             price.setDpr2(dpr2);
+             
+             String dpr3 = (String) entity.get("dpr3")+"원";
+             price.setDpr3(dpr3);
+             price_list.add(price);
+		 }
+         model.addAttribute("today", month+"/" +t_date);
+         model.addAttribute("price_list", price_list);
+         
+     	return "/main/dailyPrice1";
+    	
+	}
+	
+	
+
 }

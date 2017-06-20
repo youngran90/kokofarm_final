@@ -6,6 +6,7 @@
 
 <%@include file="../include/header.jsp"%>
 <link rel="stylesheet" href="/resources/css/detail.css">
+
 <style>
 h2 {
 	display: block;
@@ -103,20 +104,15 @@ function update_Re() {
 }
 
 </script>
+
 <div class="container">
+
 	<div class="row">
+	 <%@include file="./Mypage.jsp"%>
 		<div id="content" class="col-sm-9">
 
-			<div class="productinfo-tab">
-				<div class="nav">
-					<ul class="nav nav-tabs">
-						<li class="active"><a href="#tab-inquiry" data-toggle="tab">1:1문의</a></li>
-						<li><a href="#tab-review" data-toggle="tab">Reviews ()</a></li>
-					</ul>
-				</div>
-				<div class="tab-content">
-					<div class="tab-pane active" id="tab-inquiry">
-						<div class="cpt_product_description ">
+
+            <div class="cpt_product_description ">
 							<div class="caption_box">
 								<p class="caption">* 교환/환불/배송관련 문의는 고객센터 전화 또는 카카오톡으로 연락주시기 바랍니다. (상품문의 게시판에서는 제 때에 원활한 처리가 이뤄지지 않을 수 있습니다.)</p>
 								<p class="caption">* 상품과 관련없는 광고성, 욕설, 비방, 허위정보, 도배 등은 예고없이 삭제될 수 있습니다.</p>
@@ -253,29 +249,19 @@ function update_Re() {
 										</c:forEach>
 								</table>
 							</c:if>
-	
-	
-	
 						</div>
 	
 						<div>
 							<!--  tab1 -->
 						</div>
-	
 					</div>
 					<!-- cpt_container_end -->
-	
-	
-	
-					<!-- 댓글 -->
-					<div class="tab-pane" id="tab-review"></div>
-	
-				</div>
-			</div>
-		</div>
 	</div>
-</div>
+	</div>
+		
+		
+		
+
+  <%@include file="../include/footer.jsp"%>
 
 
-
-<%@include file="../include/footer.jsp"%>

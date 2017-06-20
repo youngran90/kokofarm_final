@@ -18,10 +18,10 @@
 		)	
 	</insert>
 	
-	<select id="listProduct" resultType="ProductVO" parameterType="ProductListForm">
+	<select id="listProduct" resultType="ProductVO" parameterType="PagingMaker">
 				SELECT * FROM (SELECT ROWNUM AS RNUM,a.* FROM(
   					select * from product where product_total >0
-  					<if test="ca1 != null" >
+  					<!-- <if test="ca1 != null" >
 						and ca1 = #{ca1}
 					</if>
 					<if test="ca2 != null" >
@@ -30,6 +30,9 @@
 					<if test="ca3 != null">
 				 		and	ca3 = #{ca3}
 					</if>
+					<if test="searchOption != null">
+						and ${searchOption} LIKE #{searchText}
+  					</if>
   					<choose>
   					<when test="input_sort == null">
   					order by product_uploaddate desc
@@ -42,12 +45,11 @@
 	  					</when>
 	  					<when test="input_sort == 'vc'">
 	  						order by view_count desc
-	  					</when>
-  					</choose>
+	  					</when> 
+  					</choose>-->
   					) a
-  						where ROWNUM <![CDATA[<=]]> #{pageMaker.end})
-  							where RNUM <![CDATA[>=]]> #{pageMaker.start}
-		
+  						where ROWNUM <![CDATA[<=]]> #{end})
+  							where RNUM <![CDATA[>=]]> #{start}
 	</select> 
 
 	
@@ -82,6 +84,13 @@
 	set reply_count = reply_count+#{amount}
 	where product_no = #{product_no}	
 	</update>
+	
+	<select id="listproduct" parameterType="PagingMaker">
+ 	select count(*) from product
+ 	<if test="searchText != null" >
+		where  ${searchOption} LIKE #{searchText} 
+  	</if>
+	</select>
 	
 	
 	</mapper>

@@ -76,7 +76,8 @@
     <div id="content" class="col-sm-9">
       <h2 class="category-title">과일/채소</h2>
       <div class="row category-banner">
-        <div class="col-sm-12 category-image"><img src="/resources/files/attach/product_banner.jpg" alt="product_banner" title="product_banner" class="img-thumbnail" style="width: 937px; height: 192px;" /></div>
+        <!-- <div class="col-sm-12 category-image"><img src="/resources/files/attach/product_banner.jpg" alt="product_banner" title="product_banner" class="img-thumbnail" style="width: 937px; height: 192px;" /></div>
+         -->
         <div class="col-sm-12 category-desc">상품설명</div>
       </div>
       <div class="category-page-wrapper">
@@ -90,13 +91,21 @@
         <div class="col-md-2 text-right sort-wrapper">
           <label class="control-label" for="input-sort">Sort By :</label>
           <div class="sort-inner">
-          				<select  id="input_sort" name="input_sort" onchange="doInput_sort(this.value)">
-							<option value="" selected="selected">-----</option>
-							<option value="ph">가격 높은순</option>
-				            <option value="pl">가격 낮은순</option>
-				        	<option value="vc">판매인기순</option>
-							</select>
-          
+	      	<select  id="input_sort" name="input_sort" onchange="doInput_sort(this.value)">
+				<option value="" selected="selected">-----</option>
+				<option value="ph">가격 높은순</option>
+	            <option value="pl">가격 낮은순</option>
+	        	<option value="vc">판매인기순</option>
+			</select>
+			
+			<select  id="searchType" name="searchType" style="width: 75px; height:27px; margin-left: 15px;">
+				<option value="product_name" selected="selected">이름</option>
+				<option value="seller">판매자</option>
+			</select>
+			
+			<input type="text" name="keyword" id="keyword">
+			<input type="button" value="검색" onclick="doSearch()">
+			
           </div>
         </div>
       </div>
@@ -135,43 +144,30 @@
       <div class="category-page-wrapper">
         <div class="pagination-in" style="margin-left: 30%">
          <ul class="pagination" >
-<li><a href="/product/list_product${pageMaker.makeQuery(1) }">처음</a></li>
-
-							<c:if test="${pageMaker.prev}">
-								<li><a
-									href="/product/list_product${pageMaker.makeQuery(pageMaker.startPage - 1) }">&laquo;</a></li>
-							</c:if>
-
-							<c:forEach begin="${pageMaker.startPage }"
-								end="${pageMaker.endPage}" var="idx">
-								<li
-									<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
-									<a href="/product/list_product?page=${idx }">${idx}</a>
-									
-								</li>
-							</c:forEach>
-
-
-							<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-								<li><a
-									href="/product/list_product${pageMaker.makeQuery(pageMaker.endPage +1) }">&raquo;</a></li>
-							</c:if>
-						<li><a href="/product/list_product${pageMaker.makeQuery(pageMaker.lastPage)}">마지막</a></li>
-						</ul>
+			<li><a href="/product/list_product${pageMaker.makeQuery(1) }">처음</a></li>
+			<c:if test="${pageMaker.prev}">
+				<li><a href="/product/list_product${pageMaker.makeQuery(pageMaker.startPage - 1) }">&laquo;</a></li>
+			</c:if>
+			<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage}" var="idx">
+				 <li <c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
+					 <a href="/product/list_product?page=${idx }">${idx}</a>
+				</li>
+			</c:forEach>
+				<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+					<li><a href="/product/list_product${pageMaker.makeQuery(pageMaker.endPage +1) }">&raquo;</a></li>
+				</c:if>
+				<li><a href="/product/list_product${pageMaker.makeQuery(pageMaker.lastPage)}">마지막</a></li>
+			</ul>
         </div>
       </div>
     </div>
   </div>
+    <div>
+  </div>
 </div>
-
-
-
-
-
-
-<form id="jobForm">
-  <input type='hidden' name="page">
-  <input type='hidden' name="perPageNum" value=${pageMaker.cri.perPageNum}>
+<form id="ProductForm" name="ProductForm" action="list_product" method="get">
+  <input type='hidden' name="page" value="${ProductForm.page }">
+  <input type='hidden' name="perPageNum" value="${ProductForm.perPageNum}">
 </form>
 
 
@@ -184,15 +180,20 @@
 	}
 
 	function doInput_sort(input_sort){
-		alert("셀렉트박스 변경");
-		alert(input_sort);
 		location.href="/product/list_product?input_sort="+ input_sort;
+	}
+	
+	function doSearch(){
+		
+		var searchOption = $("#searchType").val();
+		var searchText = $("#keyword").val();
+		location.href="/product/list_product?searchOption="+ searchOption+"&searchText="+searchText+category;
 	}
    
 </script>
 
 
-
+<%@include file="../include/footer.jsp"%>
 
 
   
