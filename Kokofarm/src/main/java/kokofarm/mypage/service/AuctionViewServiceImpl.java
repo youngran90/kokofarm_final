@@ -41,6 +41,11 @@ public class AuctionViewServiceImpl implements AuctionViewService {
 	public AuctionViewVO selectAuctionAll(int auction_no) throws Exception {
 		return dao.selectAuctionAll(auction_no);
 	}
+
+	@Override
+	public List<AuctionViewVO> selectAuctionSeller(String seller_no) throws Exception {
+		return dao.selectAuctionSeller(seller_no);
+	}
 	
 	
 	

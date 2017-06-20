@@ -27,8 +27,10 @@ public class TenderServiceImpl implements TenderService {
 		
 	}
 
+	@Transactional
 	@Override
 	public AuctionVO selectAuctionProduct(int auction_no) throws Exception {
+		dao.updateAuctionHit(auction_no);
 		return dao.selectAuctionProduct(auction_no);
 	}
 
@@ -69,14 +71,15 @@ public class TenderServiceImpl implements TenderService {
 		return dao.selectTender(tender_no);
 	}
 
-	/*@Transactional*/
+	//@Transactional
 	@Override
 	public void insertPayInfo(PayVO payvo) throws Exception {
 		dao.insertPayInfo(payvo);
-		/*System.out.println("service에서의 출력"+payvo.getPay_no());
-		dao.updateSuccess(payvo.getPay_no());*/
+		//dao.updateSuccess(payvo);
+		//System.out.println("service에서의 출력"+payvo.getPay_no());
 		
 	}
+
 
 	@Override
 	public List<PayVO> selectPayInfo() throws Exception {

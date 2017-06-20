@@ -45,6 +45,12 @@ public class AuctionViewDAOImpl implements AuctionViewDAO {
 	public AuctionViewVO selectAuctionAll(int auction_no) throws Exception {
 		return session.selectOne(namespace+".selectAuctionAll",auction_no);
 	}
+
+
+	@Override
+	public List<AuctionViewVO> selectAuctionSeller(String seller_no) throws Exception {
+		return session.selectList(namespace+".selectAuctionSeller", seller_no);
+	}
 	
 	
 	

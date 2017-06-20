@@ -22,6 +22,7 @@ public interface TenderService {
 	public List<PayVO> selectPayInfo() throws Exception;
 	public void updateSuccess(PayVO payvo) throws Exception;
 	public void updateAuctionSuccess(int auction_no) throws Exception;
+	//public void updateAuctionHit(int auction_no) throws Exception;
 
 
 

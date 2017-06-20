@@ -69,8 +69,7 @@ public class TenderDAOImpl implements TenderDAO {
 
 	@Override
 	public void insertPayInfo(PayVO payvo) throws Exception {
-		session.insert(namespace+".insertPayInfo",payvo);
-		
+			session.insert(namespace+".insertPayInfo",payvo);
 	}
 
 	@Override
@@ -89,11 +88,10 @@ public class TenderDAOImpl implements TenderDAO {
 		session.update(namespace+".updateAuctionSuccess", auction_no);
 		
 	}
-	
-	
-	
-	
-	
-	
+
+	@Override
+	public void updateAuctionHit(int auction_no) throws Exception {
+		session.update(namespace+".updateAuctionHit",auction_no);
+	}
 	
 }

@@ -3,7 +3,7 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="kokofarm.tender.mappers.TenderMapper">
-	<cache />
+	<!-- <cache /> -->
 	
 	<!-- 경매 상품 보여주기 -->
 	 <select id="selectAuctionProduct" resultType="AuctionVO" parameterType="Integer">
@@ -83,6 +83,10 @@
 	<!-- 낙찰 시 경매등록자에게 경매 결과 낙찰로 표기 -->
 	<update id="updateAuctionSuccess" parameterType="Integer">
 	  update auction set auction_result='낙찰' where auction_no=#{auction_no}
+	</update>
+	
+	<update id="updateAuctionHit" parameterType="Integer">
+	  update auction set auction_hits = auction_hits +1 where auction_no=#{auction_no}
 	</update>
 	
 	<!-- 상한가 뽑아내기 -->

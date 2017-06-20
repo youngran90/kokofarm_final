@@ -66,6 +66,11 @@
 		  formObj.attr("action","../mypage/auction_view");
 		  formObj.submit();
 	  })
+	  
+	  if(${pay_state} != null){
+		  $('#payNow').hide();
+		  $('#payLater').hide();
+	  }
 	
  })
  

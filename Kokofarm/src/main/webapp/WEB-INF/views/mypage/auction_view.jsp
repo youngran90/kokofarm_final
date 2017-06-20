@@ -4,13 +4,14 @@
 <%@include file="../include/header.jsp"%>
 <link rel="stylesheet" href="/resources/css/detail.css">
 
-
 <script>
+  
 
  $(function(){
 	 //window.location.reload();
 	 
 	 $('#tab-auctionview').hide();
+	 $('#tab-registerview').hide();
 	 
 	 $('#auctionA').on('click',function(){
 		 $('#tab-auction').show();
@@ -23,17 +24,23 @@
 	 
 	 $('#successcheck').on('click',function(){
 		 $('#tab-auctionview').hide();
+		 $('#tab-registerview').hide();
 		 $('#tab-successcheck').show();
 		
 	 });
 	 
 	 $('#auctioncheck').on('click',function(){
+		 $('#tab-registerview').hide();
 		 $('#tab-successcheck').hide();
 		 $('#tab-auctionview').show();
 		 
 	 });
 	 
-	
+	$('#registercheck').on('click',function(){
+		$('#tab-registerview').show();
+		 $('#tab-successcheck').hide();
+		 $('#tab-auctionview').hide();
+	});
 	
  })
 
@@ -60,7 +67,11 @@
 			   <div style="margin-top: 6px;" onmouseleave="out()">
 					<div id="subtitleP">
 								 <p class="caption"><a id="auctioncheck" href="#" style="float: left; margin-left: 120px; margin-right: 10px;">입찰내역조회</a></p>
-								 <p class="caption"><a id="successcheck" href="#">낙찰상품조회</a></p>
+								 <p class="caption"><a id="successcheck" href="#" style="float: left; margin-right: 10px;">낙찰상품조회</a></p>
+								 <c:if test="${login.seller_no !=null}">
+								   <p class="caption"><a id="registercheck" href="#">등록상품조회</a></p>
+								 </c:if>
+								 
 					</div>
 				</div>
 				<div class="tab-content">
@@ -114,8 +125,17 @@
 											    <td>${status.count}</td>
 											    <td>${SuccessViewDetailVO.success_no}</td>
 												<td>${SuccessViewDetailVO.tender_no}</td>
-												<td><a class="thumbnail" href="../tender/tenderform?auction_no=${SuccessViewDetailVO.auction_no}"><img src="/resources/files/attach/${SuccessViewDetailVO.auction_title_img }"></a></td>
-												<td><a href="../tender/tenderform?auction_no=${SuccessViewDetailVO.auction_no}">${SuccessViewDetailVO.auction_name}</a></td>
+												<c:choose>
+												  <c:when test="${SuccessViewDetailVO.pay_state eq null}">
+												    <td><a class="thumbnail" href="../tender/tenderform?auction_no=${SuccessViewDetailVO.auction_no}&pay_state=null"><img src="/resources/files/attach/${SuccessViewDetailVO.auction_title_img }"></a></td>
+												    <td><a href="../tender/tenderform?auction_no=${SuccessViewDetailVO.auction_no}&pay_state=null">${SuccessViewDetailVO.auction_name}</a></td>
+												  </c:when>
+												  <c:otherwise>
+												    <td><a class="thumbnail" href="../tender/tenderform?auction_no=${SuccessViewDetailVO.auction_no}&pay_state=${SuccessViewDetailVO.pay_state } "><img src="/resources/files/attach/${SuccessViewDetailVO.auction_title_img }"></a></td>
+												    <td><a href="../tender/tenderform?auction_no=${SuccessViewDetailVO.auction_no}&pay_state=${SuccessViewDetailVO.pay_state }">${SuccessViewDetailVO.auction_name}</a></td>
+												  </c:otherwise>
+												</c:choose>
+												
 												<td>${SuccessViewDetailVO.tender_price}</td>
 												<c:choose>
 													<c:when test="${SuccessViewDetailVO.pay_state eq null}">
@@ -254,6 +274,84 @@
 						</div>
 	
 					</div>
+					
+					
+		<!-- 등록 상품 조회-->
+		<div class="tab-pane active" id="tab-registerview">
+	        <div class="cpt_product_description ">
+								<section class="sub_top_section">
+									<h2 class="cate_title">
+										<span style="font-weight: bold;">등록 상품 조회&nbsp;&nbsp;</span>
+									</h2>
+								</section>
+								<table class="view_board_table">
+									<colgroup>
+									<col width="84">
+									<col width="120">
+									<col width="150">
+									<col width="200">
+									<col width="200">
+									<col width="150">
+									</colgroup>
+									<thead>
+										<tr>
+										    <th>번호</th>
+											<th>경매번호</th>
+											<th>등록상품</th>
+											<th>시작일</th>
+											<th>종료일</th>
+											<th>경매결과</th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach var="AuctionViewVO" items="${sellerlist}" varStatus="status">
+										    <c:set var="index" value="1"></c:set>
+								
+											<tr  class="tit_tr user_tit_tr">
+												<td>${status.count}</td>
+												<td>${ AuctionViewVO.auction_no }</td>
+												<td><a href="../tender/tenderform?auction_no=${AuctionViewVO.auction_no }">${AuctionViewVO.auction_name}</a></td>
+												<td>${AuctionViewVO.start_date}</td>
+												<td>${AuctionViewVO.end_date}</td>
+												<td>${AuctionViewVO.auction_result }</td>
+												
+											</tr>
+											
+											<tr class="txt_tr reply_txt_tr" style="display: none;">
+												<td colspan="5" class="txt_td">
+													<div class="reply_txt reply_user_txt" style="background: url(/resources/image/bu_qna_q.png) no-repeat 157px 20px;">
+													${inquiry_s.inquiry_content}
+													</div>
+												<c:if test="${inquiry_s.inquiry_reply eq null}">
+													<button id="update" value="" class="button_in"  style="margin-left: 20%" onclick="popup_register('${inquiry_s.inquiry_no}')">답변</button>
+												</c:if>
+												
+												<c:if test="${inquiry_s.inquiry_reply ne null}">
+													<div class="reply_txt reply_admin_txt" style="background: url(/resources/image/bu_qna_a.png) no-repeat 157px 20px;">
+													${inquiry_s.inquiry_reply}
+													<div class="admin_info">
+														<span class="write_date"><fmt:formatDate value="${inquiry.inquiry_replydate}" pattern="yyyy-MM-dd" /></span>
+														</div>
+													</div>
+													<button id="popup_register" class="button_in popup_register" style="margin-left: 20%" onclick="popup_register('${inquiry_s.inquiry_no}')">답변수정</button>
+											</c:if>
+											</td>
+										</tr>
+										</c:forEach>
+								</table>
+	
+	
+	
+						</div>
+	
+						<div>
+							<!--  tab1 -->
+						</div>
+	
+					</div>
+					
+					
+					
 					<!-- cpt_container_end -->
 	
 	

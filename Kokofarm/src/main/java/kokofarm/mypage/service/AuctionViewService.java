@@ -12,6 +12,7 @@ public interface AuctionViewService {
 	public List<TenderViewVO> selectTenderView(String member_id) throws Exception;
 	public List<TenderViewVO> selectTenderAll() throws Exception;
 	public AuctionViewVO selectAuctionAll(int auction_no) throws Exception;
+	public List<AuctionViewVO> selectAuctionSeller(String seller_no) throws Exception;
 
 
 }
