@@ -5,8 +5,6 @@
 <%@include file="../include/header.jsp"%>
 
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" /> 
-<script src="http://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
-<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
 <script type="text/javascript" src="/resources/ckeditor/ckeditor.js"></script>
@@ -158,7 +156,7 @@ function register(){
                         <label for="input-fax" class="col-sm-2 control-label">분류</label>
                         <div class="col-sm-10">
                             <select id="auction_group" name="auction_group" style="height:32px; width:790px;">
-                            	<option>&nbsp;&nbsp;분류를 선택해주세요</option>
+                            	<option value="">&nbsp;&nbsp;분류를 선택해주세요</option>
                             	<option value="과일">과일류</option>
                             	<option value="채소">채소류</option>
                             </select>
@@ -169,23 +167,25 @@ function register(){
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="start_date" name="start_date" placeholder="날짜를 선택해주세요."
                             style="width: 389px; float: left; margin-right: 10px;">
-                            <select id="selectedTime">
+                            <select name="selectedTime">
                             	<option id="am" value="am">오전</option>
                             	<option id="pm" value="pm">오후</option>
                             </select>
-                            <select>
-                            	<option>01</option><option>02</option>
-                            	<option>03</option><option>04</option>
-                            	<option>05</option><option>06</option>
-                            	<option>07</option><option>08</option>
-                            	<option>09</option><option>10</option>
-                            	<option>11</option><option>12</option>
+                            <select name="select_Time">
+                            	<option value="01">01</option><option value="02">02</option>
+                            	<option value="03">03</option><option value="04">04</option>
+                            	<option value="05">05</option><option value="06">06</option>
+                            	<option value="07">07</option><option value="08">08</option>
+                            	<option value="09">09</option><option value="10">10</option>
+                            	<option value="11">11</option><option value="12">12</option>
                             </select>
-                            <select>
-                            	<option>00</option><option>05</option><option>10</option>
-                            	<option>15</option><option>20</option><option>25</option>
-                            	<option>30</option><option>35</option><option>40</option>
-                            	<option>45</option><option>50</option><option>55</option>
+                            <select name="select_Min">
+                            	<option value="01">00</option><option value="01">05</option>
+                            	<option value="01">10</option><option value="01">15</option>
+                            	<option value="01">20</option><option value="01">25</option>
+                            	<option value="01">30</option><option value="01">35</option>
+                            	<option value="01">40</option><option value="01">45</option>
+                            	<option value="01">50</option><option value="01">55</option>
                             </select>
                         </div>
                     </div>

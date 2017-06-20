@@ -27,7 +27,6 @@ import org.springframework.web.servlet.ModelAndView;
 import kokofarm.auction.domain.AuctionCri;
 import kokofarm.auction.domain.AuctionPage;
 import kokofarm.auction.domain.AuctionRegisterVO;
-import kokofarm.auction.domain.AuctionSort;
 import kokofarm.auction.domain.RT_AuctionCri;
 import kokofarm.auction.domain.RT_AuctionRegisterVO;
 import kokofarm.auction.service.AuctionService;
@@ -70,7 +69,7 @@ public class AuctionController {
 	    //logger.info("auction_title_img : "+auction.getAuction_title_img());
 	    
 	    String select_time = request.getParameter("selectedTime");
-	    logger.info(select_time);
+	    logger.info("오전이냐 오후냐 : "+select_time);
 	    
 	    String auction_unit = request.getParameter("auction_unit");
 	    String auction_units = request.getParameter("auction_units");
@@ -131,12 +130,12 @@ public class AuctionController {
 		}
 	
 	@RequestMapping(value="/auction_list", method=RequestMethod.GET)
-	public void auctionList(@ModelAttribute("cri")AuctionCri cri, AuctionRegisterVO auction,
+	public void auctionList(@ModelAttribute("cri")AuctionCri cri, HttpServletRequest request, AuctionRegisterVO auction,
 			MemberVO member, Model model) throws Exception{
 		logger.info(cri.toString());
 
 		model.addAttribute("list", service.listCri(cri));
-	
+		
 		AuctionPage auctionPage = new AuctionPage();
 		auctionPage.setCri(cri);
 		auctionPage.setTotalCount(service.CountPage(cri));
@@ -144,12 +143,18 @@ public class AuctionController {
 		model.addAttribute("auctionPage", auctionPage);
 		logger.info("페이징 + 일반경매리스트_GET");
 		
+		
+		//logger.info("넘어오니 : " + request.getParameter("auction-sort"));
+		
+		
+		logger.info("넘어오니 : " + request.getParameter("dd"));
+		
 		auction.setSeller_no(member.getSeller_no()); //사업자번호 받아오기
 	}
 	
+	
 	@RequestMapping(value="/tender_form", method=RequestMethod.GET)
 	public void detail(@RequestParam(value="auction_no") int auction_no, HttpSession session, Model model)throws Exception{
-		
 		model.addAttribute(service.detail(auction_no));
 		System.out.println(auction_no);
 	}

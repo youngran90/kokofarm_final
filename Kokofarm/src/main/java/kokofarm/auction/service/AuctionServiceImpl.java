@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kokofarm.auction.domain.AuctionCri;
 import kokofarm.auction.domain.AuctionRegisterVO;
-import kokofarm.auction.domain.AuctionSort;
 import kokofarm.auction.domain.RT_AuctionCri;
 import kokofarm.auction.domain.RT_AuctionRegisterVO;
 import kokofarm.auction.persistence.AuctionDAO;
@@ -36,17 +35,15 @@ public class AuctionServiceImpl implements AuctionService{
 		return dao.listCri(cri);
 	}
 	@Override
-	public List<AuctionRegisterVO> listSort(AuctionSort sort) throws Exception {
-		return dao.listSort(sort);
+	public List<AuctionRegisterVO> list_Fruit(AuctionCri cri) throws Exception {
+		return dao.list_Fruit(cri);
 	}
 	@Override
 	public int CountPage(AuctionCri cri) throws Exception {
 		return dao.countPage(cri);
 	}
 	@Override
-	@Transactional
 	public AuctionRegisterVO detail(int auction_no) throws Exception {
-		dao.updateAuctionHits(auction_no);
 		return dao.detail(auction_no);
 	}
 	
@@ -68,6 +65,7 @@ public class AuctionServiceImpl implements AuctionService{
 	public List<RT_AuctionRegisterVO> rt_listCri(RT_AuctionCri cri) throws Exception {
 		return dao.rt_listCri(cri);
 	}
+
 	
 	
 	

@@ -25,23 +25,16 @@
  		<![CDATA[ select auction_no, auction_name, auction_up, auction_down, auction_content, auction_title_img
 			 from auction where auction_result is null]]>
 			 <include refid="search"></include>
-			<!--  <choose>
-			 	<when test="auction_sort == fruits">
-			 	order by auction_group = "과일"
-			 	</when>
-			 	<when test="auction_sort == vegetable">
-			 	order by auction_group = "채소"
-			 	</when>
-			 	<when test="new_reg">
-			 	order by auction_regdate desc
-			 	</when>
-			 	<when test="end_impend">
-			 	order by end_date desc
-			 	</when>
-			 </choose> -->
 		<![CDATA[ order by auction_name ]]>
- 		
  	</select>
+ 	
+ 	<select id="list_Fruit" resultType="AuctionRegisterVO">
+ 		<![CDATA[ select auction_no, auction_name, auction_up, auction_down, auction_content, auction_title_img
+			 from auction auction_group = '과일' and auction_result is null]]>
+			 <include refid="search"></include>
+		<![CDATA[ order by auction_name ]]>
+ 	</select>
+ 	
  	
  	<sql id="search">
 		<if test="searchType != null">
@@ -61,10 +54,6 @@
  		select * from auction where auction_no=#{auction_no}
  	</select>
  	
- 	<update id="updateAuctionHits" parameterType="Integer">
- 		update auction set auction_hits = auction_hits + 1 
- 		where auction_no = #{auction_no}
- 	</update>
  	
  	
  	<!-- 실시간 경매 -->

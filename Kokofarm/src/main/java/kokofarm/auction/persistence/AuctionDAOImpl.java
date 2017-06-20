@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 
 import kokofarm.auction.domain.AuctionCri;
 import kokofarm.auction.domain.AuctionRegisterVO;
-import kokofarm.auction.domain.AuctionSort;
 import kokofarm.auction.domain.RT_AuctionCri;
 import kokofarm.auction.domain.RT_AuctionRegisterVO;
 
@@ -43,8 +42,8 @@ public class AuctionDAOImpl implements AuctionDAO{
 		return session.selectList(namespace+".listCri", cri, new RowBounds(cri.getPageStart(), cri.getPerPageNum()));
 	}
 	@Override
-	public List<AuctionRegisterVO> listSort(AuctionSort sort) throws Exception {
-		return session.selectList(namespace+"listSort", sort);
+	public List<AuctionRegisterVO> list_Fruit(AuctionCri cri) throws Exception {
+		return session.selectList(namespace+".list_Fruit", cri, new RowBounds(cri.getPageStart(), cri.getPerPageNum()));
 	}
 	@Override
 	public int countPage(AuctionCri cri) throws Exception {
@@ -54,10 +53,7 @@ public class AuctionDAOImpl implements AuctionDAO{
 	public AuctionRegisterVO detail(int auction_no) throws Exception {
 		return session.selectOne(namespace+".detail", auction_no);
 	}
-	@Override
-	public void updateAuctionHits(int auction_no) throws Exception {
-		session.update(namespace+".updateAuctionHits");
-	}
+	
 	
 	
 	/*실시간 경매*/	
@@ -85,11 +81,8 @@ public class AuctionDAOImpl implements AuctionDAO{
 	public RT_AuctionRegisterVO rt_detail(String rt_auction_no) throws Exception {
 		return session.selectOne(namespace+".rt_detail", rt_auction_no);
 	}
-//	@Override
-//	public int rt_count(RT_AuctionRegisterVO vo) throws Exception {
-//		return session.selectOne(namespace+".rt_count", vo);
-//	}
-//	
+
+	
 	
 	
 	

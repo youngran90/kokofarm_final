@@ -43,6 +43,7 @@
 		}else{
 			$('#register_button').show();
 		}
+	
 	}
 	
 	function move_register(){
@@ -58,6 +59,18 @@
 					+ "&keyword=" + encodeURIComponent($('#keywordInput').val());
 				
 			};
+	
+	var form = $("form[role='form']");
+	
+	function auction_sort(val){
+		alert(val);
+		document.formselect.dd.value=val;
+		form.attr("action", "/auction_list");
+		form.submit();
+		alert('dd');
+	}	
+	
+	
 </script>
 <!-- <div class="preloader loader" style="display: block; background:#f2f2f2;"> <img src="image/loader.gif"  alt="#"/></div> -->
 <div class="container">
@@ -301,15 +314,20 @@
         </div>
         <div class="col-md-2 text-right sort-wrapper">
           <label class="control-label" for="input-sort"></label>
+          <form role="form" id="formselect" name="formselect" method="get">
           <div class="sort-inner">
-            <select id="auction-sort" class="form-control" style="font-size: 13px; text-align: center; width: 226px;
-            position: relative; left: 10px;">
-	          <option id="fruits">과일</option>
-	          <option id="vegetable">채소</option>
-              <option id="new_reg">신규등록순</option>
-              <option id="end_impend">마감임박순</option>
+            <select id="auction-sort" name="auction-sort" class="form-control" onChange="auction_sort(this.value)"
+            style="font-size: 13px; text-align: center; width: 226px; position: relative; left: 10px;">
+              <option value="">----</option>
+	          <option value="과일">과일</option>
+	          <option value="vegetable">채소</option>
+              <option value="new_reg">신규등록순</option>
+              <option value="end_impend">마감임박순</option>
             </select>
+            <input type="hidden" name="dd">
+            <input type="submit" value="전송">
           </div>
+          </form>
         </div>
       </div>
       <br><br><br>
@@ -321,8 +339,8 @@
      <c:forEach items="${list}" var="AuctionRegisterVO">
      	<div class="product-layout product-list col-xs-12">
      		<div class="product-thumb">
-     			<div class="image product-imageblock"><a href="/tender/tenderform?auction_no=${AuctionRegisterVO.auction_no}"><img src='/resources/files/attach/${AuctionRegisterVO.auction_title_img}' class="img-responsive" id="list_img"></a></div>
-     			<h4 class="product-name"> <a href="/tender/tenderform?auction_no=${AuctionRegisterVO.auction_no}"><span class="auction_name">${AuctionRegisterVO.auction_name}</span></a></h4>
+     			<div class="image product-imageblock"><a href="/tender/tenderform?auction_no=${AuctionRegisterVO.auction_no}&pay_state=null"><img src='/resources/files/attach/${AuctionRegisterVO.auction_title_img}' class="img-responsive" id="list_img"></a></div>
+     			<h4 class="product-name"> <a href="/tender/tenderform?auction_no=${AuctionRegisterVO.auction_no}&pay_state=null"><span class="auction_name">${AuctionRegisterVO.auction_name}</span></a></h4>
      			<p class="price product-price" style="margin-right:10px;">
      			<span style="font-size: 12px; color:#A6A6A6; font-weight: lighter; margin-right:5px;">상한가</span>${AuctionRegisterVO.auction_up}
      			</p>
