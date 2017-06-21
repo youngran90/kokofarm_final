@@ -11,7 +11,7 @@ var path = require('path');
 var server = http.createServer(app);
 
 server.listen("8083", function() {
-	console.log("fofofarm 가동");
+	console.log("kokofarm 시스템 가동");
 });
 
 var member_id; var seller_no;
@@ -117,10 +117,10 @@ app.get('/', function(request, response) {
 });
 
 var m = 0; //경매 대기 시간 카운트 (분)
-var s = 10;  //경매 대기 시간 카운트 (초)
+var s = 30;  //경매 대기 시간 카운트 (초)
 
 var minute = 0 //경매 진행 시간 카운트 (분)
-var second = 10;//경매 진행 시간 카운트 (초)
+var second = 30;//경매 진행 시간 카운트 (초)
 
 var wait = setInterval(function(){ //setInterval 일정시간마다 반복 실행하는 함수
 	if(m == 0 && s == 0 ){

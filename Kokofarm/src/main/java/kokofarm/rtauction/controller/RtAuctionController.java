@@ -85,6 +85,10 @@ public class RtAuctionController {
 		vo.setRt_tender_price(price); // 경매 낙찰가
 		vo.setRt_tender_date(time); // 낙찰 시간
 		
+		System.out.println(id);
+		System.out.println(date);
+		System.out.println(no);
+		System.out.println(price);
 		service.rtresultauction(vo);
 		System.out.println(vo.toString());
 	}
