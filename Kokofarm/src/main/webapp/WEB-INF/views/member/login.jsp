@@ -104,7 +104,8 @@ jq("#loginBtn").on("click",function(){
               <div class="form-group">
                 <label for="input-password" class="control-label">비밀번호</label>
                 <input type="password" class="form-control" id="member_password" placeholder="비밀번호" value="" name="member_password">
-                <a href="forgetpassword.html">암호 찾기</a></div>
+                <a href = "/find/id">아이디</a>/
+                <a href="/find/password ">비밀번호 찾기</a></div>
                 <div class = "checkbox icheck" style="float: left;">
                 	<label>
                 		<input type ="checkbox" name = "useCookie">아이디 저장
