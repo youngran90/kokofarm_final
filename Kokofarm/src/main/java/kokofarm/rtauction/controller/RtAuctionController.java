@@ -1,5 +1,6 @@
 package kokofarm.rtauction.controller;
 
+import java.sql.Timestamp;
 import java.util.UUID;
 
 import javax.inject.Inject;
@@ -74,18 +75,17 @@ public class RtAuctionController {
 	public void result_rt_auction(@RequestParam("no")String no,	@RequestParam("id")String id,
 			@RequestParam("price")int price, @RequestParam("date")String date) throws Exception{
 		
-		String rt_tender_no = UUID.randomUUID().toString().replace("-", "");
+		String rt_tender_no = UUID.randomUUID().toString().replace("-", ""); //경매번호 생성
+		java.sql.Timestamp time = java.sql.Timestamp.valueOf(date); // String 날짜 형식 -> TimeStamp 형식으로 변환
 		
 		RtResultAuctionVO vo = new RtResultAuctionVO();
 		vo.setRt_tender_no(rt_tender_no); // 낙찰번호
 		vo.setRt_auction_no(no); // 경매 번호
 		vo.setMember_id(id); // 경매 낙찰자 ID
 		vo.setRt_tender_price(price); // 경매 낙찰가
-		//vo.setRt_tender_date(date); // 낙찰 시간
+		vo.setRt_tender_date(time); // 낙찰 시간
 		
-		System.out.println(no);
-		System.out.println(id);
-		System.out.println(price);
-		System.out.println(date);
+		service.rtresultauction(vo);
+		System.out.println(vo.toString());
 	}
 }
