@@ -9,6 +9,7 @@ $(document).ready(function(){
 /* 입찰 버튼 이벤트  */
 	// cart open
 	$('#auction_btn').click(function() {
+		$("#rt_tender").focus();
 		if (!$(this).data('ch')) {
 			$(this).data('ch', 1).addClass('on');
 			$('.auction_menu').animate({
@@ -81,8 +82,6 @@ $(document).ready(function(){
 		}
 	});
 	
-	
-	
 	/* 엔터키 입력 & 입력버튼 클릭 */
 	$("#chat_text").keypress(function(e){
 		if(e.which == 13){
@@ -126,68 +125,72 @@ $(document).ready(function(){
 	
 ////////////////////////////////////////////////	
 /* 경매 시간 구하기 */
-		var now = new Date();
-		var now = finish_auction(now);
-		var minute = parseInt($("#minute").text());
-		var second = parseInt($("#second").text());
+		var now = new Date(); //현재시간 
+		var now = finish_auction(now); //현재시간 포맷 변경 
 		
-		var timer = setInterval(function(){ //setInterval 일정시간마다 반복 실행하는 함수
-			$("#minute").text(minute);
-			$("#second").text(second);
+		$("#btn_menu button").attr('disabled',true); //초기 로딩시 버튼을 잠가 놓는다.
+		$("#btn_menu input").attr('readonly',true);
+		
+		// _ing 경매중 , end 경매 종료 person 입찰자 
+		$(".rt_ing").hide(); 
+		$(".rt_end").hide();
+		$("#rt_auction_person").hide();
+		
+		$("#rt_finish_time").text("지금은 경매를 진행하기 위한 대기시간입니다.");
+	 	$("#finish_time").text("자유롭게 채팅하세요.");
+	 	
+		socket.on('wait',function(data){ //경매 대기 상태
+			$("#w_minute").text(data.w_m);
+			$("#w_second").text(data.w_s);
+			$(".rt_ing").hide();
+			$(".rt_end").hide();
 			
- 			if(minute == 0 && second == 0 ){
- 				$("#rt_finish_time").text("경매 낙찰 시간");
- 				$("#finish_time").text(now);
- 				$("#btn_menu button").attr('disabled',true);
- 				$("#btn_menu input").attr('readonly',true);
- 				
- 				$("#r_id").val($("#tender_name").text());
- 				$("#r_price").val($("#tender_price").text());
- 				$("#r_date").val($("#finish_time").text());
- 				
- 				//경매 종료시 전달하는 소켓
- 				socket.emit('finish',{
- 					no :$("#r_no").val() ,
- 					price :$("#tender_price").text() ,
- 					id : $("#tender_name").text() ,
- 					time : $("#finish_time").text()
- 				});
- 				
- 				alert("경매가 종료 되었습니다.");
-				clearInterval(timer); //타이머 종료 
-				
-			}else{
-				second--; // 초 처리
-				
-				// 분처리
-				if(second < 0){
-					minute--;
-					second = 59;
-				}
-			}	
-		}, 1000); //1초단위로 변동
-		
-
-	 	// 경매종료 후 전달한걸 받는다.
-			socket.on('finish',function(data){
-				if(data.id == $("#r_id").val()){
-					var check = confirm(
-							"경매번호 : " + data.no +
-							"\n낙찰가 : " + data.price +
-							"\n낙찰자 : " + data.id +
-							"\n경매종료시간 : " + data.time +
-							"\n 축하드립니다. 입찰하신 경매에 낙찰 되셨습니다.");
-					if(check){
-						alert("결제 완료");
-					}
-				}else{
-					alert("낙찰에 실패 하셨습니다.");
-				}
-				
+			if(data.w_m == 0 && data.w_s == 0){ // 대기 종료 상태 
+				$("#rt_finish_time").text("자유롭게 입찰하세요.");
+			 	$("#finish_time").text("입찰 버튼이 활성화 되었습니다.");
+				$(".rt_wait").hide();
+				$(".rt_ing").show();
+				$("#rt_auction_person").show();
+				$(".rt_end").hide();
+				$("#end_name").hide();
+			}
 		});
 		
-		//////////////// 경매 종료
+		socket.on('time',function(data){ //경매 진행중 상태 
+			$("#minute").text(data.m);
+			$("#second").text(data.s);
+			$("#btn_menu button").attr('disabled',false); //경매 진행시 버튼을 활성화 시킨다.
+			$("#btn_menu input").attr('readonly',false);
+			
+			if(data.m == 0 && data.s == 0){ //경매 종료 
+				$("#rt_finish_time").text("경매 종료 시간");
+			 	$("#finish_time").text(now);
+				$("#btn_menu button").attr('disabled',true); // 경매 종료시 버튼을 잠근다.
+				$("#btn_menu input").attr('readonly',true);
+			 	$("#r_date").val(now);
+				$(".rt_wait").hide();
+				$(".rt_ing").hide();
+				$(".rt_end").show();
+				$("#end_name").show();
+				
+			}
+		});
 		
+		socket.on('end',function(data){
+			alert(data);
+			socket.emit('finish',{
+				no : $("#r_no").val(),
+				id : $("#r_id").val(),
+				price : $("#r_price").val(),
+				date : $("#r_date").val()
+			});
+		});
+		
+		socket.on('finish',function(data){
+			alert(data);
+		});
+		
+	 	//////////////// 경매 종료
 		// 날짜 포멧 만들어주는 함수  YYYY-MM-DD HH:MM:SS
 		function finish_auction(now){
 			var now = leadingZeros(now.getFullYear(),4) + '-' +
@@ -216,6 +219,7 @@ $(document).ready(function(){
 	
 	// 1천원 클릭
 	$("#1000").on('click',function(e){
+		
 		socket.emit('1000',{ // 소켓 전송
 			price : parseInt($(this).val()),
 			id : $("#id").val()
@@ -227,6 +231,8 @@ $(document).ready(function(){
 	socket.on('1000',function(data){
 		var sum_1000 = $("#tender_price").text().replace(/[^0-9]/g,"");
 		if(sum_1000 == 0){
+			$("#r_price").val(data.btn_1+0);
+			
 			$($("#tender_price").text(data.btn_1+0));
 			sum_1000 = $("#tender_price").text();
 			sum_1000 = sum_1000.replace(/[^0-9]/g,"");
@@ -236,8 +242,10 @@ $(document).ready(function(){
 			sum_1000 = sum_1000.replace(/[^0-9]/g,"");
 			sum_1000= parseInt(sum_1000);
 			$($("#tender_price").text(data.btn_1+sum_1000));
+			$("#r_price").val(data.btn_1+sum_1000);
 		}
 		
+		$("#r_id").val(data.id);
 		$($("#tender_name").text(data.id));
 		
 		var price = $("#tender_price").text();
@@ -258,6 +266,7 @@ $(document).ready(function(){
 	socket.on('5000',function(data){
 		var sum_5000 = $("#tender_price").text().replace(/[^0-9]/g,"");
 		if(sum_5000 == 0){
+			$("#r_price").val(data.btn_2+0);
 			$($("#tender_price").text(data.btn_2+0));
 			sum_5000 = $("#tender_price").text();
 			sum_5000 = sum_5000.replace(/[^0-9]/g,"");
@@ -267,8 +276,10 @@ $(document).ready(function(){
 			sum_5000 = sum_5000.replace(/[^0-9]/g,"");
 			sum_5000= parseInt(sum_5000);
 			$($("#tender_price").text(data.btn_2+sum_5000));
+			$("#r_price").val(data.btn_2+sum_5000);
 		}
 		
+		$("#r_id").val(data.id);
 		$($("#tender_name").text(data.id));
 		
 		var price = $("#tender_price").text();
@@ -290,6 +301,7 @@ $(document).ready(function(){
 	socket.on('10000',function(data){
 		var sum_10000 = $("#tender_price").text().replace(/[^0-9]/g,"");
 		if(sum_10000 == 0){
+			$("#r_price").val(data.btn_3+0);
 			$($("#tender_price").text(data.btn_3+0));
 			sum_10000 = $("#tender_price").text();
 			sum_10000 = sum_10000.replace(/[^0-9]/g,"");
@@ -298,8 +310,11 @@ $(document).ready(function(){
 			sum_10000 = $("#tender_price").text();
 			sum_10000 = sum_10000.replace(/[^0-9]/g,"");
 			sum_10000= parseInt(sum_10000);
+			$("#r_price").val(data.btn_3+sum_10000);
 			$($("#tender_price").text(data.btn_3+sum_10000));
 		}
+		
+		$("#r_id").val(data.id);
 		$($("#tender_name").text(data.id));
 		
 		var price = $("#tender_price").text();
@@ -356,6 +371,7 @@ $(document).ready(function(){
 	socket.on('rt_tender',function(data){
 		var sum_tender = $("#tender_price").text().replace(/[^0-9]/g,"");
 		if(sum_tender == 0){
+			$("#r_price").val(parseInt(data.btn_4)+0);
 			$("#tender_price").text(parseInt(data.btn_4)+0);
 			sum_tender = $("#tender_price").text();
 			sum_tender = sum_tender.replace(/[^0-9]/g,"");
@@ -366,8 +382,11 @@ $(document).ready(function(){
 			sum_tender = sum_tender.replace(/[^0-9]/g,""); //현재값을 문자열로 정규화
 			sum_tender= parseInt(sum_tender); //정수형으로 치환
 			$("#tender_price").text(parseInt(data.btn_4)+sum_tender);
+			$("#r_price").val(parseInt(data.btn_4)+sum_tender);
 			$("#rt_tender").val("");
 		}
+		
+		$("#r_id").val(data.id);
 		$($("#tender_name").text(data.id));
 		
 		var price = $("#tender_price").text();
@@ -422,10 +441,10 @@ $(document).ready(function(){
 </head>
 <body>
 <form id="rt_acution_finish" method="POST">
-	<input id="r_no" value="">
-	<input id="r_id" value="">
-	<input id="r_price" value="">
-	<input id="r_date" value="">
+	<input type="hidden" id="r_no" value="">
+	<input type="hidden" id="r_id" value="">
+	<input type="hidden" id="r_price" value="">
+	<input type="hidden" id="r_date" value="">
 </form>
 <section class="auction_body" id="auction_body">
 		<div class="auction_info" id="auction_info">
@@ -447,7 +466,7 @@ $(document).ready(function(){
 				<strong id="name">상 품 명</strong><strong id="rt_name"></strong>
 				<strong id="product_area">생 산 지</strong><strong id="rt_area"></strong><br>
 				<strong id="standard">규 격</strong><strong id="rt_standard"></strong>
-				<strong id="seller">판 매 자</strong><strong id="rt_seller"></strong><br>
+				<strong id="seller">판 매 자</strong><strong id="rt_seller"></strong><br><br>
 				<strong id="content">상 품 설 명</strong>
 				<div class="rt_content" id="rt_content">
 				
@@ -456,16 +475,26 @@ $(document).ready(function(){
 		</div>
 			<div class="auction_time_price" id="auction_time_price">
 				<div id="time">
-					<strong id=rt_time>남은 시간</strong>
-					<strong id="minute">0</strong><em>분</em>
-					<strong id="second">10</strong><em>초</em>
+					<div class="rt_wait">
+						<strong id="w_time">경매 대기 시간</strong>
+						<strong id="w_minute"></strong><em>분</em>
+						<strong id="w_second"></strong><em>초</em>
+					</div>
+					<div class="rt_ing">
+						<strong id="rt_time">경매 진행 중</strong>
+						<strong id="minute"></strong><em>분</em>
+						<strong id="second"></strong><em>초</em>
+					</div>
+					<div class="rt_end">
+						<strong id="end">경매가 종료 되었습니다.</strong>
+					</div>
 				</div>
 				<div id="rt_auction_finish_time">
-					<strong id=rt_finish_time></strong>
-					<em id="finish_time"></em>
+					<strong id=rt_finish_time></strong><br>
+					<strong id="finish_time"></strong>
 				</div>
 				<div id="rt_auction_person">
-					<strong id="tender_name">입찰자</strong><em>님</em>
+					<strong id="end_name">최종 낙찰자&nbsp;</strong><strong id="tender_name">입찰자</strong><em>님</em>
 					<strong id="tender_price">입찰금액</strong><em>원</em>
 				</div>
 			</div>
@@ -546,6 +575,7 @@ $(document).ready(function(){
 	color: #38a9a5;
 }
 #content{
+	
 	font-size: 20px;
 	margin-right: 25px;
 }
@@ -596,12 +626,38 @@ $(document).ready(function(){
 	float: left;
 }
 .auction_content {
+	border : 1px solid blue;
+	padding-left : 10px;
 	margin-left: 20px;
-	height: 200px;
+	height: 240px;
 	width: 93%;
+}
+.rt_content{
+	padding-top: 10px;
+}
+
+/* 경매 대기 관련 CSS */
+.rt_wait{
+	text-align: center;
+}
+#w_time{
+	font-size: 25px;
+	margin-right: 10px;
+}
+#w_minute{
+	color : #38a9a5;
+	font-size: 55px;
+}
+#w_second{
+	color : #38a9a5;
+	font-size: 55px;
+	margin-left: 10px;
 }
 
 /* 경매 입찰 관련 CSS */
+.rt_ing{
+	text-align: center;
+}
 #time{
 	margin-left: 25px;
 	margin-bottom: 10px;
@@ -624,15 +680,19 @@ $(document).ready(function(){
 	margin-left: 10px;
 }
 #rt_auction_finish_time{
-	margin-left : 25px;
-	font-size: 25px;
+	text-align: center;
 }
 #rt_finish_time{
-	font-size: 25px;
+	font-size: 15px;
+}
+
+#finish_time{
+	font-size: 20px;
+	color : #38a9a5;
 }
 #rt_auction_person{
 	margin-top : 10px;
-	margin-left : 20px;
+	margin-left : 60px;
 	font-size: 35px;
 }
 #rt_auction_person strong{
@@ -646,6 +706,13 @@ $(document).ready(function(){
 }
 #tender_price{
 	margin-left: 10px;
+}
+
+/* 경매 종료 관련 CSS */
+#end{
+	margin-left : 20px;
+	font-size: 35px;
+	text-align: center;
 }
 
 /* 입찰 버튼 CSS */
@@ -706,7 +773,6 @@ $(document).ready(function(){
 .auction_time_price {
 	position: absolute;
 	left: 48%;
-	border : 1px solid red;
 	height: 180px;
 	width: 38%;
 }

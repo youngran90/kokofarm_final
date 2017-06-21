@@ -115,12 +115,57 @@ app.get('/', function(request, response) {
 	rt_auction_no = request.param("rt_auction_no");
 	response.sendfile(__dirname + '/rt_auction.html');
 })
-1
+
 var userList = []; // 접속한 사용자를 저장할 배열
 var socketList = {}; // 소켓 id담을 객체
-
 // 소켓 서버를 만듦
 var io = socketio.listen(server);
+
+
+var m = 0; //경매 대기 시간 카운트 (분)
+var s = 10; //경매 대기 시간 카운트 (초)
+
+var minute = 0 //경매 진행 시간 카운트 (분)
+var second = 10;//경매 진행 시간 카운트 (초)
+
+if(uselist.length != 0){
+	var wait = setInterval(function(){ //setInterval 일정시간마다 반복 실행하는 함수
+		
+		if(m == 0 && s == 0 ){
+			
+			var count = setInterval(function(){ //setInterval 일정시간마다 반복 실행하는 함수
+				
+				if(minute == 0 && second == 0 ){
+			 		
+			 		clearInterval(count); //타이머 종료 
+			 						
+				 	}else{
+				 		second--; // 초 처리
+			 					
+			 		// 분처리
+			 		if(second < 0){
+			 			minute--;
+			 			second = 59;
+			 		}
+			 	}	
+			}, 1000); //1초단위로 변동
+			
+			clearInterval(wait); //타이머 종료 
+			
+	 	}else{
+	 		s--; // 초 처리
+	 					
+	 		// 분처리
+	 		if(s < 0){
+	 			m--;
+	 			s = 59;
+	 		}
+	 	}	
+	}, 1000); //1초단위로 변동
+}
+	
+
+
 
 io.sockets.on('connection', function(socket) {
 	var joinedUser = false;
@@ -128,6 +173,7 @@ io.sockets.on('connection', function(socket) {
 	
 	socketList[member_id]=socket.id;
 	
+	// 경매 관련 정보를 넘긴다.
 	io.sockets.emit('info',{ 
 		product_n : product_n, 
 		down : down, 
@@ -234,31 +280,40 @@ io.sockets.on('connection', function(socket) {
 	 });
 	 
 	 //////////////////////////////////////////
-	 //경매 종료시 넘어오는 소켓 
-	 // 넘어 오는 정보 
+	 //경매 종료시 넘어오는 소켓 넘어 오는 정보 
 	 // 경매번호
 	 // 낙찰자
 	 // 낙찰금액
 	 // 경매 종료시간
 	 socket.on('finish',function(data){
-
-		for(var i=0; i<userList.length; i++){
-			if(data.id==userList[i]){
-				console.log(userList[i]);
-			}else{
-				console.log(userList[i]);
-			}
-			
-		}
+	       console.log(socketList[data.id]);
+	       io.sockets.socket(socketList[data. id]).emit("finish",data);
 	 });
-	
 	 
 	 
 	 
-	 
-	 
-	 
-	 
+	 // 경매 대기 시간 카운터
+	 var w_t = setInterval(function(){ //setInterval 일정시간마다 반복 실행하는 함수
+			io.sockets.emit('wait',{
+				w_m : m,
+				w_s : s
+			});
+		 	if(m == 0 && s == 0 ){
+		 		//경매 시간
+		 		var timer = setInterval(function(){ //setInterval 일정시간마다 반복 실행하는 함수
+		 			io.sockets.emit('time',{
+		 				m : minute,
+		 				s : second
+		 			});
+		 		 	if(minute == 0 && second == 0 ){
+		 		 		socket.emit("end","경매가 종료 되었습니다.");
+		 		 		clearInterval(timer); //타이머 종료 
+		 		 	}
+		 		 }, 1000); //1초단위로 변동
+		 		
+		 		clearInterval(w_t); //타이머 종료 
+		 	}
+		 }, 1000); //1초단위로 변동
 	 
 	 
 	 
