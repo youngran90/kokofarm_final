@@ -148,6 +148,13 @@ $(document).ready(function(){
 			if(data.w_m == 0 && data.w_s == 0){ // 대기 종료 상태 
 				$("#rt_finish_time").text("자유롭게 입찰하세요.");
 			 	$("#finish_time").text("입찰 버튼이 활성화 되었습니다.");
+			 	
+			 	$("#rt_tender").focus();
+			 	$("#auction_btn").data('ch', 1).addClass('on');
+				$('.auction_menu').animate({
+					bottom : '0'
+				}, 200);
+				
 				$(".rt_wait").hide();
 				$(".rt_ing").show();
 				$("#rt_auction_person").show();
@@ -164,6 +171,13 @@ $(document).ready(function(){
 			
 			if(data.m == 0 && data.s == 0){ //경매 종료 
 				$("#rt_finish_time").text("경매 종료 시간");
+			
+				$("#auction_btn").data('ch', 0).removeClass('on');
+				$('.auction_menu').animate({
+					bottom : '-80px'
+				}, 200);
+				$("#chat_text").focus();
+				
 			 	$("#finish_time").text(now);
 				$("#btn_menu button").attr('disabled',true); // 경매 종료시 버튼을 잠근다.
 				$("#btn_menu input").attr('readonly',true);
@@ -172,8 +186,11 @@ $(document).ready(function(){
 				$(".rt_ing").hide();
 				$(".rt_end").show();
 				$("#end_name").show();
-				
 			}
+		});
+		
+		socket.on('out',function(data){
+			alert(data);
 		});
 		
 		socket.on('end',function(data){
@@ -187,8 +204,33 @@ $(document).ready(function(){
 		});
 		
 		socket.on('finish',function(data){
-			alert(data);
+			
+			var check = confirm("해당 경매에 낙찰 되셨습니다.\n" + 
+					"경매 번호 : " + data.no + "\n"+
+					"낙찰자 : " + data.id + "\n"+
+					"낙찰 금액 : " + data.price + "\n"+
+					"낙찰 시간 : " + data.date + "\n" +
+					"확인을 누르시면 메인으로 이동합니다."
+					);
+			if(check){
+				$.ajax({
+					type : 'POST',
+					url : 'http://localhost:8081/rt_auction/result_rt_auction',
+					data : {
+						no : data.no,
+						id : data.id,
+						price : data.price,
+						date : data.date
+					},
+					dataType : 'html',
+					success: function(data){
+						
+					}
+				});
+				$(location).attr("href", "http://localhost:8081/");
+			}
 		});
+		
 		
 	 	//////////////// 경매 종료
 		// 날짜 포멧 만들어주는 함수  YYYY-MM-DD HH:MM:SS
@@ -466,7 +508,7 @@ $(document).ready(function(){
 				<strong id="name">상 품 명</strong><strong id="rt_name"></strong>
 				<strong id="product_area">생 산 지</strong><strong id="rt_area"></strong><br>
 				<strong id="standard">규 격</strong><strong id="rt_standard"></strong>
-				<strong id="seller">판 매 자</strong><strong id="rt_seller"></strong><br><br>
+				<strong id="seller">판 매 자</strong><strong id="rt_seller"></strong><br>
 				<strong id="content">상 품 설 명</strong>
 				<div class="rt_content" id="rt_content">
 				
@@ -529,55 +571,53 @@ $(document).ready(function(){
 /* 경매번호 */
 .slider_background{
 	height: 400px;
-	background-color:;
 }
 .no_info{
-	padding : 20px 0 10px 30px;
+	padding : 20px 0 10px 15px;
 }
 #rt_auction_no{
-	margin-left: 10px;
 	color : #38a9a5;
 }
 
 /* 제품 내용 */
 #name{
-	font-size: 20px;
-	margin-right: 25px;
+	font-size: 15px;
+	margin-right: 10px;
 }
 #rt_name{
-	font-size: 30px;
+	font-size: 15px;
 	color: #38a9a5;
 }
 #product_area{
-	font-size: 20px;
-	margin-left: 25px;
-	margin-right: 20px;
+	font-size: 15px;
+	margin-right: 10px;
+	margin-left: 10px;
 }
 #rt_area{
-	font-size: 30px;
+	font-size: 15px;
 	color: #38a9a5;
 }
 #standard{
-	font-size: 20px;
+	font-size: 15px;
 	margin-right: 25px;
 }
 #rt_standard{
-	font-size: 30px;
+	font-size: 15px;
 	color: #38a9a5;
 }
 #seller{
-	font-size: 20px;
+	font-size: 15px;
 	margin-left: 25px;
-	margin-right: 20px;
+	margin-right: 10px;
 }
 #rt_seller{
-	font-size: 30px;
+	font-size: 20px;
 	color: #38a9a5;
 }
 #content{
-	
-	font-size: 20px;
-	margin-right: 25px;
+	font-size: 15px;
+	position: relative;
+	top: 5px;
 }
 #prev_btn{
 	background-image: url(/btn_img01);
@@ -620,17 +660,16 @@ $(document).ready(function(){
 }
 .auction_info {
 	margin-left: 10px;
-	border: 1px solid red;
 	height: 650px;
 	width: 45%;
 	float: left;
 }
 .auction_content {
-	border : 1px solid blue;
+	padding-top : 10px;
 	padding-left : 10px;
 	margin-left: 20px;
 	height: 240px;
-	width: 93%;
+	width: 90%;
 }
 .rt_content{
 	padding-top: 10px;
@@ -692,7 +731,7 @@ $(document).ready(function(){
 }
 #rt_auction_person{
 	margin-top : 10px;
-	margin-left : 60px;
+	margin-left : 40px;
 	font-size: 35px;
 }
 #rt_auction_person strong{
@@ -710,9 +749,8 @@ $(document).ready(function(){
 
 /* 경매 종료 관련 CSS */
 #end{
-	margin-left : 20px;
+	margin-left : 50px;
 	font-size: 35px;
-	text-align: center;
 }
 
 /* 입찰 버튼 CSS */
@@ -793,8 +831,9 @@ $(document).ready(function(){
 	position: relative;
 	top: 200px;
 	resize: none;
-	font-size: 20px;
+	font-size: 15px;
 	font-weight: bold;
+	text-align: center;
 }
 #chat_input{
 	position: relative;

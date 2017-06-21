@@ -100,7 +100,6 @@ app.get('/img02',function (req,res){
 	});
 });*/
 
-
 app.get('/', function(request, response) {
 	member_id = request.param("member_id");
 	product_n = request.param("name");
@@ -114,43 +113,35 @@ app.get('/', function(request, response) {
 	seller_no =request.param("seller_no");
 	rt_auction_no = request.param("rt_auction_no");
 	response.sendfile(__dirname + '/rt_auction.html');
-})
-
-var userList = []; // 접속한 사용자를 저장할 배열
-var socketList = {}; // 소켓 id담을 객체
-// 소켓 서버를 만듦
-var io = socketio.listen(server);
-
+	
+});
 
 var m = 0; //경매 대기 시간 카운트 (분)
-var s = 10; //경매 대기 시간 카운트 (초)
+var s = 10;  //경매 대기 시간 카운트 (초)
 
 var minute = 0 //경매 진행 시간 카운트 (분)
 var second = 10;//경매 진행 시간 카운트 (초)
 
-if(uselist.length != 0){
-	var wait = setInterval(function(){ //setInterval 일정시간마다 반복 실행하는 함수
-		
-		if(m == 0 && s == 0 ){
-			
-			var count = setInterval(function(){ //setInterval 일정시간마다 반복 실행하는 함수
+var wait = setInterval(function(){ //setInterval 일정시간마다 반복 실행하는 함수
+	if(m == 0 && s == 0 ){
+		var count = setInterval(function(){ //setInterval 일정시간마다 반복 실행하는 함수
 				
-				if(minute == 0 && second == 0 ){
+			if(minute == 0 && second == 0 ){
 			 		
-			 		clearInterval(count); //타이머 종료 
+			 	clearInterval(count); //타이머 종료 
 			 						
-				 	}else{
-				 		second--; // 초 처리
-			 					
+			 	}else{
+			 		second--; // 초 처리
+			 		
 			 		// 분처리
-			 		if(second < 0){
-			 			minute--;
-			 			second = 59;
-			 		}
-			 	}	
-			}, 1000); //1초단위로 변동
+			 	if(second < 0){
+			 		minute--;
+					second = 59;
+		 		}
+		 	}	
+		}, 1000); //1초단위로 변동
 			
-			clearInterval(wait); //타이머 종료 
+		clearInterval(wait); //타이머 종료 
 			
 	 	}else{
 	 		s--; // 초 처리
@@ -162,16 +153,18 @@ if(uselist.length != 0){
 	 		}
 	 	}	
 	}, 1000); //1초단위로 변동
-}
-	
 
+
+var userList = []; // 접속한 사용자를 저장할 배열
+var socketList = {}; // 소켓 id담을 객체
+// 소켓 서버를 만듦
+var io = socketio.listen(server);
 
 
 io.sockets.on('connection', function(socket) {
-	var joinedUser = false;
 	var nickname = member_id;
 	
-	socketList[member_id]=socket.id;
+	socketList[nickname] = socket.id;
 	
 	// 경매 관련 정보를 넘긴다.
 	io.sockets.emit('info',{ 
@@ -286,8 +279,9 @@ io.sockets.on('connection', function(socket) {
 	 // 낙찰금액
 	 // 경매 종료시간
 	 socket.on('finish',function(data){
-	       console.log(socketList[data.id]);
-	       io.sockets.socket(socketList[data. id]).emit("finish",data);
+		 if(socketList[data.id]){
+		       io.sockets.connected[socketList[data.id]].emit("finish",data);			 
+		 }
 	 });
 	 
 	 
