@@ -48,7 +48,7 @@ display: none;!important;
         padding: 10px 0px;
         background-color: white;
         width: 100%;
-        z-index: 1;
+        z-index: 100;
       }
       .jbContent {
         height: 2000px;
