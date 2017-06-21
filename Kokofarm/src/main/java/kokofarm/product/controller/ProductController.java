@@ -130,15 +130,15 @@ public class ProductController {
 		ProductVO productVo = service.detail_product(product_no);
 		model.addAttribute("product", productVo);
 		
+		//댓글 갯수
 		int reply_count = re_service.countReply(product_no);
 		model.addAttribute("reply_count", reply_count);
 		
+		//댓글 평점 평균
 		int reply_avg = re_service.avgReply(product_no);
 		model.addAttribute("reply_avg", reply_avg);
 		
 		replylist = re_service.list_Post(product_no);
-		
-		
 		model.addAttribute("replylist", replylist);
 	}
 		

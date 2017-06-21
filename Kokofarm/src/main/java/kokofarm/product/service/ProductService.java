@@ -23,7 +23,7 @@ public interface ProductService {
     
     public String create_UUID() throws Exception;
     
-    public void view_count(String product_no)throws Exception;
+    //public void view_count(String product_no)throws Exception;
 
 
 }

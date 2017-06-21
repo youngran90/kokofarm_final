@@ -5,6 +5,17 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%@ include file= "../include/header.jsp" %>	
+<script>
+$(function(){
+
+	$(".ca3").on("click", function(){
+		var v = $(this).attr("value");
+		alert(v);
+	})
+})
+
+
+</script>
 
 <div class="container">
   <ul class="breadcrumb">
@@ -19,19 +30,19 @@
         <ul class="box-category treeview-list treeview">
             <li><a href="/product/list_product?ca2=fs" class="activSub">과일</a>
               <ul>
-                <li><a href="/product/list_product?ca3=fs_1" >딸기</a></li>
-                <li><a href="/product/list_product?ca3=fs_2" >한라봉</a></li>
-                <li><a href="/product/list_product?ca3=fs_3" >수박</a></li>
-                <li><a href="/product/list_product?ca3=fs_4" >참외</a></li>
-                <li><a href="/product/list_product?ca3=fs_5" >포도</a></li>
-                <li><a href="/product/list_product?ca3=fs_6" >복숭아</a></li>
-                <li><a href="/product/list_product?ca3=fs_7" >배</a></li>
-                <li><a href="/product/list_product?ca3=fs_8" >사과</a></li>
-                <li><a href="/product/list_product?ca3=fs_9" >귤</a></li>
-                <li><a href="/product/list_product?ca3=fs_10" >바나나</a></li>
-                <li><a href="/product/list_product?ca3=fs_11" >복분자</a></li>
-                <li><a href="/product/list_product?ca3=fs_12" >블루베리</a></li>
-                <li><a href="/product/list_product?ca3=fs_13" >기타</a></li>
+                <li value="fs_1"  class="ca3">딸기</li>
+                <li value="fs_2"  class="ca3">한라봉</li>
+                <li value="fs_3"  class="ca3">수박</li>
+                <li value="fs_4"  class="ca3" >참외</li>
+                <li value="fs_5"  class="ca3" >포도</li>
+                <li value="fs_6"  class="ca3" >복숭아</li>
+                <li value="fs_7"  class="ca3" >배</li>
+                <li value="fs_8"  class="ca3" >사과</li>
+                <li value="fs_9"  class="ca3" >귤</li>
+                <li value="fs_10"  class="ca3">바나나</li>
+                <li value="fs_11" class="ca3">복분자</li>
+                <li value="fs_12" class="ca3">블루베리</li>
+                <li value="fs_13"  class="ca3">기타</li>
                </ul>
             </li>
           </ul>
@@ -43,16 +54,16 @@
         <ul class="box-category treeview-list treeview">
             <li><a href="/product/list_product?ca2=vs" class="activSub">쌈/야채</a>
               <ul>
-                <li><a href="/product/list_product?ca3=vs_1" >상추/깻잎</a></li>
-                <li><a href="/product/list_product?ca3=vs_2" >치커리/케일</a></li>
-                <li><a href="/product/list_product?ca3=vs_3" >쑥갓/청겨자</a></li>
+                <li><a href="/product/list_product?ca2=vs_1" >상추/깻잎</a></li>
+                <li ><a href="/product/list_product?ca2=vs_2" >치커리/케일</a></li>
+                <li value="vs_3" >쑥갓/청겨자</a></li>
               </ul>
             </li>
             <li><a href="/product/list_product?ca2=vf" class="activSub">열매채소</a>
               <ul>
-                <li><a href="/product/list_product?ca3=vf_1" >가지/오이</a></li>
-                <li><a href="/product/list_product?ca3=vf_2" >고추/파프리카</a></li>
-                <li><a href="/product/list_product?ca3=vf_3" >옥수수/호박</a></li>
+                <li value="vf_1" >가지/오이</a></li>
+                <li value="vf_2" >고추/파프리카</a></li>
+                <li value="vf_3" >옥수수/호박</a></li>
               </ul>
             </li>
             <li><a href="/product/list_product?ca2=vr" class="activSub">뿌리채소</a>
@@ -165,15 +176,13 @@
     <div>
   </div>
 </div>
-<form id="ProductForm" name="ProductForm" action="list_product" method="get">
+  <form id="ProductForm" name="ProductForm" action="list_product" method="get">
   <input type='hidden' name="page" value="${ProductForm.page }">
   <input type='hidden' name="perPageNum" value="${ProductForm.perPageNum}">
 </form>
 
 
 <script>
-
-	
 	function pay(product_no){
 		alert(product_no);
 		location.href="/cart/cart_detail?num=1&product_no="+ product_no;
@@ -187,9 +196,14 @@
 		
 		var searchOption = $("#searchType").val();
 		var searchText = $("#keyword").val();
-		location.href="/product/list_product?searchOption="+ searchOption+"&searchText="+searchText+category;
+		location.href="/product/list_product?searchOption="+ searchOption+"&searchText="+searchText;
 	}
    
+	function ca(v){
+		alert(v);
+	}
+	
+	
 </script>
 
 

@@ -6,6 +6,7 @@ import java.util.UUID;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kokofarm.mypage.domain.graphVO;
 import kokofarm.product.domain.PagingMaker;
@@ -25,8 +26,6 @@ public class ProductServiceImpl implements ProductService {
 	
 	@Override
 	public void insert_product(ProductVO product) throws Exception {
-	/*	String uuid = create_UUID();
-		product.setProduct_no("P-"+uuid);*/
 		dao.insert_Pro(product);
 	}
 
@@ -36,14 +35,16 @@ public class ProductServiceImpl implements ProductService {
 		return dao.list_Pro(ProductForm);
 	}
 	
-
+	
 	@Override
 	public int Count_Product() throws Exception {
 		return dao.Count_Pro();
 	}
 	
+	@Transactional
 	@Override
 	public ProductVO detail_product(String product_no) throws Exception {
+		dao.view_count(product_no); //클릭수
 		return dao.detail_pro(product_no);
 	}
 
@@ -58,10 +59,6 @@ public class ProductServiceImpl implements ProductService {
 		  return uuid;		
 	}
 
-	@Override
-	public void view_count(String product_no) throws Exception {
-		dao.view_count(product_no);
-	}
 
 
 }
