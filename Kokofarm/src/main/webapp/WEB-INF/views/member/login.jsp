@@ -13,6 +13,15 @@
     </style>
     <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
  	<script>
+ 	
+ 	function enterkey() {
+        if (window.event.keyCode == 13) {
+ 
+        	$('#loginBtn').trigger('click');
+        }
+}
+	
+ 	
 	var jq = $.noConflict(true);
  	</script>
  
@@ -35,8 +44,20 @@
 	 });
 	 
 
-jq("#loginBtn").on("click",function(){
+jq("#loginBtn").on('click',function(){
+ 	var id = $('#member_id').val();
+ 	var pw = $('#member_password').val();
  	
+ 	if(id==""){
+ 		alert("아이디를 입력하세요");
+ 		$('#member_id').focus();
+  		return false;
+ 	}else if(pw==""){
+ 		
+ 		alert("비밀번호를 입력하세요");
+ 		$('#member_password').focus();
+ 		return false;
+ 	}
   	var params=jq("#loginForm").serialize();
   	  	
   		 	 jq.ajax({
@@ -113,11 +134,11 @@ jq("#loginBtn").on("click",function(){
             <form enctype="multipart/form-data" method="post" id = "loginForm" name="loginForm" action="/member/loginPost">
               <div class="form-group">
                 <label for="input-email" class="control-label">아이디</label>
-                <input type="text" class="form-control" id="member_id" placeholder="아이디" value="" name="member_id">
+                <input type="text" class="form-control" id="member_id" placeholder="아이디" value="" name="member_id" onkeyup="enterkey();">
               </div>
               <div class="form-group">
                 <label for="input-password" class="control-label">비밀번호</label>
-                <input type="password" class="form-control" id="member_password" placeholder="비밀번호" value="" name="member_password">
+                <input type="password" class="form-control" id="member_password" placeholder="비밀번호" value="" name="member_password" onkeyup="enterkey();">
                <div style="margin-top: 5px;">
 	                <a href = "javascript:fnfindId()" id = "findId">아이디</a>/
 	                <a href="javascript:fnfindPw()" id ="findPw">비밀번호 찾기</a>
@@ -129,7 +150,8 @@ jq("#loginBtn").on("click",function(){
                    	</label>
                 </div>
                	
-              <input type="button" class="btn btn-primary" id = "loginBtn"  value="로그인">
+              <input type="button" class="btn btn-primary" id = "loginBtn"  onkeyup="enterkey();"   value="로그인">
+           
             </form>
           </div>
         </div>

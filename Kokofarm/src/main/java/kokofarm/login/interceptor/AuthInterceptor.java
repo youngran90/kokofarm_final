@@ -54,7 +54,7 @@ private void saveDest(HttpServletRequest request){
 			Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
 			if(loginCookie !=null){
 				MemberVO memberVO = service.checkLoginBefore(loginCookie.getValue());
-				
+				System.out.println("헬로");
 				if(memberVO !=null){
 					session.setAttribute("login", memberVO);
 					return true;
