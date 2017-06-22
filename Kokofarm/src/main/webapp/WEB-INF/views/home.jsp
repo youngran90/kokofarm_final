@@ -80,7 +80,6 @@
    
     <script type="text/javascript">
        $(function(){    	  
-    	  
     	   
     	   
     	   $("button.wishlist").css("display","none");
@@ -89,6 +88,27 @@
     	   $(".addmainslider-btn").on('click',function(){
     		   openWin= window.open("/main/product_add","childForm","width=600, height=500, resizable = no, scrollbars = yes");
     	   });
+    	   
+    	   
+    	   $('.addtocart-btn').on('click',function(){
+    		   alert($(this).attr('no'));
+    		   var product_no = $(this).attr("no");
+    		   var amount = 1;
+    		   $.ajax({
+    			type : "get",
+    			url : "/cart/cart_detail",
+    			data : {num : amount, product_no : product_no},
+    			dataType : "text",
+    			success : function(){
+    				alert("장바구니에 추가되었습니다.");
+    			}
+    				
+    			   
+    		   });
+  			
+  			 
+  		 });
+    	   
     	   
        });	
   
@@ -104,6 +124,9 @@
  	<%}
  	}
  	%>
+ 	
+ 	
+
  	    
    </script> 
    
@@ -118,17 +141,27 @@
   	 	 <button class="addmainslider-btn" type="button">슬라이더 교체</button>
  	</div>
 </div>
+    
+
 <div class="container">
   <div class="row">
   
     <div class="cms_banner ">
-      <div class="col-md-4 cms-banner-left"> <a href="#"><img alt="#" src="../../../resources/image/banners/subbanner1.jpg"></a>
+   		 
+   		  <div class="auctionsale_banner">       			
+      		<a href="#"><img alt="경매 시간배너" src="/resources/files/attach/Rtauctionbanner.png" style="width: 1230px" height="200px">
+      			<div class="as_title_box">
+      			
+      			</div>
+      		</a>
+          
           </div>
-      <div class="col-md-4 cms-banner-middle-top">
+          
+      <!-- <div class="col-md-4 cms-banner-middle-top">
         <div class="md1"><a href="#"> <img alt="#" src="../../../resources/image/banners/subbanner2.jpg"></a> </div>
         <div class="md2"><a href="#"> <img alt="#" src="../../../resources/image/banners/subbanner2-1.jpg"></a></div>
       </div>
-      <div class="col-md-4 cms-banner-right"> <a href="#"><img alt="#" src="../../../resources/image/banners/subbanner3.jpg"></a> </div>
+      <div class="col-md-4 cms-banner-right"> <a href="#"><img alt="#" src="../../../resources/image/banners/subbanner3.jpg"></a> </div> -->
     </div>
   	 <div class="button-group-admin">
   	 	 <button class="addmainslider-btn" type="button" style="right: 0px;">상품 교체 (위)</button>
@@ -151,10 +184,13 @@
               <c:forEach items="${Latestlist }" var="LproductVO">
               <div class="item">
                 <div class="product-thumb transition">
-                  <div class="image product-imageblock"> <a href="/product/detail_product?product_no=${LproductVO.product_no }"><img src="/resources/files/attach/${LproductVO.product_mainimage}" alt="${LproductVO.product_name}" title="${LproductVO.product_name }"   class="img-responsive" /> </a>
+                  <div class="image product-imageblock"> 
+                  	<a href="/product/detail_product?product_no=${LproductVO.product_no }">
+                  		<img src="/resources/files/attach/${LproductVO.product_mainimage}" alt="${LproductVO.product_name}" title="${LproductVO.product_name }"   class="img-responsive" /> 
+                  	</a>
                     <div class="button-group">
                       <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List" ><i class="fa fa-heart-o"></i></button>
-                      <button type="button" class="addtocart-btn" >Add To Cart</button>
+                      <button type="button" class="addtocart-btn" no="${LproductVO.product_no }" >Add To Cart</button>
                       <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product" ><i class="fa fa-exchange"></i></button>
                     </div>
                   </div>
@@ -194,7 +230,7 @@
                   </div>
                   <div class="button-group">
                     <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List" ><i class="fa fa-heart-o"></i></button>
-                    <button type="button" class="addtocart-btn" >Add To Cart</button>
+                    <button type="button" class="addtocart-btn">Add To Cart</button>
                     <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product" ><i class="fa fa-exchange"></i></button>
                   </div>
                 </div>
@@ -213,7 +249,7 @@
                   <div class="image product-imageblock"> <a href="/product/detail_product?product_no=${LbestList.product_no }"> <img src="/resources/files/attach/${LbestList.product_mainimage }" alt="${LbestList.product_name }" title="${LbestList.product_name }" class="img-responsive" /> </a>
                     <div class="button-group">
                       <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List" ><i class="fa fa-heart-o"></i></button>
-                      <button type="button" class="addtocart-btn" >Add To Cart</button>
+                      <button type="button" class="addtocart-btn"  no="${LbestList.product_no }">Add To Cart</button>
                       <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product" ><i class="fa fa-exchange"></i></button>
                     </div>
                   </div>
@@ -223,7 +259,7 @@
                   </div>
                   <div class="button-group">
                     <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List" ><i class="fa fa-heart-o"></i></button>
-                    <button type="button" class="addtocart-btn" >Add To Cart</button>
+                    <button type="button" class="addtocart-btn" no="${LbestList.product_no }">Add To Cart</button>
                     <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product" ><i class="fa fa-exchange"></i></button>
                   </div>
                 </div>
@@ -398,18 +434,18 @@
           </li>
         </ul>
       </div>  -->
-      <div class="row">
+      <!-- <div class="row">
         <div class="cms_banner">
           <div class="col-md-4 cms-banner-left"> <a href="#"><img alt="#" src="../../../resources/image/banners/subbanner5.jpg"></a> </div>
           <div class="col-md-4 cms-banner-middle"> <a href="#"><img alt="#" src="../../../resources/image/banners/subbanner6.jpg"></a> </div>
           <div class="col-md-4 cms-banner-right"> <a href="#"><img alt="#" src="../../../resources/image/banners/subbanner7.jpg"></a> </div>
         </div>
-      </div>
-      <div id="subbanner4" class="banner" >
+      </div> -->
+     <!--  <div id="subbanner4" class="banner" >
         <div class="item"> <a href="#"><img src="../../../resources/image/banners/subbanner4.jpg" alt="Sub Banner4" class="img-responsive" /></a> </div>
-      </div>
+      </div> -->
       <h3 class="productblock-title">Featured Products</h3>
-      <div class="box">
+      <!-- <div class="box">
         <div id="feature-slider" class="row owl-carousel product-slider">
           <div class="item product-slider-item">
             <div class="product-thumb transition">
@@ -532,7 +568,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
       <!-- <div class="blog">
         <div class="blog-heading">
           <h3>Latest Blogs</h3>
