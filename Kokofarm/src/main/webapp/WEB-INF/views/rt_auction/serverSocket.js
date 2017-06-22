@@ -23,6 +23,49 @@ var content;
 var area;
 var rt_auction_no;
 
+app.get('/mp3.01',function (req,res){     
+    var filename = 'TWICE-SIGNAL.mp3';
+    var dir = 'C:\\Users\\김Jason\\git\\kokofarm_final\\Kokofarm\\src\\main\\webapp\\resources\\rt_auction\\mp3\\'+filename;
+    fs.exists(dir, function (exists) {
+        if (exists) {
+            fs.readFile(dir, function (err,data){
+                res.end(data);
+            });
+        } else {
+            res.end('file is not exists');
+        }
+    })
+});
+
+app.get('/mp3.02',function (req,res){     
+    var filename = 'PSY-NewFace.mp3';
+    var dir = 'C:\\Users\\김Jason\\git\\kokofarm_final\\Kokofarm\\src\\main\\webapp\\resources\\rt_auction\\mp3\\'+filename;
+    fs.exists(dir, function (exists) {
+        if (exists) {
+            fs.readFile(dir, function (err,data){
+                res.end(data);
+            });
+        } else {
+            res.end('file is not exists');
+        }
+    })
+});
+
+
+app.get('/rt_auction',function (req,res){     
+    var filename = 'rt_auction.css';
+    var dir = 'C:\\Users\\김Jason\\git\\kokofarm_final\\Kokofarm\\src\\main\\webapp\\resources\\rt_auction\\css\\'+filename;
+    fs.exists(dir, function (exists) {
+        if (exists) {
+            fs.readFile(dir, function (err,data){
+                res.end(data);
+            });
+        } else {
+            res.end('file is not exists');
+        }
+    })
+});
+
 app.get('/btn_img01',function (req,res){     
     var filename = 'btn1.PNG';
     var dir = 'C:\\Users\\김Jason\\git\\kokofarm_final\\Kokofarm\\src\\main\\webapp\\resources\\files\\attach\\'+filename;
@@ -113,7 +156,6 @@ app.get('/', function(request, response) {
 	seller_no =request.param("seller_no");
 	rt_auction_no = request.param("rt_auction_no");
 	response.sendfile(__dirname + '/rt_auction.html');
-	
 });
 
 var m = 0; //경매 대기 시간 카운트 (분)
@@ -160,11 +202,13 @@ var socketList = {}; // 소켓 id담을 객체
 // 소켓 서버를 만듦
 var io = socketio.listen(server);
 
-
 io.sockets.on('connection', function(socket) {
 	var nickname = member_id;
+	var hap_1000, hap_5000, hap_10000, input_hap;
 	
 	socketList[nickname] = socket.id;
+	socket.member_id = member_id;
+
 	
 	// 경매 관련 정보를 넘긴다.
 	io.sockets.emit('info',{ 
@@ -217,7 +261,7 @@ io.sockets.on('connection', function(socket) {
 	       if(nickname){
 	       io.sockets.emit('exit',{
 	    	   msg : nickname + " 님이 나가셨습니다."
-	       }); 
+	       });
 	        deleteUser();
 	       }
 	});
@@ -242,33 +286,37 @@ io.sockets.on('connection', function(socket) {
 	 
 	 //1000원
 	 socket.on('1000',function(data){ //받고
+		hap_1000 = data.price + 1000;
 		io.sockets.emit('1000',{ //전송
-			 btn_1 : data.price,
-			 id : data.id
-		 });
+			 hap : hap_1000,
+			 id : nickname
+		});
 	 });
-	 
+	
 	 //5000원
 	 socket.on('5000',function(data){ //받고
+		hap_5000 = data.price + 5000;
 		io.sockets.emit('5000',{ //전송
-			 btn_2 : data.price,
-			 id : data.id
+			 hap : hap_5000,
+			 id : nickname
 		 });
 	 });
 	 
 	//10000원
 	 socket.on('10000',function(data){ //받고
+		hap_10000 = data.price + 10000;
 		io.sockets.emit('10000',{ //전송
-			 btn_3 : data.price,
-			 id : data.id
+			 hap : hap_10000,
+			 id : nickname
 		 });
 	 });
 	 
 	 //직접 금액을 입력
 	 socket.on('rt_tender',function(data){
+		input_hap = data.price + data.input_price;
 		io.sockets.emit('rt_tender',{
-			btn_4 : data.price,
-			id : data.id
+			hap : input_hap,
+			id : nickname
 		});
 	 });
 	 
@@ -279,12 +327,17 @@ io.sockets.on('connection', function(socket) {
 	 // 낙찰금액
 	 // 경매 종료시간
 	 socket.on('finish',function(data){
-		 if(socketList[data.id]){
-		       io.sockets.connected[socketList[data.id]].emit("finish",data);			 
+		 if(data.id == nickname){
+			 io.sockets.sockets[socketList[data.id]].emit("finish",data);
 		 }
+		 
+		 /*for(var i=0; i<userList.length; i++){
+			 if(data.id = userList[i]){
+			    io.sockets.connected[socketList[data.id]].emit("finish",data);			 
+			 }
+			 break;
+		 }*/
 	 });
-	 
-	 
 	 
 	 // 경매 대기 시간 카운터
 	 var w_t = setInterval(function(){ //setInterval 일정시간마다 반복 실행하는 함수
@@ -293,6 +346,7 @@ io.sockets.on('connection', function(socket) {
 				w_s : s
 			});
 		 	if(m == 0 && s == 0 ){
+		 		
 		 		//경매 시간
 		 		var timer = setInterval(function(){ //setInterval 일정시간마다 반복 실행하는 함수
 		 			io.sockets.emit('time',{
@@ -300,8 +354,13 @@ io.sockets.on('connection', function(socket) {
 		 				s : second
 		 			});
 		 		 	if(minute == 0 && second == 0 ){
-		 		 		socket.emit("end","경매가 종료 되었습니다.");
-		 		 		clearInterval(timer); //타이머 종료 
+		 		 	//	console.log(nickname+" : "+total);
+		 		    //console.log(hap_1000+hap_5000+hap_10000+input_hap);
+		 		 		clearInterval(timer); //타이머 종료
+		 		 		
+		 		 		socket.emit("end",{
+		 		 			msg : "경매가 종료 되었습니다."
+		 		 		});
 		 		 	}
 		 		 }, 1000); //1초단위로 변동
 		 		
@@ -309,8 +368,7 @@ io.sockets.on('connection', function(socket) {
 		 	}
 		 }, 1000); //1초단위로 변동
 	 
-	 
-	 
+	
 	 
 	 
 });

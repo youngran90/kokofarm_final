@@ -116,12 +116,12 @@ $(function(){
 
 	<section id="top_img_box" class="top_img_box">
 		<img src="/../../resources/orderproduct/image/ord_top_con_step2.jpg"
-			alt="top_img_box" width="100%">
+			alt="top_img_box" width="1160px">
 	</section>
 
 	<div class="row">
 		<!-- 왼쪽 탭 메뉴 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-		<div id="column-left" class="col-sm-3 hidden-xs column-left">
+		<div id="column-left" class="col-sm-3 hidden-xs column-left" style="display: none;">
 			<div class="column-block">
 				<div class="column-block">
 					<div class="columnblock-title">Categories</div>
@@ -170,7 +170,7 @@ $(function(){
 			<!-- 주문 내역 테이블 시작 -->
 			<form method="post" id="orderproductform">
 				<div class="table-responsive">
-					<table class="table table-bordered" style="width: 940px">
+					<table class="table table-bordered" style="width: 1160px">
 						<thead>
 							<tr>
 								<th class="text-center" width="470">상품명</th>
@@ -223,7 +223,7 @@ $(function(){
 				</div>
 
 				<!-- 주문 내역 테이블 종료 -->
-				<div id="accordion" class="panel-group">
+				<div id="accordion" class="panel-group" style="width: 1160px">
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<h4 class="panel-title">
@@ -307,7 +307,7 @@ $(function(){
 				</div>
 			</form>
 
-<div class="panel panel-default">
+<div class="panel panel-default" style="width: 1160px">
 	<div class="panel-heading">
 		<h4 class="panel-title">
 			<a class="accordion-toggle" data-parent="#accordion" data-toggle="collapse" href="#collapse-checkout-confirm" aria-expanded="false">Step 2: 마일리지 확인/사용 <i	class="fa fa-caret-down"></i></a>
@@ -328,7 +328,7 @@ $(function(){
 					</div>
 				</div>
 			</div>
-			<div class="table-responsive">
+			<div class="table-responsive" >
 			<form method="POST" id="mileage">
 				<div class="point_box">
 					<div class="point_info">

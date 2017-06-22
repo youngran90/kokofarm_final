@@ -156,8 +156,14 @@
 #delivery_1 {
 	float: left;
 	border-right: 1px solid #a7a7a7;
-	padding-left: 5%;
-	padding-right: 14%;
+	padding-left: 15%;
+	padding-right: 15%;
+}
+
+#delivery_2 {
+	position : relative;
+	left : 10%;
+	padding-right: 15%;
 }
 
 .delivery_area h2 {
@@ -187,7 +193,7 @@
 .inbox {
 	background-image: url("/../../resources/cart/image/ord1_amout_bg.gif");
 	background-repeat: no-repeat;
-	background-size: 940px 130px;
+	background-size: 1160px 130px;
 	height: 130px;
 }
 

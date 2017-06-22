@@ -1,0 +1,286 @@
+@CHARSET "UTF-8";
+/* 경매번호 */
+.slider_background{
+	height: 400px;
+}
+.no_info{
+	padding : 20px 0 10px 15px;
+}
+#rt_auction_no{
+	color : #38a9a5;
+}
+
+/* 제품 내용 */
+#name{
+	font-size: 15px;
+	margin-right: 10px;
+}
+#rt_name{
+	font-size: 15px;
+	color: #38a9a5;
+}
+#product_area{
+	font-size: 15px;
+	margin-right: 10px;
+	margin-left: 10px;
+}
+#rt_area{
+	font-size: 15px;
+	color: #38a9a5;
+}
+#standard{
+	font-size: 15px;
+	margin-right: 25px;
+}
+#rt_standard{
+	font-size: 15px;
+	color: #38a9a5;
+}
+#seller{
+	font-size: 15px;
+	margin-left: 25px;
+	margin-right: 10px;
+}
+#rt_seller{
+	font-size: 20px;
+	color: #38a9a5;
+}
+#content{
+	font-size: 15px;
+	position: relative;
+	top: 5px;
+}
+#prev_btn{
+	background-image: url(/btn_img01);
+	background-repeat: no-repeat;
+	background-size: 30px;
+	margin-left : 40%;
+}
+#next_btn{
+	margin-left : 5%;
+	background-image: url(/btn_img02);
+	background-repeat: no-repeat;
+	background-size: 30px;
+}
+.btn {
+	margin-top : 10px;
+	width : 30px;
+	height:30px;
+	border:0;
+	background:#f5f6fa;
+	display:none;
+}
+#slider {
+	position:relative;
+	margin:0 auto;
+	padding:0;
+	list-style:none;
+	width:450px;
+	height:300px;
+	overflow-x:hidden
+}
+#slider li {
+	display:none;
+	position:absolute;
+	left:0;
+	top:0;
+}
+#slider img {
+	width:450px;
+	height:300px
+}
+.auction_info {
+	margin-left: 10px;
+	height: 650px;
+	width: 45%;
+	float: left;
+}
+.auction_content {
+	padding-top : 10px;
+	padding-left : 10px;
+	margin-left: 20px;
+	height: 240px;
+	width: 90%;
+}
+.rt_content{
+	padding-top: 10px;
+}
+
+/* 경매 대기 관련 CSS */
+.rt_wait{
+	text-align: center;
+}
+#w_time{
+	font-size: 25px;
+	margin-right: 10px;
+}
+#w_minute{
+	color : #38a9a5;
+	font-size: 55px;
+}
+#w_second{
+	color : #38a9a5;
+	font-size: 55px;
+	margin-left: 10px;
+}
+
+/* 경매 입찰 관련 CSS */
+.rt_ing{
+	text-align: center;
+}
+#time{
+	margin-left: 25px;
+	margin-bottom: 10px;
+}
+#time em{
+	margin-left : 5px;
+	font-size: 35px;
+}
+#rt_time{
+	font-size: 25px;
+	margin-right: 10px;
+}
+#minute{
+	color : #38a9a5;
+	font-size: 55px;
+}
+#second{
+	color : #38a9a5;
+	font-size: 55px;
+	margin-left: 10px;
+}
+#rt_auction_finish_time{
+	text-align: center;
+}
+#rt_finish_time{
+	font-size: 15px;
+}
+
+#finish_time{
+	font-size: 20px;
+	color : #38a9a5;
+}
+#rt_auction_person{
+	margin-top : 10px;
+	margin-left : 40px;
+	font-size: 35px;
+}
+#rt_auction_person strong{
+	color : #e2704b;
+	font-size: 25px;
+	margin-right: 20px;
+	margin-left: 5px;
+}
+#rt_auction_person em{
+	margin-right: 5px;
+}
+#tender_price{
+	margin-left: 10px;
+}
+
+/* 경매 종료 관련 CSS */
+#end{
+	margin-left : 50px;
+	font-size: 35px;
+}
+
+/* 입찰 버튼 CSS */
+.auction_menu {
+	position: fixed;
+	width: 79%;
+}
+#auction_btn {
+	border: 0px;
+	padding: 0px;
+	height : 32px;
+	width: 100%;
+	background-color: #7fb1bf;
+	color: white;
+  	font-size: 20px;
+  	border-radius: 5px;
+}
+#auction_box {
+	height: 80px;
+	background-color: #eaedf1;
+	text-align: center;
+	font-family: 'Lato', sans-serif;
+	border-radius: 5px;
+	border-right: 2px solid #7fb1bf;
+	border-left: 2px solid #7fb1bf;
+	border-top: 2px solid #7fb1bf;
+}
+#auction_box button{
+	color: white;
+	position : relative;
+	top : 15px;
+	margin-right: 60px;
+	padding: 10px 40px; 
+  	font-size: 20px;
+  	background-color: #7fb1bf;
+  	border-radius: 5px;
+}
+#auction_box input{
+	position : relative;
+	top : 12px;
+	margin-right: 25px;
+	height: 48px;
+	border-radius: 5px;
+}
+#income{
+	color: green;
+}
+#out{
+	color: red;
+}
+.auction_body {
+	padding-top: 20px;
+	margin-left: 10%;
+	margin-right: 10%;
+	width: 80%;
+	height: 700px;
+}
+.auction_time_price {
+	position: absolute;
+	left: 48%;
+	height: 180px;
+	width: 38%;
+}
+#area {
+	position: relative;
+	top: 200px;
+	border: 1px solid blue;
+	margin-left: 15px;
+	width : 355px;
+	height : 402px;
+	float : left;
+}
+#chat_list {
+	border: 1px solid green;
+	height : 402px;
+	margin-left : 25px;
+	float : left;
+	position: relative;
+	top: 200px;
+	resize: none;
+	font-size: 15px;
+	font-weight: bold;
+	text-align: center;
+}
+#chat_input{
+	position: relative;
+	top: 220px;
+	float : left;
+	margin-left: 15px;
+	width: 48.3%;
+}
+#id {
+	width: 20%;
+	text-align: center;
+}
+#chat_text {
+	width: 48%;
+}
+#chat_enter {
+	margin-left : 19px;
+	width: 26%;
+}

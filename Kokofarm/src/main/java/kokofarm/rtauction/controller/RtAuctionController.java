@@ -64,7 +64,7 @@ public class RtAuctionController {
 		model.addAttribute("seller_no", seller_no);
 		model.addAttribute("rt_auction_no", rt_auction_no);
 		
-		//return "redirect://localhost:8083";
+	//	return "redirect://localhost:8083";
 		//return "redirect:http://192.168.0.172:8083"; // 학원에서 할때 학원 서버
 		//return "redirect:http://106.242.203.68:8083"; //집에서 할때 학원 서버
 		return "redirect:http://192.168.0.172:8083"; // 학원에서 내껄로 접속할때
@@ -74,6 +74,8 @@ public class RtAuctionController {
 	@RequestMapping(value="/result_rt_auction", method=RequestMethod.POST)
 	public void result_rt_auction(@RequestParam("no")String no,	@RequestParam("id")String id,
 			@RequestParam("price")int price, @RequestParam("date")String date) throws Exception{
+		
+		System.out.println(date);
 		
 		String rt_tender_no = UUID.randomUUID().toString().replace("-", ""); //경매번호 생성
 		java.sql.Timestamp time = java.sql.Timestamp.valueOf(date); // String 날짜 형식 -> TimeStamp 형식으로 변환
@@ -85,11 +87,13 @@ public class RtAuctionController {
 		vo.setRt_tender_price(price); // 경매 낙찰가
 		vo.setRt_tender_date(time); // 낙찰 시간
 		
-		System.out.println(id);
-		System.out.println(date);
-		System.out.println(no);
-		System.out.println(price);
 		service.rtresultauction(vo);
-		System.out.println(vo.toString());
+		
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@"+vo.toString());
+	}
+	
+	@RequestMapping(value="/rt_auctionpay", method=RequestMethod.GET)
+	public void rt_auctionpayGet(Model model)throws Exception{
+		
 	}
 }

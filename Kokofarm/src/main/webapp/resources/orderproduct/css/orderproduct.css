@@ -31,13 +31,14 @@
 
 .result_info_box {
 	padding: 25px 0px;
+	width: 1160px;
 }
 
 .inbox {
 	background-image:
 		url("/../../resources/orderproduct/image/ord1_amout_bg.gif");
 	background-repeat: no-repeat;
-	background-size: 940px 130px;
+	background-size: 1160px 130px;
 	height: 130px;
 }
 
@@ -170,7 +171,7 @@ select {
 	width: 200px;
 	float: left;
 	padding: 10px;
-	margin: 0px 35px 0px 15px;
+	margin: 0px 35px 0px 35px;
 }
 
 .pay_list {
@@ -265,6 +266,7 @@ select {
 	float: left;
 	padding: 10px;
 	margin-bottom: 30px;
+	margin-left: 50px;
 }
 
 .kakaopay_info01 p {
@@ -302,7 +304,7 @@ select {
 .result_box {
 	background-image: url("/resources/orderproduct/image/ord2_amout_bg.jpg");
 	background-repeat: no-repeat;
-	background-size: 900px 130px;
+	background-size: 1125px 130px;
 	height: 130px;
 	margin-bottom: 30px;
 }

@@ -15,12 +15,12 @@
     <li><a href="#">장바구니</a></li>
   </ul>
  	<section id="top_img_box" name="top_img_box">
-		<img src="/../../resources/cart/image/ord_top_con_step1.jpg" alt="top_img_box" width="100%">
+		<img src="/../../resources/cart/image/ord_top_con_step1.jpg" alt="top_img_box" width="1160px">
 	</section>
 
   <div class="row">
   <!-- 왼쪽 탭 메뉴 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-    <div id="column-left" class="col-sm-3 hidden-xs column-left">
+    <div id="column-left" class="col-sm-3 hidden-xs column-left" style="display: none;">
       <div class="column-block">
         <div class="column-block">
           <div class="columnblock-title">Categories</div>
@@ -128,7 +128,7 @@
     </div>
    <!-- 왼쪽 탭 메뉴 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
    
-    <div class="col-sm-9" id="content">
+    <div class="col-sm-9" id="content" style="width: 1180px;">
  
       	<section id="crat_total_amount" name="crat_total_amount">
 				<div class="cart_amount" name="cart_amount">
@@ -141,7 +141,7 @@
 		</div>
 	
         <div class="table-responsive">
-          <table class="table table-bordered" style="width: 945px">
+          <table class="table table-bordered" style="width:1160px">
             <thead>
               <tr>
               	<th class="text-center" width="50"><button id="all" name="all"></button></th>
