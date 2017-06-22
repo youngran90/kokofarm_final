@@ -22,7 +22,9 @@ $('#btn_update').on('click',function(){
 		 alert("5~20자 영문, 숫자 섞어서 입력해주세요")
 	 }
 	 
+	 alert("비밀번호가 변경 되었습니다.")
 	document.updatePw.submit();
+	  self.close();
 })
 })
 

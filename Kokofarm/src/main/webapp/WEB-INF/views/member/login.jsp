@@ -19,6 +19,20 @@
  
  <script>
  jq(document).ready(function(){
+	 jq("#findId").on("click",function(){
+		 
+		 	 			
+				window.name = "parentForm";
+				openWin = window.open("/find/id",
+						"childForm", "width =500, height = 300, resizable = no, scrollbars = no");
+						
+		 return false;
+	 });
+	 
+	 jq("#findPw").on("click",function(){
+		 openWin  = window.open("/find/password", "childForm","width=500, height = 300, resizable= no, scrollbars=no");
+		 return false;
+	 });
 	 
 
 jq("#loginBtn").on("click",function(){
@@ -104,8 +118,11 @@ jq("#loginBtn").on("click",function(){
               <div class="form-group">
                 <label for="input-password" class="control-label">비밀번호</label>
                 <input type="password" class="form-control" id="member_password" placeholder="비밀번호" value="" name="member_password">
-                <a href = "/find/id">아이디</a>/
-                <a href="/find/password ">비밀번호 찾기</a></div>
+               <div style="margin-top: 5px;">
+	                <a href = "javascript:fnfindId()" id = "findId">아이디</a>/
+	                <a href="javascript:fnfindPw()" id ="findPw">비밀번호 찾기</a>
+                </div>
+                </div>
                 <div class = "checkbox icheck" style="float: left;">
                 	<label>
                 		<input type ="checkbox" name = "useCookie">아이디 저장

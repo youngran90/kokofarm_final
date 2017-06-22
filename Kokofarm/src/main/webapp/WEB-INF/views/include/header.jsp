@@ -113,7 +113,7 @@ $( document ).ready( function() {
 } );
 </script>
 	
-	</script>
+	
 
 </head>
 <body>

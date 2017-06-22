@@ -38,23 +38,28 @@
 	<!-- 로그인 인터셉터 설정 -->
 
 <beans:bean id = "authInterceptor" class="kokofarm.login.interceptor.AuthInterceptor"></beans:bean>
-	<beans:bean id = "loginInterceptor" class="kokofarm.login.interceptor.LoginInterceptor"></beans:bean>
+<beans:bean id = "loginInterceptor" class="kokofarm.login.interceptor.LoginInterceptor"></beans:bean>
+<beans:bean id = "rt_auctionInterceptor" class="kokofarm.login.interceptor.Rt_auctionAccessInterceptor"></beans:bean>
 		<interceptors>
-			<interceptor>
-				<mapping path="/member/loginPost"/>
-				<beans:ref bean = "loginInterceptor"/>
-			</interceptor>
-		
-			<interceptor>
-				<mapping path="/mypage/list_Inquiry"/>
-				<beans:ref bean="authInterceptor"/>
-							
-			</interceptor>
-					
-			<interceptor>
-				<mapping path="/tender/tenderform"/>
-				<beans:ref bean="authInterceptor"/>
-			</interceptor>
+				<interceptor>
+					<mapping path="/member/loginPost"/>
+					<beans:ref bean = "loginInterceptor"/>
+				</interceptor>
+			
+				<interceptor>
+					<mapping path="/mypage/list_Inquiry"/>
+					<beans:ref bean="authInterceptor"/>							
+				</interceptor>
+						
+				<interceptor>
+					<mapping path="/tender/tenderform"/>
+					<beans:ref bean="authInterceptor"/>
+				</interceptor>
+				
+				<interceptor>
+					<mapping path="/rt_auction/rt_auction"/>
+					<beans:ref bean="rt_auctionInterceptor"/>
+				</interceptor>
 								
 		</interceptors>
 </beans:beans>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace ="kokofarm.mainProc.mapper.mProcMapper">
+	
+	<select id="mainImageLatest" resultType="ProductVO">
+		
+		select ROWNUM, alias.* from(select * from product order by product_uploaddate desc) alias<![CDATA[
+where rownum <=10
+		  ]]>
+	</select>
+	
+	<select id="mainAuctionLatest" resultType="AuctionListDTO">
+		select ROWNUM, alias.* from 
+(select a.*, t.tender_price from auction a, tender t where a.auction_no=t.auction_no order by a.end_date desc, t.tender_price desc) alias 
+<![CDATA[ where rownum <=10]]>
+
+	</select>
+	
+	<select id="bestSellerItem" resultType="ProductVO">
+		select ROWNUM, alias.* from
+			(select p.* from product p, order_finish o where p.product_no=o.orderfinish_product_no order by o.ORDERFINISH_PRODUCT_AMOUNT desc) alias 
+		<![CDATA[ where rownum <=10 ]]> 
+	</select>
+
+</mapper>

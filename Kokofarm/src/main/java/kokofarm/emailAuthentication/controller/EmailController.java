@@ -96,7 +96,6 @@ public class EmailController {
 	@RequestMapping(value="/update/passwordForm", method = RequestMethod.POST)
 	public String updatePw(@RequestParam("member_id")String member_id, RedirectAttributes ra) throws Exception{
 		String m_id = member_id;
-		System.out.println("아이디 safa:" +m_id);
 		ra.addAttribute("member_id",m_id);
 		
 		return "/find/updatePw";
@@ -104,14 +103,15 @@ public class EmailController {
 	
 	
 	@RequestMapping(value="/update/password", method=RequestMethod.POST)
-	public String updatePw(@RequestParam("member_id")String member_id, @RequestParam("member_password") String member_password) throws Exception{
+	@ResponseBody
+	public void updatePw(@RequestParam("member_id")String member_id, @RequestParam("member_password") String member_password) throws Exception{
 		String pw = member_password;
 		Map<String, String> map = new HashMap<String,String>();
 		map.put("member_id", member_id);
 		map.put("member_password", pw);
 		service.changePw(map);
 		
-		return "/member/login";
+		
 	}
 	
 	@RequestMapping(value = "/find/authPw", method = RequestMethod.GET)

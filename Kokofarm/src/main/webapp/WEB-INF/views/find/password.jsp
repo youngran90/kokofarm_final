@@ -15,10 +15,9 @@ $(function(){
 	
 	$("#btn_auth").on("click",function(){
 		var num = $("#authnum").val();		
-		$('#id').attr('value',m_id);
-		$.ajax({
+			$.ajax({
 			type : "get",
-			url : "authPw",
+			url : "/find/authPw",
 			data : {authNum : num},
 			dataType : "text",
 			error : function(error){
@@ -63,7 +62,7 @@ $(function(){
  
         <div class="box email">
             <label for="email">이메일</label>
-            <input type="text" id="member_email" name="member_email" autofocus autocomplete="off" required />
+            <input type="text" id="member_email" name="member_email" autofocus autocomplete="off" required /></br>
             <label for ="id">아이디</label>
             <input type="text" id = "member_id" name = "member_id" autofocus autocomplete = "off" required />
         </div>
@@ -84,7 +83,7 @@ $(function(){
 <h5> 인증번호를 입력하세요</h5>
 		<div class="container">
 				<input type = "text" name = "authnum" id = "authnum" onkeydown="onlyNumber(this)" maxlength="6"><br />
-				<input type = "submit" id = "btn_auth" class="btn btn-info" value = "입력" >
+				<input type = "button" id = "btn_auth" class="btn btn-info" value = "입력" >
 		</div>
 
 </div>
