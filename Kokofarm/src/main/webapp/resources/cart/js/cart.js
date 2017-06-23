@@ -57,18 +57,18 @@
 						
 						//체크박스 전체 선택 / 선택 해제 이벤트
 						 $('#all').on('click', function(){
-							var cnt = $('input[name=product_no]:checked').length;
-							var size = $("input[name=product_no]").length;
+							var cnt = $('input[name=product_no]:checked').length; //체크된 갯수
+							var size = $("input[name=product_no]").length; // 체크박스 갯수
 							for(var i=0; i<size; i++){
 								var index = i + 1;
-								if(cnt == 0){
+								if(cnt == 0){ // 체크된 갯수가 10개면 전부 체크
 									$("input[id="+index+"ac]").prop("checked",true);
 									$("input[class="+index+"dp]").prop("checked",true); //배송비
 									$("input[class="+index+"tp]").prop("checked",true); // 금액
 									$("input[class="+index+"opa]").prop("checked",true); // 수량
 									$("input[class="+index+"pn]").prop("checked",true); // 품명
 									$("input[class="+index+"pp]").prop("checked",true); // 각각의 제품 금액
-								}else if(cnt >= 0){
+								}else if(cnt >= 0){ // 체크된 갯수가 0개 이상일 경우 체크해제
 									$("input[id="+index+"ac]").prop("checked",false);
 									$("input[class="+index+"dp]").prop("checked",false); //배송비
 									$("input[class="+index+"tp]").prop("checked",false); // 금액
@@ -104,18 +104,48 @@
 								$("input[class="+index+"pp]").prop("checked",false); // 각각의 제품 금액
 							}
 						})
-					
 						//체크박스 선택 없이 주문하기 눌렀을때...
-						$(".btn-primary").on('click',function(event) {
+						$("#btn_sub").on('click',function(event) {
+							var x = 0;
 							event.preventDefault();
 							var checked = $("input:checkbox[name=product_no]:checked").length;
 									if(checked > 0 ){
-										// ajax로 form submit하기
-										$("#cartForm").submit();
+										for (var int = 0; int < checked; int++) {
+			                                 if($('.amount_box>input').eq(int).val() ==0){
+			                                    x++;
+			                                    alert($("input[class="+(int+1)+"pn]").val()+" 해당 품목의 수량이 0 입니다.");
+			                                 }
+			                              }
+			                              if(x==0){
+			                                 $('#cartForm').submit();
+			                              }
 									}else{
 										alert("상품을 선택해주세요.");
 									}
-						}); //체크박스 선택없이 주문하기... 종료 
+						}); 
+						
+						/* 수량 0값 체크 해서 submit 팅기게...
+						//체크박스 선택 없이 주문하기 눌렀을때...
+		                  $(".btn-primary").on('click',function(event) {
+		                     
+		                     event.preventDefault();
+		                     var checked = $("input:checkbox[name=product_no]:checked").length;
+		                           if(checked > 0 ){
+		                              for (var int = 0; int < checked; int++) {
+		                                 if($('.amount_box>input').eq(int).val() ==0){
+		                                    x++;
+		                                 alert("0인 값이 있다");
+		                                 }
+		                                                         
+		                              }
+		                              if(x==0){
+		                                 $('#cartForm').submit();
+		                              }
+		                      });*/
+						
+						
+						
+						//체크박스 선택없이 주문하기... 종료 
 						
 						$("input:checkbox[name=product_no]").on("click",function(){ // 숨겨진 체크박스 같이 선택
 								var size = $("input[name=product_no]").length;
@@ -176,7 +206,6 @@
 							}); // 증가버튼 종료 
 							
 							///////////////////////////////////////////////////////////
-							
 							$(document).on("click",".amount_down", function(){ //감소버튼
 								var cnt = $(this).attr("value"); // 각 버튼 인덱스
 								var amount = $('input[class='+index+'pa]').val(); // 각 해당하는 제품수량
@@ -184,6 +213,8 @@
 								if(index+"bd" == cnt){ //index  = 각 행 index
 									if( amount < 1){
 										alert("0 이하 입력 불가");
+										/*amount = 1;
+										$('input[class='+index+'pa]').val(amount);*/
 									}else{
 										amount--;
 									}
@@ -208,16 +239,25 @@
 							});//감소버튼 종료
 							
 							///////////////////////////////////////////////////////////	
-								
 							$(document).on("click",".change",function(){ // 수량 변경으로 값 구하기
 								var cnt = $(this).attr("value"); // 각 버튼 인덱스
 								var amount = $('input[class='+index+'pa]').val(); // 각 해당하는 제품수량
+								
 								$("input[class="+index+"opa]").val(amount);
+								
 								if(index+"bc" == cnt ){
-									if(amount <1){
+									if(amount < 1){
 										alert("0이하 입력 불가");
-										$('em[id='+index+'tp]').text(0);
-										$('input[class='+index+'opa]').val(0);
+										$("input[class="+index+"opa]").val(amount);
+										var num_casting = price.replace(/[^0-9]/g,""); //천 단위 제거 
+										var product_price = parseInt(num_casting); // 각 제품 가격 정수형으로 캐스팅
+										var total = amount * product_price;
+										var total_casting = numberFormat(total);
+										$('em[id='+index+'tp]').text(total_casting);
+										$('input[class='+index+'tp]').val(total_casting);
+										hidden_tp(index, total);
+										deliveryPrice(index,cnt,total);
+										totalSum(size);
 									}else{
 										var product_amount = parseInt(amount); //  각 제품 수량 정수형으로 캐스팅
 										var num_casting = price.replace(/[^0-9]/g,""); //천 단위 제거 

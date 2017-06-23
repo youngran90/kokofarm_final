@@ -1,10 +1,14 @@
 package kokofarm.rtauction.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import kokofarm.member.domain.MemberVO;
 import kokofarm.rtauction.domain.RtAuctionInfoVO;
+import kokofarm.rtauction.domain.RtResultAuctionListVO;
 import kokofarm.rtauction.domain.RtResultAuctionVO;
 import kokofarm.rtauction.persistence.RtAuctionDAO;
 
@@ -24,5 +28,14 @@ public class RtAuctionServiceImpl implements RtAuctionService{
 		dao.rtresultauction(vo);
 	}
 
-	
+	@Override
+	public RtResultAuctionListVO resultList(String rt_auction_no) throws Exception {
+		return dao.resultList(rt_auction_no);
+	}
+
+	@Override
+	public MemberVO member_info(String member_id) throws Exception {
+		return dao.member_info(member_id);
+	}
+
 }

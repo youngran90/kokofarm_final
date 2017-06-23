@@ -61,7 +61,7 @@
 		select distinct o.orderfinish_final_price from payment p, order_finish o
  		 where p.orderfinish_no = o.orderfinish_no 
   		and o.orderfinish_no = #{orderfinish_no}
-	</select>
+	</select><!-- 최종금액 뽑아내는 쿼리문 -->
 	
 	<update id="product_update">
 		update product set product_total = product_total - #{orderfinish_product_amount} where product_no = #{orderfinish_product_no}

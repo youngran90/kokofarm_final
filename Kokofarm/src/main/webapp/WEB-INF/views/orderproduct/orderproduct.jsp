@@ -175,13 +175,13 @@ $(function(){
 							<tr>
 								<th class="text-center" width="470">상품명</th>
 								<th class="text-center">배송비</th>
-								<th class="text-right">가격</th>
+								<th class="text-center">가격</th>
 								<th class="text-center" width="100">수량</th>
 								<th class="text-center" width="150">주문 금액</th>
 							</tr>
 						</thead>
 						<c:forEach var="order_list" items="${order_list }" varStatus="status">
-							<em class="${status.count}p_amount" id="p_amount" style="display: none;">${order_list.product_total}</em>
+							<em class="${status.count}p_amount" id="p_amount" >${order_list.product_total}개&nbsp;</em>
 							<td style="display: none;"><input type="checkbox" id="${status.count }ac" name="product_no"	value="${order_list.product_no }">${order_list.product_no } 제품번호</td>
 							<td style="display: none;"><input type="checkbox" id="dp" name="order_delivery_price" value="${order_list.order_delivery_price}" class="${status.count }dp">${order_list.order_delivery_price}배송비</td>	<!-- 배송비 값 submit -->
 							<td style="display: none;"><input type="checkbox" id="order_product_amount" name="order_product_amount" value="${order_list.order_product_amount }" class="${status.count}opa">${order_list.order_product_amount }수량</td>
@@ -199,7 +199,7 @@ $(function(){
 										</c:if> --%>
 									</td>
 									<td class="text-center"><em class="delivery_price" id="${status.count }dp">${order_list.order_delivery_price }</em><b id="${status.count }dp_unit">원</b></td>
-									<td class="text-right"><em class="product_price" id="${status.count }pp">${order_list.product_price }</em><b>원</b></td>
+									<td class="text-center"><em class="product_price" id="${status.count }pp">${order_list.product_price }</em><b>원</b></td>
 									<td class="text-center"><em class="order_product_amount" id="${status.count}opa">${order_list.order_product_amount }</em></td>
 									<td class="text-center"><em class="total_price" id="${status.count }tp">${order_list.order_total_price}</em><b>원</b></td>
 								</tr>
@@ -329,7 +329,7 @@ $(function(){
 				</div>
 			</div>
 			<div class="table-responsive" >
-			<form method="POST" id="mileage">
+			<form method="POST" id="mileage" onsubmit="return false;">
 				<div class="point_box">
 					<div class="point_info">
 						<strong>포인트 </strong><strong class="point_check">조회</strong>

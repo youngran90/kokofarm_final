@@ -3,8 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="../include/header.jsp"%>
 
-<link rel="stylesheet" href="/resources/tenderpay/css/tenderpay.css">
-<script src="/resources/tenderpay/js/tenderpay.js"></script>
+<link rel="stylesheet" href="/resources/rt_auction/css/rt_auctionpay.css">
+<script src="/resources/rt_auction/js/rt_auctionpay.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
     function sample6_execDaumPostcode() {
@@ -58,120 +58,17 @@
 
 <div class="container">
   <ul class="breadcrumb">
-    <li><a href="index.html"><i class="fa fa-home"></i></a></li>
-    <li><a href="cart.html">장바구니</a></li>
+    <li><a href="/"><i class="fa fa-home"></i></a></li>
+    <li><a href="/auction/auction_list">일반 경매</a></li>
   </ul>
   <div class="row">
-    <div id="column-left" class="col-sm-3 hidden-xs column-left" style="display: none;">
-      <div class="column-block">
-        <div class="column-block">
-          <div class="columnblock-title">Categories</div>
-          <div class="category_block">
-            <ul class="box-category treeview-list treeview">
-              <li><a href="#" class="activSub">Desktops</a>
-                <ul>
-                  <li><a href="#">PC</a></li>
-                  <li><a href="#">MAC</a></li>
-                </ul>
-              </li>
-              <li><a href="#" class="activSub">Laptops &amp; Notebooks</a>
-                <ul>
-                  <li><a href="#">Macs</a></li>
-                  <li><a href="#">Windows</a></li>
-                </ul>
-              </li>
-              <li><a href="#" class="activSub">Components</a>
-                <ul>
-                  <li><a href="#">Mice and Trackballs</a></li>
-                  <li><a href="#" class="activSub" >Monitors</a>
-                    <ul>
-                      <li><a href="#"  >test 1</a></li>
-                      <li><a href="#"  >test 2</a></li>
-                    </ul>
-                  </li>
-                  <li><a href="#">Windows</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Tablets</a></li>
-              <li><a href="#">Software</a></li>
-              <li><a href="#">Phones & PDAs</a></li>
-              <li><a href="#">Cameras</a></li>
-              <li><a href="#">MP3 Players</a></li>
-            </ul>
-          </div>
-        </div>
-        <h3 class="productblock-title">Bestsellers</h3>
-        <div class="row bestseller-grid product-grid">
-          <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-grid-item">
-            <div class="product-thumb transition">
-              <div class="image product-imageblock"> <a href="#"> <img src="image/product/2product50x59.jpg" alt="women's clothing" title="women's clothing" class="img-responsive" /> </a>
-                <div class="button-group">
-                  <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
-                  <button type="button" class="addtocart-btn">Add to Cart</button>
-                  <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product"><i class="fa fa-exchange"></i></button>
-                </div>
-              </div>
-              <div class="caption product-detail">
-                <h4 class="product-name"> <a href="product.html" title="women's clothing">Clothing</a> </h4>
-                <p class="price product-price"> <span class="price-new">$254.00</span><span class="price-tax">Ex Tax: $210.00</span> </p>
-              </div>
-              <div class="button-group">
-                <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
-                <button type="button" class="addtocart-btn">Add to Cart</button>
-                <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product"><i class="fa fa-exchange"></i></button>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-grid-item">
-            <div class="product-thumb transition">
-              <div class="image product-imageblock"> <a href="#"> <img src="image/product/3product50x59.jpg" alt="women's clothing" title="women's clothing" class="img-responsive" /> </a>
-                <div class="button-group">
-                  <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
-                  <button type="button" class="addtocart-btn">Add to Cart</button>
-                  <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product"><i class="fa fa-exchange"></i></button>
-                </div>
-              </div>
-              <div class="caption product-detail">
-                <h4 class="product-name"> <a href="product.html" title="women's clothing">Clothing</a> </h4>
-                <p class="price product-price"> <span class="price-new">$254.00</span><span class="price-tax">Ex Tax: $210.00</span> </p>
-              </div>
-              <div class="button-group">
-                <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
-                <button type="button" class="addtocart-btn">Add to Cart</button>
-                <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product"><i class="fa fa-exchange"></i></button>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-grid-item">
-            <div class="product-thumb transition">
-              <div class="image product-imageblock"> <a href="#"> <img src="image/product/4product50x59.jpg" alt="women's clothing" title="women's clothing" class="img-responsive" /> </a>
-                <div class="button-group">
-                  <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
-                  <button type="button" class="addtocart-btn">Add to Cart</button>
-                  <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product"><i class="fa fa-exchange"></i></button>
-                </div>
-              </div>
-              <div class="caption product-detail">
-                <h4 class="product-name"> <a href="product.html" title="women's clothing">Clothing</a> </h4>
-                <p class="price product-price"> <span class="price-new">$254.00</span><span class="price-tax">Ex Tax: $210.00</span> </p>
-              </div>
-              <div class="button-group">
-                <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
-                <button type="button" class="addtocart-btn">Add to Cart</button>
-                <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product"><i class="fa fa-exchange"></i></button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
     <div class="col-sm-9" id="content">
-      <form action="paycomplete" method="post">
-      <h1><strong>경매 상품 </strong></h1>
-      <br>
-      <!-- <form enctype="multipart/form-data" method="post" action="#"> -->
+      <form action="paycomplete" method="post"  style="width: 1200px;">
+      <div class="rt_acution_info">
+      	<strong id="rt_title">실시간 경매 </strong><strong id="rt_no">${rt_result_actionListVO.rt_auction_no}</strong>
+      </div>
         <div class="table-responsive">
-          <table class="table table-bordered" style="width: 1000px;">
+          <table class="table table-bordered" style="width: 1200px;">
             <thead>
               <tr style="background: #ef8829; color: white; font-weight: bold;">
                 <td class="text-center">낙찰번호</td>
@@ -179,36 +76,22 @@
                 <td class="text-center">상품이미지</td>
                 <td class="text-center">상품이름</td>
                 <td class="text-center">단위</td>
-                <td class="text-center">가격</td>
-                <td class="text-center">경매번호</td>
-                <td class="text-center">Total</td>
-                <!-- <td class="text-right"></td> -->
+                <td class="text-center">낙찰가</td>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td class="text-center">${successPay.success_no}</td>
-                <input type="hidden" name="success_no" value="${successPay.success_no}">
-                <td class="text-center">${successPay.auction_group}</td>
-                <td class="text-center"><a href="product.html"><img class="img-thumbnail" title="${successPay.auction_name}" alt="" src="/resources/files/attach/${auction_title_img }" style="width: 100px; height: 100px;"></a></td>
-                <td class="text-center"><a href="product.html">${successPay.auction_name}</a></td>
-                <td class="text-center">${successPay.auction_unit}</td>
-                <td class="text-center">${successPay.tender_price }원</td>
-                <!-- <td class="text-left"><div style="max-width: 200px;" class="input-group btn-block">
-                    <input type="text" class="form-control quantity" size="1" value="1" name="quantity">
-                    <span class="input-group-btn">
-                    <button class="btn btn-primary" title="" data-toggle="tooltip" type="submit" data-original-title="Update"><i class="fa fa-refresh"></i></button>
-                    <button  class="btn btn-danger" title="" data-toggle="tooltip" type="button" data-original-title="Remove"><i class="fa fa-times-circle"></i></button>
-                    </span></div></td> -->
-                    <td class="text-center">${successPay.auction_no}</td>
-                <td class="text-center">${successPay.tender_price }원</td>
-                <input type="hidden" name="price" value="${successPay.tender_price}">
-               <!--  <td class="text-right"></td> -->
+                <td class="text-center">${rt_result_actionListVO.rt_tender_no}</td>
+                <td class="text-center">${rt_result_actionListVO.rt_auction_group}</td>
+                <td class="text-center"><a href="product.html"><img class="img-thumbnail" title="${rt_result_actionListVO.rt_auction_title_img}" alt="" src="/resources/files/attach/${list.rt_auction_title_img }" style="width: 100px; height: 100px;"></a></td>
+                <td class="text-center"><strong id="rt_acution_name"><a href="#">${rt_result_actionListVO.rt_auction_name}</a></strong></td>
+                <td class="text-center">${rt_result_actionListVO.rt_auction_unit}</td>
+                <td class="text-center"><strong id="rt_acution_price">${rt_result_actionListVO.rt_tender_price }</strong><strong id="rt_unit">원</strong></td>
+                <input type="hidden" name="price" value="">
               </tr>
             </tbody>
           </table>
         </div>
-      <!-- </form> -->
       <h2><strong>배송 정보</strong></h2>
       <p style="color: red;">*필수 입력사항입니다.</p>
       

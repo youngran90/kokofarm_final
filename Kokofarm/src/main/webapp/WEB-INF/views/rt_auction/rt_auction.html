@@ -31,10 +31,51 @@ $(document).ready(function(){
 		}
 	});
 	
+/* 새로 고침 막기 */
+
+
+
+$(document).keydown(function (e) {
+    // F5, ctrl + F5, ctrl + r 새로고침 막기
+    var allowPageList   = new Array('/a.php', '/b.php');
+    var bBlockF5Key     = true;
+    for (number in allowPageList) {
+        var regExp = new RegExp('^' + allowPageList[number] + '.*', 'i');
+        if (regExp.test(document.location.pathname)) {
+            bBlockF5Key = false;
+            break;
+        }
+    }
+     
+    if (bBlockF5Key) {
+        if (e.which === 116) {
+            if (typeof event == "object") {
+                event.keyCode = 0;
+            }
+            return false;
+        } else if (e.which === 82 && e.ctrlKey) {
+            return false;
+        }
+    }
+});
+
 //////////////////////////////////////////////////////////////////
 /* Node.Js 소켓 통신 할 구분 */
 
 	var socket = io.connect(); //소켓 연결
+	
+	
+	socket.on('text',function(data){
+		//입장알림
+		var income = "<strong id=income>&nbsp;"+data.nickname+" 님 입장하셨습니다.</strong><br>";
+		$("#chat_area").append(income);
+		
+		if($('#area').prop('scrollHeight') > $('#area').height()){
+			 $('#area').scrollTop($('#area').prop('scrollHeight'));
+		}
+		//유저 리스트 업데이트
+		userUpdate(data.userList);
+	});
 	
 	$("#chat_text").focus(); // 채팅 입력창으로 포커스 지정
 	
@@ -63,24 +104,16 @@ $(document).ready(function(){
 		userUpdate(data);
 	});
 	
-	socket.on('text',function(data){
-		//입장알림
-		var income = "<strong id=income>&nbsp;"+data.nickname+" 님 입장하셨습니다.</strong><br>";
-		$("#chat_area").append(income);
-		if($('#area').prop('scrollHeight') > $('#area').height()){
-			 $('#area').scrollTop($('#area').prop('scrollHeight'));
-		}
-		//유저 리스트 업데이트
-		userUpdate(data.userList);
-	});
 	
 	//퇴장시 알림
 	socket.on('exit',function(data){
 		var out = "<strong id=out>&nbsp;"+data.msg+"</strong><br>";
 		$("#chat_area").append(out);
+		
 		if($('#area').prop('scrollHeight') > $('#area').height()){
 			 $('#area').scrollTop($('#area').prop('scrollHeight'));
 		}
+		
 	});
 	
 	/* 엔터키 입력 & 입력버튼 클릭 */
@@ -208,7 +241,8 @@ $(document).ready(function(){
 					"낙찰자 : " + data.id + "\n"+
 					"낙찰 금액 : " + data.price + "\n"+
 					"낙찰 시간 : " + data.date + "\n" +
-					"확인을 누르시면 메인으로 이동합니다."
+					"바로 결제를 원하시면 확인을 눌러주시고 \n"+ 
+					"아닐경우에는 취소를 눌러 메인으로 이동하세요."
 					);
 			if(check){
 				$.ajax({
@@ -221,11 +255,12 @@ $(document).ready(function(){
 						date : data.date
 					},
 					dataType : 'text',
-					success: function(data){
-						console.log(data);
+					success: function(){
 					}
 				});
-				$(location).attr("href", "http://localhost:8081/rt_auction/rt_auctionpay");
+				$(location).attr("href", "http://localhost:8081/rt_auction/rt_auctionpay?rt_acution_no="+data.no);
+			}else{
+				$(location).attr("href", "http://localhost:8081/");
 			}
 		});
 		
@@ -386,6 +421,20 @@ $(document).ready(function(){
 		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 	}
 	
+	
+	// 입찰중인 사람이 나가기 버튼을 눌렀을때 팅겨내기
+	$("#tender_exit").on('click',function(e){
+		e.preventDefault();
+		var name = $("#tender_name").text();
+		var id = $("#id").val();
+		if( name == id ){
+			alert("현재 입찰 중이셔서 퇴장하실 수 없습니다.");
+		}else{
+			history.go(-1);
+		}
+	});
+	
+	
 ///////////////////////////////////////////////////////
 /* 이미지 슬라이드 */	
 	var time = 500;
@@ -425,11 +474,12 @@ $(document).ready(function(){
 });
 </script>
 </head>
-<body>
-<audio controls>
-	<source src="/mp3.01" type="audio/mp3"><!-- 트와이스 시그널  -->
-	<!-- <source src="/mp3.02" type="audio/mp3">싸이 뉴페이스  -->
+<body oncontextmenu="return false"> <!-- 마우스 오른쪽 새로고침 방지 -->
+<!-- <audio controls>
+	<source src="/mp3.01" type="audio/mp3">트와이스 시그널 
+	<source src="/mp3.02" type="audio/mp3">싸이 뉴페이스 
 </audio>
+ -->
 <form id="rt_acution_finish" method="POST" style="display: none;">
 	<input type="text" id="r_no" value="">
 	<input type="text" id="r_id" value="">
@@ -508,6 +558,7 @@ $(document).ready(function(){
 						<button id="10000" value="10000">10,000</button>
 						<input type="text" id=rt_tender>
 						<button id="tender_btn">입찰</button>
+						<a id="tender_exit">나가기</a>
 					</div>
 				</div>
 		</div>

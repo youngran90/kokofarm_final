@@ -18,8 +18,19 @@
 		) values (
 			#{rt_tender_no},#{member_id},#{rt_tender_price},#{rt_tender_date},#{rt_auction_no}
 		)
-		
 	</insert>
+	
+	<select id="resultList" resultType="RtResultAuctionListVO">
+		select rt.rt_tender_no, ra.rt_auction_group, ra.rt_auction_title_img, ra.rt_auction_name, ra.rt_auction_unit, rt.rt_tender_price, rt.rt_auction_no
+		from rt_auction ra, rt_tender rt
+		where ra.rt_auction_no = rt.rt_auction_no
+		and rt.rt_auction_no = #{rt_auction_no}
+	</select>
+	
+	<select id="member_info" resultType="MemberVO">
+		select * from member where member_id = #{member_id}
+	</select>
+	
 </mapper>
 
 

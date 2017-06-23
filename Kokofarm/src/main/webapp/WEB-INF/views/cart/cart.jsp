@@ -155,12 +155,12 @@
             <tbody>
 		<form enctype="multipart/form-data" method="post" action="/cart/orderproduct" id="cartForm">
         <c:forEach var="cart_list" items="${listcart }" varStatus="status">
-           <td style="display: none;"><em class="${status.count}p_amount" id="p_amount">${cart_list.product_total}</em></td>
-           <td style="display: none;"><input type="checkbox" id="dp" name="order_delivery_price" value="0" class="${status.count }dp"></td> <!-- 배송비 값 submit -->
+           <td style="display: none;"><em class="${status.count}p_amount" id="p_amount">${cart_list.product_total}</em></td><!-- 재고 -->
+		   <td style="display: none;"><input type="checkbox" id="dp" name="order_delivery_price" value="0" class="${status.count }dp"></td> <!-- 배송비 값 submit -->
            <td style="display: none;"><input type="checkbox" id="tp" name="order_total_price" value="0" class="${status.count }tp"></td> <!-- 금액 값 submit -->
-           <td style="display: none;"><input type="checkbox" class="${status.count}opa" id="order_product_amount" name="order_product_amount" value="${cart_list.product_unit }" ></td>
+		   <td style="display: none;"><input type="checkbox" class="${status.count}opa" id="order_product_amount" name="order_product_amount" value="${cart_list.product_unit }" ></td>
            <td style="display: none;"><input type="checkbox" id="pn" name="order_product_name" value="${cart_list.product_name}" class="${status.count}pn"></td> <!-- 품명 submit -->   
-           <td style="display: none;"><input type="checkbox" id="pp" name="order_product_price" value="${cart_list.product_price}" class="${status.count}pp"></td> <!-- 품명 submit -->
+		   <td style="display: none;"><input type="checkbox" id="pp" name="order_product_price" value="${cart_list.product_price}" class="${status.count}pp"></td> <!-- 품명 submit -->
               <tr>
               	<td class="text-center">
               		<input type="checkbox" id="${status.count }ac" name="product_no" value ="${cart_list.product_no }">
@@ -181,7 +181,7 @@
                 			<input type="text" class="${status.count}pa" id="product_amount" name="product_amount" value="${cart_list.product_unit }" size="2" min="1" max="0" style="text-align: center;">
                 		</div>
                 		<div class="cnt_box">
-	                		<div class="cnt_top_box">
+	                		<div cl	ass="cnt_top_box">
 	                			<button class="amount_up" type="button" value="${status.count}bu" id="${status.count}bu"></button>
 	                		</div>
 	                		<div class="cnt_down_box">
@@ -210,7 +210,7 @@
       </div>
       
       <div class="buttons">
-        <div class="pull-right"><a class="btn btn-primary" href="#">결제하기</a></div>
+        <div class="pull-right"><a class="btn btn-primary" href="#" id="btn_sub">결제하기</a></div>
       </div>
       
     <section class="info_section">

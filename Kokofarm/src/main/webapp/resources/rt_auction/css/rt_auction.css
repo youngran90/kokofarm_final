@@ -214,18 +214,31 @@
 	position : relative;
 	top : 15px;
 	margin-right: 60px;
-	padding: 10px 40px; 
-  	font-size: 20px;
+	padding: 10px 30px; 
+  	font-size: 15px;
   	background-color: #7fb1bf;
   	border-radius: 5px;
 }
 #auction_box input{
 	position : relative;
 	top : 12px;
-	margin-right: 25px;
+	margin-right: 10px;
 	height: 48px;
 	border-radius: 5px;
 }
+
+#auction_box a{
+	color: white;
+	position : relative;
+	top : 15px;
+	margin-right: 30px;
+	padding: 10px 30px; 
+  	font-size: 15px;
+  	background-color: #7fb1bf;
+  	border-radius: 5px;
+  	text-decoration: none;
+}
+
 #income{
 	color: green;
 }

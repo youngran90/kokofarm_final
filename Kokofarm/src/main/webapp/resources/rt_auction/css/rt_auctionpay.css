@@ -1,5 +1,30 @@
 @CHARSET "UTF-8";
 
+.rt_acution_info {
+	margin: 10px 0px;
+}
+#rt_title {
+	font-size: 13px;
+}
+#rt_no{
+	font-size: 18px;
+	color: #38a9a5;
+}
+#rt_acution_name{
+	font-size: 15px;
+	font-weight: bold;
+}
+#rt_acution_price{
+	font-size: 25px;
+	font-weight: bold;
+	color: #38a9a5;
+	margin-right: 3px;
+}
+#rt_unit{
+	font-size: 15px;
+	font-weight: bold;
+}
+
 #top_img_box {
 	height: 100px;
 	padding-bottom: 50px;
@@ -21,27 +46,23 @@
 }
 
 .product_price {
-	font-size: 13px;
+	font-size: 20px;
 	font-weight: bold;
 }
 
 .total_price {
-	font-size : 18px;
-	font-weight : bold;
 	color: #38a9a5;
-	
 }
 
 .result_info_box {
 	padding: 25px 0px;
-	width: 1160px;
 }
 
 .inbox {
 	background-image:
 		url("/../../resources/orderproduct/image/ord1_amout_bg.gif");
 	background-repeat: no-repeat;
-	background-size: 1160px 130px;
+	background-size: 940px 130px;
 	height: 130px;
 }
 
@@ -72,7 +93,7 @@
 .order_info02 h4 {
 	font-size: 20px;
 	border-top: 2px solid #e2704b;
-	padding: 10px;
+	padding: 15px;
 	margin: 0px;
 }
 
@@ -123,6 +144,7 @@
 
 .caption_info {
 	height: 35px;
+	margin-top: 10px;
 }
 
 .caption_info p {
@@ -172,12 +194,14 @@ select {
 .point_box {
 	height: 150px;
 	width: 200px;
+	/* border: 1px solid red; */
 	float: left;
 	padding: 10px;
-	margin: 0px 35px 0px 35px;
+	margin: 0px 35px 0px 15px;
 }
 
 .pay_list {
+	/* border: 1px solid blue; */
 	height: 150px;
 	width: 650px;
 	float: left;
@@ -185,43 +209,6 @@ select {
 	margin-bottom: 30px;
 }
 
-.point_info {
-	padding: 5px;
-}
-
-.point_check {
-	float: right;
-}
-
-.point_result {
-	padding: 5px;
-	clear: both;
-}
-
-.point_box span {
-	font-weight: bold;
-	color: #38a9a5;
-	clear: both;
-}
-
-.current_point {
-	padding-right: 40px;
-}
-
-.point_use {
-	clear: both;
-	padding: 5px;
-}
-
-#use {
-	padding-left: 30px;
-	text-align: right;
-}
-
-.use_btn {
-	padding: 5px;
-	float: right;
-}
 /* @@@@ Step2 결제 방법 사용 @@@@ */
 .creditcard_info03 p {
 	font-size: 10px;
@@ -246,8 +233,10 @@ select {
 }
 
 .pay_info {
+	/* border: 1px solid green; */
 	height: 90px;
 	padding-top: 10px;
+	margin-top: 10px;
 }
 
 .img-thumbnail {
@@ -258,18 +247,19 @@ select {
 .point_box {
 	height: 150px;
 	width: 200px;
+	/* border: 1px solid red; */
 	float: left;
 	padding: 10px;
 	margin: 0px 35px 0px 15px;
 }
 
 .pay_list {
+	/* border: 1px solid blue; */
 	height: 150px;
 	width: 650px;
 	float: left;
 	padding: 10px;
 	margin-bottom: 30px;
-	margin-left: 50px;
 }
 
 .kakaopay_info01 p {
@@ -304,81 +294,55 @@ select {
 	color: #e2704b;
 }
 
-.result_box {
-	background-image: url("/resources/orderproduct/image/ord2_amout_bg.jpg");
-	background-repeat: no-repeat;
-	background-size: 1125px 130px;
-	height: 130px;
+#paycompletemessage {
+	/* margin-left: 500px; */
+	margin-top: 150px;
+}
+
+#paycompletePdiv {
+	margin-left: 500px;
 	margin-bottom: 30px;
 }
 
-.result_box div {
-	float: left;
-	text-align: center;
-	font-size: 24px;
-	width: 33.3%;
-	padding-top: 64px;
+#paycompleteP {
+	font-size: 40px;
+	color: #ef8829;
+	font-weight: bold;
 }
 
-.result_box em {
-	font-size: 30px;
-	vertical-align: middle;
+#paycompleteLabel {
+	margin-left: 550px;
+	margin-bottom: 30px;
 }
 
-.result_box b {
-	margin-left: 10px;
-	font-size: 30px;
-	vertical-align: middle;
+#buttonDiv {
+	margin-left: 750px;
 }
 
-.order_result_price_total {
-	color: #38a9a5;
-}
-
-.use_btn span {
-	padding-left: 20px;
-	padding-right: 20px;
-}
-
-/* 결제 완료 페이지 CSS */
-.finish_area img {
-	height: 300px;
-	width: 800px;
-}
-
-.home {
-	height: 60px;
-	width: 220px;
-	float: left;
-	margin-right: 20px;
-	background-color: #e2704b;
-}
-
-.shopping {
-	margin-left: 20px;
-	height: 60px;
-	width: 220px;
-	float: left;
-	background-color: #e2704b;
-}
-
-#home p {
-	font-size: 24px;
+#okButton {
+	background: #ef8829;
 	color: white;
-	margin-top: 20px;
-	text-align: center;
+	font-weight: bold;
+	width: 120px;
+	height: 40px;
+	float: left;
 }
 
-#shopping p {
-	text-align: center;
-	font-size: 24px;
-	color: white;
-	margin-top: 20px;
+#payinfoButton {
+	margin-left: 6px;
+	background: white;
+	color: black;
+	width: 120px;
+	height: 40px;
 }
 
-/* 재고 수량 0일경우 삭제 버튼 나오게 */
-input[name=delete] {
-	width: 20px;
-	height: 20px;
-	background: url("/resources/cart/image/btn_cart_del.gif") no-repeat;
+#tendercompleteDiv {
+	/* margin-left: 1500px; */
+	margin-top: 150px;
+	font-size: 20px;
+}
+
+#firstP {
+	/* margin-left: 100; */
+	
 }

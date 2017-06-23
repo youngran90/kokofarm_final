@@ -1,11 +1,10 @@
-//모듈 추출
+	//모듈 추출
 var express = require('express');
 var app = express();
 var http = require('http');
 var fs = require('fs');
 var socketio = require('socket.io');
 var path = require('path');
-
 
 // 웹 서버 만듦
 var server = http.createServer(app);
@@ -22,35 +21,6 @@ var unit;
 var content;
 var area;
 var rt_auction_no;
-
-app.get('/mp3.01',function (req,res){     
-    var filename = 'TWICE-SIGNAL.mp3';
-    var dir = 'C:\\Users\\김Jason\\git\\kokofarm_final\\Kokofarm\\src\\main\\webapp\\resources\\rt_auction\\mp3\\'+filename;
-    fs.exists(dir, function (exists) {
-        if (exists) {
-            fs.readFile(dir, function (err,data){
-                res.end(data);
-            });
-        } else {
-            res.end('file is not exists');
-        }
-    })
-});
-
-app.get('/mp3.02',function (req,res){     
-    var filename = 'PSY-NewFace.mp3';
-    var dir = 'C:\\Users\\김Jason\\git\\kokofarm_final\\Kokofarm\\src\\main\\webapp\\resources\\rt_auction\\mp3\\'+filename;
-    fs.exists(dir, function (exists) {
-        if (exists) {
-            fs.readFile(dir, function (err,data){
-                res.end(data);
-            });
-        } else {
-            res.end('file is not exists');
-        }
-    })
-});
-
 
 app.get('/rt_auction',function (req,res){     
     var filename = 'rt_auction.css';
@@ -134,15 +104,6 @@ app.get('/img02',function (req,res){
     })
 });
 
-/*app.get('/img01', function(request, response) {
-	fs.readFile(img01, function(error, data) {
-		response.writeHead(200, {
-			'content-type' : 'text/html'
-		});
-		response.end(data);
-	});
-});*/
-
 app.get('/', function(request, response) {
 	member_id = request.param("member_id");
 	product_n = request.param("name");
@@ -159,10 +120,10 @@ app.get('/', function(request, response) {
 });
 
 var m = 0; //경매 대기 시간 카운트 (분)
-var s = 30;  //경매 대기 시간 카운트 (초)
+var s = 10;  //경매 대기 시간 카운트 (초)
 
 var minute = 0 //경매 진행 시간 카운트 (분)
-var second = 30;//경매 진행 시간 카운트 (초)
+var second = 10;//경매 진행 시간 카운트 (초)
 
 var wait = setInterval(function(){ //setInterval 일정시간마다 반복 실행하는 함수
 	if(m == 0 && s == 0 ){
@@ -208,7 +169,6 @@ io.sockets.on('connection', function(socket) {
 	
 	socketList[nickname] = socket.id;
 	socket.member_id = member_id;
-
 	
 	// 경매 관련 정보를 넘긴다.
 	io.sockets.emit('info',{ 
@@ -228,10 +188,14 @@ io.sockets.on('connection', function(socket) {
 	
 	//이미 접속한 유저면 .... 중단
 	var count = 0;
-		
-	 //접속한 유저를 배열에 저장한다.
+	
+	 //접속한 1유저를 배열에 저장한다.
 	if(userList.length == 0){
 		userList.push(nickname);
+		io.sockets.emit('text',{
+			nickname : nickname,
+			userList : userList
+		});
 	}else{
 		Loop: for(var i=0; i<userList.length; i++){
 			if(nickname == userList[i]){
@@ -241,13 +205,13 @@ io.sockets.on('connection', function(socket) {
 		}
 		if(count == 0){
 			userList.push(nickname);
+			io.sockets.emit('text',{
+				nickname : nickname,
+				userList : userList
+			});
 		}
 	}
 	
-	io.sockets.emit('text',{
-		nickname : nickname,
-		userList : userList
-	});
 		
 	//메세지 전달 이벤트
 	socket.on('send',function(data){ //클리이언트에서 보낸 메세지를 받고
@@ -265,6 +229,7 @@ io.sockets.on('connection', function(socket) {
 	        deleteUser();
 	       }
 	});
+	
 	
 	 var deleteUser  = function(){
 	        for (var i in userList) {
@@ -327,16 +292,10 @@ io.sockets.on('connection', function(socket) {
 	 // 낙찰금액
 	 // 경매 종료시간
 	 socket.on('finish',function(data){
+		 
 		 if(data.id == nickname){
 			 io.sockets.sockets[socketList[data.id]].emit("finish",data);
 		 }
-		 
-		 /*for(var i=0; i<userList.length; i++){
-			 if(data.id = userList[i]){
-			    io.sockets.connected[socketList[data.id]].emit("finish",data);			 
-			 }
-			 break;
-		 }*/
 	 });
 	 
 	 // 경매 대기 시간 카운터
@@ -354,13 +313,10 @@ io.sockets.on('connection', function(socket) {
 		 				s : second
 		 			});
 		 		 	if(minute == 0 && second == 0 ){
-		 		 	//	console.log(nickname+" : "+total);
-		 		    //console.log(hap_1000+hap_5000+hap_10000+input_hap);
-		 		 		clearInterval(timer); //타이머 종료
-		 		 		
 		 		 		socket.emit("end",{
-		 		 			msg : "경매가 종료 되었습니다."
+				 			msg : "경매가 종료 되었습니다."
 		 		 		});
+		 		 		clearInterval(timer); //타이머 종료
 		 		 	}
 		 		 }, 1000); //1초단위로 변동
 		 		
@@ -372,3 +328,90 @@ io.sockets.on('connection', function(socket) {
 	 
 	 
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 
+
+음악파일 가져오는 코드
+app.get('/mp3.01',function (req,res){     
+    var filename = 'TWICE-SIGNAL.mp3';
+    var dir = 'C:\\Users\\김Jason\\git\\kokofarm_final\\Kokofarm\\src\\main\\webapp\\resources\\rt_auction\\mp3\\'+filename;
+    fs.exists(dir, function (exists) {
+        if (exists) {
+            fs.readFile(dir, function (err,data){
+                res.end(data);
+            });
+        } else {
+            res.end('file is not exists');
+        }
+    })
+});
+
+app.get('/mp3.02',function (req,res){     
+    var filename = 'PSY-NewFace.mp3';
+    var dir = 'C:\\Users\\김Jason\\git\\kokofarm_final\\Kokofarm\\src\\main\\webapp\\resources\\rt_auction\\mp3\\'+filename;
+    fs.exists(dir, function (exists) {
+        if (exists) {
+            fs.readFile(dir, function (err,data){
+                res.end(data);
+            });
+        } else {
+            res.end('file is not exists');
+        }
+    })
+});
+
+자체 디렉토리에 있는 파일 불러오는 코드
+app.get('/img01', function(request, response) {
+	fs.readFile(img01, function(error, data) {
+		response.writeHead(200, {
+			'content-type' : 'text/html'
+		});
+		response.end(data);
+	});
+});
+*/
