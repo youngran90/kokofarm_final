@@ -1,132 +1,119 @@
 @CHARSET "UTF-8";
 
+/* 상단 이미지 */
+#top_img_box {
+	height: auto;
+	padding-bottom: 15px;
+}
+
+/* 경매 번호 안내 구역  */
 .rt_acution_info {
-	margin: 10px 0px;
+	margin: 20px 0px;
 }
+
 #rt_title {
-	font-size: 13px;
+	font-size: 14px;
+	margin-right: 10px;
 }
-#rt_no{
+
+#rt_no {
 	font-size: 18px;
 	color: #38a9a5;
 }
-#rt_acution_name{
+
+/* 테이블 경매 품목 이름 & 가격 정보 */
+#rt_acution_name {
 	font-size: 15px;
 	font-weight: bold;
 }
-#rt_acution_price{
+
+#rt_acution_price01{
 	font-size: 25px;
 	font-weight: bold;
 	color: #38a9a5;
 	margin-right: 3px;
 }
-#rt_unit{
+
+#rt_unit {
 	font-size: 15px;
 	font-weight: bold;
-}
-
-#top_img_box {
-	height: 100px;
-	padding-bottom: 50px;
-}
-
-.op_title {
-	padding-bottom: 15px;
-}
-
-.op_title h3 {
-	font-size: 18px;
-	font-family: YG76;
-	text-indent: 4px;
-	color: #352f29;
 }
 
 .table-bordered b {
 	padding-left: 10px;
 }
 
-.product_price {
-	font-size: 20px;
-	font-weight: bold;
-}
-
-.total_price {
-	color: #38a9a5;
-}
-
-.result_info_box {
-	padding: 25px 0px;
-}
-
-.inbox {
-	background-image:
-		url("/../../resources/orderproduct/image/ord1_amout_bg.gif");
-	background-repeat: no-repeat;
-	background-size: 940px 130px;
-	height: 130px;
-}
-
-.inbox div {
-	float: left;
-	text-align: center;
-	font-size: 24px;
-	width: 33.3%;
-	padding-top: 64px;
-}
-
-.inbox em {
-	font-size: 30px;
-	vertical-align: middle;
-}
-
-.inbox b {
-	margin-left: 10px;
-	font-size: 30px;
-	vertical-align: middle;
-}
-
-.result_total {
-	color: #38a9a5;
+/* 주무내역 토글 탭 */
+.accordion-toggle {
+	margin-left: 60px;
 }
 
 /* @@@@ Step1 배송 고객 정보 @@@@ */
-.order_info02 h4 {
-	font-size: 20px;
+
+#necessary{
+	color: red;
+	margin: 5px;
+	font-size: 10px;
+}
+
+/* 01 배송 정보 / 결제 소제목 */
+.order_info01 {
 	border-top: 2px solid #e2704b;
-	padding: 15px;
-	margin: 0px;
+	margin: 10px 0px;
+	padding-top: 20px;
+}
+
+.order_info01 strong {
+	font-size: 20px;
+	padding-left: 60px;
+}
+
+/* 02 받으시는분 / 주소지 체크 라디오 버튼*/
+.recipient_customer01 {
+	height: 40px;
+	margin: 20px 0px 10px 0px;
+	padding-top: 10px;
 }
 
 .recipient_name {
 	padding-right: 48px;
+	padding-left: 60px;
 }
 
 .rd_label01 {
-	padding-left: 40px;
+	padding-left: 50px;
 }
 
 .rd_label02 {
 	padding-left: 40px;
 }
 
+/* 03 휴대폰 정보*/
+.recipient_customer02 {
+	height: 45px;
+	margin: 10px 0px;
+	padding-top: 10px;
+}
+
 .recipient_monile {
 	padding-right: 78px;
+	padding-left: 60px;
 }
 
 .recipient_phone {
 	padding: 0px 35px;
 }
 
-.recipient_customer01 {
-	height: 40px;
-}
-
-.recipient_customer02 {
-	height: 45px;
+/* 04 주소지 정보*/
+.recipient_customer03 {
+	height: 205px;
+	margin: 10px 0px;
+	padding-top: 10px;
 }
 
 .recipient_addr {
 	padding-right: 78px;
+	padding-left: 60px;
 }
 
 .recipientpost {
@@ -134,24 +121,24 @@
 }
 
 .post_addr {
-	height: 40px
+	height: 40px;
 }
 
 .sub_addr {
-	margin-left: 125px;
+	margin-left: 200px;
 	height: 40px;
 }
 
 .caption_info {
-	height: 35px;
-	margin-top: 10px;
+	height: auto;
 }
 
 .caption_info p {
-	text-align: center;
 	vertical-align: bottom;
-	padding: 4px;
 	font-size: 10px;
+	position: relative;
+	left: 200px;
+	margin: 0px;
 }
 
 .delivery_msg01 {
@@ -160,19 +147,22 @@
 
 .msg_box {
 	padding-right: 51px;
+	padding-left: 75px;
 }
 
 .comment {
 	width: 750px;
 	height: 75px;
 	resize: none;
+	margin-left: 2px;
 }
 
+/* @@@@ Step2 결제 구역 @@@@ */
+/* 01 경제 방법 리스트 */
 select {
 	width: 70px;
 }
 
-/* @@@@ Step2 마일리지 사용 @@@@ */
 .pays {
 	display: inline-block;
 	list-style: none;
@@ -189,24 +179,6 @@ select {
 
 .pays li img {
 	padding-left: 10px;
-}
-
-.point_box {
-	height: 150px;
-	width: 200px;
-	/* border: 1px solid red; */
-	float: left;
-	padding: 10px;
-	margin: 0px 35px 0px 15px;
-}
-
-.pay_list {
-	/* border: 1px solid blue; */
-	height: 150px;
-	width: 650px;
-	float: left;
-	padding: 10px;
-	margin-bottom: 30px;
 }
 
 /* @@@@ Step2 결제 방법 사용 @@@@ */
@@ -233,10 +205,10 @@ select {
 }
 
 .pay_info {
-	/* border: 1px solid green; */
 	height: 90px;
 	padding-top: 10px;
 	margin-top: 10px;
+	float: left;
 }
 
 .img-thumbnail {
@@ -244,22 +216,15 @@ select {
 	height: 98px;
 }
 
-.point_box {
-	height: 150px;
-	width: 200px;
-	/* border: 1px solid red; */
-	float: left;
-	padding: 10px;
-	margin: 0px 35px 0px 15px;
-}
-
 .pay_list {
-	/* border: 1px solid blue; */
 	height: 150px;
-	width: 650px;
-	float: left;
+	width: 850px;
 	padding: 10px;
 	margin-bottom: 30px;
+	margin-left: 150px;
+	position: relative;
+	left: 31px;
+	float: left;
 }
 
 .kakaopay_info01 p {
@@ -294,55 +259,33 @@ select {
 	color: #e2704b;
 }
 
-#paycompletemessage {
-	/* margin-left: 500px; */
-	margin-top: 150px;
+#price_info {
+	float: right;
 }
 
-#paycompletePdiv {
-	margin-left: 500px;
-	margin-bottom: 30px;
+.buttons {
+	clear: both;
 }
 
-#paycompleteP {
-	font-size: 40px;
-	color: #ef8829;
-	font-weight: bold;
-}
-
-#paycompleteLabel {
-	margin-left: 550px;
-	margin-bottom: 30px;
-}
-
-#buttonDiv {
-	margin-left: 750px;
-}
-
-#okButton {
+#submitPay {
+	padding: 13px 26px;
+	font-size: 13px;
+	width: 180px;
+	height: 44px;
+	color: #ffffff;
 	background: #ef8829;
-	color: white;
-	font-weight: bold;
-	width: 120px;
-	height: 40px;
-	float: left;
+	border: none;
 }
 
-#payinfoButton {
-	margin-left: 6px;
-	background: white;
-	color: black;
-	width: 120px;
-	height: 40px;
-}
-
-#tendercompleteDiv {
-	/* margin-left: 1500px; */
-	margin-top: 150px;
+#rt_acution_price02{
 	font-size: 20px;
+	font-weight: bold;
+	color: #38a9a5;
+	margin-right: 3px;
 }
-
-#firstP {
-	/* margin-left: 100; */
-	
+#rt_acution_price03{
+	font-size: 20px;
+	font-weight: bold;
+	color: #38a9a5;
+	margin-right: 3px;
 }

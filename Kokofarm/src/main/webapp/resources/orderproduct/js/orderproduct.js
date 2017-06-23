@@ -16,6 +16,7 @@ $(function() {
 	}) // 은행 이름
 	
 	var db_id = $("select[name=mobileReceiver1]").attr("id");
+	
 	$("#button-confirm").on('click', function() {
 		var payments = $("input[name=pay]:checked").val();// 결제방법
 		

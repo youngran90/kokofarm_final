@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import kokofarm.member.domain.MemberVO;
+import kokofarm.rtauction.domain.RtAcutionFinishVO;
 import kokofarm.rtauction.domain.RtAuctionInfoVO;
 import kokofarm.rtauction.domain.RtResultAuctionListVO;
 import kokofarm.rtauction.domain.RtResultAuctionVO;
@@ -29,7 +30,8 @@ public class RtAuctionController {
 	private RtAuctionService service;
 	
 	@RequestMapping(value="/rt_auction",method=RequestMethod.GET)
-	public String rt_actionGet(HttpServletRequest request, Model model)throws Exception{
+	public String rt_actionGet(@RequestParam("rt_auction_no") String rt_auction_no,
+			HttpServletRequest request, Model model)throws Exception{
 		
 		HttpSession session = request.getSession();
 		MemberVO member = (MemberVO)session.getAttribute("login");
@@ -40,7 +42,7 @@ public class RtAuctionController {
 		}
 		
 		
-		RtAuctionInfoVO vo = service.rtauction_info("RT_Auction_bff703e9e7f449cead2ad6f1d52ed6e4");
+		RtAuctionInfoVO vo = service.rtauction_info(rt_auction_no);
 		String name = vo.getRt_auction_name();
 		int down = vo.getRt_auction_down();
 		String unit = vo.getRt_auction_unit();
@@ -50,7 +52,7 @@ public class RtAuctionController {
 		String content = vo.getRt_auction_content();
 		String area = vo.getRt_auction_area();
 		String seller_no = vo.getSeller_no();
-		String rt_auction_no = vo.getRt_auction_no();
+		//String rt_auction_no = vo.getRt_auction_no();
 		
 		model.addAttribute("member_id", member.getMember_id());
 		model.addAttribute("name", name);
@@ -111,11 +113,31 @@ public class RtAuctionController {
 		MemberVO member = (MemberVO)session.getAttribute("login");
 		
 		RtResultAuctionListVO rt_result_actionListVO = service.resultList("RT_Auction_bff703e9e7f449cead2ad6f1d52ed6e4");
+			
+		MemberVO memberVO = service.member_info(member.getMember_id());
+		
+		String phoneNum = memberVO.getMember_phoneNum();
+		
+		String phone0 = phoneNum.substring(0,3);
+		String phone1 = phoneNum.substring(3, 7);
+		String phone2 = phoneNum.substring(7, 11);
+		
+		model.addAttribute("phone0", phone0);
+		model.addAttribute("phone1", phone1);
+		model.addAttribute("phone2", phone2);
+		
 		
 		model.addAttribute("rt_result_actionListVO",rt_result_actionListVO);
-		model.addAttribute("memberVO",member.getMember_id());
+		model.addAttribute("memberVO",memberVO);
 		
 		return "rt_auction/rt_auctionpay";
 		
 	}
+	
+	@RequestMapping(value="/rt_auction", method=RequestMethod.POST)
+	public void rt_auction_finishPost(RtAcutionFinishVO vo) throws Exception{
+		
+		System.out.println(vo.toString());
+	}
+	
 }

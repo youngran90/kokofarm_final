@@ -745,7 +745,7 @@ footer ul li {
 /* breadcrumb */
 .breadcrumb {
 	margin:20px 0;
-	padding: 10px 15px;
+	padding: 10px 0px;
 	background: #F5F5F5;
 }
 .breadcrumb li a {
