@@ -235,19 +235,19 @@ input[name=delete] {
 	background: url("/../../resources/cart/image/btn_cart_del.gif");
 }
 
-.btn-primary {
+/* .btn-primary {
 	width: 208px;
 	height: 54px;
-}
+} */
 
 .buttons {
 	height: 40px;
 }
 
-.btn-primary {
+/* .btn-primary {
 	padding: 23px 46px;
 	font-size: 18px;
-}
+} */
 
 .info_section {
 	margin-top: 20px;

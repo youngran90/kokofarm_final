@@ -210,7 +210,7 @@
       </div>
       
       <div class="buttons">
-        <div class="pull-right"><a class="btn btn-primary" href="#" id="btn_sub">결제하기</a></div>
+        <div class="pull-right"><a class="btn btn-primary" href="#" id="btn_sub" style="width: 208px; height: 54px; padding: 23px 46px; font-size: 18px;">결제하기</a></div>
       </div>
       
     <section class="info_section">
