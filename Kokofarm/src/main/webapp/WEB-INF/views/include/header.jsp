@@ -57,6 +57,18 @@ display: none;!important;
         position: fixed;
         top: 0px;
       }
+      
+      
+.show_price{
+margin : 0px;
+position : relative;
+
+display: inline-block;
+width: 200px;
+height: 20px;
+
+}
+      
 </style>
 
 <script type="text/javascript">
@@ -263,19 +275,19 @@ $( document ).ready( function() {
             <li style="display: none;"><a href="/auction/rt_auction_register" >셀러 실시간 물품 등록</a></li>
             <li style="display: none;"><a href="/mypage/auction_view" >경매</a></li>
             </ul>
-        </li>
-     <!--    <li><a href="blog.html" class="parent"  >Blog</a></li>
-        <li><a href="about-us.html" >About us</a></li>
-        <li><a href="contact.html" >Contact Us</a> </li> -->
-      </ul>
+        </li>       
+        <div class="show_price" >
+			<button type="button"  id="B" onclick="show();" data-loading-text="Loading..." class="btn btn-primary btn-lg btn-block addtocart" >시세현황보기▼</button>
+		</div>        
+         </ul>
+       
+      
     </div>
+   
+      
   </div>
 </nav>
-
-
-<div style=" margin-left: 3%;">
-<button type="button"  id="B" onclick="show();" data-loading-text="Loading..." class="btn btn-primary btn-lg btn-block addtocart" style="margin-left: 75%; " >시세현황보기▼</button>
-	<div id="A" style="display: none;">
+<div id="A" style="display: none;">
 		<div style="display: inline-table;">
           <iframe src="/product/getdate" name=ce width=600 height=190 frameborder=0 style="border-width:0px; border-color:white; border-style:solid;" ></iframe>
           </div>
@@ -284,7 +296,8 @@ $( document ).ready( function() {
           <iframe src="/product/getdate1" name=ce width=600 height=190 frameborder=0 style="border-width:0px; border-color:white; border-style:solid;" ></iframe>
           </div>
         </div>
-    </div>
-          </div>
+
+
+   </div>
 
 

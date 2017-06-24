@@ -1338,15 +1338,16 @@ h2.price {
 ul.main-navigation {
 	display: inline-block;
 	width: 100%;
-	padding: 20px 0;
+	padding: 16px 0;	
 	margin: 0;
+	margin-left : 44px;
 	vertical-align: top;
 	text-align: center;
 }
 .main-navigation li ul {
 	position: absolute;
 	left: 0;
-	top: 38px;
+	top: 36px;
 	padding: 0;
 	background: #6EA22B;
 	z-index: 9;
@@ -1886,7 +1887,7 @@ span.review-count, span.review-edit {
 /* CSS for CMS-Banner Start */
 .cms_banner {
 	display: inline-block;
-	margin-bottom: 15px;
+	margin-bottom: -38px;
 }
 .md2 {
     margin-top: 20px;

@@ -74,14 +74,119 @@
 	cursor: pointer;
 }     
 
+.auctionsale_banner{
+width:1250px;
+height:210px;
+padding-top:10px;
+margin:0 auto 60px;
+ margin-top: 20px;
 
+background: url("/resources/files/attach/Rtauctionbanner.png") no-repeat;
+background-size: 1200px 200px;
+
+}
+
+
+.auction_image{
+    position: relative;
+    left: 612px;
+display : inline-block;
+float :left;
+width: 200px;
+height: 110px;
+}
+
+.right2{
+left : 723px;
+}
+
+.time_count_banner{
+position: relative;
+    top: 117px;
+    left: 99px;
+background : url("/resources/files/attach/bg_main_time.png") no-repeat 50% 50%;
+background-size : 197px 68px;
+display: inline-block;
+margin-left: 113px;
+
+}
+
+.time_count{
+width: 197px;
+height : 49px;
+display: block;
+text-align: center;
+
+}
+
+
+.time_countdown1{
+    position: relative;
+    top: 18px;
+display:inline-block;
+text-align:center;
+font-size:31px;
+font-weight:bold;
+font-family:Tahoma;
+color:#593e35;
+
+}
+
+
+.time_countdown1 div{
+vertical-align:top;
+display:inline-block;
+margin:0 4px;
+}
+
+.auctionsale_banner .time_countdown1 .today-timer1
+{
+margin : 0px;
+width:4px;
+height:22px;
+background:url(../resources/files/attach/time_colon.png) no-repeat left;
+} 
+
+.sp_11{
+    position: relative;
+    top: 3px;
+
+}
+.sp_1{
+margin-left : 30px;
+    font-size: 14px;
+    font-family: Tahoma;
+    font-weight: bold;
+    color: #f0774f;
+}
+
+.sp_2{
+margin-left : 10px;
+   font-size: 14px;
+font-family: YG77;
+   font-weight: bold;
+    color: #fce2b8;
+}
+
+
+
+/* 	.auctionsale_banner .time_end{display:block;text-align:center;font-size:25px;font-family:YG78;color:#593e35;padding-top:6px;}
+	.timesale_banner .ts_item .bot_con .time_end span{font-size:25px;font-family:YG74;}
+	.timesale_banner .ts_item .bot_con.end{display:none;}
+	.timesale_banner .ts_item.off .bot_con{display:none;}
+	.timesale_banner .ts_item.off .bot_con.end{display:block;}
+ */
 
   </style>
    
     <script type="text/javascript">
        $(function(){    	  
-    	   
-    	   
+    	if($('.time_countdown1>div').eq(2).text()=="종료"){
+    		$('.today-timer1').css("display","none");
+    	}
+    		
+    		
+    	
     	   $("button.wishlist").css("display","none");
     	   $("button.compare").css("display","none");
     	   
@@ -126,6 +231,7 @@
  	%>
  	
  	
+ 	
 
  	    
    </script> 
@@ -142,27 +248,80 @@
  	</div>
 </div>
     
+<!-- <script src="/resources/main/countdown.js"> -->
+<script src="/resources/main/countdown2.js">
 
+
+</script>
 <div class="container">
   <div class="row">
   
-    <div class="cms_banner ">
-   		 
-   		  <div class="auctionsale_banner">       			
-      		<a href="#"><img alt="경매 시간배너" src="/resources/files/attach/Rtauctionbanner.png" style="width: 1230px" height="200px">
-      			<div class="as_title_box">
-      			
-      			</div>
-      		</a>
+    <div class="cms_banner">   		 
+   		  <div class="auctionsale_banner"> 
+   		  <div class="auction_image left1">
+   		  	<img alt="" src="/resources/files/attach/banner.jpg" style="width: 200px; height: 100px;">
+   		  
+   		  </div>
+   		  
+   		  			<div class="time_count_banner" >
+   		  				<div class = "sp_11">
+   		  					<span class="sp_1">
+   		  						10시까지
+   		  					</span>
+							<span class="sp_2">
+			   				  	남은시간
+			   				 </span>
+   		  				</div>	
+      		    	<div class="time_count">
+      		    	          <span class="time_countdown1" id="el-countdown-0">
+								<div class="today-timer"></div>
+								<div class="today-timer1"></div>
+								<div class="today-timer">종료</div>
+								<div class="today-timer1"></div>
+								<div class="today-timer"></div>
+							</span>
+				
+							<script type="text/javascript">
+									Countdown.init('2017-06-24 10:57:00', 'el-countdown-0','1111');
+							</script> 
+					</div>						
+				 </div>
+				 
+								
+			<div class="auction_image right2">
+   		  		<img alt="" src="/resources/files/attach/banner.jpg" style="width: 200px; height: 100px;">
+   		  
+   		  </div>					
+									 
+			<div class="time_count_banner" >
+				<div class = "sp_11">
+				
+					<span class="sp_1">
+   		  				22시까지
+   		  			</span>
+					<span class="sp_2">
+			   		  	남은시간
+			   		  </span>
+					</div>
+					<div class="time_count">
+					
+			      			<span class="time_countdown1" id="el-countdown-1">
+			      		
+								<div class="today-timer"></div>
+								<div class="today-timer1"></div>
+								<div class="today-timer">종료</div>
+								<div class="today-timer1"></div>
+								<div class="today-timer"></div>
+							</span>
+				
+							<script type="text/javascript">
+									Countdown.init('2017-06-24 11:00:00', 'el-countdown-1','1111');
+							</script> 
+					</div>
+      		</div>
           
           </div>
-          
-      <!-- <div class="col-md-4 cms-banner-middle-top">
-        <div class="md1"><a href="#"> <img alt="#" src="../../../resources/image/banners/subbanner2.jpg"></a> </div>
-        <div class="md2"><a href="#"> <img alt="#" src="../../../resources/image/banners/subbanner2-1.jpg"></a></div>
-      </div>
-      <div class="col-md-4 cms-banner-right"> <a href="#"><img alt="#" src="../../../resources/image/banners/subbanner3.jpg"></a> </div> -->
-    </div>
+       </div>
   	 <div class="button-group-admin">
   	 	 <button class="addmainslider-btn" type="button" style="right: 0px;">상품 교체 (위)</button>
  	</div>

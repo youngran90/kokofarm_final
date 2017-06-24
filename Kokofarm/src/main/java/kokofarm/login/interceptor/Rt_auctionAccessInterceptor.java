@@ -49,7 +49,10 @@ public class Rt_auctionAccessInterceptor extends HandlerInterceptorAdapter {
 				}
 			}
 			list.add(m_id);
-			System.out.println(list.get(0));
+			for(int i=0;i<list.size();i++){
+				System.out.println(list.get(0));
+			}
+		
 					
 		
 		}

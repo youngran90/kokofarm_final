@@ -56,10 +56,10 @@
 					<beans:ref bean="authInterceptor"/>
 				</interceptor>
 				
-				<!-- <interceptor>
-					<mapping path="/find/id"/>
+				<!--  <interceptor>
+					<mapping path="/rt_auction/rt_auction"/>
 					<beans:ref bean="rt_auctionInterceptor"/>
 				</interceptor> -->
-								
+							
 		</interceptors>
 </beans:beans>
