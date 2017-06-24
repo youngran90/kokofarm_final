@@ -14,15 +14,25 @@ public class PageMaker {
   private boolean prev;
   private boolean next;
   private int lastPage;
-  private int cpage;
+  private int cpage = 1;  //현재페이지
   private int start;
   private int end;
-  private int displayPageNum = 4;
+  private int displayPageNum = 4;  //보여줄 페이지
+  private int perPageNum = 5; //페이지당 보여줄 갯수
   private Criteria cri;
   
+   
   
 
-  public int getCpage() {
+public int getPerPageNum() {
+	return perPageNum;
+}
+
+public void setPerPageNum(int perPageNum) {
+	this.perPageNum = perPageNum;
+}
+
+public int getCpage() {
 	return cpage;
 }
 
@@ -56,7 +66,7 @@ public void setEnd(int end) {
     calcData();
   }
 
-  private void calcData() {
+ /* private void calcData() {
 
     endPage = (int) (Math.ceil(cri.getPage() / (double) displayPageNum) * displayPageNum);
 
@@ -84,8 +94,40 @@ public void setEnd(int end) {
 	this.end = end;
 	
 
-  }
+  }*/
 
+  private void calcData() {
+
+	    endPage = (int) (Math.ceil(getCpage() / (double) displayPageNum) * displayPageNum);
+
+	    startPage = (endPage - displayPageNum) + 1;
+
+	    int tempEndPage = (int) (Math.ceil(totalCount / (double) getPerPageNum()));
+
+	    if (endPage > tempEndPage) {
+	      endPage = tempEndPage;
+	    }
+
+	    prev = startPage == 1 ? false : true;
+
+	    next = endPage * getPerPageNum() >= totalCount ? false : true;
+	    
+	    lastPage = (totalCount / displayPageNum) +1;
+	   
+	    int start = 0;
+		int end = 0;
+		
+		start = displayPageNum * (cpage - 1) + 1; // 시작위치
+		end = (displayPageNum * (cpage - 1)) + displayPageNum;
+		
+		this.start = start;
+		this.end = end;
+
+	  }
+  
+  
+  
+  
   public int getTotalCount() {
     return totalCount;
   }

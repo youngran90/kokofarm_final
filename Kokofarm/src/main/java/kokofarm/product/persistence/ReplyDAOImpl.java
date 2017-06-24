@@ -1,12 +1,15 @@
 package kokofarm.product.persistence;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import kokofarm.product.domain.PagingMaker;
 import kokofarm.product.domain.ReplyVO;
 
 @Repository
@@ -25,8 +28,13 @@ public class ReplyDAOImpl implements ReplyDAO {
 	}
 
 	@Override
-	public List<ReplyVO> list_Po(String product_no) throws Exception {
-		return session.selectList(namespace+".listReply", product_no);
+	public List<ReplyVO> list_Po(String product_no, PagingMaker pagingMaker) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("product_no", product_no);
+		map.put("PagingMaker", pagingMaker);
+		System.out.println("pno : "+ product_no);
+		System.out.println("paging : "+ pagingMaker.toString());
+		return session.selectList(namespace+".listReply", map);
 	}
 
 	@Override

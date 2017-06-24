@@ -25,6 +25,8 @@ public class OrderFinishVO implements Serializable {
 
 	private Timestamp orderfinish_date;
 
+	private String product_mainimage;
+	
 	public OrderFinishVO() {
 	}
 
@@ -32,7 +34,8 @@ public class OrderFinishVO implements Serializable {
 			int orderfinish_product_amount, int orderfinish_product_price, int orderfinish_delivery_price,
 			int orderfinish_total_price, int orderfinish_final_price, String orderfinish_member_id,
 			String orderfinish_member_name, String orderfinish_member_phonenum, String orderfinish_member_homenum,
-			String orderfinish_member_address, String orderfinish_message, Timestamp orderfinish_date) {
+			String orderfinish_member_address, String orderfinish_message, Timestamp orderfinish_date,
+			String product_mainimage) {
 		super();
 		this.orderfinish_no = orderfinish_no;
 		this.orderfinish_product_no = orderfinish_product_no;
@@ -49,6 +52,7 @@ public class OrderFinishVO implements Serializable {
 		this.orderfinish_member_address = orderfinish_member_address;
 		this.orderfinish_message = orderfinish_message;
 		this.orderfinish_date = orderfinish_date;
+		this.product_mainimage = product_mainimage;
 	}
 
 	public String getOrderfinish_no() {
@@ -171,6 +175,14 @@ public class OrderFinishVO implements Serializable {
 		this.orderfinish_date = orderfinish_date;
 	}
 
+	public String getProduct_mainimage() {
+		return product_mainimage;
+	}
+
+	public void setProduct_mainimage(String product_mainimage) {
+		this.product_mainimage = product_mainimage;
+	}
+
 	@Override
 	public String toString() {
 		return "OrderFinishVO [orderfinish_no=" + orderfinish_no + ", orderfinish_product_no=" + orderfinish_product_no
@@ -182,7 +194,7 @@ public class OrderFinishVO implements Serializable {
 				+ orderfinish_member_name + ", orderfinish_member_phonenum=" + orderfinish_member_phonenum
 				+ ", orderfinish_member_homenum=" + orderfinish_member_homenum + ", orderfinish_member_address="
 				+ orderfinish_member_address + ", orderfinish_message=" + orderfinish_message + ", orderfinish_date="
-				+ orderfinish_date + "]";
+				+ orderfinish_date + ", product_mainimage=" + product_mainimage + "]";
 	}
 
 }

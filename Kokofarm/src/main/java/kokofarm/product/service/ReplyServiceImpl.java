@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kokofarm.product.domain.PagingMaker;
 import kokofarm.product.domain.ReplyVO;
 import kokofarm.product.persistence.ProductDAO;
 import kokofarm.product.persistence.ReplyDAO;
@@ -28,8 +29,8 @@ public class ReplyServiceImpl implements ReplyService {
 	}
 
 	@Override
-	public List<ReplyVO> list_Post(String product_no) throws Exception {
-		return dao.list_Po(product_no);
+	public List<ReplyVO> list_Post(String product_no, PagingMaker pagingMaker) throws Exception {
+		return dao.list_Po(product_no, pagingMaker);
 	}
 
 	@Transactional

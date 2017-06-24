@@ -147,7 +147,7 @@ function update_Re() {
 									<input type="hidden" id="inquiry_no" class="inquiry_no" value="${inquiry.inquiry_no}">
 									
 											<tr class="tit_tr user_tit_tr">
-												<td>${status.count}</td>
+												<td>${pageMaker.start + status.index}</td>
 												<c:choose>
 													<c:when test="${inquiry.inquiry_reply eq null}">
 														<td><div class="reply_check comp">대기</div></td>
@@ -182,6 +182,24 @@ function update_Re() {
 									</c:forEach>
 								</tbody>
 							</table>
+							<div class="category-page-wrapper">
+        <div class="pagination-in" style="margin-left: 40%">
+         <ul class="pagination" >
+			<li><a href="/mypage/list_Inquiry?page1=${pageMaker.startPage}">처음</a></li>
+			<c:if test="${pageMaker.prev}">
+				<li><a href="/mypage/list_Inquiry${pageMaker.makeQuery(pageMaker.startPage - 1) }">&laquo;</a></li>
+			</c:if>
+			<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.lastPage}" var="idx">
+				 <li <c:out value="${pageMaker.page == idx?'class =active':''}"/>>
+					 <a href="/mypage/list_Inquiry?page1=${idx}">${idx}</a>
+				</li>
+			</c:forEach>
+				<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+					<li><a href="/mypage/list_Inquiry${pageMaker.makeQuery(pageMaker.endPage +1) }">&raquo;</a></li>
+				</c:if>
+				<li><a href="/mypage/list_Inquiry?page1=${pageMaker.endPage}">마지막</a></li></ul>
+        </div>
+      </div>
 	
 	
 							<!-- 판매자용 -->
@@ -212,7 +230,7 @@ function update_Re() {
 										<c:forEach var="inquiry_s" items="${inquirylist_s}" varStatus="status">
 											<tr  class="tit_tr user_tit_tr">
 											<c:set var="index" value="1"></c:set>
-												<td>${status.count}</td>
+												<td>${pageMaker_s.start + status.index}</td>
 												<c:choose>
 													<c:when test="${inquiry_s.inquiry_reply eq null}">
 														<td><a class="reply_check comp">대기</a></td>
@@ -250,6 +268,34 @@ function update_Re() {
 								</table>
 							</c:if>
 						</div>
+	<div class="category-page-wrapper">
+        <div class="pagination-in" style="margin-left: 40%">
+         <ul class="pagination" >
+			<li><a href="/mypage/list_Inquiry${pageMaker_s.makeQuery(1)}">처음</a></li>
+			<c:if test="${pageMaker_s.prev}">
+				<li><a href="/mypage/list_Inquiry${pageMaker_s.makeQuery(pageMaker_s.startPage - 1) }">&laquo;</a></li>
+			</c:if>
+			<c:forEach begin="${pageMaker_s.startPage}" end="${pageMaker_s.lastPage}" var="idx">
+				 <li <c:out value="${pageMaker_s.page == idx?'class =active':''}"/>>
+					<a href="/mypage/list_Inquiry?page2=${idx}">${idx}</a>
+				</li>
+			</c:forEach>
+				<c:if test="${pageMaker_s.next && pageMaker_s.endPage > 0}">
+					<li><a href="/mypage/list_Inquiry${pageMaker_s.makeQuery(pageMaker_s.endPage +1) }">&raquo;</a></li>
+				</c:if>
+				<li><a href="/mypage/list_Inquiry${pageMaker_s.makeQuery(pageMaker_s.lastPage)}">마지막</a></li>
+			</ul>
+        </div>
+      </div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 						<div>
 							<!--  tab1 -->

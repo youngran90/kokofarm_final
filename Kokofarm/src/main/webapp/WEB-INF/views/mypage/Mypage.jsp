@@ -10,6 +10,7 @@
           <ul class="box-category treeview-list treeview">
                 <li ><a href="/mypage//list_Inquiry" >1:1문의</a></li>
 		       <li><a href="/mypage/graph">통계</a></li>
+		       <li><a href="/mypage/order_list">구매내역</a></li>
           </ul>
         </div>
       </div>

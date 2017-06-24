@@ -1,4 +1,4 @@
-package kokofarm.product.domain;
+﻿package kokofarm.product.domain;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -11,24 +11,23 @@ import kokofarm.basic.domain.SearchCriteria;
 
 public class PagingMaker {
 
-	private int totalCount;
-	private int startPage;
-	private int endPage;
+	private int totalCount; //총 개시물 개수
+	private int startPage; //페이징 시작
+	private int endPage; // 페이징 끝 번호
 	private boolean prev;
 	private boolean next;
-	private int lastPage;
-	private int cpage;
-	private int start;
-	private int end;
-	private int displayPageNum = 12;
-	private int page = 1;
-	private int perPageNum = 4;
-	private String searchOption;
-	private String searchText;
-	private String input_sort;
-	private String ca1;
-	private String ca2;
-	private String ca3;
+	private int lastPage; // 맨 마지막 번호
+	private int start; // 디비에서 사용될 시작 번호
+	private int end;// 디비에서 사용될 끝 번호
+	private int displayPageNum =4 ; // 화면상에 보여줄 리스트의 크기 
+	private int page = 1;	//현재페이지 
+	private int perPageNum = 5; //하단 페이징할 개수 5로 하면 될듯 
+	private String searchOption; // 검색 옵션 ex)name, seller등
+	private String searchText; // 검색어
+	private String input_sort; // 정렬 방식
+	private String ca1; // 카테고리 정보
+	private String ca2; // 카테고리 정보
+	private String ca3; // 카테고리 정보
 	
 
 	public String getCa1() {
@@ -115,7 +114,7 @@ public class PagingMaker {
 	public void setPerPageNum(int perPageNum) {
 
 		if (perPageNum <= 0 || perPageNum > 100) {
-			this.perPageNum = 4;
+			this.perPageNum = 5;
 			return;
 		}
 
@@ -136,13 +135,6 @@ public class PagingMaker {
 		return this.perPageNum;
 	}
 
-	public int getCpage() {
-		return cpage;
-	}
-
-	public void setCpage(int cpage) {
-		this.cpage = cpage;
-	}
 
 	public int getStart() {
 		return start;
@@ -161,19 +153,15 @@ public class PagingMaker {
 	}
 
 	public void calcData() {
-
-		endPage = (int) (Math.ceil(getPage() / (double) displayPageNum) * displayPageNum);
-
-		startPage = (endPage - displayPageNum) + 1;
-
-		int tempEndPage = (int) (Math.ceil(totalCount / (double) getPerPageNum()));
-
-		if (endPage > tempEndPage) {
-			endPage = tempEndPage;
-		}
-
+		int pageGroupNum = (int) Math.ceil((double) page / perPageNum);
+		
+		startPage = (pageGroupNum - 1) * perPageNum + 1;
+		
+		if (startPage <= 0)
+			startPage = 1;
+		endPage = startPage + perPageNum - 1; // 페이지그룹의 마지막페이지
+		
 		prev = startPage == 1 ? false : true;
-
 		next = endPage * getPerPageNum() >= totalCount ? false : true;
 
 		lastPage = (totalCount / displayPageNum) + 1;
@@ -195,6 +183,7 @@ public class PagingMaker {
 
 	public void setTotalCount(int totalCount) {
 		this.totalCount = totalCount;
+		calcData();
 	}
 
 	public int getStartPage() {
@@ -243,7 +232,7 @@ public class PagingMaker {
 	@Override
 	public String toString() {
 		return "PagingMaker [totalCount=" + totalCount + ", startPage=" + startPage + ", endPage=" + endPage + ", prev="
-				+ prev + ", next=" + next + ", lastPage=" + lastPage + ", cpage=" + cpage + ", start=" + start
+				+ prev + ", next=" + next + ", lastPage=" + lastPage + ",  start=" + start
 				+ ", end=" + end + ", displayPageNum=" + displayPageNum + ", page=" + page + ", perPageNum="
 				+ perPageNum + ", searchOption=" + searchOption + ", searchText=" + searchText + ", input_sort="
 				+ input_sort + ", ca1=" + ca1 + ", ca2=" + ca2 + ", ca3=" + ca3 + "]";

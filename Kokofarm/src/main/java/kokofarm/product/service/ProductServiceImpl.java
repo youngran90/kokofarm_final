@@ -37,8 +37,8 @@ public class ProductServiceImpl implements ProductService {
 	
 	
 	@Override
-	public int Count_Product() throws Exception {
-		return dao.Count_Pro();
+	public int Count_Product(PagingMaker PagingMaker) throws Exception {
+		return dao.Count_Pro(PagingMaker);
 	}
 	
 	@Transactional

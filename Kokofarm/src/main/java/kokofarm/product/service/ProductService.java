@@ -15,7 +15,7 @@ public interface ProductService {
 	
 	public List<ProductVO> list_product(PagingMaker ProductForm)throws Exception;
 		
-	public int Count_Product()throws Exception;
+	public int Count_Product(PagingMaker PagingMaker)throws Exception;
 	
 	public ProductVO detail_product(String product_no)throws Exception;
 	

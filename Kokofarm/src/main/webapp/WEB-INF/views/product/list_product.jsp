@@ -5,17 +5,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%@ include file= "../include/header.jsp" %>	
-<script>
-$(function(){
-
-	$(".ca3").on("click", function(){
-		var v = $(this).attr("value");
-		alert(v);
-	})
-})
-
-
-</script>
 
 <div class="container">
   <ul class="breadcrumb">
@@ -28,13 +17,13 @@ $(function(){
         <div class="columnblock-title">과일(Fruit)</div>
         <div class="category_block">
         <ul class="box-category treeview-list treeview">
-            <li><a href="/product/list_product?ca2=fs" class="activSub">과일</a>
+            <li><a href="#" onclick="selectCategoryTwo('fs')" class="activSub">과일</a>
               <ul>
-                <li value="fs_1"  class="ca3">딸기</li>
-                <li value="fs_2"  class="ca3">한라봉</li>
-                <li value="fs_3"  class="ca3">수박</li>
-                <li value="fs_4"  class="ca3" >참외</li>
-                <li value="fs_5"  class="ca3" >포도</li>
+                <li value="fs_1"  class="ca3" onclick="selectCategoryThree('fs_1')">딸기</li>
+                <li value="fs_2"  class="ca3" onclick="selectCategoryThree('fs_2')">한라봉</li>
+                <li value="fs_3"  class="ca3" onclick="selectCategoryThree('fs_3')">수박</li>
+                <li value="fs_4"  class="ca3" onclick="selectCategoryThree('fs_4')">참외</li>
+                <li value="fs_5"  class="ca3" onclick="selectCategoryThree('fs_5')">포도</li>
                 <li value="fs_6"  class="ca3" >복숭아</li>
                 <li value="fs_7"  class="ca3" >배</li>
                 <li value="fs_8"  class="ca3" >사과</li>
@@ -103,10 +92,10 @@ $(function(){
           <label class="control-label" for="input-sort">Sort By :</label>
           <div class="sort-inner">
 	      	<select  id="input_sort" name="input_sort" onchange="doInput_sort(this.value)">
-				<option value="" selected="selected">-----</option>
-				<option value="ph">가격 높은순</option>
-	            <option value="pl">가격 낮은순</option>
-	        	<option value="vc">판매인기순</option>
+				<option value="" <c:if test="${empty pageMaker.input_sort }">selected="selected"</c:if> >-----</option>
+				<option value="ph" <c:if test="${pageMaker.input_sort eq 'ph'}">selected="selected"</c:if>>가격 높은순</option>
+	            <option value="pl" <c:if test="${pageMaker.input_sort eq 'pl'}">selected="selected"</c:if> >가격 낮은순</option>
+	        	<option value="vc" <c:if test="${pageMaker.input_sort eq 'vc'}">selected="selected"</c:if> >판매인기순</option>
 			</select>
 			
 			<select  id="searchType" name="searchType" style="width: 75px; height:27px; margin-left: 15px;">
@@ -114,9 +103,14 @@ $(function(){
 				<option value="seller">판매자</option>
 			</select>
 			
-			<input type="text" name="keyword" id="keyword">
-			<input type="button" value="검색" onclick="doSearch()">
-			
+			<input type="text" name="keyword" id="keyword" value="${pageMaker.searchText }">
+			<input type="button" value="검색" onclick="doSearch('1')">
+			<c:if test="${not empty pageMaker.searchText }">
+				<input type="button" id="allButton" value="전체보기" onclick="showAll()">
+			</c:if>
+			<input type="hidden" id="ca1" value="${pageMaker.ca1 }">
+			<input type="hidden" id="ca2" value="${pageMaker.ca2 }">
+			<input type="hidden" id="ca3" value="${pageMaker.ca3 }">
           </div>
         </div>
       </div>
@@ -155,19 +149,19 @@ $(function(){
       <div class="category-page-wrapper">
         <div class="pagination-in" style="margin-left: 30%">
          <ul class="pagination" >
-			<li><a href="/product/list_product${pageMaker.makeQuery(1) }">처음</a></li>
+			<li><a href="#" onclick="doMove(1)">처음</a></li>
 			<c:if test="${pageMaker.prev}">
-				<li><a href="/product/list_product${pageMaker.makeQuery(pageMaker.startPage - 1) }">&laquo;</a></li>
+				<li><a href="#" onclick="doMove(${pageMaker.startPage - 1})">&laquo;</a></li>
 			</c:if>
-			<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage}" var="idx">
-				 <li <c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
-					 <a href="/product/list_product?page=${idx }">${idx}</a>
+			<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.lastPage}" var="idx">
+				 <li <c:out value="${pageMaker.page == idx?'class =active':''}"/>>
+					 <a href="#" onclick="doMove(${idx})">${idx}</a>
 				</li>
 			</c:forEach>
 				<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-					<li><a href="/product/list_product${pageMaker.makeQuery(pageMaker.endPage +1) }">&raquo;</a></li>
+					<li><a href="#" onclick="doMove(${pageMaker.endPage +1})">&raquo;</a></li>
 				</c:if>
-				<li><a href="/product/list_product${pageMaker.makeQuery(pageMaker.lastPage)}">마지막</a></li>
+				<li><a href="#" onclick="doMove(${pageMaker.lastPage})">마지막</a></li>
 			</ul>
         </div>
       </div>
@@ -176,41 +170,58 @@ $(function(){
     <div>
   </div>
 </div>
-  <form id="ProductForm" name="ProductForm" action="list_product" method="get">
-  <input type='hidden' name="page" value="${ProductForm.page }">
-  <input type='hidden' name="perPageNum" value="${ProductForm.perPageNum}">
-</form>
 
 
 <script>
+
+	function showAll(){
+		$("#keyword").val('');
+		doSearch('1');
+	}
+	function doMove(page){
+		var input_sort = $("#input_sort").val();
+		var searchOption = $("#searchType").val();
+		var searchText = $("#keyword").val();
+		doPaging(page,searchOption,searchText,input_sort, "1", "1");
+	}
 	function pay(product_no){
-		alert(product_no);
 		location.href="/cart/cart_detail?num=1&product_no="+ product_no;
 	}
 
 	function doInput_sort(input_sort){
-		location.href="/product/list_product?input_sort="+ input_sort;
-	}
-	
-	function doSearch(){
-		
 		var searchOption = $("#searchType").val();
 		var searchText = $("#keyword").val();
-		location.href="/product/list_product?searchOption="+ searchOption+"&searchText="+searchText;
-	}
-   
-	function ca(v){
-		alert(v);
+		doPaging(page,searchOption,searchText,input_sort, ca2, ca3);
+		
 	}
 	
+	function doSearch(page, ca2, ca3){
+		var searchOption = $("#searchType").val();
+		var searchText = $("#keyword").val();
+		var input_sort = $("#input_sort").val();
+		
+		doPaging(page,searchOption,searchText,input_sort, ca2, ca3);
+	}
+	
+	
+	function doPaging(page,searchOption,searchText,input_sort, ca2, ca3){
+		 location.href="/product/list_product?searchOption="+ searchOption+"&searchText="+searchText+"&page="+page+"&input_sort="+input_sort+"&ca2="+ca2+"&ca3="+ca3; 
+	}
+   
+	
+	function selectCategoryTwo(ca2){
+		doSearch("1", ca2, "1");
+	}
+	
+	function selectCategoryThree(ca3){
+		doSearch("1", "1", ca3);
+	}
 	
 </script>
 
 
 <%@include file="../include/footer.jsp"%>
 
-
-  
 
 
  

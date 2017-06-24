@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kokofarm.member.domain.MemberVO;
@@ -22,6 +23,8 @@ import kokofarm.mypage.domain.InquiryVO;
 import kokofarm.mypage.domain.graphVO;
 import kokofarm.mypage.service.GraphService;
 import kokofarm.mypage.service.InquiryService;
+import kokofarm.orderproduct.domain.OrderFinishVO;
+import kokofarm.product.domain.PagingMaker;
 
 @Controller
 @RequestMapping("/mypage/*")
@@ -60,10 +63,9 @@ public class InquiryController {
 }
 	
 	@RequestMapping(value="/list_Inquiry", method= RequestMethod.GET)
-	public void listInquiry(InquiryVO inquiry, Model model, HttpServletRequest request,@Param("action")String action)throws Exception{
+	public void listInquiry(InquiryVO inquiry, Model model, HttpServletRequest request, @RequestParam(value="page1", defaultValue = "1")int page1, @RequestParam(value="page2", defaultValue = "1")int page2)throws Exception{
 		
 		logger.info("inquiry..list...");
-		
 		
 		MemberVO member = (MemberVO)request.getSession().getAttribute("login");
 		String member_id = member.getMember_id();
@@ -72,12 +74,36 @@ public class InquiryController {
 		if(seller_no == null){
 			seller_no = "";
 		}
+		PagingMaker PagingMaker = new PagingMaker();
+		PagingMaker.setDisplayPageNum(2);
+	    if(page1 != 1){
+			PagingMaker.setPage(page1);
+	    }
+		PagingMaker.setTotalCount(service.countInquiry(member_id));
+		List<InquiryVO> inquirylist =  service.list_Inquiry(member_id, PagingMaker);
 		
-		List<InquiryVO> inquirylist =  service.list_Inquiry(member_id);
-		List<InquiryVO> inquirylist_s =  service.list_Inquiry_s(seller_no);
+		System.out.println("PagingMaker : ");
+		System.out.println(PagingMaker.toString());
+		
+		PagingMaker PagingMaker_s = new PagingMaker();
+		PagingMaker_s.setDisplayPageNum(3);
+	    if(page2 != 1){
+	    	PagingMaker_s.setPage(page2);
+	    }
+		PagingMaker_s.setTotalCount(service.countInquiry(seller_no));
+		List<InquiryVO> inquirylist_s =  service.list_Inquiry_s(seller_no, PagingMaker_s);
+		System.out.println("PagingMaker_s : ");
+		System.out.println(PagingMaker_s.toString());
+		
 		
 		model.addAttribute("inquirylist",inquirylist); //구매자용 1:1
+		model.addAttribute("pageMaker", PagingMaker);
+		
 		model.addAttribute("inquirylist_s",inquirylist_s); //판매자용 1:1
+		model.addAttribute("pageMaker_s", PagingMaker_s);
+
+		
+		
 		
 		
 	}
@@ -201,5 +227,22 @@ public class InquiryController {
 		return "mypage/Mypage";
 	}
 	
+	@RequestMapping(value="/mypage/order_list", method=RequestMethod.GET)
+	public String order_list(HttpServletRequest request, @Param("orderproduct_list")OrderFinishVO orderproduct_list ,
+			Model model, @RequestParam(value="page", defaultValue = "1")int page)throws Exception{
+		
+		MemberVO member = (MemberVO)request.getSession().getAttribute("login");
+		String member_id = member.getMember_id();
+		PagingMaker PagingMaker = new PagingMaker();
+		PagingMaker.setDisplayPageNum(2);
+		if(page != 1){
+			PagingMaker.setPage(page);
+	    }
+		PagingMaker.setTotalCount(service.countOrderfinish(member_id)); //토탈
+		model.addAttribute("list", service.orderproduct_list(member_id, PagingMaker));
+		model.addAttribute("pageMaker", PagingMaker);
+		System.out.println(PagingMaker.toString());
+		return "mypage/order_list";
+	}
 	
 }

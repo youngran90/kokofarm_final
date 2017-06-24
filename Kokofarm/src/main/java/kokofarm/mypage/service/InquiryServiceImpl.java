@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import kokofarm.mypage.domain.InquiryVO;
 import kokofarm.mypage.persistence.InquiryDAO;
+import kokofarm.orderproduct.domain.OrderFinishVO;
+import kokofarm.product.domain.PagingMaker;
 import kokofarm.product.domain.ReplyVO;
 
 @Service
@@ -22,8 +24,8 @@ public class InquiryServiceImpl implements InquiryService {
 	}
 
 	@Override
-	public List<InquiryVO> list_Inquiry(String member_id) throws Exception {
-		return dao.list_Inquiry(member_id);
+	public List<InquiryVO> list_Inquiry(String member_id, PagingMaker PagingMaker) throws Exception {
+		return dao.list_Inquiry(member_id, PagingMaker);
 	}
 
 	@Override
@@ -48,8 +50,23 @@ public class InquiryServiceImpl implements InquiryService {
 	}
 
 	@Override
-	public List<InquiryVO> list_Inquiry_s(String seller_no) throws Exception {
-		return dao.list_Inquiry_s(seller_no);
+	public List<InquiryVO> list_Inquiry_s(String seller_no, PagingMaker PagingMaker) throws Exception {
+		return dao.list_Inquiry_s(seller_no, PagingMaker);
+	}
+
+	@Override
+	public int countInquiry(String member_id) throws Exception {
+		return dao.countInquiry(member_id);
+	}
+
+	@Override
+	public List<OrderFinishVO> orderproduct_list(String member_id, PagingMaker PagingMaker) throws Exception {
+		return dao.orderproduct_list(member_id, PagingMaker);
+	}
+
+	@Override
+	public int countOrderfinish(String member_id) throws Exception {
+		return dao.countOrderfinish(member_id);
 	}
 
 

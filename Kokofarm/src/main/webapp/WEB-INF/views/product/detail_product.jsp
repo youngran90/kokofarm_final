@@ -628,7 +628,7 @@
 					<c:forEach var="replylist" items="${replylist}" varStatus="status">
 					<input type="hidden" value="${replylist.reply_no}" id="re_no" class="re_no">
 					<tr class="tit_tr user_tit_tr">
-						<td>${status.count}</td>
+						<td>${pageMaker.start + status.index}</td>
 						<td style="text-align:left; ">
 							<div class="grade_box" style="margin-left: 20px;">
 							<c:set var="star" value="${replylist.reply_rating}" ></c:set>
@@ -658,10 +658,32 @@
 				</tbody>
 			</table>
 			
+			<div class="category-page-wrapper">
+        <div class="pagination-in" style="margin-left: 40%">
+         <ul class="pagination" >
+			<li><a href="/product/detail_product${pageMaker.makeQuery(1)}&product_no=${product.product_no}">처음</a></li>
+			<c:if test="${pageMaker.prev}">
+				<li><a href="/product/detail_product${pageMaker.makeQuery(pageMaker.startPage - 1) }">&laquo;</a></li>
+			</c:if>
+			<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.lastPage}" var="idx">
+				 <li <c:out value="${pageMaker.page == idx?'class =active':''}"/>>
+					 <a href="/product/detail_product?page=${idx}&product_no=${product.product_no}">${idx}</a>
+				</li>
+			</c:forEach>
+				<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+					<li><a href="/product/detail_product${pageMaker.makeQuery(pageMaker.endPage +1) }">&raquo;</a></li>
+				</c:if>
+				<li><a href="/product/detail_product${pageMaker.makeQuery(pageMaker.lastPage)}&product_no=${product.product_no}">마지막</a></li>
+			</ul>
+        </div>
+      </div>
+			
 			</div>
       </div>
     </div>
   </div>
+  
+  
 
 <script type="text/javascript">
 

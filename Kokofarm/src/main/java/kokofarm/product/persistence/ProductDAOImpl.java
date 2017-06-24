@@ -38,8 +38,8 @@ public class ProductDAOImpl implements ProductDAO {
 	
 	
 	@Override
-	public int Count_Pro() throws Exception {
-		return session.selectOne(namespace+".countProduct");
+	public int Count_Pro(PagingMaker PagingMaker) throws Exception {
+		return session.selectOne(namespace+".countProduct", PagingMaker);
 	}
 
 	@Override

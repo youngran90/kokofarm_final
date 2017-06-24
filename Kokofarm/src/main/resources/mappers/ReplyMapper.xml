@@ -9,11 +9,26 @@
 	values(#{reply_no}, #{product_no}, #{member_id}, #{reply_content}, #{reply_rating}, sysdate) 
 	</insert>
 	
-	<select id="listReply" parameterType="String" resultType="ReplyVO">
+<!-- 	<select id="listReply" parameterType="String" resultType="ReplyVO">
 	select * from Reply
 	where product_no = #{product_no}
 	order by reply_date desc
-	</select>
+	</select> -->
+	
+	
+	<select id="listReply" resultType="ReplyVO" parameterType="java.util.HashMap">
+				SELECT * FROM (SELECT ROWNUM AS RNUM,a.* FROM(
+  					select * from Reply 
+  					where product_no = #{product_no}
+					order by reply_date desc
+  					) a
+  						where ROWNUM <![CDATA[<=]]> #{PagingMaker.end})
+  							where RNUM <![CDATA[>=]]> #{PagingMaker.start}
+	</select> 
+	
+	
+	
+	
 	
 	<delete id="deleteReply" parameterType="String">
 	delete from Reply

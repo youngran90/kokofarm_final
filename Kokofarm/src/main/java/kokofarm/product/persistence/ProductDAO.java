@@ -16,7 +16,7 @@ public interface ProductDAO {
 	//전체출력
 	public List<ProductVO> list_Pro(PagingMaker ProductForm)throws Exception;
 	
-	public int Count_Pro()throws Exception;
+	public int Count_Pro(PagingMaker PagingMaker)throws Exception;
 	
 	public ProductVO detail_pro(String product_no)throws Exception;
 	

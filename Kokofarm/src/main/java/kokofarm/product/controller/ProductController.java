@@ -101,28 +101,39 @@ public class ProductController {
 	}
 
 	@RequestMapping(value="/list_product", method= {RequestMethod.GET, RequestMethod.POST})
-	public void listProduct(HttpServletRequest request, Model model, @ModelAttribute("ProductForm") PagingMaker ProductForm)throws Exception{
+	public void listProduct(HttpServletRequest request, Model model, @ModelAttribute("PagingMaker") PagingMaker PagingMaker)throws Exception{
 
 		System.out.println("Here is listController");
-		String text = "%"+ProductForm.getSearchText()+"%";
-		ProductForm.setSearchText(text);
-		System.out.println(ProductForm.toString());
+		String text = PagingMaker.getSearchText();
+		PagingMaker.setSearchText("%"+text+"%");
+		System.out.println(PagingMaker.toString());
 		
-		ProductForm.setTotalCount(service.Count_Product());
-		
-		ProductForm.calcData();
-		List<ProductVO>list = service.list_product(ProductForm);
+		if(PagingMaker.getCa1() == null){
+			PagingMaker.setCa1("1");
+		}else if(PagingMaker.getCa2() == null){
+			PagingMaker.setCa2("1");
+
+		}else if(PagingMaker.getCa3() == null){
+			PagingMaker.setCa3("1");
+		}
+		System.out.println("ca1 -"+PagingMaker.getCa1()+"ca2 -"+PagingMaker.getCa2()+"ca3 -"+PagingMaker.getCa3());
+		System.out.println("개"+service.Count_Product(PagingMaker));
+		PagingMaker.setTotalCount(service.Count_Product(PagingMaker));
+		List<ProductVO>list = service.list_product(PagingMaker);
 		
 		System.out.println(list.toString());
-		model.addAttribute("count_product", service.Count_Product());
+		System.out.println(PagingMaker.toString());
+		//model.addAttribute("count_product", service.Count_Product());
 		model.addAttribute("list",list);
-		model.addAttribute("ProductForm", ProductForm);
+		PagingMaker.setSearchText(text);
+		model.addAttribute("pageMaker", PagingMaker);
+		
      		
 	}
 	
 	
 	@RequestMapping(value="/detail_product", method= RequestMethod.GET)
-	public void detail_product(Model model,@RequestParam("product_no") String product_no)throws Exception{
+	public void detail_product(Model model,@RequestParam("product_no") String product_no, @Param("pagingMaker") PagingMaker paging)throws Exception{
 
 		logger.info("product..detail_product...");
 		
@@ -138,8 +149,20 @@ public class ProductController {
 		int reply_avg = re_service.avgReply(product_no);
 		model.addAttribute("reply_avg", reply_avg);
 		
-		replylist = re_service.list_Post(product_no);
-		model.addAttribute("replylist", replylist);
+		
+		
+		//댓글 페이징
+		  re_service.countReply(product_no); //상품별 총 댓글수
+		  paging.setDisplayPageNum(5);
+		  paging.setTotalCount(re_service.countReply(product_no));
+		  
+		  replylist = re_service.list_Post(product_no, paging);
+		  model.addAttribute("replylist", replylist);
+			
+		  System.out.println("--------");
+		  System.out.println(paging.toString());
+		  model.addAttribute("pageMaker", paging);
+		  
 	}
 		
 	//게시판 
