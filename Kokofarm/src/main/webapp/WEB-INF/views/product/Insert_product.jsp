@@ -10,9 +10,10 @@
 <script type="text/javascript" src="/resources/ckeditor/ckeditor.js"></script>
 
 <script type="text/javascript"> 
+var jq = jQuery.noConflict();
 
-$(function() {
-    $( "#testDatepicker" ).datepicker({
+jq(function() {
+    jq( "#testDatepicker" ).datepicker({
          changeMonth: true, 
          dayNames: ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'],
          dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'], 
@@ -26,21 +27,21 @@ $(function() {
 
 function submit1(){
 
-	var product_name = $('#product_name').val();
-	var product_unit = $('#product_unit').val();
-	var product_price = $('#product_price').val();
-	var product_harvest = $('#testDatepicker').val();
-	var product_mainimage = $('#product_mainimage').val();
-	var product_sellerimage = $('#product_sellerimage').val();
-	var product_total = $('#product_total').val();
-	var s_contents = $('#s_contents').val();
-	var ca1 = $('#ca1').attr("selectd");
-	var ca2 = $('#ca2').val();
-	var ca3 = $('#ca3').val();
+	var product_name = jq('#product_name').val();
+	var product_unit = jq('#product_unit').val();
+	var product_price = jq('#product_price').val();
+	var product_harvest = jq('#testDatepicker').val();
+	var product_mainimage = jq('#product_mainimage').val();
+	var product_sellerimage = jq('#product_sellerimage').val();
+	var product_total = jq('#product_total').val();
+	var s_contents = jq('#s_contents').val();
+	var ca1 = jq('#ca1').attr("selectd");
+	var ca2 = jq('#ca2').val();
+	var ca3 = jq('#ca3').val();
 
-	var ca1 = $("#ca1 option:selected").val();
-	var ca2 = $("#ca2 option:selected").val();
-	var ca3 = $("#ca3 option:selected").val();
+	var ca1 = jq("#ca1 option:selected").val();
+	var ca2 = jq("#ca2 option:selected").val();
+	var ca3 = jq("#ca3 option:selected").val();
 
 	if(product_name == ''){
 		alert("상품명을 입력해주세요");
@@ -98,10 +99,10 @@ function submit1(){
 	}
 	
 }
- $(function(){
+ jq(function(){
 
-	 $("#ca2").chained("#ca1");
-	 $("#ca3").chained("#ca2");
+	 jq("#ca2").chained("#ca1");
+	 jq("#ca3").chained("#ca2");
 	
  })
  
@@ -138,9 +139,9 @@ function form_save(form) {
 window.parent.CKEDITOR.tools.callFunction('${CKEditorFuncNum}', '${file_path}'); 
 
 function onlyNumber(obj) {
-    $(obj).keyup(function(){
-         $(this).val($(this).val().replace(/[^0-9]/g,""));
-         $(this).apend()
+    jq(obj).keyup(function(){
+         jq(this).val(jq(this).val().replace(/[^0-9]/g,""));
+         jq(this).apend()
 
     }); 
 }

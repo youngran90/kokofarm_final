@@ -91,7 +91,7 @@
 </div>
 <script src="/resources/javascript/parally.js"></script> 
 <script>
-$('.parallax').parally({offset: -40});
+jQuery('.parallax').parally({offset: -40});
 </script>
 </body>
 </html>

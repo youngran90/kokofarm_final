@@ -5,14 +5,17 @@
 <%@include file="../include/header.jsp"%>
 
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
-<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> 
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <script type="text/javascript" src="/resources/ckeditor/ckeditor.js"></script>
 
 <script type="text/javascript">
 /* datetimepicker */
-$(function(){
-   $("#rt_auction_date").datepicker({
+
+var jq = jQuery.noConflict(true);
+
+jq(document).ready(function(){
+   jq("#rt_auction_date").datepicker({
       local:"ko",
       dateFormat:"yy-mm-dd",
       dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
@@ -25,17 +28,17 @@ $(function(){
 
 /* register alert */
 function register(){
-	var rt_auction_name=$('#rt_auction_name').val();
-	var	rt_auction_group=$('#rt_auction_group').val();
-	var rt_auction_time=$('#rt_auction_time').val();
-	var rt_auction_date=$('#rt_auction_date').val();
-	var rt_auction_down=$('#rt_auction_down').val();
-	var rt_auction_unit=$('#rt_auction_unit').val();
-	var rt_auction_units=$('#rt_auction_units').val();
-	var rt_auction_location=$('#rt_auction_location').val();
-	var rt_auction_area=$('#rt_auction_area').val();
-	var rt_auction_title=$('#rt_auction_title_img').val();
-	var rt_auction_content=$('#rt_auction_content').val();
+	var rt_auction_name=jq('#rt_auction_name').val();
+	var	rt_auction_group=jq('#rt_auction_group').val();
+	var rt_auction_time=jq('#rt_auction_time').val();
+	var rt_auction_date=jq('#rt_auction_date').val();
+	var rt_auction_down=jq('#rt_auction_down').val();
+	var rt_auction_unit=jq('#rt_auction_unit').val();
+	var rt_auction_units=jq('#rt_auction_units').val();
+	var rt_auction_location=jq('#rt_auction_location').val();
+	var rt_auction_area=jq('#rt_auction_area').val();
+	var rt_auction_title=jq('#rt_auction_title_img').val();
+	var rt_auction_content=jq('#rt_auction_content').val();
 	
 	if(rt_auction_name==''){
 		alert("상품명을 입력하세요.");
@@ -83,7 +86,7 @@ function register(){
 	
 	
 	var editor = null;
-	jQuery(function(){
+	jq(function(){
 		editor = CKEDITOR.replace("rt_auction_content", ckeditor_config);
 	});
 	
@@ -93,6 +96,13 @@ function register(){
 	
 	window.parent.CKEDITOR.tools.callFunction('${CKEditorFuncNum}', '${file_path}');
 	
+	function onlyNumber(obj) {
+	    jq(obj).keyup(function(){
+	         jq(this).val(jq(this).val().replace(/[^0-9]/g,""));
+	         jq(this).append();
+
+	    }); 
+	}
 	
 	
 </script>
@@ -163,7 +173,7 @@ function register(){
                     <div class="form-group">
                         <label for="input-fax" class="col-sm-2 control-label">하한가</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="rt_auction_down" placeholder="하한가를 입력해주세요." name="rt_auction_down">
+                            <input type="text" class="form-control" id="rt_auction_down" placeholder="하한가를 입력해주세요." name="rt_auction_down" onkeyup="onlyNumber(this)">
                         </div>
                     </div>
                     <div class="form-group">

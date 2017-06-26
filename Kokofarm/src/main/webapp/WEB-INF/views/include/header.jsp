@@ -21,6 +21,7 @@
 
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>  -->
 <script src="/resources/javascript/jquery-2.1.1.min.js" type="text/javascript"></script>
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
 <script src="/resources/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 <script src="/resources/javascript/jstree.min.js" type="text/javascript"></script>
 <script src="/resources/javascript/template.js" type="text/javascript" ></script>
@@ -28,7 +29,6 @@
 <script src="/resources/javascript/global.js" type="text/javascript"></script>
 <script src="/resources/owl-carousel/owl.carousel.min.js" type="text/javascript"></script>
   
-<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
 
 <style type="text/css">
 #top-links li .logout {
@@ -272,7 +272,7 @@ $( document ).ready( function() {
             <li><a href="/cart/cart">장바구니</a></li>
             <li><a href="checkout.html">결제 페이지</a></li>
             <li><a href="/mypage/list_Inquiry" >1:1 문의</a></li>
-            <li style="display: none;"><a href="/product/insert_product">셀러 판매물품 등록</a></li>
+            <li style="display: none;"><a href="/product/Insert_product">셀러 판매물품 등록</a></li>
             <li style="display: none;"><a href="/auction/rt_auction_register" >셀러 실시간 물품 등록</a></li>
             <li style="display: none;"><a href="/mypage/auction_view" >경매</a></li>
             </ul>

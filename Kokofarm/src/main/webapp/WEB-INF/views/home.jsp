@@ -83,6 +83,7 @@ margin:0 auto 60px;
 
 background: url("/resources/files/attach/Rtauctionbanner.png") no-repeat;
 background-size: 1200px 200px;
+cursor: pointer;
 
 }
 
@@ -256,12 +257,13 @@ font-family: YG77;
 <div class="container">
   <div class="row">
   
-    <div class="cms_banner">   		 
+    <div class="cms_banner">   	
+    	<a href="/auction/rt_auction_list"> 
    		  <div class="auctionsale_banner"> 
    		  <div class="auction_image left1">
-   		  	<img alt="" src="/resources/files/attach/${rtAuctionInfoList.get(0).rt_auction_title_img }" style="width: 200px; height: 100px;">
-   		  
-   		  </div>
+   		  <img alt="" src="/resources/files/attach/${rtAuctionInfoList.get(0).rt_auction_title_img }" style="width: 200px; height: 100px;">
+ 		  
+   	</div>
    		  
    		  			<div class="time_count_banner" >
    		  				<div class = "sp_11">
@@ -321,6 +323,8 @@ font-family: YG77;
       		</div>
           
           </div>
+          </a>	
+          
        </div>
   	 <div class="button-group-admin">
   	 	 <button class="addmainslider-btn" type="button" style="right: 0px;">상품 교체 (위)</button>
