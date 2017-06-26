@@ -195,7 +195,7 @@ $( document ).ready( function() {
       <div class="col-sm-4 col-xs-6 header-left">
         <div class="shipping">
           <div class="shipping-img"></div>
-          <div class="shipping-text">(02)534-7777<br><span class="shipping-detail">Week From 9:00am To 7:00pm</span></div>
+          <div class="shipping-text">(02)534-7777<br><span class="shipping-detail">고객센터 이용시간 9:00 ~ 19:00</span></div>
         </div>
       </div>
       <div class="col-sm-4 col-xs-12 header-middle">
