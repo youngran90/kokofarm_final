@@ -4,10 +4,10 @@
 <%@include file="../include/header.jsp"%>
 <link rel="stylesheet" href="/resources/css/detail.css">
 
-<script>
+<!-- <script>
   
 
- $(function(){
+/*  $(function(){
 	 //window.location.reload();
 	 
 	 $('#tab-auctionview').hide();
@@ -50,33 +50,17 @@
  
  function out(){
 	 $('#subtitleP').hide();
- }
+ } */
 
-</script>
+</script> -->
+
 <div class="container">
 	<div class="row">
-		<div id="content" class="col-sm-9" style="margin-left: 120px;">
-
-			<div class="productinfo-tab">
-				<div class="nav">
-					<ul class="nav nav-tabs">
-						<li class="active"><a href="#tab-inquiry" data-toggle="tab">1:1문의</a></li>
-						<li class="active"><a id="auctionA" href="#" data-toggle="tab" onmouseover="over()">경매</a></li>	
-					</ul>
-				</div>
-			   <div style="margin-top: 6px;" onmouseleave="out()">
-					<div id="subtitleP">
-								 <p class="caption"><a id="auctioncheck" href="#" style="float: left; margin-left: 120px; margin-right: 10px;">입찰내역조회</a></p>
-								 <p class="caption"><a id="successcheck" href="#" style="float: left; margin-right: 10px;">낙찰상품조회</a></p>
-								 <c:if test="${login.seller_no !=null}">
-								   <p class="caption"><a id="registercheck" href="#">등록상품조회</a></p>
-								 </c:if>
-								 
-					</div>
-				</div>
+	  <%@include file="./Mypage.jsp"%>
+		<div id="content" class="col-sm-9" >
+			 
 				<div class="tab-content">
 				  <!-- 낙찰 상품 조회  및 결제 -->
-					<div class="tab-pane active" id="tab-successcheck">
 						<div class="cpt_product_description ">
 							<!-- <div onmouseleave="out()">
 							<div class="caption_box" id="subtitleP">
@@ -340,27 +324,17 @@
 										</c:forEach>
 								</table>
 	
-	
-	
 						</div>
-	
 						<div>
 							<!--  tab1 -->
 						</div>
-	
 					</div>
-					
-					
 					
 					<!-- cpt_container_end -->
 	
-	
-	
-				</div>
 			</div>
 		</div>
 	</div>
-</div>
 
 
 

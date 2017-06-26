@@ -19,8 +19,8 @@ $(function() {
          monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'],
          monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
    		 altField : '#getdate',
-   		dateFormat: "yy/mm/dd"
-
+   		dateFormat: "yy/mm/dd",
+   		 maxDate: 0
   });
 });
 
@@ -32,7 +32,11 @@ function submit1(){
 	var product_harvest = $('#testDatepicker').val();
 	var product_mainimage = $('#product_mainimage').val();
 	var product_sellerimage = $('#product_sellerimage').val();
-	alert("dd");
+	var product_total = $('#product_total').val();
+	var s_contents = $('#s_contents').val();
+	var ca1 = $('#ca1').attr("selectd");
+	var ca2 = $('#ca2').val();
+	var ca3 = $('#ca3').val();
 
 	var ca1 = $("#ca1 option:selected").val();
 	var ca2 = $("#ca2 option:selected").val();
@@ -42,17 +46,40 @@ function submit1(){
 		alert("상품명을 입력해주세요");
 		return;
 	
-	}else if(product_unit == ''){
-		alert("상품 단위를 입력해주세요");
+	}else if(ca1 == ''){
+		alert("대분류 선택은 필수입니다.");
+		return;
+		
+	}else if(ca2 == ''){
+		alert("중분류 선택은 필수입니다.");
+		return;
+	}else if(ca3 == ''){
+		alert("소분류 선택은 필수입니다.");
 		return;
 		
 	}else if(product_price == ''){
 		alert("상품 단가를 입력해주세요");
 		return;
 		
-	}else if(product_harvest == ''){
-		alert("수확일을 선택해주세요");
+	}else if(product_unit == ''){
+		alert("상품 단위를 입력해주세요");
 		return;
+		
+	}else if(product_total == ''){
+		alert("상품 총 수량을 입력해주세요");
+		return;
+		
+	}else if(product_harvest == ''){
+		alert("상품 수확일을 입력해주세요");
+		return;
+		
+	}else if(s_contents == ''){
+		alert("상세설명을 입력해주세요");
+		return;
+		
+	}else if(s_contents == ''){
+		alert("상세설명을 입력해주세요");
+		return;	
 		
 	}else if(product_mainimage == ''){
 		alert("메인이미지를 등록하세요");
@@ -63,8 +90,11 @@ function submit1(){
 		return;
 		
 	}else{
-		alert("성공");
-		document.getElementById('registerForm').submit();
+		if (confirm("상품 등록 후 수정이 불가능합니다. 상품을 등록하시겠습니까?") == true){    //확인
+			document.getElementById('registerForm').submit();
+		}else{   //취소
+		    return false;
+		}
 	}
 	
 }
@@ -82,7 +112,6 @@ function submit1(){
 		shiftEnterMode : CKEDITOR.ENTER_P , // 쉬프트 + 엔터를 <p> 로 적용함. 
 		toolbarCanCollapse : true , removePlugins : "elementspath", // DOM 출력하지 않음 
 		filebrowserUploadUrl: '/product/file_upload',
-
 		toolbar : [ [ 'Source', '-' , 'NewPage', 'Preview' ],
 			[ 'Cut', 'Copy', 'Paste', 'PasteText', '-', 'Undo', 'Redo' ], 
 			[ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript'],
@@ -148,7 +177,7 @@ function onlyNumber(obj) {
                     <div class="form-group required">
                         <label for="input-product_name" class="col-sm-2 control-label">상품 이름</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="product_name" placeholder="상품이름" value=""  name="product_name">
+                            <input type="text" class="form-control" id="product_name" placeholder="상품이름" value=""  name="product_name" maxlength="14">
                         </div>
                     </div>
                    

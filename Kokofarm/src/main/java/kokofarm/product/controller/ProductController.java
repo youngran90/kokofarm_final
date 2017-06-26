@@ -107,6 +107,7 @@ public class ProductController {
 		String text = PagingMaker.getSearchText();
 		PagingMaker.setSearchText("%"+text+"%");
 		System.out.println("ca1 -"+PagingMaker.getCa1()+"  ca2 -"+PagingMaker.getCa2()+"  ca3 -"+PagingMaker.getCa3());
+		PagingMaker.setDisplayPageNum(12);
 		int totalCount = service.Count_Product(PagingMaker);
 		PagingMaker.setTotalCount(totalCount);
 		List<ProductVO>list = service.list_product(PagingMaker);
@@ -198,7 +199,7 @@ public class ProductController {
 	
 	@RequestMapping(value ="/getdate", method = RequestMethod.GET)
 	public String getdate(HttpServletResponse response, Model model)throws Exception {
-		System.out.println("insert getdate");
+
 		GregorianCalendar today = new GregorianCalendar ( ); 
 		int year = today.get ( today.YEAR ); 
 		int month = today.get ( today.MONTH ) + 1; 
@@ -218,7 +219,7 @@ public class ProductController {
 		 
 		 //조회날짜
 		// String today_date = "&p_regday="+year +"-"+ month + "-" + date; //당일날짜
-		 String t_date = "16";
+		 String t_date = "24";
 		 String today_date = "&p_regday="+year +"-"+ month + "-" + t_date; //당일날짜
 		 
 		 //소매 채소
@@ -293,7 +294,7 @@ public class ProductController {
 		 
 		 //조회날짜
 		// String today_date = "&p_regday="+year +"-"+ month + "-" + date; //당일날짜
-		 String t_date = "16";
+		 String t_date = "22";
 		 String today_date = "&p_regday="+year +"-"+ month + "-" + t_date; //당일날짜
 		 
 		 //소매 채소

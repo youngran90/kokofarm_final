@@ -655,6 +655,16 @@
 					</c:forEach>
 				</c:if>
 					<!-- admin -->
+					<c:if test="${empty replylist}">
+      		<tr class="tit_tr user_tit_tr" >
+      		<td></td>
+      		<td></td>
+      		<td> 댓글이 존재하지 않습니다.</td>
+      		<td></td>
+      		<td></td>
+      		<td></td>
+      		</tr>
+      	</c:if>
 				</tbody>
 			</table>
 			
@@ -825,7 +835,6 @@ $(function(){
 		})
 		
 		function product_delete(product_no){
-			alert(product_no)
 			if (confirm("정말로 제품을 삭제하시겠습니까??") == true){    //확인
 			    location.href="/product/product_delete?product_no="+product_no;
 			}else{   //취소

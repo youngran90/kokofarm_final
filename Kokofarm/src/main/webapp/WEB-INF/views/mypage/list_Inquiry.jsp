@@ -187,7 +187,7 @@ function update_Re() {
          <ul class="pagination" >
 			<li><a href="/mypage/list_Inquiry?page1=${pageMaker.startPage}">처음</a></li>
 			<c:if test="${pageMaker.prev}">
-				<li><a href="/mypage/list_Inquiry${pageMaker.makeQuery(pageMaker.startPage - 1) }">&laquo;</a></li>
+				<li><a href="/mypage/list_Inquiry${pageMaker.startPage}">&laquo;</a></li>
 			</c:if>
 			<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.lastPage}" var="idx">
 				 <li <c:out value="${pageMaker.page == idx?'class =active':''}"/>>
@@ -195,7 +195,7 @@ function update_Re() {
 				</li>
 			</c:forEach>
 				<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-					<li><a href="/mypage/list_Inquiry${pageMaker.makeQuery(pageMaker.endPage +1) }">&raquo;</a></li>
+					<li><a href="/mypage/list_Inquiry${pageMaker.endPage}">&raquo;</a></li>
 				</c:if>
 				<li><a href="/mypage/list_Inquiry?page1=${pageMaker.lastPage}">마지막</a></li></ul>
         </div>
@@ -287,7 +287,6 @@ function update_Re() {
 			</ul>
         </div>
       </div>
-	
 	
 	
 	
