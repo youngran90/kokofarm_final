@@ -55,6 +55,10 @@
 </script> -->
 
 <div class="container">
+<ul class="breadcrumb">
+    <li><a href="/"><i class="fa fa-home"></i></a></li>
+    <li><a href="/mypage/auction_view">마이페이지/경매내역정보</a></li>
+  </ul>
 	<div class="row">
 	  <%@include file="./Mypage.jsp"%>
 		<div id="content" class="col-sm-9" >

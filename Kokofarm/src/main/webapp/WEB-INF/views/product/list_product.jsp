@@ -78,7 +78,7 @@
       <div class="row category-banner">
         <!-- <div class="col-sm-12 category-image"><img src="/resources/files/attach/product_banner.jpg" alt="product_banner" title="product_banner" class="img-thumbnail" style="width: 937px; height: 192px;" /></div>
          -->
-        <div class="col-sm-12 category-desc">상품설명</div>
+        <div class="col-sm-12 category-desc"></div>
       </div>
       <div class="category-page-wrapper">
         <div class="col-md-6 list-grid-wrapper">
@@ -107,7 +107,7 @@
 			<input type="text" name="keyword" id="keyword" value="${pageMaker.searchText }">
 			<input type="button" value="검색" onclick="doSearch('1')" data-loading-text="Loading..." class="btn btn-primary">
 			<c:if test="${not empty pageMaker.searchText }">
-				<input type="button" id="allButton" value="전체보기" onclick="showAll()">
+				<input type="button" id="allButton" value="전체보기" onclick="showAll()" data-loading-text="Loading..." class="btn btn-primary">
 			</c:if>
 			<input type="hidden" id="ca1" value="${pageMaker.ca1 }">
 			<input type="hidden" id="ca2" value="${pageMaker.ca2 }">
@@ -131,22 +131,22 @@
 		            <div class="image product-imageblock"> <a href="/product/detail_product?product_no=${product.product_no}"> <img src='/resources/files/attach/${product.product_mainimage}' alt="women's clothing stores" title="lorem ippsum dolor dummy" class="img-responsive"  style="width: 220px; height: 165px;"/></a>
 		             <div class="button-group">
 		                <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List" style="display: none"><i class="fa fa-heart-o"></i></button>
-		                <button type="button" class="addtocart-btn" style="width: 200px" onclick="pay('${product.product_no}');"><b>장바구니 담기</b></button>
-		                <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product" style="display: none"><i class="fa fa-exchange"></i></button>
-		              </div>
+		                <button type="button" class="addtocart-btn" style="width: 120px" onclick="pay('${product.product_no}');"><b>장바구니담기</b></button>
+		               	<img src="/resources/files/attach/${product.product_sellerimage}" width="50px;" height="50px"; style="margin-bottom: 10px; margin-left: 10px"></img>
+		               </div>
+		            </div>
+		            <div>
 		            </div>
 		            <div class="caption product-detail">
 		              <h4 class="product-name"> 
 		              <a href="product.html" title="lorem ippsum dolor dummy" style="font-size: 18px"><b>${product.product_name}</b></a>
 		              </h4>
 		               <p class="product-desc"> ${product.s_contents} </p>
-		              <p class="price product-price" ><sub>${product.reply_count}reviews&nbsp;(${product.product_unit}${product.unit}당)</sub><span style="margin-left: 50px;"><font color="#38a9a5"><fmt:formatNumber value="${product.product_price}" pattern="#,###" />원</font></span></p>
+		              <p class="price product-price" ><sub style="color: #ef8829">${product.reply_count}&nbsp;</sub><sub>reviews&nbsp;(${product.product_unit}${product.unit}당)</sub><span style="margin-left: 40px;"><font color="#38a9a5"><fmt:formatNumber value="${product.product_price}" pattern="#,###" />원</font></span></p>
 		              <p>
 		            </div>
 		              <div class="button-group" style="margin-top: 50px">
-		                <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List" style="display: none"><i class="fa fa-heart-o"></i></button>
 		                <button type="button" class="addtocart-btn" style="width: 200px" onclick="pay('${product.product_no}');"><b>장바구니 담기</b></button>
-		                <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product" style="display: none"><i class="fa fa-exchange"></i></button>
 		              </div>
 		          </div>
 		            </div>

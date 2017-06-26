@@ -21,7 +21,10 @@ h2 {
 </script>
 
 <div class="container">
-
+<ul class="breadcrumb">
+    <li><a href="/"><i class="fa fa-home"></i></a></li>
+    <li><a href="/mypage/order_list">마이페이지/주문배송정보</a></li>
+  </ul>
 	<div class="row">
 	 <%@include file="./Mypage.jsp"%>
 		<div id="content" class="col-sm-9">
