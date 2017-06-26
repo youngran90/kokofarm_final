@@ -109,10 +109,9 @@ $(function(){
 });
 	
 </script>
-
-
 <div class="container">
-<%@include file="./Mypage.jsp"%>
+	<div class="row">
+		<%@include file="./Mypage.jsp"%>
 		<div id="content" class="col-sm-9">
             <div class="cpt_product_description ">
             
@@ -162,29 +161,27 @@ $(function(){
 					</c:forEach>
 				</table>
 				
-		<div class="category-page-wrapper">
-        <div class="pagination-in" style="margin-left: 40%">
-         <ul class="pagination" >
-			<li><a href="/orderproduct/mileage_view?page=${pageMaker.startPage}">처음</a></li>
-			<c:if test="${pageMaker.prev}">
-				<li><a href="/orderproduct/mileage_view${pageMaker.makeQuery(pageMaker.startPage - 1) }">&laquo;</a></li>
-			</c:if>
-			<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.lastPage}" var="idx">
-				 <li <c:out value="${pageMaker.page == idx?'class =active':''}"/>>
-					 <a href="/orderproduct/mileage_view?page=${idx}">${idx}</a>
-				</li>
-			</c:forEach>
-				<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-					<li><a href="/orderproduct/mileage_view${pageMaker.makeQuery(pageMaker.endPage +1) }">&raquo;</a></li>
-				</c:if>
-				<li><a href="/orderproduct/mileage_view?page=${pageMaker.endPage}">마지막</a></li></ul>
-        </div>
-      </div>
+				<div class="category-page-wrapper">
+		        	<div class="pagination-in" style="margin-left: 40%">
+		         		<ul class="pagination" >
+							<li><a href="/orderproduct/mileage_view?page=${pageMaker.startPage}">처음</a></li>
+							<c:if test="${pageMaker.prev}">
+								<li><a href="/orderproduct/mileage_view${pageMaker.makeQuery(pageMaker.startPage - 1) }">&laquo;</a></li>
+							</c:if>
+							<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.lastPage}" var="idx">
+						 		<li <c:out value="${pageMaker.page == idx?'class =active':''}"/>>
+							 	<a href="/orderproduct/mileage_view?page=${idx}">${idx}</a>
+								</li>
+							</c:forEach>
+							<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+								<li><a href="/orderproduct/mileage_view${pageMaker.makeQuery(pageMaker.endPage +1) }">&raquo;</a></li>
+							</c:if>
+								<li><a href="/orderproduct/mileage_view?page=${pageMaker.endPage}">마지막</a></li></ul>
+		        	</div>
+		      	</div>
       
-      </div>
-      </div>
-      
-    
-      
+      		</div>
+      	</div>
+    </div>  
 </div>
 <%@include file="../include/footer.jsp"%>
