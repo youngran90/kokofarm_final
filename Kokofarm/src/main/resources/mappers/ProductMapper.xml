@@ -24,13 +24,13 @@
   					<if test="searchOption != null" >
 						and  ${searchOption} LIKE #{searchText} 
   				  </if>
-  				  <if test="ca1 != null" >
+  				  <if test='ca1 != "1".toString()'  >
 						and ca1 = #{ca1}
 					</if>
-					<if test="ca2 != null" >
+					<if test='ca2 != "1".toString()'  >
 						and	ca2 = #{ca2}
 					</if>
-					<if test="ca3 != null">
+					<if test='ca3 != "1".toString()' >
 				 		and	ca3 = #{ca3}
 					</if>
   				<choose>
@@ -67,16 +67,16 @@
 	<select id="countProduct" resultType="int" parameterType="PagingMaker">
 	select count(*) from product
 		where product_total > 0
-		<if test="searchOption != null" >
+		<if test='searchOption != null' >
 			and ${searchOption} LIKE #{searchText}
 		</if>
-		<if test="ca1 != null" >
-			and ca1 = #{ca1}
+		<if test='ca1 != "1".toString()'  >
+						and ca1 = #{ca1}
 		</if>
-		<if test="ca2 != null" >
+		<if test='ca2 != "1".toString()'  >
 			and	ca2 = #{ca2}
 		</if>
-		<if test="ca3 != null">
+		<if test='ca3 != "1".toString()' >
 	 		and	ca3 = #{ca3}
 		</if>
 	</select>

@@ -106,24 +106,14 @@ public class ProductController {
 		System.out.println("Here is listController");
 		String text = PagingMaker.getSearchText();
 		PagingMaker.setSearchText("%"+text+"%");
-		System.out.println(PagingMaker.toString());
-		
-		if(PagingMaker.getCa1() == null){
-			PagingMaker.setCa1("1");
-		}else if(PagingMaker.getCa2() == null){
-			PagingMaker.setCa2("1");
-
-		}else if(PagingMaker.getCa3() == null){
-			PagingMaker.setCa3("1");
-		}
-		System.out.println("ca1 -"+PagingMaker.getCa1()+"ca2 -"+PagingMaker.getCa2()+"ca3 -"+PagingMaker.getCa3());
-		System.out.println("개"+service.Count_Product(PagingMaker));
-		PagingMaker.setTotalCount(service.Count_Product(PagingMaker));
+		System.out.println("ca1 -"+PagingMaker.getCa1()+"  ca2 -"+PagingMaker.getCa2()+"  ca3 -"+PagingMaker.getCa3());
+		int totalCount = service.Count_Product(PagingMaker);
+		PagingMaker.setTotalCount(totalCount);
 		List<ProductVO>list = service.list_product(PagingMaker);
 		
 		System.out.println(list.toString());
 		System.out.println(PagingMaker.toString());
-		//model.addAttribute("count_product", service.Count_Product());
+		model.addAttribute("count_product", totalCount);
 		model.addAttribute("list",list);
 		PagingMaker.setSearchText(text);
 		model.addAttribute("pageMaker", PagingMaker);

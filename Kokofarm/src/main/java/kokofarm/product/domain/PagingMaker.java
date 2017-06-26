@@ -25,9 +25,9 @@ public class PagingMaker {
 	private String searchOption; // 검색 옵션 ex)name, seller등
 	private String searchText; // 검색어
 	private String input_sort; // 정렬 방식
-	private String ca1; // 카테고리 정보
-	private String ca2; // 카테고리 정보
-	private String ca3; // 카테고리 정보
+	private String ca1 = "1"; // 카테고리 정보
+	private String ca2 = "1"; // 카테고리 정보
+	private String ca3 = "1"; // 카테고리 정보
 	
 
 	public String getCa1() {
@@ -163,8 +163,12 @@ public class PagingMaker {
 		
 		prev = startPage == 1 ? false : true;
 		next = endPage * getPerPageNum() >= totalCount ? false : true;
-
-		lastPage = (totalCount / displayPageNum) + 1;
+		
+		if((totalCount % displayPageNum) ==0){
+			lastPage = (totalCount / displayPageNum);
+		}else{
+			lastPage = (totalCount / displayPageNum)+1;
+		}
 
 		int start = 0;
 		int end = 0;

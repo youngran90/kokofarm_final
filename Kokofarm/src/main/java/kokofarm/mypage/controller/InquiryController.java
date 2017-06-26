@@ -86,7 +86,7 @@ public class InquiryController {
 		System.out.println(PagingMaker.toString());
 		
 		PagingMaker PagingMaker_s = new PagingMaker();
-		PagingMaker_s.setDisplayPageNum(3);
+		PagingMaker_s.setDisplayPageNum(2);
 	    if(page2 != 1){
 	    	PagingMaker_s.setPage(page2);
 	    }
