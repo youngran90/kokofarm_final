@@ -382,8 +382,10 @@
       
       <!-- =================입찰 완료 창============================= -->
       
-       <form action="tenderform">
-        <input type="hidden" name="auction_no" value="${tender.auction_no }">
+       <form action="tenderform" method="get">
+         <input type="hidden" name="auction_no" value="${tender.auction_no }">
+         <input type="hidden" name="pay_state" value=null>
+         <!-- <input type="hidden" name="tender_price_1" value=0> -->
         <div id="tendercompleteDiv" style="text-align: center; font-size: 30px; padding: 6px;">
         <p id="firstP">경매번호 : ${tender.auction_no } </p>
 		<p id="secondP">${tender.member_id }님 입찰이 완료되었습니다.</p>

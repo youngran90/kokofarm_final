@@ -48,10 +48,40 @@
             }
         }).open();
     }
-   
-    $('#submitPay').on('click',function(){
+    
+    function startpay(){
+    	var recipient = $('#recipientId').val();
+    	var mobilerec2 = $('#mobilerec2').val();
+    	var mobilerec3 = $('#mobilerec3').val();
+    	var recipientpost = $('.recipientpost').val();
+    	var address = $('.address').val();
+    	var address_sub = $('.address_sub').val();
+    	var comment = $('.comment').val();
     	
-    });
+    	if(recipient ==''){
+    		alert('받으시는 분의 이름을 입력해주세요.');
+    	}else if(mobilerec2 =='' || mobilerec3==''){
+    		alert('휴대폰번호를 입력해주세요.');
+    	
+    	}else if(recipientpost =='' || address =='' || address_sub=='' ){
+    		alert('배송지를 입력해주세요.');
+    	}else if(comment==''){
+    		alert('배송메세지를 입력해주세요.');
+    	}else{
+    	
+    		$('#payform').submit();
+    	}
+    	
+    }
+   
+    /* $('#submitPay').on('click',function(){
+     var recipient = $('#recipientId').val();
+    
+    	if(recipient ==null){
+    		alert('받으시는 분의 이름을 적어주세요.');
+    	}
+    	
+    }); */
 </script>
 
 
@@ -166,7 +196,7 @@
       </div>
     </div>
     <div class="col-sm-9" id="content">
-      <form action="paycomplete" method="post">
+      <form id="payform" action="paycomplete" method="post">
       <h1><strong>경매 상품 </strong></h1>
       <br>
       <!-- <form enctype="multipart/form-data" method="post" action="#"> -->
@@ -210,7 +240,7 @@
         </div>
       <!-- </form> -->
       <h2><strong>배송 정보</strong></h2>
-      <p style="color: red;">*필수 입력사항입니다.</p>
+      <p style="color: red;">* 필수 입력사항입니다.</p>
       
       
       <div id="accordion" class="panel-group">
@@ -229,8 +259,13 @@
             	
             	
 				<div class="recipient_customer01">
-					<strong class="recipient_name">받으시는분</strong>
-							<input type="text" class="input_recipientname" name="recipient" value="" placeholder=" 받으시는 분의 이름을 적어주세요" size="45">
+					<strong class="recipient_name"><span style="color: red;">*</span> 받으시는분</strong>
+							<input type="text" id="recipientId" class="input_recipientname" name="recipient" value="" placeholder=" 받으시는 분의 이름을 적어주세요" size="45">
+							  <%-- <c:if test="${recipient ==null }">
+							    <script type="text/javascript">
+							      alert('받으시는분의 이름을 입력하세요.');
+							    </script>
+							  </c:if> --%>
 								<label class="rd_label01">
 									<input type="radio" id="addr01" name="addr" class="addr01">
 										<span></span>
@@ -244,7 +279,7 @@
 				</div>
 				
 				<div class="recipient_customer02">
-					<strong class="recipient_monile">휴대폰</strong>
+					<strong class="recipient_monile"><span style="color: red;">*</span> 휴대폰</strong>
 							<!-- <input type="text" class="mobilerecipient1" name="mobileReceiver1" value="" maxlength="3" size="7"> -->
 							<select name="phone_no">
 								<option value="010">010</option>
@@ -254,10 +289,10 @@
 							</select>
 							<!-- <input type="hidden" name="mobileReceiver1">  -->
 								<span class="hyphen">-</span>
-							<input type="text" class="mobilerecipient2" name="mobileReceiver2" value="" maxlength="4" size="7">
+							<input type="text" id="mobilerec2" class="mobilerecipient2" name="mobileReceiver2" value="" maxlength="4" size="7">
 								<span class="hyphen">-</span>
-							<input type="text" class="mobilerecipient3" name="mobileReceiver3" value="" maxlength="4" size="7">
-					<strong class="recipient_phone">전화번호</strong>
+							<input type="text" id="mobilerec3" class="mobilerecipient3" name="mobileReceiver3" value="" maxlength="4" size="7">
+					<strong class="recipient_phone"><span> </span> 전화번호</strong>
 						<!-- <input type="text" class="phonerecipient1" name="phoneReceiver1" value="" maxlength="3" size="7"> -->
 						<select name="tel_no">
 								<option value="02">02</option>
@@ -285,7 +320,7 @@
 				
 				<div class="recipient_customer03">
 					<div class="post_addr">
-						<strong class="recipient_addr">배송지</strong>
+						<strong class="recipient_addr"><span style="color: red;">*</span> 배송지</strong>
 							<input type="text" class="recipientpost" name="recipientpost" id="sample6_postcode" placeholder="우편번호" value="" size="25" readonly="readonly">
 							<input type="button" class="post_btn" id="post_btn" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
 					</div>
@@ -297,7 +332,7 @@
 						<p class="caption">* 주말, 공휴일에 회사로 배송이 되어 상품 수령을 하지 못하는 경우, 반송에 따른 <span>추가 배송비 및 추가 비용이 부과</span>될 수 있습니다. </p>
 					</div>
 					<div class="delivery_msg01">
-						<strong class="msg_box">배송메시지</strong>
+						<strong class="msg_box"><span style="color: red;">*</span> 배송메시지</strong>
 					</div>
 					<div class="delivery_msg02">
 							<textarea name="ship_msg" class="comment" placeholder="※배송메시지 기재 필수 사항  
@@ -317,7 +352,7 @@
               	 -->
               	<div class="pay_list" style="margin-left: 150px;">
 					 <ul class="pays">
-					     <li><input type="radio" name="pay_sort" class="pay" value="신용카드">신용카드<span></span></li>
+					     <li><input type="radio" name="pay_sort" class="pay" value="신용카드"><span></span>신용카드</li>
 					     <li><input type="radio" name="pay_sort" class="pay" value="kakaopay"><img src="/../../resources/orderproduct/image/kakaopay.png" alt="kakaopay"></li>
 					     <li><input type="radio" name="pay_sort" class="pay" value="naverpay"><img src="/../../resources/orderproduct/image/naverpay.png" alt="naverpay"></li>
 					     <li><input type="radio" name="pay_sort" class="pay" value="무통장입금"><span></span>무통장입금</li>
@@ -584,7 +619,7 @@
       </div>  
       <div class="buttons">
         <div class="pull-left"><a class="btn btn-default" href="../auction/auction_list">경매상품보기</a></div>
-        <div class="pull-right" style="margin-right: 80px;"><input type="submit" id="submitPay" class="btn btn-primary" name="결제하기" value="결제하기"></div>
+        <div class="pull-right" style="margin-right: 80px;"><input type="button" id="submitPay" class="btn btn-primary" name="결제하기" value="결제하기" onclick="startpay()"></div>
       </div>
       </form>
     </div>

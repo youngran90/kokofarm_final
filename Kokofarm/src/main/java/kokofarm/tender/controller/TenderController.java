@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -37,6 +38,9 @@ public class TenderController {
 
 		@RequestMapping(value="tenderform", method=RequestMethod.GET)
 		public void tenderformGET(@RequestParam("pay_state") String pay_state, TenderVO tender, Model model, @RequestParam("auction_no") int auction_no) throws Exception{
+			//@RequestParam("tender_price_1") int tender_price_1,
+			//System.out.println("get에서 받아온 tender_price값=========="+tender_price_1);
+			
 			//HttpServletRequest request = null;
 			//System.out.println("넘어오나요 "+auction_no);
 			
@@ -55,6 +59,7 @@ public class TenderController {
 			//상품이 뜨도록 로드
 			AuctionVO auction= service.selectAuctionProduct(auction_no);
 			model.addAttribute("auction",auction);
+			
 			
 			int current_price;
 			
@@ -299,266 +304,21 @@ public class TenderController {
 					}	
 				}
 			}
+			/*System.out.println("get마지막부분tender_price=========="+tender_price_1);
+			if(tender_price_1 > auction.getAuction_up() || tender_price_1 < auction.getAuction_down() || tender_price_1 <= current_price){
+				if(tender_price_1!=0){
+				model.addAttribute("tender_price_1",tender_price_1);
+				}
+			}*/
 			model.addAttribute("tender_no",tender_no);
 			
-			//}
-			//////////여기서 부터 수정
-			/*else{
-				//상품이 뜨도록 로드
-				AuctionVO auction= service.selectAuctionProduct(auction_no);
-				model.addAttribute("auction",auction);
-				
-				int current_price;
-				
-				if(service.selectCurrentPrice(auction_no)!=null){
-					current_price=service.selectCurrentPrice(auction_no);
-				}else{
-					current_price=0;
-				}
-				model.addAttribute("current_price", current_price);
-				
-				
-				
-				//입찰내역 list
-				List<TenderVO> list= service.AllTender(auction_no);
-				//List<TenderVO> copy_list=new ArrayList<TenderVO>();
-				//@SuppressWarnings("unchecked")
-				//List<TenderVO> s_list=(List<TenderVO>)list.clone();
-	 			List<TenderVO> s_list = new ArrayList<TenderVO>();
-				
-				System.out.println("s_list "+ s_list);
-				//List<TenderVO> s_list = new ArrayList<TenderVO>();
-				//List<TenderVO> s_list;
-				
-				//System.out.println("=======================s_list==========="+s_list);
-				String m_id=null;
-				
-				if(list!=null){
-					
-					for(int i=0;i<list.size();i++){
-						int tender_no= list.get(i).getTender_no();
-						String member_id = list.get(i).getMember_id();
-						int tender_price = list.get(i).getTender_price();
-						Timestamp tender_date = list.get(i).getTender_date();
-						int auction_no2 = list.get(i).getAuction_no();
-						
-						TenderVO tender1 = new TenderVO(tender_no, member_id, tender_price, tender_date, auction_no2);
-						s_list.add(tender1);
-						System.out.println("s_list"+s_list);
-					}
-					
-					for(int i=0;i<list.size();i++){
-						
-						System.out.println("==========s_list에 들어가는 내용:========="+s_list);
-						
-						m_id =s_list.get(i).getMember_id();
-						//copy_list.get(i).setMember_id(m_id);
-						// list에 있는 아이디를 얻어  m_id에 넣고, replace하여 list의 아이디도 바껴있다. 
-						String s_id=m_id.replace(m_id.substring(m_id.length()-3, m_id.length()),"***");
-						
-						
-						System.out.println("================밑의 m_id======="+m_id);
-						System.out.println(s_id);
-					
-						s_list.get(i).setMember_id(s_id);
-						//list.get(i).setMember_id(m_id);
-					}
-					int tender_number = list.size();
-					System.out.println(tender_number);
-					model.addAttribute("tender_number",tender_number);
-					//System.out.println(copy_list);
-					model.addAttribute("s_list",s_list);
-					
-					System.out.println(s_list);
-				}
-				
-				for(int i=0;i<list.size();i++){
-					list.get(i).setMember_id(m_id);
-				}
-				
-				System.out.println(list);
-				//System.out.println(copy_list);
-				//System.out.println("밖의 s_list"+s_list);
-				
-				
-				String start_time = auction.getStart_date();
-				System.out.println("시작시간 "+start_time);
-				int s_year= Integer.parseInt(start_time.substring(0, 4));
-				int s_month= Integer.parseInt(start_time.substring(5, 7));
-				int s_day = Integer.parseInt(start_time.substring(8,10));
-				int s_hour = Integer.parseInt(start_time.substring(11,13));
-				int s_minute = Integer.parseInt(start_time.substring(14,16));
-				int s_second = Integer.parseInt(start_time.substring(17,19));
-				
-				int startTime=s_hour*60*60+s_minute*60+s_second;
-				System.out.println("시작시간(초) "+startTime);
-				
-				String end_time = auction.getEnd_date();
-				System.out.println("끝나는시간 "+ end_time);
-				int e_year = Integer.parseInt(end_time.substring(0,4));
-				int e_month=Integer.parseInt(end_time.substring(5,7));
-				int e_day=Integer.parseInt(end_time.substring(8,10));
-				int e_hour=Integer.parseInt(end_time.substring(11,13));
-				int e_minute= Integer.parseInt(end_time.substring(14,16));
-				int e_second=Integer.parseInt(end_time.substring(17,19));
-				
-				int endTime=e_hour*60*60+e_minute*60+e_second;
-				System.out.println("끝나는시간(초) "+endTime);
-				
-				Calendar cal= Calendar.getInstance();
-				SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				String visitTime=sf.format(cal.getTime());
-				System.out.println("현재시간 "+visitTime);
-				
 			
-				int v_year = Integer.parseInt(visitTime.substring(0,4));
-				int v_month=Integer.parseInt(visitTime.substring(5,7));
-				int v_day=Integer.parseInt(visitTime.substring(8,10));
-				int v_hour=Integer.parseInt(visitTime.substring(11,13));
-				int v_minute= Integer.parseInt(visitTime.substring(14,16));
-				int v_second=Integer.parseInt(visitTime.substring(17,19));
-				
-				int currentvisitTime=v_hour*60*60+v_minute*60+v_second;
-				System.out.println("현재시간(초) "+currentvisitTime);
-				
-				int year1= e_year-v_year;
-				int month1=e_month- v_month;
-				int day1= e_day-v_day;
-				int hour1=e_hour-v_hour;
-				int minute1 = e_minute-v_minute;
-				int second1= e_second-v_second;
-						
-				int visitingTime=0;
-					
-				if(year1==0 && month1==0 && day1>0){
-					if(e_second<v_second){
-						if(e_minute<1){
-							e_hour= e_hour-1;
-							e_minute = 59;
-							e_second=e_second+60;
-						}else{
-							e_minute=e_minute-1;
-							e_second=e_second+60;
-						}
-					}
-					
-					hour1=e_hour-v_hour;
-					minute1 = e_minute-v_minute;
-					second1= e_second-v_second;
-			
-					visitingTime= day1*24*60*60+ hour1*60*60+ minute1*60+ second1;
-				}else if(year1==0 && month1==0 && day1==0){
-					if(e_second<v_second){
-						if(e_minute<1){
-							e_hour= e_hour-1;
-							e_minute = 59;
-							e_second=e_second+60;
-						}else{
-							e_minute=e_minute-1;
-							e_second=e_second+60;
-						}
-					}
-					
-					hour1=e_hour-v_hour;
-					minute1 = e_minute-v_minute;
-					second1= e_second-v_second;
-					
-					
-					visitingTime= hour1*60*60+ minute1*60+ second1;
-					
-					if(visitingTime<=0){
-						visitingTime=0;
-					}				
-				}
-				System.out.println("방문시간: "+ visitingTime);
-				model.addAttribute("visitingTime", visitingTime);
-						
-				int tender_no = 0;
-				String member_id =null;
-				List<SuccessVO> successList=service.selectSuccess();
-				System.out.println("=========================successlist 테스트======================="+successList);
-				
-				if(visitingTime==0){  
-					if(current_price!=0){
-						for(int i=0;i<list.size();i++){
-							if(list.get(i).getTender_price()==current_price){
-								 tender_no =list.get(i).getTender_no();
-								 member_id =list.get(i).getMember_id();
-								 System.out.println("안의 member_id "+member_id);
-							}
-						}
-						
-						System.out.println("멤버아이디: "+member_id);
-						model.addAttribute("member_id",member_id);
-						
-						//List<SuccessVO> successList=service.selectSuccess();
-						int same_count=0;
-						if(successList.size()==0){
-							service.insertSuccess(tender_no);
-							service.updateAuctionSuccess(auction_no);
-						}else{
-							for(int i=0;i<successList.size();i++){
-								if(tender_no!=0){
-									if(tender_no==successList.get(i).getTender_no()){
-										same_count++;
-									}
-								}
-							}
-							System.out.println("======================if문 위 same_count================="+same_count);
-							if(same_count==0){
-								service.insertSuccess(tender_no);
-								service.updateAuctionSuccess(auction_no);
-							}
-						}	
-					}else{ //시간은 다됐는데 현재가=0  ==> 유찰 
-						service.updateAuctionResult(auction_no);  
-					}
-				}else{
-					if(auction.getAuction_up()==current_price){
-						visitingTime=0;
-						model.addAttribute("visitingTime", visitingTime);
-						for(int i=0;i<list.size();i++){
-							//copy_list.get(i).setMember_id(m_id);
-							if(list.get(i).getTender_price()==current_price){
-								
-								 tender_no = list.get(i).getTender_no();
-								 member_id = list.get(i).getMember_id();
-								 System.out.println("안의 member_id "+member_id);
-							}
-						}
-						System.out.println("멤버아이디: "+member_id);
-						model.addAttribute("member_id",member_id);
-						
-						//List<SuccessVO> successList=service.selectSuccess();
-						int same_count=0;
-						if(successList.size()==0){
-							service.insertSuccess(tender_no);
-							service.updateAuctionSuccess(auction_no);
-							
-						}else{
-							for(int i=0;i<successList.size();i++){
-								if(tender_no!=0){
-									if(tender_no==successList.get(i).getTender_no()){
-										same_count++;
-										
-									}
-								}
-							}
-							if(same_count==0){
-								service.insertSuccess(tender_no);
-								service.updateAuctionSuccess(auction_no);
-							}
-						}	
-					}
-				}
-				model.addAttribute("tender_no",tender_no);
-				
-				
-			}*/
 		}
 		
 		@RequestMapping(value="tenderform", method=RequestMethod.POST)
 		public String tenderformPOST(HttpServletRequest request,TenderVO tender, Model model, @RequestParam("auction_no") int auction_no) throws Exception{
+			System.out.println("테스트한 tender_price=================="+tender.getTender_price());
+			
 			HttpSession session = request.getSession();
 			MemberVO member= (MemberVO)session.getAttribute("login");
 			
@@ -576,14 +336,19 @@ public class TenderController {
 				current_price=0;
 			}
 			
-			if(tender.getTender_price() < auction.getAuction_down() || tender.getTender_price() <= current_price){
-				return "redirect:/tender/tenderform";
+			/*if(tender.getTender_price() < auction.getAuction_down() || tender.getTender_price() <= current_price || tender.getTender_price() > auction.getAuction_up()){
+				System.out.println("이리로는 들어오긴하는거니");
+				model.addAttribute("tender_price_1", tender.getTender_price());
+				System.out.println("얻어온값=========tenderprice"+tender.getTender_price());
+				//return "redirect:/tender/tenderform?auction_no=${auction_no}&pay_state=null";
+				return "redirect:/tender/tenderform?auction_no="+auction_no+"&pay_state=null&tender_price="+tender.getTender_price();
 				
-			}else{
+			}*/
+			//else{
 				service.insertTender(tender);
 				model.addAttribute("tender",tender);
 				return "/tender/tenderfinish";
-			}
+			//}
 		
 		
 		}
@@ -618,6 +383,11 @@ public class TenderController {
 		public void paycomplete(PayVO payvo, Model model, @RequestParam("address_sub") String address_sub, @RequestParam("recipientpost") String recipientpost,
 					    @RequestParam("mobileReceiver2") String mobileReceiver2, @RequestParam("mobileReceiver3") String mobileReceiver3,
 					    @RequestParam("phoneReceiver2") String phoneReceiver2, @RequestParam("phoneReceiver3") String phoneReceiver3) throws Exception{
+			
+			/*if(payvo.getRecipient()==null){
+				model.addAttribute("recipient",null);
+				return "tenderpay";
+			}*/
 			
 			String ship_area = "우편번호: "+recipientpost+", 상세주소: "+payvo.getShip_area()+", "+address_sub;
 			System.out.println("주소: "+ship_area);
@@ -671,8 +441,8 @@ public class TenderController {
 					model.addAttribute("payvo",payvo);
 				}
 			}
-			
 		}
+		
 		/*@RequestMapping("payend")
 		public String payend() throws Exception{
 			return "../mypage/auction_view";

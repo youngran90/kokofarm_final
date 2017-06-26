@@ -116,7 +116,7 @@
 								</thead>
 
 								<tbody>
-									<c:forEach var="SuccessViewDetailVO" items="${successViewList}" 	varStatus="status">
+									<c:forEach var="SuccessViewDetailVO" items="${successViewList}" varStatus="status">
 									<input type="hidden" id="inquiry_content" class="inquiry_content" value="${SuccessViewDetailVO.success_no}">
 									<input type="hidden" id="inquiry_no" class="inquiry_no" value="${SuccessViewDetailVO.tender_no}">
 									
@@ -310,7 +310,7 @@
 											<tr  class="tit_tr user_tit_tr">
 												<td>${status.count}</td>
 												<td>${ AuctionViewVO.auction_no }</td>
-												<td><a href="../tender/tenderform?auction_no=${AuctionViewVO.auction_no }">${AuctionViewVO.auction_name}</a></td>
+												<td><a href="../tender/tenderform?auction_no=${AuctionViewVO.auction_no }&pay_state=null">${AuctionViewVO.auction_name}</a></td>
 												<td>${AuctionViewVO.start_date}</td>
 												<td>${AuctionViewVO.end_date}</td>
 												<td>${AuctionViewVO.auction_result }</td>

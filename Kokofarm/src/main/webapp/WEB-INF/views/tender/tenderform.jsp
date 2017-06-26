@@ -10,11 +10,11 @@
  %>
  
  <script type="text/javascript">
-
-  
+ 
   var time=${visitingTime};
   
    function timer(){ 
+	   
 	   if(time<=0){
 		   clearInterval(tid);
 		   time=0;
@@ -43,16 +43,20 @@
  
  $(function(){
 	 
+	 
+	 
 	 tid=setInterval(timer,1000);
 	 
 	 $('#tenderinfoview').hide();
 	 
 	 $('#tenderinfo').on('click',function(){
 		$('#tenderinfoview').slideDown('slow');
+		return false;
 	 });
 	
 	 $('#tenderinfoend').on('click',function(){
 		 $('#tenderinfoview').hide();
+		 return false;
 	 });
 	 
 	  var formObj = $("form[role='form']");
@@ -71,10 +75,26 @@
 		  $('#payNow').hide();
 		  $('#payLater').hide();
 	  }
-	
- })
- 
- 
+
+ });
+   
+
+   function tend(){
+	 
+			 var tender_price = $('#tenderpriceId').val();
+			 
+			 if(tender_price > ${auction.auction_up}){
+				 alert('상한가를 확인하세요.');
+				 alert(${auction.auction_up});
+			 }else if(tender_price < ${auction.auction_down}){
+			   alert('하한가를 확인하세요.');
+			 }else if(tender_price <= ${current_price}){
+				 alert('현재가를 확인하세요.');
+			 }else{
+				 $('#form').submit();
+			 }
+   }
+   
  
 </script>
 <div class="container">
@@ -357,7 +377,8 @@
         
         
         <!-- 여기서부터 상품상세 -->
-        <form action="tenderform" method="post">
+        <form id="form" action="tenderform" method="post">
+         <!-- action="tenderform"  -->
         <div class="col-sm-6">
           <h1 class="productpage-title">${auction.auction_name}</h1>
           <div class="rating product"> 
@@ -494,14 +515,15 @@
 		       </c:when>
 		       <c:otherwise>
               <label class="control-label qty-label" for="input-quantity">입찰가격</label>
-              <input type="number" name="tender_price" id="input-quantity" class="form-control productpage-qty" style="width:150px;"/>
+              <input type="number" id="tenderpriceId" name="tender_price" id="input-quantity" class="form-control productpage-qty" style="width:150px; float: left"/>
+              <input style="float: left; visibility: hidden; width : 0;">
               <input type="hidden" name="product_id" value="48" />
               
               <div class="btn-group">
                  <button type="button" data-toggle="tooltip" class="btn btn-default wishlist" title="Add to Wish List" style="display: none;"><i class="fa fa-heart-o" style="display: none;"></i></button> 
-               
+                
                <!-- 입찰버튼 -->
-                <input type="submit" id="button-cart" data-loading-text="Loading..." class="btn btn-primary btn-lg btn-block addtocart" value="입찰하기">
+                <input type="button" id="button-cart" data-loading-text="Loading..." class="btn btn-primary btn-lg btn-block addtocart" value="입찰하기" onclick="tend()">
                 <button type="button" data-toggle="tooltip" class="btn btn-default compare" title="Compare this Product"style="display: none;" ><i class="fa fa-exchange" style="display: none;"></i></button>
                 </div>
                </c:otherwise>    
@@ -570,8 +592,8 @@
               <h2>Write a review</h2>
               <div class="form-group required">
                 <div class="col-sm-12">
-                  <label class="control-label" for="input-name">Your Name</label>
-                  <input type="text" name="name" value="" id="input-name" class="form-control" />
+                  <label class="control-label" for="input-name">ID</label>
+                  <input type="text" name="name" value="${login.member_id}" id="input-name" class="form-control" readonly="readonly"/>
                 </div>
               </div>
               <div class="form-group required">
@@ -598,7 +620,7 @@
               </div>
               <div class="buttons clearfix">
                 <div class="pull-right">
-                  <button type="button" id="button-review" data-loading-text="Loading..." class="btn btn-primary">Continue</button>
+                  <button type="button" id="button-review" data-loading-text="Loading..." class="btn btn-primary" onclick="">Continue</button>
                 </div>
               </div>
             </form>
