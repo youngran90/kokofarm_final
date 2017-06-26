@@ -34,7 +34,7 @@ public class RtAuctionController {
 	private RtAuctionService service;
 	
 	@RequestMapping(value="/rt_auction",method=RequestMethod.GET)
-	public String rt_actionGet(@RequestParam("rt_auction_no") String rt_auction_no,
+	public String rt_actionGet(//@RequestParam("rt_auction_no") String rt_auction_no,
 			HttpServletRequest request, Model model)throws Exception{
 		
 		HttpSession session = request.getSession();
@@ -46,7 +46,7 @@ public class RtAuctionController {
 		}
 		
 		
-		RtAuctionInfoVO vo = service.rtauction_info(rt_auction_no);
+		RtAuctionInfoVO vo = service.rtauction_info("RT_Auction_bff703e9e7f449cead2ad6f1d52ed6e4");
 		String name = vo.getRt_auction_name();
 		int down = vo.getRt_auction_down();
 		String unit = vo.getRt_auction_unit();
@@ -68,12 +68,12 @@ public class RtAuctionController {
 		model.addAttribute("content", content);
 		model.addAttribute("area", area);
 		model.addAttribute("seller_no", seller_no);
-		model.addAttribute("rt_auction_no", rt_auction_no);
+		//model.addAttribute("rt_auction_no", rt_auction_no);
 		
-		//return "redirect://localhost:8083";
+		return "redirect://localhost:8083";
 		//return "redirect:http://192.168.0.172:8083"; // 학원에서 할때 학원 서버
 		//return "redirect:http://106.242.203.68:8083"; //집에서 할때 학원 서버
-		return "redirect:http://192.168.0.172:8083/"; // 학원에서 내껄로 접속할때
+		//return "redirect:http://192.168.0.172:8083/"; // 학원에서 내껄로 접속할때
 		
 	}
 	

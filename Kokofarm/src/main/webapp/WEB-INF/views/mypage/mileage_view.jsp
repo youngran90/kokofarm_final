@@ -56,11 +56,15 @@ $(function(){
 		
 		var now = new Date();
 		now = finish_auction(now);
-
-		if(start > now){
+		
+		//시작일  > 오늘일자
+		if(now <= start && now < end){
 			alert("미래를 조회하겠다고?");
+		//끝나는일 < 시작일
 		}else if(end < start){
 			alert("시간지배자?");
+		}else if(end > now){
+			alert("끝나는 날이 오늘을 못 넘어요~");
 		}else{
 			$("#search_form").submit();
 		}

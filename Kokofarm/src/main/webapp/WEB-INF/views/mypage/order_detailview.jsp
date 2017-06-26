@@ -30,7 +30,7 @@
 		<div class="title_container">
 			<strong id="order_date">주문일</strong><strong id="order_date_info">${date}</strong>
 			<strong id="order_no">주문번호</strong><strong id="order_no_info">${order_finish_no}</strong>
-			<span class="confirm_btn">확인</span>
+			<span class="confirm_btn">닫기</span>
 		</div>
 		<div class="tb_container">
 			<table class="order_detail">
@@ -42,13 +42,15 @@
 			</colgroup>
 			<tr>
 				<th>번호</th>
-				<th colspan="2">제품</th>
+				<th colspan="2">제품<span id="comment">(이미지를 클릭하면 해당 제품으로 이동합니다.)</span></th>
 				<th>배송비</th>
 			</tr>
 			<c:forEach var="detail" items="${list}" varStatus="status">	
 			<tr>
 				<td id="count">${status.count }</td>
-				<td><a href="/product/detail_product?product_no=${detail.product_no}"><img src="/resources/files/attach/${detail.product_mainimage}" alt="/resources/files/attach/${detail.product_mainimage}" id="img"></a></td>
+				<td><a href="#" onclick="javascript:opener.location.href='/product/detail_product?product_no=${detail.product_no}'; self.close();" >
+					<img src="/resources/files/attach/${detail.product_mainimage}" alt="/resources/files/attach/${detail.product_mainimage}" id="img"></a>
+				</td>
 				<td>
 					<strong id="product_name">제품명</strong><strong id="product_name_info">${detail.orderfinish_product_name}</strong><br>
 					<strong id="product_amount">총 수량</strong><strong id="product_amount_info">${detail.orderfinish_product_amount}</strong><br>
@@ -81,10 +83,10 @@
 			<div class="price_info">
 				<strong>총상품가격</strong>
 				<strong id="pay_t"><fmt:formatNumber value="${total}" type="number"/>원</strong><br>
-				<strong>할인내역</strong>
-				<strong id="pay_m"><fmt:formatNumber value="${mileage}" type="number"/>원</strong><br>
 				<strong>배송비</strong>
 				<strong id="pay_d"><fmt:formatNumber value="${delivery}" type="number"/>원</strong><br>
+				<strong>할인내역</strong>
+				<strong id="pay_m"><fmt:formatNumber value="${mileage}" type="number"/>원</strong><br>
 				<strong>총가격</strong>
 				<strong id="pay_f"><fmt:formatNumber value="${finish}" type="number"/>원</strong><br>
 			</div>

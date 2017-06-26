@@ -16,14 +16,6 @@ $(function() {
 	}) // 은행 이름
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
 	var db_id = $("select[name=mobileReceiver1]").attr("id");
 	
 	$("#button-confirm").on('click', function() {
@@ -348,26 +340,26 @@ $(function() {
 
 	$(".point_count").on('click',function() {
 				var use_point = parseInt($("#use").val()); //사용할 마일리지
-				if (point < use_point) {
-					alert("포인트 부족");
-					$("#use").val(0);
-					$(".order_result_price_sel").text(0);
-					$(".order_result_price_total").text(numberFormat(order_result_price));
-					$(".use_btn span").text(numberFormat(point));
-				} else if (use_point < 0) {
-					alert("0 이하 입력불가");
-					$("#use").val(0);
-					$(".order_result_price_sel").text(0);
-					$(".order_result_price_total").text(numberFormat(order_result_price));
-					$(".use_btn span").text(numberFormat(point));
-				}else if(use_point > order_result_price){
-					alert("초과할 수 없습니다.");
-					$("#use").val(0);
-				}else {
-					$(".order_result_price_sel").text(numberFormat(use_point));
-					$(".order_result_price_total").text(numberFormat((order_result_price - use_point)));
-					$(".use_btn span").text(numberFormat((point - use_point)));
-				}
+					if (point < use_point) {
+						alert("포인트 부족");
+						$("#use").val(0);
+						$(".order_result_price_sel").text(0);
+						$(".order_result_price_total").text(numberFormat(order_result_price));
+						$(".use_btn span").text(numberFormat(point));
+					} else if (use_point < 0) {
+						alert("0 이하 입력불가");
+						$("#use").val(0);
+						$(".order_result_price_sel").text(0);
+						$(".order_result_price_total").text(numberFormat(order_result_price));
+						$(".use_btn span").text(numberFormat(point));
+					}else if(use_point > order_result_price){
+						alert("초과할 수 없습니다.");
+						$("#use").val(0);
+					}else {
+						$(".order_result_price_sel").text(numberFormat(use_point));
+						$(".order_result_price_total").text(numberFormat((order_result_price - use_point)));
+						$(".use_btn span").text(numberFormat((point - use_point)));
+					}
 				// 최종 금액 ( 마일리지 구하기 위한 가격 , 모든 제품가격을 더한것...)
 				$("input[name=orderfinish_final_price]").val(
 						$(".order_result_price_total").text().replace(/[^0-9]/g, ""));
