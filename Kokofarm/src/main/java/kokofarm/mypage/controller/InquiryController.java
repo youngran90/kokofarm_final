@@ -149,6 +149,7 @@ public class InquiryController {
 	@RequestMapping(value="/graph" , method=RequestMethod.GET)
 	public String graph(HttpServletRequest request ,Model model, @Param("action") String action)throws Exception{
 		
+		System.out.println("graph in");
 		MemberVO member = (MemberVO)request.getSession().getAttribute("login");
 		String member_id = member.getMember_id();
 		

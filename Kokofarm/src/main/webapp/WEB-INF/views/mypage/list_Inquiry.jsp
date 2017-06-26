@@ -203,7 +203,7 @@ function update_Re() {
 				<li><a href="/mypage/list_Inquiry?page1=${pageMaker.lastPage}">마지막</a></li></ul>
         </div>
       </div>
-	
+	</div>
 	
 							<!-- 판매자용 -->
 							<c:if test="${login.seller_no ne null || login.seller_no == ''}">
@@ -269,8 +269,8 @@ function update_Re() {
 										</tr>
 										</c:forEach>
 								</table>
-							</c:if>
-						</div>
+							
+						
 	<div class="category-page-wrapper">
         <div class="pagination-in" style="margin-left: 40%">
          <ul class="pagination" >
@@ -290,7 +290,8 @@ function update_Re() {
 			</ul>
         </div>
       </div>
-	
+      </c:if>
+   
 	
 	
 	

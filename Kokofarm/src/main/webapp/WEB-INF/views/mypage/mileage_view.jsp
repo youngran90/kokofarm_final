@@ -112,10 +112,8 @@ $(function(){
 <div class="container">
 	<div class="row">
 		<%@include file="./Mypage.jsp"%>
-		<div id="content" class="col-sm-9">
-            <div class="cpt_product_description ">
-            
-				<div class="current_box">
+		
+		<div class="current_box">
 					<strong id="current_t">현재 포인트 <strong id="current_m"><fmt:formatNumber value="${current}" type="number"/></strong>P</strong>
 				</div>
 				
@@ -132,6 +130,10 @@ $(function(){
 				</div>
 				</form>
                     
+		<div id="content" class="col-sm-9">
+		
+            <div class="cpt_product_description ">
+				
 				<table id="mileage_tb">
 				<colgroup>
 					<col width="100">
@@ -141,7 +143,7 @@ $(function(){
 					<col width="230">
 					<col width="230">
 				</colgroup>
-					<tr>
+					<tr  class="tit_tr user_tit_tr">
 						<th>번호</th>
 						<th>거래일</th>
 						<th>적립</th>
@@ -150,7 +152,7 @@ $(function(){
 						<th>이용정보</th>
 					</tr>
 					<c:forEach var="list" items="${list }" varStatus="status">
-					<tr>
+					<tr class="txt_tr reply_txt_tr">
 						<td>${pageMaker.start+status.index }</td>
 						<td><fmt:formatDate value="${list.mileage_date }" pattern="yyyy-MM-dd" /></td>
 						<td><fmt:formatNumber value="${list.mileage_saving }" type="number"/></td>
