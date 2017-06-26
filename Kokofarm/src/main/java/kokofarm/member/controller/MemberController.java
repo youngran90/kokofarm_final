@@ -2,6 +2,7 @@ package kokofarm.member.controller;
 
 import java.io.PrintWriter;
 import java.util.Date;
+import java.util.Set;
 
 import javax.inject.Inject;
 import javax.servlet.http.Cookie;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.WebUtils;
 
@@ -170,9 +172,58 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
+	@RequestMapping(value="/myInfo", method = RequestMethod.GET)
+	public String myInfo() throws Exception{
+		
+		return "/member/myInfoCheck";
+	}
+	
+	@RequestMapping(value = "/myInfo", method = RequestMethod.POST)
+	public void myInfoDetail(LoginDTO dto, Model model) throws Exception{
+	MemberVO vo = service.memberInfo(dto);
+	model.addAttribute("list",vo);
+	
+		
+	}
+	
+	@RequestMapping(value = "/myInfoCheck" , method = RequestMethod.POST)
+	@ResponseBody
+	public int myInfoCheck(LoginDTO dto) throws Exception{
+		
+		
+		int re = service.login(dto);
+		return re;
+		
+		
+	}
 	
 	
+	@RequestMapping(value= "/myInfoUpdate", method = RequestMethod.POST)
+	public String myInfoUpdate(MemberVO vo)throws Exception{
+		service.updateMyInfo(vo);
+		
+		return "redirect:/";
+	}
 	
+	/*@RequestMapping("/contextpath")
+	@ResponseBody
+	public void path(HttpServletRequest request) throws Exception{
+		String path = request.getServletContext().getContextPath();
+		String path2 = request.getServletContext().getServletContextName();
+		String path3 = request.getServletContext().getContextPath();
+		String path4 = request.getSession().getServletContext().getContext("/files").getRealPath("");
+			
+		String path1 = 	request.getSession().getServletContext().getRealPath("/files");
+		Set<String> pathSet = request.getSession().getServletContext().getResourcePaths("/");
+			
+		System.out.println("getcontextpaht"+path);
+		System.out.println("getrealpath"+path1);
+		System.out.println("getservletcontextname"+path2);
+		System.out.println("getcontextpath"+path3);
+		System.out.println("getcontext(/files)"+path4);
+		System.out.println("pathset"+pathSet);
+		
+	}*/
 	
 }
 

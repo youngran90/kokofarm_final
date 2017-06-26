@@ -71,5 +71,12 @@ class MemberDAOImpl implements MemberDAO {
 	}
 
 
+	@Override
+	public void updateMyInfo(MemberVO vo) throws Exception {
+		session.update(namespace+".updateMyInfo", vo);
+		
+	}
+
+
 
 }

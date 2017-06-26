@@ -60,4 +60,11 @@ public class MemberServiceImpl implements MemberService {
 		return dao.memberInfo(dto);
 	}
 
+	@Transactional
+	@Override
+	public void updateMyInfo(MemberVO vo) throws Exception {
+		dao.updateMyInfo(vo);
+		
+	}
+
 }

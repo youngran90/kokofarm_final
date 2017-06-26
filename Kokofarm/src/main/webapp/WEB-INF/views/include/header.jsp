@@ -63,7 +63,7 @@ display: none;!important;
 .show_price{
 margin : 0px;
 position : relative;
-
+left :100px;
 display: inline-block;
 width: 200px;
 height: 20px;

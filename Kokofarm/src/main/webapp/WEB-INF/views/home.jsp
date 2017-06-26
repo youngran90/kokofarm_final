@@ -259,7 +259,7 @@ font-family: YG77;
     <div class="cms_banner">   		 
    		  <div class="auctionsale_banner"> 
    		  <div class="auction_image left1">
-   		  	<img alt="" src="/resources/files/attach/banner.jpg" style="width: 200px; height: 100px;">
+   		  	<img alt="" src="/resources/files/attach/${rtAuctionInfoList.get(0).rt_auction_title_img }" style="width: 200px; height: 100px;">
    		  
    		  </div>
    		  
@@ -289,7 +289,7 @@ font-family: YG77;
 				 
 								
 			<div class="auction_image right2">
-   		  		<img alt="" src="/resources/files/attach/banner.jpg" style="width: 200px; height: 100px;">
+   		  		<img alt="" src="/resources/files/attach/${rtAuctionInfoList.get(1).rt_auction_title_img }" style="width: 200px; height: 100px;">
    		  
    		  </div>					
 									 
@@ -345,7 +345,7 @@ font-family: YG77;
                 <div class="product-thumb transition">
                   <div class="image product-imageblock"> 
                   	<a href="/product/detail_product?product_no=${LproductVO.product_no }">
-                  		<img src="/resources/files/attach/${LproductVO.product_mainimage}" alt="${LproductVO.product_name}" title="${LproductVO.product_name }"   class="img-responsive" /> 
+                  		<img src="/resources/files/attach/${LproductVO.product_mainimage}" alt="${LproductVO.product_name}" title="${LproductVO.product_name }"   class="img-responsive"  style="width: 280px; height:196px;"/> 
                   	</a>
                     <div class="button-group">
                       <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List" ><i class="fa fa-heart-o"></i></button>
@@ -376,7 +376,7 @@ font-family: YG77;
               <c:forEach items="${auctionList }" var="LauctionList">
               <div class="item">
                 <div class="product-thumb transition">
-                  <div class="image product-imageblock"> <a href="/tender/tenderform?auction_no=${LauctionList.auction_no }&pay_state=null"> <img src="/resources/files/attach/${LauctionList.auction_title_img }" alt="${LauctionList.auction_name }" title="${LauctionList.auction_name }" class="img-responsive" /> </a>
+                  <div class="image product-imageblock"> <a href="/tender/tenderform?auction_no=${LauctionList.auction_no }&pay_state=null"> <img src="/resources/files/attach/${LauctionList.auction_title_img }" alt="${LauctionList.auction_name }" title="${LauctionList.auction_name }" class="img-responsive"  style="width: 280px; height:196px;"/> </a>
                   <!--   <div class="button-group">
                       <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List" ><i class="fa fa-heart-o"></i></button>
                       <button type="button" class="addtocart-btn" >Add To Cart</button>
@@ -405,7 +405,7 @@ font-family: YG77;
               <c:forEach items="${bestList}" var="LbestList">            
               <div class="item">
                 <div class="product-thumb transition">
-                  <div class="image product-imageblock"> <a href="/product/detail_product?product_no=${LbestList.product_no }"> <img src="/resources/files/attach/${LbestList.product_mainimage }" alt="${LbestList.product_name }" title="${LbestList.product_name }" class="img-responsive" /> </a>
+                  <div class="image product-imageblock"> <a href="/product/detail_product?product_no=${LbestList.product_no }"> <img src="/resources/files/attach/${LbestList.product_mainimage }" alt="${LbestList.product_name }" title="${LbestList.product_name }" class="img-responsive"  style="width: 280px; height:196px;"/> </a>
                     <div class="button-group">
                       <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List" ><i class="fa fa-heart-o"></i></button>
                       <button type="button" class="addtocart-btn"  no="${LbestList.product_no }">Add To Cart</button>

@@ -56,6 +56,19 @@
 					<beans:ref bean="authInterceptor"/>
 				</interceptor>
 				
+				<interceptor>
+					<mapping path="/member/myInfo"/>
+					<beans:ref bean="authInterceptor"/>
+				</interceptor>
+				
+				<interceptor>
+					<mapping path="/product/Insert_product"/>
+					<beans:ref bean="authInterceptor"/>
+				</interceptor>
+				
+				
+				
+				
 				<!--  <interceptor>
 					<mapping path="/rt_auction/rt_auction"/>
 					<beans:ref bean="rt_auctionInterceptor"/>

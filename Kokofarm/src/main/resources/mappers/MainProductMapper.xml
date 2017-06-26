@@ -24,4 +24,12 @@ where rownum <=10
 		<![CDATA[ where rownum <=10 ]]> 
 	</select>
 
+	<select id="rtAuctionImage" resultType="RT_AuctionRegisterVO">
+	<![CDATA[
+		 select * from rt_auction where rt_auction_date >=to_char(sysdate, 'YYYY-MM-DD') and rt_auction_date < to_char(sysdate+1,'YYYY-MM-DD')
+	]]> ORDER BY rt_auction_date asc
+	</select>
+
+
+
 </mapper>

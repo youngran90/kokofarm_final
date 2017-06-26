@@ -7,9 +7,11 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import kokofarm.auction.domain.AuctionRegisterVO;
+import kokofarm.auction.domain.RT_AuctionRegisterVO;
 import kokofarm.mainImage.domain.AuctionListDTO;
 import kokofarm.mainImage.persistence.MainImageDAO;
 import kokofarm.product.domain.ProductVO;
+import kokofarm.rtauction.domain.RtAuctionInfoVO;
 
 @Service
 public class MainImageServiceImpl implements MainImageService {
@@ -31,6 +33,11 @@ public class MainImageServiceImpl implements MainImageService {
 	@Override
 	public List<ProductVO> bestSellerItems() throws Exception {
 		return dao.mainBestSellerItem();
+	}
+
+	@Override
+	public List<RT_AuctionRegisterVO> rtAuctionInfo() throws Exception {
+		return dao.rtAuctionImage();
 	}
 
 }

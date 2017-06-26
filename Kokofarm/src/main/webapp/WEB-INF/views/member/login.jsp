@@ -13,20 +13,22 @@
     </style>
     <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
  	<script>
- 	
- 	function enterkey() {
+ 		var jq = $.noConflict(true);
+ 	</script>
+ 
+ 
+ <script>
+ 
+	function enterkey() {
         if (window.event.keyCode == 13) {
  
         	$('#loginBtn').trigger('click');
         }
 }
 	
- 	
-	var jq = $.noConflict(true);
- 	</script>
  
  
- <script>
+ 
  jq(document).ready(function(){
 	 jq("#findId").on("click",function(){
 		 
@@ -97,7 +99,7 @@ jq("#loginBtn").on('click',function(){
     <li><a href="/member/login">Login</a></li>
   </ul>
   <div class="row">
-    <div class="col-sm-3 hidden-xs column-left" id="column-left">
+   <!--  <div class="col-sm-3 hidden-xs column-left" id="column-left">
       <div class="column-block">
         <div class="columnblock-title">Account</div>
         <div class="account-block">
@@ -117,8 +119,8 @@ jq("#loginBtn").on('click',function(){
 		 </div>
         </div>
       </div>
-    </div>
-    <div class="col-sm-9" id="content">
+    </div> -->
+    <div class="col-sm-9" id="content" style="margin-left: 131px">
       <div class="row">
         <div class="col-sm-6">
           <div class="well">

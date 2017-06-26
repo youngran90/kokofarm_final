@@ -17,6 +17,13 @@
 			
 </insert>
 
+<update id="updateMyInfo" parameterType="MemberVO">
+	update member set member_password =PACK_ENCRYPTION_DECRYPTION.FUNC_ENCRYPT(#{member_password}), member_email=#{member_email}, member_phoneNum=#{member_phoneNum},
+													member_zipcode=#{member_zipcode}, member_address1=#{member_address1}, member_address2=#{member_address2},
+													member_tele=#{member_tele}
+										where member_id=#{member_id}
+</update>
+
 <select id = "logincheck" resultType="Integer" parameterType="LoginDTO">
 	select count(*) from member 
 		where member_id=#{member_id} and member_password=PACK_ENCRYPTION_DECRYPTION.FUNC_ENCRYPT(#{member_password})
