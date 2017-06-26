@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>아이디 중복 체크</title>
+<title>이메일 중복 체크</title>
   
  <style type="text/css">
         #wrap {
@@ -32,58 +32,35 @@
 <script type="text/javascript"> 
 $(function(){
 			
-			var id = $("#member_id", opener.document).val();
-			$("#userId").val(id);
+			var email = $("#member_email", opener.document).val();
+			$("#member_email").val(email);
 })
-
- /*     function getXMLHttpRequest(){
-
-
-        var httpRequest = null;
-        
-        // httpRequest 객체 생성
-            var httpRequest = null;
-        
-            if(window.ActiveXObject){
-                try{
-                    httpRequest = new ActiveXObject("Msxml2.XMLHTTP");    
-                } catch(e) {
-                    try{
-                        httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
-                    } catch (e2) { httpRequest = null; }
-                }
-            }
-            else if(window.XMLHttpRequest){
-                httpRequest = new window.XMLHttpRequest();
-            }
-            return httpRequest;    
-} */
 
 // 회원가입창의 아이디 입력란의 값을 가져온다.
 
- function idCheck(){
+ function emailCheck(){
 	
-	var id = $("#userId").val();
-	 var eid = /^[a-z0-9A-Z_]{4,15}$/; 
-	 if(!eid.test(id)){ 
-		alert("4~15글자 한글 및 특수문자는 아이디로 사용 할 수 없습니다.");
+	var email = $("#member_email").val();
+	var eemail =/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+	 if(!eemail.test(email)){ 
+		alert("해당 형식의 이메일은 사용 할 수 없습니다.");
 	
 	 }else{
 		 $.ajax({
 			 type : "post",
-			 url : "/member/id_check",
-			 data : {userid:id},
+			 url : "/member/email_check",
+			 data : {member_email:email},
 			 dataType : "text",
 			 success : function(result){
 				 if(result==0){
-					 alert("사용 할 수 없는 아이디 입니다.");
+					 alert("사용 할 수 없는 이메일 입니다.");
 					 document.getElementById("cancelBtn").style.visibility='visible';
 			            document.getElementById("useBtn").style.visibility='hidden';
-			            document.getElementById("msg").innerHTML ="사용 할수 없는 아이디";
+			            document.getElementById("msg").innerHTML ="사용 할 수 없는 이메일";
 				 }else if(result ==1){
 					 document.getElementById("cancelBtn").style.visibility='hidden';
 			            document.getElementById("useBtn").style.visibility='visible';
-			            document.getElementById("msg").innerHTML = "사용 가능한 아이디입니다.";
+			            document.getElementById("msg").innerHTML = "사용 가능한 이메일 입니다.";
 					 					 
 				 }
 				 
@@ -98,12 +75,12 @@ $(function(){
 
 // 사용하기 클릭 시 부모창으로 값 전달 
 function sendCheckValue(){
-    // 중복체크 결과인 idCheck 값을 전달한다.
-    $("#idDuplication",parent.opener.document).val("idCheck")
+    // 중복체크 결과인 emailCheck 값을 전달한다.
+    $("#emailDuplication",parent.opener.document).val("emailCheck")
    
-    // 회원가입 화면의 ID입력란에 값을 전달
-    var id = $("#userId").val();
-    $("#member_id",parent.opener.document).val(id);
+    // 회원가입 화면의 email입력란에 값을 전달
+    var email = $("#member_email").val();
+    $("#member_email",parent.opener.document).val(email);
         
     if (opener != null) {
         opener.chkForm = null;
@@ -121,13 +98,13 @@ function sendCheckValue(){
 
 	<div id = "wrap">
 		<br>
-		<b><font size = "4" color ="gray">아이디 중복체크</font></b>
+		<b><font size = "4" color ="gray">이메일 중복체크</font></b>
 		<hr size="1" width="460">
 		<br>
 		<div id = "chk">
 			<form id = "checkForm">
-				<input type = "text" name = "idinput" id ="userId">
-				<input type="button" value="중복확인" onclick="idCheck()">
+				<input type = "text" name = "emailInput" id ="member_email">
+				<input type="button" value="중복확인" onclick="emailCheck()">
 				
 			</form>
 			<div id = "msg"></div>

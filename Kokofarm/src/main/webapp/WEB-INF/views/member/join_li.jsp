@@ -41,6 +41,24 @@ text-align: center;
 	
 		});
 		
+		$("#member_email").on("keydown",function(){
+				
+				$("#emailDuplication").attr("value","emailUncheck");
+			});
+		
+		
+		$("#email_check").on('click',function(){
+			
+			var email = $("#member_email").val();
+		
+			window.name = "parentForm";
+			openWin = window.open("/member/email_check?member_email="+email,
+					"childForm", "width =500, height = 300, resizable = no, scrollbars = no");
+			
+
+	
+		});
+		
 		
 		
 		//회원가입 정규 표현식
@@ -51,9 +69,9 @@ text-align: center;
 		if(idD !="idCheck"){
 			alert("아이디 중복체크를 해주세요.");
 			return false;
-			
-			
+					
 		}
+		
 		var id = $('#member_id').val();
 		var eid = /^[a-z0-9A-Z_]{4,15}$/;
 		if(!eid.test(id)){
@@ -61,6 +79,7 @@ text-align: center;
 			$("#member_id").focus();
 			return;
 		}
+		
 		
 		var name = $('#member_name').val();
 		var ename = /^[가-힣]{2,8}$/;
@@ -79,6 +98,14 @@ text-align: center;
 			$('#member_email').focus();
 			return;
 		}
+		
+		var emailD = $("#emailDuplication").val();
+		if(idD !="emailCheck"){
+			alert("이메일 중복체크를 해주세요.");
+			return false;
+					
+		}
+		
 		
 		var phone = $('#member_phoneNum2').val();
 		var ephone= /^[0-9]{3,4}$/;
@@ -251,28 +278,7 @@ text-align: center;
      <br><br>
     
     <div class="row">
-        <div class="col-sm-3 hidden-xs column-left" id="column-left">
-            <div class="column-block">
-                <div class="columnblock-title">Account</div>
-                <div class="account-block">
-                    <div class="list-group"> <a class="list-group-item" href="login.html">Login</a> 
-                    <a class="list-group-item" href="/member/join">Register</a> 
-                    <a class="list-group-item" href="forgetpassword.html">Forgotten Password</a> 
-                    <a class="list-group-item" href="#">My Account</a> 
-                    <a class="list-group-item" href="#">Address Book</a> 
-                    <a class="list-group-item" href="#">Wish List</a> 
-                    <a class="list-group-item" href="#">Order History</a> 
-                    <a class="list-group-item" href="download">Downloads</a>
-                     <a class="list-group-item" href="#">Reward Points</a> 
-                     <a class="list-group-item" href="#">Returns</a>
-                      <a class="list-group-item" href="#">Transactions</a>
-                       <a class="list-group-item" href="#">Newsletter</a>
-                       <a class="list-group-item last" href="#">Recurring payments</a> 
-                       </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-9" id="content">
+          <div class="col-sm-9" id="content" style="margin-left: 100px;">
             <h1>회원 가입</h1>
             <p>이미 계정이 가입되어 있으면. <a href="login">Login page</a>.</p>
             <form:form class="form-horizontal" enctype="multipart/form-data" method="post" action="join"  commandName="MemberCommand" name="joinForm">
@@ -308,7 +314,10 @@ text-align: center;
                         <label for="input-email" class="col-sm-2 control-label">E-Mail</label>
                         <div class="col-sm-10">
                             <form:input type="email" class="form-control" id="member_email" placeholder="abcd@abcd.com" value="aa@aa.com" path="member_email"/>
+                             <input type="button" value = "중복확인" id ="email_check">
                             <form:errors path="member_email" cssClass="error"/>
+                            
+                      				<input type="hidden" id = "emailDuplication" name = "emailDuplication" value="emailUncheck">    
                         </div>
                     </div>
                     <div class="form-group required">

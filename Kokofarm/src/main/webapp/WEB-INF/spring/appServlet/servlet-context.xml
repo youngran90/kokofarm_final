@@ -40,6 +40,8 @@
 <beans:bean id = "authInterceptor" class="kokofarm.login.interceptor.AuthInterceptor"></beans:bean>
 <beans:bean id = "loginInterceptor" class="kokofarm.login.interceptor.LoginInterceptor"></beans:bean>
 <beans:bean id = "rt_auctionInterceptor" class="kokofarm.login.interceptor.Rt_auctionAccessInterceptor"></beans:bean>
+<beans:bean id = "urlAccessInterceptor" class="kokofarm.login.interceptor.UrlAccessInterceptor"></beans:bean>
+		
 		<interceptors>
 				<interceptor>
 					<mapping path="/member/loginPost"/>
@@ -66,7 +68,15 @@
 					<beans:ref bean="authInterceptor"/>
 				</interceptor>
 				
-				
+				<interceptor>
+					<mapping path="/member/join0"/>
+					<mapping path="/member/join1"/>
+					<mapping path="/member/join1_1"/>
+					<mapping path="/member/join_li"/>
+					<mapping path="/member/join"/>
+					
+					<beans:ref bean="urlAccessInterceptor"/>
+				</interceptor>
 				
 				
 				<!--  <interceptor>

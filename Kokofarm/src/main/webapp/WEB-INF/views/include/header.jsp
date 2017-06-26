@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Fresh Food</title>
+<title>Koko Farm</title>
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="e-commerce site well design with responsive view." />
@@ -21,7 +21,6 @@
 
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>  -->
 <script src="/resources/javascript/jquery-2.1.1.min.js" type="text/javascript"></script>
-<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
 <script src="/resources/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 <script src="/resources/javascript/jstree.min.js" type="text/javascript"></script>
 <script src="/resources/javascript/template.js" type="text/javascript" ></script>
@@ -29,6 +28,7 @@
 <script src="/resources/javascript/global.js" type="text/javascript"></script>
 <script src="/resources/owl-carousel/owl.carousel.min.js" type="text/javascript"></script>
   
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
 
 <style type="text/css">
 #top-links li .logout {
@@ -172,7 +172,7 @@ $( document ).ready( function() {
             <div id="top-links" class="nav pull-right">
               <ul class="list-inline">
               		<li><span id="check_id"><i class="fa fa-user"></i>${login.member_id }님 환영 합니다.</span></li>
-                	<li class="dropdown"><a href="#" title="My Account" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-user"></i><span>My Account</span> <span class="caret"></span></a>
+                	<li class="dropdown"><a href="#" title="My Account" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-user"></i><span>My 코코팜</span> <span class="caret"></span></a>
                   		<ul class="dropdown-menu dropdown-menu-right">
                     			<li><a href="/member/join0">회원가입</a></li>
                   				  <li><a href="/member/login">로그인</a></li>

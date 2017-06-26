@@ -652,7 +652,7 @@
 <!--//wrapper-->
 
 <!-- 절대! 지우지마세요 : Start -->
-<iframe name="ifrmHidden" src="/shop/blank.txt" style="width: 100%; display: none;"></iframe>
+<!-- <iframe name="ifrmHidden" src="/shop/blank.txt" style="width: 100%; display: none;"></iframe> -->
 <!-- 절대! 지우지마세요 : End -->
 
 

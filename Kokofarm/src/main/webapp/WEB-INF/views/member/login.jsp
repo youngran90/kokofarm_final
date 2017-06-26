@@ -95,8 +95,8 @@ jq("#loginBtn").on('click',function(){
  
     <div class="container">
   <ul class="breadcrumb">
-    <li><a href="#">Account</a></li>
-    <li><a href="/member/login">Login</a></li>
+    <li><a href="#">내 계정</a></li>
+    <li><a href="/member/login">로그인</a></li>
   </ul>
   <div class="row">
    <!--  <div class="col-sm-3 hidden-xs column-left" id="column-left">
@@ -126,13 +126,18 @@ jq("#loginBtn").on('click',function(){
           <div class="well">
             <h2>회원 가입</h2>
             <p><strong>계정 등록</strong></p>
-            <p>By creating an account you will be able to shop faster, be up to date on an order's status, and keep track of the orders you have previously made.</p>
+            <p> &nbsp;&nbsp;&nbsp; 저희 코코팜에 오신걸 환영 합니다. 
+            										다양한 혜택이 기다리고 있으니 회원이 아니신 분은 회원가입을 해주세요. <br>
+            										&nbsp;업계 1위 농수산 최대 쇼핑몰 KokoFarm <br>
+            
+            </p>
+            <br>
             <a class="btn btn-primary" href="/member/join">회원가입</a></div>
         </div>
         <div class="col-sm-6">
           <div class="well">
             <h2>로그인</h2>
-            <p><strong>I am a returning customer</strong></p>
+            <p><strong></strong></p>
             <form enctype="multipart/form-data" method="post" id = "loginForm" name="loginForm" action="/member/loginPost">
               <div class="form-group">
                 <label for="input-email" class="control-label">아이디</label>

@@ -334,7 +334,7 @@
 				$("#bizNum3").focus();
 			}
 		}
-		if (event.target.value.length > event.target.maxLength) {
+		if (event.target.value.length > event.target.maxLength){
 			event.target.value = event.target.value.slice(0, event.target.maxLength);
 		}
 	}

@@ -58,6 +58,31 @@ text-align: center;
 					"childForm", "width =500, height = 300, resizable = no, scrollbars = no");
 			
 		});
+		
+		
+		$("#member_email").on("keydown",function(){
+			
+			$("#emailDuplication").attr("value","emailUncheck");
+		});
+	
+	
+	$("#email_check").on('click',function(){
+		
+		var email = $("#member_email").val();
+	
+		window.name = "parentForm";
+		openWin = window.open("/member/email_check?member_email="+email,
+				"childForm", "width =500, height = 300, resizable = no, scrollbars = no");
+		
+
+
+	});
+		
+		
+		
+		
+		
+		
 				
 		//회원가입 정규 표현식
 	$("#joinBtn").on("click",function(){
@@ -266,7 +291,9 @@ text-align: center;
                         <label for="input-email" class="col-sm-2 control-label">E-Mail</label>
                         <div class="col-sm-10">
                             <form:input type="email" class="form-control" id="member_email" placeholder="abcd@abcd.com" value="" path="member_email"/>
+                            <input type="button" value = "중복확인" id ="email_check">
                             <form:errors path="member_email" cssClass="error"/>
+                        	<input type="hidden" id = "emailDuplication" name = "emailDuplication" value="emailUncheck">    
                         </div>
                     </div>
                     <div class="form-group required">

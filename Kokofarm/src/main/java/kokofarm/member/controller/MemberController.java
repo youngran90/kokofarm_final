@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.WebUtils;
 
+import kokofarm.emailAuthentication.service.MailService;
 import kokofarm.member.domain.LoginDTO;
 import kokofarm.member.domain.MemberVO;
 
@@ -36,6 +37,8 @@ public class MemberController {
 	@Inject
 	private MemberService service;
 	
+	@Inject
+	private MailService mailService;
 	
 	
 	@RequestMapping("/join1")
@@ -112,6 +115,7 @@ public class MemberController {
 			
 	}
 	
+	
 @RequestMapping(value="/id_check",method = RequestMethod.POST)
 	public void id_check(HttpServletRequest request, HttpServletResponse
 			response, @RequestParam("userid") String userid) throws Exception{
@@ -132,6 +136,48 @@ public class MemberController {
 	out.close();
 	
 }
+
+
+
+@RequestMapping(value="/email_check", method = RequestMethod.GET)
+public void email_check(@RequestParam("member_email")String member_email ,Model model) throws Exception{
+	model.addAttribute("member_email",member_email);
+	System.out.println("member_email : "+ member_email);
+		
+}
+
+
+@RequestMapping(value="/email_check",method = RequestMethod.POST)
+@ResponseBody
+public  int email_check(HttpServletRequest request, HttpServletResponse
+		response, @RequestParam("member_email") String member_email) throws Exception{
+		
+System.out.println("입력한 이메일:"+member_email);
+	String id = mailService.userInfo(member_email);
+	
+	if(id!=null){
+		return 0;
+	}else{
+		return 1;
+	}
+	
+   
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception{
