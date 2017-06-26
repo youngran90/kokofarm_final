@@ -10,6 +10,7 @@
    .button-group-admin{
 	display: none;
 }
+
  .button-group-admin .addmainslider-btn{
   background: #ef8829;
 	display: inline-block;
@@ -350,10 +351,11 @@ font-family: YG77;
                   <div class="image product-imageblock"> 
                   	<a href="/product/detail_product?product_no=${LproductVO.product_no }">
                   		<img src="/resources/files/attach/${LproductVO.product_mainimage}" alt="${LproductVO.product_name}" title="${LproductVO.product_name }"   class="img-responsive"  style="width: 280px; height:196px;"/> 
+                  		<img src = "/resources/files/attach/${LproductVO.product_sellerimage }" alt = "${LproductVO.product_sellerimage}" style="position: absolute; width: 50px; height: 50px; z-index: 100; top: 145px; left : 228px; " />
                   	</a>
                     <div class="button-group">
                       <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List" ><i class="fa fa-heart-o"></i></button>
-                      <button type="button" class="addtocart-btn" no="${LproductVO.product_no }" >Add To Cart</button>
+                      <button type="button" class="addtocart-btn" no="${LproductVO.product_no }" >장바구니</button>
                       <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product" ><i class="fa fa-exchange"></i></button>
                     </div>
                   </div>
