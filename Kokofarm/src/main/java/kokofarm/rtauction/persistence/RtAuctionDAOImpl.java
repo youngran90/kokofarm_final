@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import kokofarm.member.domain.MemberVO;
+import kokofarm.rtauction.domain.RtAcutionFinishVO;
 import kokofarm.rtauction.domain.RtAuctionInfoVO;
 import kokofarm.rtauction.domain.RtResultAuctionListVO;
 import kokofarm.rtauction.domain.RtResultAuctionVO;
@@ -39,6 +40,11 @@ public class RtAuctionDAOImpl implements RtAuctionDAO{
 	@Override
 	public MemberVO member_info(String member_id) throws Exception {
 		return session.selectOne(namespace+".member_info", member_id);
+	}
+
+	@Override
+	public void rt_auction_finish(RtAcutionFinishVO vo) throws Exception {
+		session.insert(namespace+".rt_auction_finish", vo);
 	}
 	
 	

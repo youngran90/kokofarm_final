@@ -22,10 +22,10 @@ public class OrderProductServiceImpl implements OrderProductService {
 
 	@Override
 	public void order_insert(OrderProductVO data) throws Exception {
+		
 		List<OrderProductListVO> list = dao.order_list(data.getMember_id()); // 저장
-																				// 정보
+		
 		int count = 0;
-
 		if (list.size() == 0) {
 			dao.order_insert(data);
 		} else {
@@ -52,24 +52,27 @@ public class OrderProductServiceImpl implements OrderProductService {
 
 	@Override
 	public void order_update(OrderProductVO data) throws Exception {
-		List<OrderProductListVO> list = dao.order_list(data.getMember_id());
+		
+		List<OrderProductListVO> list = dao.order_list(data.getMember_id()); //결제 테이블 리스트
+		
+		int total_price = Integer.parseInt(data.getOrder_total_price()); // 최종금액
+		int delivery_price = Integer.parseInt(data.getOrder_delivery_price()); // 배달금액
 
-		int total_price = Integer.parseInt(data.getOrder_total_price());
-		int delivery_price = Integer.parseInt(data.getOrder_delivery_price());
-
+		
 		for (int i = 0; i < list.size(); i++) {
 
 			String product_no = list.get(i).getProduct_no();
-
-			if (data.getProduct_no().equals(product_no)) {
+			
+			if (list.get(i).getProduct_no().contains(data.getProduct_no())) {
+				
 				if ((total_price + Integer.parseInt(list.get(i).getOrder_total_price())) >= 50000) {
 					data.setOrder_delivery_price("0");
+					System.out.println("2");
 					dao.order_update(data);
 				} else {
+					System.out.println("3");
 					dao.order_update(data);
 				}
-			} else {
-				dao.order_update(data);
 			}
 		}
 

@@ -31,6 +31,17 @@
 		select * from member where member_id = #{member_id}
 	</select>
 	
+	
+	<insert id="rt_auction_finish" parameterType="RtAcutionFinishVO">
+		insert into rt_tender_finish(
+			rt_tender_finish_no, rt_tender_no, recipient_name, recipient_phone, recipient_tel, recipient_address, delivery_message, pay,
+			creditcard_name, pay_month, pay_bank, deposit_name, price, pay_date
+		) values (
+			#{rt_tender_finish_no}, #{rt_tender_no}, #{recipient_name}, #{recipient_phone}, #{recipient_tel}, #{recipient_address}, #{delivery_message}, #{pay},
+			#{creditcard_name}, #{pay_month}, #{pay_bank}, #{deposit_name}, #{price}, sysdate
+		)
+	</insert>
+	
 </mapper>
 
 

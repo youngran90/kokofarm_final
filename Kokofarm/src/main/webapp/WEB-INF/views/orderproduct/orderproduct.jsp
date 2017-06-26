@@ -168,7 +168,7 @@ $(function(){
 			</section>
 
 			<!-- 주문 내역 테이블 시작 -->
-			<form method="post" id="orderproductform">
+			<form method="post" id="orderproductform" action="/orderproduct/orderproduct">
 				<div class="table-responsive">
 					<table class="table table-bordered" style="width: 1160px">
 						<thead>
@@ -181,7 +181,7 @@ $(function(){
 							</tr>
 						</thead>
 						<c:forEach var="order_list" items="${order_list }" varStatus="status">
-							<em class="${status.count}p_amount" id="p_amount" >${order_list.product_total}개&nbsp;</em>
+							<em class="${status.count}p_amount" id="p_amount" style="display: none;">${order_list.product_total}개&nbsp;</em>
 							<td style="display: none;"><input type="checkbox" id="${status.count }ac" name="product_no"	value="${order_list.product_no }">${order_list.product_no } 제품번호</td>
 							<td style="display: none;"><input type="checkbox" id="dp" name="order_delivery_price" value="${order_list.order_delivery_price}" class="${status.count }dp">${order_list.order_delivery_price}배송비</td>	<!-- 배송비 값 submit -->
 							<td style="display: none;"><input type="checkbox" id="order_product_amount" name="order_product_amount" value="${order_list.order_product_amount }" class="${status.count}opa">${order_list.order_product_amount }수량</td>
@@ -305,7 +305,7 @@ $(function(){
 						</div>
 					</div>
 				</div>
-			</form>
+			<!-- </form> -->
 
 <div class="panel panel-default" style="width: 1160px">
 	<div class="panel-heading">
@@ -329,7 +329,7 @@ $(function(){
 				</div>
 			</div>
 			<div class="table-responsive" >
-			<form method="POST" id="mileage" onsubmit="return false;">
+			<!-- <form method="POST" id="mileage" onsubmit="return false;"> -->
 				<div class="point_box">
 					<div class="point_info">
 						<strong>포인트 </strong><strong class="point_check">조회</strong>
@@ -344,15 +344,15 @@ $(function(){
 						<strong>잔여<span></span></strong><strong class="point_count">사용</strong>
 					</div>
 				</div>
-			</form>
+			<!-- </form> -->
 				<div class="pay_list">
 					<div class="pay_info">
-						<form method="POST" id="creditcard">
+						<!-- <form method="POST" id="creditcard"> -->
 						<ul class="pays">
-							<li><input type="radio" name="pay" class="pay" value="creditcard"><span></span>신용카드</li>
+							<li><input type="radio" name="pay" class="pay" value="신용카드"><span></span>신용카드</li>
 							<li><input type="radio" name="pay" class="pay" value="kakaopay"><img src="/resources/orderproduct/image/kakaopay.png" alt="kakaopay"></li>
 							<li><input type="radio" name="pay" class="pay" value="naverpay"><img src="/resources/orderproduct/image/naverpay.png" alt="naverpay"></li>
-							<li><input type="radio" name="pay" class="pay" value="accounttransfer"><span></span>무통장입금</li>
+							<li><input type="radio" name="pay" class="pay" value="무통장입금"><span></span>무통장입금</li>
 						</ul>
 						<div class="creditcard_info">
 							<!-- 신용카드 -->
@@ -369,9 +369,9 @@ $(function(){
 							<div class="creditcard_info02">
 								<strong>할부 기간 </strong><select id="month">
 									<option value="none">&nbsp;&nbsp;==선택==</option>
-									<option value="singlepayment">&nbsp;일시불</option>
-									<option value="2_free">&nbsp;2개월(무이자)</option>
-									<option value="3_free">&nbsp;3개월(무이자)</option>
+									<option value="일시불">&nbsp;일시불</option>
+									<option value="2개월(무이자)">&nbsp;2개월(무이자)</option>
+									<option value="3개월(무이자)">&nbsp;3개월(무이자)</option>
 								</select>
 								<input type="hidden" name="pay_month" value="none">
 							</div>
@@ -380,36 +380,33 @@ $(function(){
 								<p>* 과도한 구매는 언제든지 감사합니다.</p>
 							</div>
 						</div>
-						</form>
+						<!-- </form> -->
 						
 						<div class="kakaopay_info">
 							<!-- 카카오페이 -->
-							<form method="POST" id="kakaopay">
+							<!-- <form method="POST" id="kakaopay"> -->
 							<div class="kakaopay_info01">
 								<p>
 									* 카카오페이 결제 서비스로 결제됩니다.<br> 결제후 세부 결제 내역은 카카오페이 구매내역을 확인하여
 									주십시오.
 							</div>
-							<input type="hidden"name="pay" value="kakaopay">
-							</form>
+							<!-- </form> -->
 						</div>
 
 						<div class="naverpay_info">
 							<!-- 네이버 -->
-							<form method="POST" id="naverpay">
+							<!-- <form method="POST" id="naverpay"> -->
 							<div class="naverpay_info01">
 								<p>
 									* 네이버페이 간편결제 서비스로 결제됩니다.<br> 결제후 세부 결제내역은 네이버페이 구매내역을 확인하여
 									주십시오.
 							</div>
-							<input type="hidden"name="pay" value="naverpay">
-							</form>
+							<!-- </form> -->
 						</div>
 
 						<div class="payment_info">
 							<!-- 무통장 입금 -->
-							<form method="post" id="payment">
-							<input type="hidden" name="pay" value="accounttransfer">
+							<!-- <form method="post" id="payment"> -->
 							<div class="payment_info01">
 								<strong>입금계좌 선택 </strong><select id="bankaccount">
 									<option value="none">&nbsp;&nbsp;==입금계좌 선택==</option>
@@ -424,7 +421,7 @@ $(function(){
 								<strong>입금자명 </strong><input type="text" name="deposit_name" placeholder="입금자명을 적어주세요." size="20">
 								<p>* 실제 입금자명과 정확히 일치하여야 정상 주문이 됩니다.</p>
 							</div>
-							</form>
+							<!-- </form> -->
 						</div>
 						
 					</div>
@@ -439,7 +436,7 @@ $(function(){
 		</div>
 	</div>
 </div>
-
+</form>
 </div>
 </div>
 </div>

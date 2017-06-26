@@ -26,12 +26,62 @@
 		update mileage set mileage_current = #{mileage_current} where mileage_member_id = #{mileage_member_id}
 	</update>
 	
-	<select id="mileage_view" resultType="MileageListVO">
-		select orderfinish_no, mileage_use, mileage_saving, mileage_total, mileage_date 
+	<select id="mileage_view" resultType="MileageListVO" parameterType="java.util.HashMap">
+		SELECT * FROM (SELECT ROWNUM AS RNUM,a.* FROM(
+			select orderfinish_no, mileage_use, mileage_saving, mileage_total, mileage_date 
 		from mileage
-		where mileage_member_id = #{mileage_member_id}
+		where mileage_member_id = #{member_id}
 		order by mileage_date desc
+					) a
+			where ROWNUM <![CDATA[<=]]> #{PagingMaker.end})
+				where RNUM <![CDATA[>=]]> #{PagingMaker.start}
 	</select>
+	
+	<select id="mileage_search_view" resultType="MileageListVO" parameterType="java.util.HashMap">
+		SELECT * FROM (SELECT ROWNUM AS RNUM,a.* FROM(
+			select orderfinish_no, mileage_use, mileage_saving, mileage_total, mileage_date 
+		from mileage
+		where mileage_member_id = #{member_id}
+		and mileage_date between to_date(#{start_time}) and to_date(#{end_time})
+		order by mileage_date desc
+					) a
+			where ROWNUM <![CDATA[<=]]> #{PagingMaker.end})
+				where RNUM <![CDATA[>=]]> #{PagingMaker.start}
+	</select>
+	
+	
+	
+	<select id="mileagecount" resultType="int">
+		select count(*) from mileage where mileage_member_id = #{mileage_member_id}
+	</select>
+	
+	<select id="mileage_search_count" resultType="int" parameterType="java.util.HashMap">
+		select count(*) from mileage where mileage_member_id = #{member_id} and mileage_date between to_date(#{start_time}) and to_date(#{end_time})
+	</select>
+	
+	<select id="dateAsc"> <!-- 오름차순... 작은거 부터.... -->
+		select mileage_date from mileage where mileage_member_id = #{mileage_member_id} order by mileage_date asc
+	</select>
+	
+	<select id="orderproduct_detail" resultType="OrderFinish_DetailVO">
+		select o.orderfinish_no, o.orderfinish_product_name, o.orderfinish_product_amount, o.orderfinish_delivery_price,
+				o.orderfinish_total_price, o.orderfinish_final_price, o.orderfinish_member_name, o.orderfinish_member_phonenum, o.orderfinish_member_address,
+				o.orderfinish_date,
+				p.product_mainimage,
+				p.product_no
+		from order_finish o, product p
+		where o.orderfinish_product_no = p.product_no
+		and o.orderfinish_no = #{orderfinish_no}
+	</select>
+	
+	<select id="detail_payment" resultType="String">
+		select DISTINCT pay from payment where orderfinish_no = #{orderfinish_no}
+	</select>
+	
+	<select id="detail_mileage" resultType="Integer">
+		select mileage_use from mileage where orderfinish_no = #{orderfinish_no}
+	</select>
+	
 </mapper>
 
 

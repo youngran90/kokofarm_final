@@ -33,7 +33,7 @@ public class CartController {
 	
 	
 	private static String cart_no = UUID.randomUUID().toString().replace("-", "");
-	private static String order_no = UUID.randomUUID().toString().replace("-", "");
+	
 	
 	private static final Logger logger = LoggerFactory.getLogger(CartController.class);
 	
@@ -101,6 +101,8 @@ public class CartController {
 			@RequestParam("order_product_name") String[] order_product_name,
 			@RequestParam("order_product_price") String[] order_product_price,
 			Model model, HttpServletRequest request ) throws Exception{
+		
+		String order_no = UUID.randomUUID().toString().replace("-", "");
 		
 		OrderProductVO data = new OrderProductVO();
 		

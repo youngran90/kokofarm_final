@@ -15,30 +15,44 @@ $(function() {
 		$("input[name=pay_bank]").val(bankaccount);
 	}) // 은행 이름
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	var db_id = $("select[name=mobileReceiver1]").attr("id");
 	
 	$("#button-confirm").on('click', function() {
 		var payments = $("input[name=pay]:checked").val();// 결제방법
+		
 		
 		if (payments == null) {
 			alert("결제 방법을 선택해주세요.");
 		} else {
 			$("em[id=p_amount]").each(function(i){
 				var index = i + 1;
-				var opa = parseInt($("input[class="+index+"opa]").val());
-				var name= $("input[class="+index+"pn]").val();
-				var db_price = parseInt($(this).text());
-				var pp= $("input[id="+index+"ac]").val();
+				var opa = parseInt($("input[class="+index+"opa]").val()); //제품 수량
+				var name= $("input[class="+index+"pn]").val(); //제품명
+				var db_price = parseInt($(this).text()); // 재고량
+				var pp= $("input[id="+index+"ac]").val(); // 제품번호
+				
 				if(db_price < opa){// 13 < 7
 					var check = confirm("제품명 : "+name+"\n현재 재고량 : "+db_price+"\n죄송합니다. 재고가 부족하여 구매하실수 없습니다. " +
 							"\n\n해당 제품을 삭제후 구매하시거나 \n장바구니로 가셔서 해당 품목을 삭제후 구매해 주세요.\n  <  확인을 누르면 장바구니로 이동합니다.  >");
 					var tag = "<input type='button' name='delete' onclick="+"location.href='delete?product_no="+pp+"'>";
-					$("span[class="+index+"pnd]").append(tag);		
+					
+					$("span[class="+index+"pnd]").append(tag);	
+					
 					if(check){
 						location.href="/cart/cart";
 					}
 					return false;
 					$(location).attr("href", "/orderproduct/orderproduct");
+					
 				}else{
 					
 					$("select[name=mobileReceiver1]").val(db_id).attr("selected",true).attr("disabled", false); // 전화번호 앞자리 3개
@@ -46,19 +60,23 @@ $(function() {
 					var orderfinish = $("#orderproductform").serialize();
 					var url01 = "/orderproduct/orderproduct";
 
-					var mileage = $("#mileage").serialize();
+					/*var mileage = $("#mileage").serialize();
 					var url02 = "/orderproduct/mileage";
 
 					var url03 = "/orderproduct/payment";
-
-					if (payments == "creditcard") {
+					var test = $("#payment").serialize();*/
+					
+					
+					if (payments == "신용카드") {
 						var credit = $("input[name=creditcard_name]").val();
 						var month = $("input[name=pay_month]").val();
 						if (credit == "none" || month == "none") {
 							alert("카드 / 기간을 선택해주세요.");
 							
 						} else {
-							$.ajax({
+							alert("결제 되었습니다.");
+							$("#orderproductform").submit();
+					/*	$.ajax({
 								type : 'POST',
 								url : url01,
 								data : orderfinish, // 구매 리스트 + 개인정보 폼
@@ -66,7 +84,7 @@ $(function() {
 								success : function(data) {
 									$.ajax({
 										type : "POST",
-										url : url02,
+										url : url02, //102
 										data : mileage, // 마일리지 폼
 										dataType : 'text',
 										success : function(data) {
@@ -80,15 +98,17 @@ $(function() {
 							var pay = $("#creditcard").serialize();
 							$.ajax({
 								type : 'POST',
-								url : url03,
+								url : url03, 
 								data : pay, // 신용카드 정보
 								dataType : 'html',
 								success : function(data) {
 								}// 신용카드 정보 (성공함수)
-							})
+							})*/
 						}
 					} else if (payments == "kakaopay") {
-						$.ajax({
+						alert("결제 되었습니다.");
+						$("#orderproductform").submit();
+						/*$.ajax({
 							type : 'POST',
 							url : url01,
 							data : orderfinish, // 구매 리스트 + 개인정보 폼
@@ -116,9 +136,11 @@ $(function() {
 								alert("결제되었습니다.");
 								$(location).attr("href", "/orderproduct/orderfinish");
 							}// 신용카드 정보 (성공함수)
-						})
+						})*/
 					} else if (payments == "naverpay") {
-						$.ajax({
+						alert("결제 되었습니다.");
+						$("#orderproductform").submit();
+						/*$.ajax({
 							type : 'POST',
 							url : url01,
 							data : orderfinish, // 구매 리스트 + 개인정보 폼
@@ -144,14 +166,16 @@ $(function() {
 							dataType : 'text',
 							success : function(data) {
 							}// 신용카드 정보 (성공함수)
-						})
-					} else if (payments == "accounttransfer") {
+						})*/
+					} else if (payments == "무통장입금") {
 						var bank = $("input[name=pay_bank]").val();
 						var name = $("input[name=deposit_name]").val();
 						if (bank == "none" || name == "") {
 							alert("계좌 / 이름을 작성해주세요.");
 						} else {
-							$.ajax({
+							alert("결제 되었습니다.");
+							$("#orderproductform").submit();
+						/*	$.ajax({
 								type : 'POST',
 								url : url01,
 								data : orderfinish, // 구매 리스트 + 개인정보 폼
@@ -178,7 +202,7 @@ $(function() {
 								dataType : 'html',
 								success : function(data) {
 								}// 신용카드 정보 (성공함수)
-							})
+							})*/
 						}
 					} // ajax종료
 					return false;
@@ -276,7 +300,7 @@ $(function() {
 	$(".pay").on('click', function() {
 		var radio = $(this).val();
 
-		if (radio == "creditcard") {
+		if (radio == "신용카드") {
 			$(".creditcard_info").show();
 			$(".kakaopay_info").hide();
 			$(".naverpay_info").hide();
@@ -291,7 +315,7 @@ $(function() {
 			$(".kakaopay_info").hide();
 			$(".naverpay_info").show();
 			$(".payment_info").hide();
-		} else if (radio == "accounttransfer") {
+		} else if (radio == "무통장입금") {
 			$(".creditcard_info").hide();
 			$(".kakaopay_info").hide();
 			$(".naverpay_info").hide();
@@ -315,7 +339,7 @@ $(function() {
 
 	// 최종 금액 ( 마일리지 구하기 위한 가격 , 모든 제품가격을 더한것...)
 	$("input[name=orderfinish_final_price]").val(
-			$(".result_price").text().replace(/[^0-9]/g, ""));
+			$(".order_result_price_total").text().replace(/[^0-9]/g, ""));
 
 	// 포인트 사용 + 총합 구하기
 	var point = parseInt($("#point").text().replace(/[^0-9]/g, "")); //현재포인트
@@ -344,7 +368,10 @@ $(function() {
 					$(".order_result_price_total").text(numberFormat((order_result_price - use_point)));
 					$(".use_btn span").text(numberFormat((point - use_point)));
 				}
-			})
+				// 최종 금액 ( 마일리지 구하기 위한 가격 , 모든 제품가격을 더한것...)
+				$("input[name=orderfinish_final_price]").val(
+						$(".order_result_price_total").text().replace(/[^0-9]/g, ""));
+	})
 
 	/*
 	 * // 전화번호 자리수 끊어서 출력 var phone1 = $("input[name=mobileReceiver2]").val();

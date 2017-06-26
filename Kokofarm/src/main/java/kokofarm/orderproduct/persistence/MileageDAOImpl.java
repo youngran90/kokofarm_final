@@ -11,6 +11,8 @@ import org.springframework.stereotype.Repository;
 
 import kokofarm.orderproduct.domain.MileageListVO;
 import kokofarm.orderproduct.domain.MileageVO;
+import kokofarm.orderproduct.domain.OrderFinish_DetailVO;
+import kokofarm.product.domain.PagingMaker;
 
 @Repository
 public class MileageDAOImpl implements MileageDAO {
@@ -48,11 +50,55 @@ public class MileageDAOImpl implements MileageDAO {
 		session.update(namespace+".update",map);
 	}
 
+	
+	
+	// 마일리지 내역 
 	@Override
-	public List<MileageListVO> mileage_view(String member_id) throws Exception {
-		return session.selectList(namespace+".mileage_view", member_id);
+	public List<MileageListVO> mileage_view(String member_id,PagingMaker pagingMaker) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("member_id", member_id);
+		map.put("PagingMaker", pagingMaker);
+		return session.selectList(namespace+".mileage_view", map);
 	}
 
-	
+	@Override
+	public int mileagecount(String member_id) throws Exception {
+		return session.selectOne(namespace+".mileagecount", member_id);
+	}
+
+	@Override
+	public List<MileageListVO> mileage_search_view(String member_id, PagingMaker pagingMaker, String start, String end) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("member_id", member_id);
+		map.put("PagingMaker", pagingMaker);
+		map.put("start_time", start);
+		map.put("end_time", end);
+		return session.selectList(namespace+".mileage_search_view",map);
+	}
+
+	@Override
+	public int mileage_search_count(String member_id, String start, String end) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("member_id", member_id);
+		map.put("start_time", start);
+		map.put("end_time", end);
+		return session.selectOne(namespace+".mileage_search_count", map);
+	}
+
+	@Override
+	public List<OrderFinish_DetailVO> orderproduct_detail(String orderfinish_no) throws Exception {
+		return session.selectList(namespace+".orderproduct_detail", orderfinish_no);
+	}
+
+	@Override
+	public List<String> detail_payment(String orderfinish_no) throws Exception {
+		return session.selectList(namespace+".detail_payment",orderfinish_no);
+	}
+
+	@Override
+	public int detail_mileage(String orderfinish_no) throws Exception {
+		return session.selectOne(namespace+".detail_mileage",orderfinish_no);
+	}
+
 	
 }

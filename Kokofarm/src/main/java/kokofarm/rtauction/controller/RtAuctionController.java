@@ -14,12 +14,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import kokofarm.member.domain.MemberVO;
 import kokofarm.rtauction.domain.RtAcutionFinishVO;
 import kokofarm.rtauction.domain.RtAuctionInfoVO;
 import kokofarm.rtauction.domain.RtResultAuctionListVO;
 import kokofarm.rtauction.domain.RtResultAuctionVO;
+import kokofarm.rtauction.domain.Rt_Auction_Address;
+import kokofarm.rtauction.domain.Rt_Auction_Homenum;
+import kokofarm.rtauction.domain.Rt_Auction_Phonenum;
 import kokofarm.rtauction.service.RtAuctionService;
 
 @Controller
@@ -66,7 +70,7 @@ public class RtAuctionController {
 		model.addAttribute("seller_no", seller_no);
 		model.addAttribute("rt_auction_no", rt_auction_no);
 		
-	//	return "redirect://localhost:8083";
+		//return "redirect://localhost:8083";
 		//return "redirect:http://192.168.0.172:8083"; // 학원에서 할때 학원 서버
 		//return "redirect:http://106.242.203.68:8083"; //집에서 할때 학원 서버
 		return "redirect:http://192.168.0.172:8083/"; // 학원에서 내껄로 접속할때
@@ -109,6 +113,7 @@ public class RtAuctionController {
 	@RequestMapping(value="/rt_auctionpay", method=RequestMethod.GET)
 	public String rt_auctionpayGet(/*@RequestParam("rt_acution_no") String rt_acution_no,*/ Model model,
 			HttpServletRequest request)throws Exception{
+		
 		HttpSession session = request.getSession();
 		MemberVO member = (MemberVO)session.getAttribute("login");
 		
@@ -134,10 +139,25 @@ public class RtAuctionController {
 		
 	}
 	
-	@RequestMapping(value="/rt_auction", method=RequestMethod.POST)
-	public void rt_auction_finishPost(RtAcutionFinishVO vo) throws Exception{
+	@RequestMapping(value="/rt_auctionfinish", method=RequestMethod.POST)
+	public String rt_auction_finishPost(RtAcutionFinishVO vo, Rt_Auction_Address addr,
+				Rt_Auction_Homenum home, Rt_Auction_Phonenum phone) throws Exception{
+		
+		String PhoneNum = phone.getMobileReceiver1() + phone.getMobileReceiver2() + phone.getMobileReceiver3(); //전화번호
+		String HomeNum = home.getPhoneReceiver1() + home.getPhoneReceiver2() + home.getPhoneReceiver3(); //집번호
+		String HomeAddr = addr.getRecipientpost() +" "+ addr.getAddress() +" "+ addr.getAddress_sub(); //집주소
+		
+		String rt_tender_finish_no = UUID.randomUUID().toString().replace("-", ""); // 실시간 경매 결제번호 생성
+		
+		vo.setRt_tender_finish_no(rt_tender_finish_no);
+		vo.setRecipient_address(HomeAddr);
+		vo.setRecipient_phone(PhoneNum);
+		vo.setRecipient_tel(HomeNum);
+		
+		service.rt_auction_finish(vo);
 		
 		System.out.println(vo.toString());
+		
+		return "/rt_auction/rt_auctionfinish";
 	}
-	
 }

@@ -17,7 +17,6 @@ var member_id; var seller_no;
 var img; var img01; var img02;
 var product_n;
 var down;
-var unit;
 var content;
 var area;
 var rt_auction_no;
@@ -38,7 +37,7 @@ app.get('/rt_auction',function (req,res){
 
 app.get('/btn_img01',function (req,res){     
     var filename = 'btn1.PNG';
-    var dir = 'C:\\Users\\김Jason\\git\\kokofarm_final\\Kokofarm\\src\\main\\webapp\\resources\\files\\attach\\'+filename;
+    var dir = 'C:\\Users\\김Jason\\git\\kokofarm_final\\Kokofarm\\src\\main\\webapp\\resources\\rt_auction\\image\\'+filename;
     fs.exists(dir, function (exists) {
         if (exists) {
             fs.readFile(dir, function (err,data){
@@ -52,7 +51,7 @@ app.get('/btn_img01',function (req,res){
 
 app.get('/btn_img02',function (req,res){     
     var filename = 'btn2.PNG';
-    var dir = 'C:\\Users\\김Jason\\git\\kokofarm_final\\Kokofarm\\src\\main\\webapp\\resources\\files\\attach\\'+filename;
+    var dir = 'C:\\Users\\김Jason\\git\\kokofarm_final\\Kokofarm\\src\\main\\webapp\\resources\\rt_auction\\image\\'+filename;
     fs.exists(dir, function (exists) {
         if (exists) {
             fs.readFile(dir, function (err,data){
@@ -66,7 +65,7 @@ app.get('/btn_img02',function (req,res){
 
 app.get('/img',function (req,res){     
     var filename = img;
-    var dir = 'C:\\Users\\김Jason\\git\\kokofarm_final\\Kokofarm\\src\\main\\webapp\\resources\\files\\attach\\'+filename;
+    var dir = 'C:\\Users\\김Jason\\Desktop\\Kosta\\spring_work\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Kokofarm\\resources\\files\\attach'+filename;
     fs.exists(dir, function (exists) {
         if (exists) {
             fs.readFile(dir, function (err,data){
@@ -79,7 +78,7 @@ app.get('/img',function (req,res){
 });
 app.get('/img01',function (req,res){     
     var filename = img01;
-    var dir = 'C:\\Users\\김Jason\\git\\kokofarm_final\\Kokofarm\\src\\main\\webapp\\resources\\files\\attach\\'+filename;
+    var dir = 'C:\\Users\\김Jason\\Desktop\\Kosta\\spring_work\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Kokofarm\\resources\\files\\attach'+filename;
     fs.exists(dir, function (exists) {
         if (exists) {
             fs.readFile(dir, function (err,data){
@@ -92,7 +91,7 @@ app.get('/img01',function (req,res){
 });
 app.get('/img02',function (req,res){     
     var filename = img02;
-    var dir = 'C:\\Users\\김Jason\\git\\kokofarm_final\\Kokofarm\\src\\main\\webapp\\resources\\files\\attach\\'+filename;
+    var dir = 'C:\\Users\\김Jason\\Desktop\\Kosta\\spring_work\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Kokofarm\\resources\\files\\attach'+filename;
     fs.exists(dir, function (exists) {
         if (exists) {
             fs.readFile(dir, function (err,data){
@@ -119,11 +118,11 @@ app.get('/', function(request, response) {
 	response.sendfile(__dirname + '/rt_auction.html');
 });
 
-var m = 0; //경매 대기 시간 카운트 (분)
-var s = 10;  //경매 대기 시간 카운트 (초)
+var m = 120; //경매 대기 시간 카운트 (분)
+var s = 0;  //경매 대기 시간 카운트 (초)
 
-var minute = 0 //경매 진행 시간 카운트 (분)
-var second = 10;//경매 진행 시간 카운트 (초)
+var minute = 120 //경매 진행 시간 카운트 (분)
+var second = 0;//경매 진행 시간 카운트 (초)
 
 var wait = setInterval(function(){ //setInterval 일정시간마다 반복 실행하는 함수
 	if(m == 0 && s == 0 ){

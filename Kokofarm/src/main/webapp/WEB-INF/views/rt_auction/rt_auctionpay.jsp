@@ -13,13 +13,12 @@ $(function(){
 	$("input[name=mobileReceiver2]").attr("readonly",true); //초기 로딩시 각 태그 잠금 - 전화번호 중간 4자리
 	$("input[name=mobileReceiver3]").attr("readonly",true); //초기 로딩시 각 태그 잠금 - 전화번호 마지막 4자리 
 	$("input[name=recipientpost]").attr("readonly",true); //초기 로딩시 각 태그 잠금 - 우편번호
-	$("input[name=area]").attr("readonly",true);  //초기 로딩시 각 태그 잠금 - 고객 주소
+	$("input[name=address]").attr("readonly",true);  //초기 로딩시 각 태그 잠금 - 고객 주소
 	$("input[name=address_sub]").attr("readonly",true); //초기 로딩시 각 태그 잠금 - 고객 상세 주소
 	$("#post_btn").attr("disabled",true);
 	
 	var db_id = $("select[name=mobileReceiver1]").attr("id"); //초기 로딩시 각 태그 잠금 - 고객 전화번호 앞자리 3자리를 가져온다
-	
-	//$("select[name=mobileReceiver1]").val(db_id).attr("selected",true); //초기 로딩시 각 태그 잠금 - 고객 전화번호를 선택 시켜놓는다.
+	$("select[name=mobileReceiver1]").val(db_id).attr("selected",true); //초기 로딩시 각 태그 잠금 - 고객 전화번호를 선택 시켜놓는다.
 	$("select[name=mobileReceiver1]").val(db_id).attr("selected",true).attr("disabled",true); //초기 로딩시 각 태그 잠금 - 전화번호 010
 	
 	$("input[name=addr]").on('click',function(){
@@ -30,7 +29,7 @@ $(function(){
 			$("input[name=mobileReceiver2]").val("");
 			$("input[name=mobileReceiver3]").val("");
 			$("input[name=recipientpost]").val("");
-			$("input[name=area]").val("");
+			$("input[name=address]").val("");
 			$("input[name=address_sub]").val("");
 			$("input[name=phoneReceiver2]").val("");
 			$("input[name=phoneReceiver3]").val("");
@@ -39,7 +38,7 @@ $(function(){
 			$("input[name=mobileReceiver2]").attr("readonly",false);
 			$("input[name=mobileReceiver3]").attr("readonly",false);
 			$("input[name=recipientpost]").attr("readonly",true);
-			$("input[name=area]").attr("readonly",true);
+			$("input[name=address]").attr("readonly",true);
 			$("input[name=address_sub]").attr("readonly",false);
 			
 			$("select[name=mobileReceiver1]").val("010").attr("selected",true).attr("disabled",false); //전화번호 앞자리 3개
@@ -50,7 +49,7 @@ $(function(){
 			$("input[name=mobileReceiver2]").val("${phone1}");
 			$("input[name=mobileReceiver3]").val("${phone2}");
 			$("input[name=recipientpost]").val("${memberVO.member_zipcode}");
-			$("input[name=area]").val("${memberVO.member_address1}");
+			$("input[name=address]").val("${memberVO.member_address1}");
 			$("input[name=address_sub]").val("${memberVO.member_address2}");
 			
 			$("input[name=phoneReceiver2]").val("");
@@ -60,7 +59,7 @@ $(function(){
 			$("input[name=mobileReceiver2]").attr("readonly",true);
 			$("input[name=mobileReceiver3]").attr("readonly",true);
 			$("input[name=recipientpost]").attr("readonly",true);
-			$("input[name=area]").attr("readonly",true);
+			$("input[name=address]").attr("readonly",true);
 			$("input[name=address_sub]").attr("readonly",true);
 			
 			$("select[name=mobileReceiver1]").val(db_id).attr("selected",true).attr("disabled",true); // 전화번호 앞자리 3개
@@ -137,7 +136,7 @@ function onlyNumber(obj) {
   <div class="row">
     <div class="col-sm-9" id="content">
     
-      <form id="rt_auction_finish" method="POST" style="width: 1150px;">
+      <form id="rt_auction_finish" method="POST" action="/rt_auction/rt_auctionfinish" style="width: 1150px;">
       
       <div class="rt_acution_info">
       	<strong id="rt_title">경매 번호</strong><strong id="rt_no">${rt_result_actionListVO.rt_auction_no}</strong>
@@ -216,7 +215,7 @@ function onlyNumber(obj) {
 							<input type="text" class="mobilerecipient3" name="mobileReceiver3" value="${phone2}" maxlength="4" size="7" onkeydown="onlyNumber(this)">
 					<strong class="recipient_phone">전화번호</strong>
 						<!-- <input type="text" class="phonerecipient1" name="phoneReceiver1" value="" maxlength="3" size="7"> -->
-						<select name="tel_no">
+						<select name="phoneReceiver1">
 								<option value="02">02</option>
 								<option value="031">031</option>
 								<option value="032">032</option>
@@ -244,10 +243,10 @@ function onlyNumber(obj) {
 					<div class="post_addr">
 						<strong class="recipient_addr"><em id="necessary">*</em>배송지</strong>
 							<input type="text" class="recipientpost" name="recipientpost" id="sample6_postcode" placeholder="우편번호" value="${memberVO.member_zipcode}" size="25" readonly="readonly">
-							<input type="button" class="post_btn" id="post_btn" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
+							<input type="button" class="post_btn" id="post_btn" name="" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
 					</div>
 					<div class="sub_addr">
-							<input type="text" class="address" name="area" id="sample6_address" readonly="" value="${memberVO.member_address1}" required"="" size="45">
+							<input type="text" class="address" name="address" id="sample6_address" readonly="" value="${memberVO.member_address1}" required"="" size="45">
 							<input type="text" class="address_sub" name="address_sub" id="sample6_address2" value="${memberVO.member_address2}" size="52">
 					</div>
 					<div class="caption_info">
@@ -257,9 +256,7 @@ function onlyNumber(obj) {
 						<strong class="msg_box">배송메시지</strong>
 					</div>
 					<div class="delivery_msg02">
-							<textarea name="delivery_massage" class="comment" placeholder=" ※배송메시지 기재 필수 사항  
- ex) 1.선물의 경우 [선물용]이라는 문구 기재    
-       2.건물 1층 입구 비밀번호, 배송요청사항 등 구체적인 요청사항 "></textarea>
+							<input type="text" name="delivery_message" class="comment" placeholder=" ※배송메시지 기재 필수 사항  1.선물의 경우 [선물용] 2.건물 입구 비밀번호,배송요청사항 등 구체적인 요청사항 " value=""></textarea>
 					</div>
 				</div>
 				<br>
@@ -329,7 +326,7 @@ function onlyNumber(obj) {
 								 			<em id="pay_bank" style="display: none;">none</em>
 						 			</div>
 						 			<div class="payment_info02">
-						 				<strong>입금자명 </strong><input type="text" name="deposit_name" placeholder="입금자명을 적어주세요." size="20" >
+						 				<strong>입금자명 </strong><input type="text" name="deposit_name" placeholder="입금자명을 적어주세요." size="20" value="">
 						 				<p> * 입금자명을 꼭 적어 주세요 </p>
 						 			</div>
 						 		</div>

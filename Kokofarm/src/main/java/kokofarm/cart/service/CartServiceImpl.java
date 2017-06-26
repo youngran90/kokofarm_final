@@ -21,6 +21,7 @@ public class CartServiceImpl implements CartService{
 	@Override
 	public void cart_insert(CartVO vo) throws Exception {
 		List<CartListVO> list = dao.cart_list(vo.getMember_id()); // 저장 정보
+		
 		int count=0;
 		
 		if( list.size() == 0 ){
@@ -39,6 +40,7 @@ public class CartServiceImpl implements CartService{
 				dao.cart_insert(vo);
 			}
 		}
+		
 		
 	}
 	

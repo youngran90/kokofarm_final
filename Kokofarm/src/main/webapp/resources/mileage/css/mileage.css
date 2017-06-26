@@ -1,0 +1,120 @@
+@CHARSET "UTF-8";
+
+.current_box {
+	height: 50px;
+	padding: 15px 0px;
+	margin-bottom: 20px;
+	width: 400px;
+	float: left;
+}
+
+#current_t {
+	font-size: 20px;
+}
+
+#current_m {
+	color: #38a9a5;
+	font-size: 35px;
+	padding-right: 5px;
+}
+
+.date_search {
+	height: 50px;
+	padding: 15px 0px;
+	margin-bottom: 20px;
+	float: right;
+}
+
+.date_s {
+	position: relative;
+	float: left;
+	width: 125px;
+	height: 32px;
+	padding: 0 14px 0 40px;
+	border: 1px solid #ddd;
+	background-color: #fff;
+	overflow: hidden;
+}
+
+.date_e {
+	position: relative;
+	float: left;
+	width: 125px;
+	height: 32px;
+	padding: 0 14px 0 40px;
+	border: 1px solid #ddd;
+	background-color: #fff;
+	overflow: hidden;
+	float: left;
+}
+
+.ui-datepicker-trigger {
+	position: absolute;
+	width: 18px;
+	height: 19px;
+	background: no-repeat left top;
+	top: 7px;
+	left: 10px;
+	text-indent: -99999px;
+}
+
+.hyphen {
+	float: left;
+	width: 8px;
+	height: 1px;
+	margin: 17px 11px 0;
+	background-color: #ddd;
+}
+
+.start {
+	width: 75px;
+	height: 32px;
+	border: 0;
+	color: #888;
+	font-size: 14px;
+	line-height: 32px;
+}
+
+.end {
+	width: 75px;
+	height: 32px;
+	border: 0;
+	color: #888;
+	font-size: 14px;
+	line-height: 32px;
+}
+
+.search {
+	min-width: 78px;
+	height: 34px;
+	line-height: 30px;
+	float: left;
+	width: 80px;
+	margin: 0 0 0 10px;
+	background-color: #38a9a5;
+    color: #fff;
+}
+
+#mileage_tb th {
+	border-top: 2px solid #38a9a5;
+	border-bottom: 1px solid #d9d9d9;
+	background: #f3f3f3;
+	text-align: center;
+	color: #555;
+	height: 39px;
+}
+
+#mileage_tb td {
+	border-bottom: 1px solid #d9d9d9;
+	background: #f3f3f3;
+	text-align: center;
+	color: #555;
+	height: 39px;
+}
+
+.order_detail{
+	border : none;
+	background-color: white;
+	color: #38a9a5;
+	font-weight: bold;
+}

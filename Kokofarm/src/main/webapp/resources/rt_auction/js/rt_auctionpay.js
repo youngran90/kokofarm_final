@@ -18,6 +18,10 @@ $(function() {
 	
 	
 	$("#submitPay").on('click',function(){
+		var db_id = $("select[name=mobileReceiver1]").attr("id"); //초기 로딩시 각 태그 잠금 - 고객 전화번호 앞자리 3자리를 가져온다
+		$("select[name=mobileReceiver1]").val(db_id).attr("selected",true).attr("disabled", false); 
+		// 전화번호 앞자리 3개 disabled를 풀어준다( disabled = submit이 안됨 )
+		
 		var pay_sort = $("input[name=pay]:checked").val(); //결제 방법을 선택한것..
 		
 		if($("input[name=recipient_name]").val() == ""){
@@ -50,64 +54,36 @@ $(function() {
 			}
 		}else if(pay_sort == "신용카드"){
 			$("#bankaccount").val("none").prop("selected",true);
-			$("#deposit_name").val("");
+			$("#deposit_name").val("none");
 			
-			var rt_auction_finish = $("#rt_auction_finish").serialize();
-				
 			var credit = $("em[id=creditcard_name]").text(); // 카드사명
 			var month = $("em[id=pay_month]").text(); // 할부 종류
 	
 			if (credit == "none" || month == "none") {
 				alert("카드 / 기간을 선택해주세요.");
 			}else{
-				$.ajax({
-					type : "POST",
-					url : "/rt_auction/rt_auction",
-					data : rt_auction_finish,
-					dataType : "html",
-					success : function(){
-					}
-				});
+				$("#rt_auction_finish").submit();
 			}
 		}else if(pay_sort == "kakaopay"){
 			$("#creditcards").val("none").prop("selected",true);
 			$("#month").val("none").prop("selected",true);
 			$("#bankaccount").val("none").prop("selected",true);
-			$("#deposit_name").val("");
+			$("#deposit_name").val("none");
 			
-			var rt_auction_finish = $("#rt_auction_finish").serialize();
-			
-			$.ajax({
-				type : "POST",
-				url : "/rt_auction/rt_auction",
-				data : rt_auction_finish,
-				dataType : "html",
-				success : function(){
-				}
-			});
+			$("#rt_auction_finish").submit();
 			
 		}else if(pay_sort == "naverpay"){
 			$("#creditcards").val("none").prop("selected",true);
 			$("#month").val("none").prop("selected",true);
 			$("#bankaccount").val("none").prop("selected",true);
-			$("#deposit_name").val("");
+			$("#deposit_name").val("none");
 			
-			var rt_auction_finish = $("#rt_auction_finish").serialize();
-			
-			$.ajax({
-				type : "POST",
-				url : "/rt_auction/rt_auction",
-				data : rt_auction_finish,
-				dataType : "html",
-				success : function(){
-				}
-			});
+			$("#rt_auction_finish").submit();
 			
 		}else if(pay_sort == "무통장입금"){
 			$("#creditcards").val("none").prop("selected",true);
 			$("#month").val("none").prop("selected",true);
 			
-			var rt_auction_finish = $("#rt_auction_finish").serialize();
 			
 			var bank = $("em[id=pay_bank]").text();
 			var name = $("input[name=deposit_name]").val();
@@ -115,35 +91,10 @@ $(function() {
 			if (bank == "none" || name == "") {
 				alert("계좌 / 이름을 작성해주세요.");
 			}else{
-				
-				$.ajax({
-					type : "POST",
-					url : "/rt_auction/rt_auction",
-					data : rt_auction_finish,
-					dataType : "html",
-					success : function(){
-					}
-				});
-				
+				$("#rt_auction_finish").submit();
 			}
 		}// 조건 & ajax전송 종료
 });
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	$("#rt_acution_price01").text(numberFormat($("#rt_acution_price01").text()));
