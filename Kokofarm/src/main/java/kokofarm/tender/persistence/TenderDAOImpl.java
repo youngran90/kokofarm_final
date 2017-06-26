@@ -93,5 +93,12 @@ public class TenderDAOImpl implements TenderDAO {
 	public void updateAuctionHit(int auction_no) throws Exception {
 		session.update(namespace+".updateAuctionHit",auction_no);
 	}
+
+	@Override
+	public List<Integer> selectBestTend() throws Exception {
+		return session.selectList(namespace+".selectBestTend");
+	}
+	
+	
 	
 }

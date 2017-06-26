@@ -99,7 +99,7 @@
 </script>
 <div class="container">
   <ul class="breadcrumb">
-    <li><a href="index.html"><i class="fa fa-home"></i></a></li>
+    <li style="margin-left: 15px;"><a href="index.html"><i class="fa fa-home"></i></a></li>
     <li><a href="category.html">경매</a></li>
     <li><a href="#">경매상세</a></li>
   </ul>
@@ -110,19 +110,19 @@
           <div class="columnblock-title">Categories</div>
           <div class="category_block">
             <ul class="box-category treeview-list treeview">
-              <li><a href="#" class="activSub">Desktops</a>
-                <ul>
+              <li><a href="../auction/auction_list" class="activSub">경매리스트</a>
+                <!-- <ul>
                   <li><a href="#">PC</a></li>
                   <li><a href="#">MAC</a></li>
-                </ul>
+                </ul> -->
               </li>
-              <li><a href="#" class="activSub">Laptops &amp; Notebooks</a>
+              <!-- <li><a href="#" class="activSub"></a>
                 <ul>
                   <li><a href="#">Macs</a></li>
                   <li><a href="#">Windows</a></li>
                 </ul>
-              </li>
-              <li><a href="#" class="activSub">Components</a>
+              </li> -->
+              <!-- <li><a href="#" class="activSub">Components</a>
                 <ul>
                   <li><a href="#">Mice and Trackballs</a></li>
                   <li><a href="#" class="activSub" >Monitors</a>
@@ -138,15 +138,15 @@
               <li><a href="#">Software</a></li>
               <li><a href="#">Phones & PDAs</a></li>
               <li><a href="#">Cameras</a></li>
-              <li><a href="#">MP3 Players</a></li>
+              <li><a href="#">MP3 Players</a></li> -->
             </ul>
           </div>
         </div>
-        <h3 class="productblock-title">Bestsellers</h3>
+        <h3 class="productblock-title">인기상품</h3>
         <div class="row bestseller-grid product-grid">
           <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-grid-item">
             <div class="product-thumb transition">
-              <div class="image product-imageblock"> <a href="#"> <img src="image/product/2product50x59.jpg" alt="women's clothing" title="women's clothing" class="img-responsive" /> </a>
+              <div class="image product-imageblock"> <a href="tenderform?auction_no=${auctionbest0.auction_no }&pay_state=null"> <img src="/resources/files/attach/${auctionbest0.auction_title_img }" alt="${auctionbest0.auction_name }" title="${auctionbest0.auction_name }" class="img-responsive" /> </a>
                 <div class="button-group">
                   <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
                   <button type="button" class="addtocart-btn">Add to Cart</button>
@@ -154,39 +154,41 @@
                 </div>
               </div>
               <div class="caption product-detail">
-                <h4 class="product-name"> <a href="product.html" title="women's clothing">Clothing</a> </h4>
-                <p class="price product-price"> <span class="price-new">$254.00</span><span class="price-tax">Ex Tax: $210.00</span> </p>
+                <h4 class="product-name" style="width: 300px;"> <a href="tenderform?auction_no=${auctionbest0.auction_no }&pay_state=null" title="${auctionbest0.auction_name }">${auctionbest0.auction_name }</a> </h4>
+                <p class="price product-price" style="width: 300px;"> <span class="price-new">상한가 : ${auctionbest0.auction_up }원</span></p>
+                <p class="price product-price" style="width: 300px;"> <span class="price-new">하한가 : ${auctionbest0.auction_down }원</span> </p>
               </div>
-              <div class="button-group">
+             <!--  <div class="button-group">
                 <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
                 <button type="button" class="addtocart-btn">Add to Cart</button>
                 <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product"><i class="fa fa-exchange"></i></button>
-              </div>
+              </div> -->
             </div>
           </div>
           <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-grid-item">
             <div class="product-thumb transition">
-              <div class="image product-imageblock"> <a href="#"> <img src="image/product/3product50x59.jpg" alt="women's clothing" title="women's clothing" class="img-responsive" /> </a>
-                <div class="button-group">
+              <div class="image product-imageblock"> <a href="tenderform?auction_no=${auctionbest1.auction_no }&pay_state=null"> <img src="/resources/files/attach/${auctionbest1.auction_title_img }" alt="${auctionbest1.auction_name }" title="${auctionbest1.auction_name }" class="img-responsive" /> </a>
+                <!-- <div class="button-group">
                   <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
                   <button type="button" class="addtocart-btn">Add to Cart</button>
                   <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product"><i class="fa fa-exchange"></i></button>
-                </div>
+                </div> -->
               </div>
               <div class="caption product-detail">
-                <h4 class="product-name"> <a href="product.html" title="women's clothing">Clothing</a> </h4>
-                <p class="price product-price"> <span class="price-new">$254.00</span><span class="price-tax">Ex Tax: $210.00</span> </p>
+                <h4 class="product-name" style="width: 300px;"> <a href="tenderform?auction_no=${auctionbest1.auction_no }&pay_state=null" title="${auctionbest1.auction_name }">${auctionbest1.auction_name }</a></h4>
+                <p class="price product-price" style="width: 300px;"> <span class="price-new">상한가 : ${auctionbest1.auction_up }원</span> </p>
+                <p class="price product-price" style="width: 300px;"> <span class="price-new">하한가 : ${auctionbest1.auction_down }원</span> </p>
               </div>
-              <div class="button-group">
+              <!-- <div class="button-group">
                 <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
                 <button type="button" class="addtocart-btn">Add to Cart</button>
                 <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product"><i class="fa fa-exchange"></i></button>
-              </div>
+              </div> -->
             </div>
           </div>
           <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-grid-item">
             <div class="product-thumb transition">
-              <div class="image product-imageblock"> <a href="#"> <img src="image/product/4product50x59.jpg" alt="women's clothing" title="women's clothing" class="img-responsive" /> </a>
+              <div class="image product-imageblock"> <a href="tenderform?auction_no=${auctionbest2.auction_no }&pay_state=null"> <img src="/resources/files/attach/${auctionbest2.auction_title_img }" alt="${auctionbest2.auction_name }" title="${auctionbest2.auction_name }" class="img-responsive" /> </a>
                 <div class="button-group">
                   <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
                   <button type="button" class="addtocart-btn">Add to Cart</button>
@@ -194,24 +196,67 @@
                 </div>
               </div>
               <div class="caption product-detail">
-                <h4 class="product-name"> <a href="product.html" title="women's clothing">Clothing</a> </h4>
-                <p class="price product-price"> <span class="price-new">$254.00</span><span class="price-tax">Ex Tax: $210.00</span> </p>
+                <h4 class="product-name" style="width: 300px;"> <a href="tenderform?auction_no=${auctionbest2.auction_no }&pay_state=null" title="${auctionbest2.auction_name }">${auctionbest2.auction_name }</a> </h4>
+                <p class="price product-price" style="width: 300px;"> <span class="price-new">상한가 : ${auctionbest2.auction_up }원 </span> </p>  <!-- </span><span class="price-tax"> -->
+                <p class="price product-price" style="width: 300px;"> <span class="price-new">하한가 : ${auctionbest2.auction_down }원 </span> </p>               
               </div>
-              <div class="button-group">
+              <!-- <div class="button-group">
                 <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
                 <button type="button" class="addtocart-btn">Add to Cart</button>
                 <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product"><i class="fa fa-exchange"></i></button>
+              </div> -->
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-grid-item">
+            <div class="product-thumb transition">
+              <div class="image product-imageblock"> <a href="tenderform?auction_no=${auctionbest3.auction_no }&pay_state=null"> <img src="/resources/files/attach/${auctionbest3.auction_title_img }" alt="${auctionbest3.auction_name }" title="${auctionbest3.auction_name }" class="img-responsive" /> </a>
+                <div class="button-group">
+                  <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
+                  <button type="button" class="addtocart-btn">Add to Cart</button>
+                  <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product"><i class="fa fa-exchange"></i></button>
+                </div>
               </div>
+              <div class="caption product-detail">
+                <h4 class="product-name" style="width: 300px;"> <a href="tenderform?auction_no=${auctionbest3.auction_no }&pay_state=null" title="${auctionbest3.auction_name }">${auctionbest3.auction_name }</a> </h4>
+                <p class="price product-price" style="width: 300px;"> <span class="price-new">상한가 : ${auctionbest3.auction_up }원 </span> </p>  <!-- </span><span class="price-tax"> -->
+                <p class="price product-price" style="width: 300px;"> <span class="price-new">하한가 : ${auctionbest3.auction_down }원 </span> </p>               
+              </div>
+              <!-- <div class="button-group">
+                <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
+                <button type="button" class="addtocart-btn">Add to Cart</button>
+                <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product"><i class="fa fa-exchange"></i></button>
+              </div> -->
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-grid-item">
+            <div class="product-thumb transition">
+              <div class="image product-imageblock"> <a href="tenderform?auction_no=${auctionbest4.auction_no }&pay_state=null"> <img src="/resources/files/attach/${auctionbest4.auction_title_img }" alt="${auctionbest4.auction_name }" title="${auctionbest4.auction_name }" class="img-responsive" /> </a>
+                <div class="button-group">
+                  <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
+                  <button type="button" class="addtocart-btn">Add to Cart</button>
+                  <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product"><i class="fa fa-exchange"></i></button>
+                </div>
+              </div>
+              <div class="caption product-detail">
+                <h4 class="product-name" style="width: 300px;"> <a href="tenderform?auction_no=${auctionbest4.auction_no }&pay_state=null" title="${auctionbest4.auction_name }">${auctionbest4.auction_name }</a> </h4>
+                <p class="price product-price" style="width: 300px;"> <span class="price-new">상한가 : ${auctionbest4.auction_up }원 </span> </p>  <!-- </span><span class="price-tax"> -->
+                <p class="price product-price" style="width: 300px;"> <span class="price-new">하한가 : ${auctionbest4.auction_down }원 </span> </p>               
+              </div>
+              <!-- <div class="button-group">
+                <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
+                <button type="button" class="addtocart-btn">Add to Cart</button>
+                <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product"><i class="fa fa-exchange"></i></button>
+              </div> -->
             </div>
           </div>
         </div>
-        <h3 class="productblock-title">Latest</h3>
-        <div class="row latest-grid product-grid">
+        <h3 class="productblock-title" style="display: none;">Latest</h3>
+        <div class="row latest-grid product-grid" style="display: none;">
           <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-grid-item">
             <div class="product-thumb transition">
               <div class="image product-imageblock">
               <a href="#">
-              <img src="image/product/1product50x59.jpg" alt="lorem ippsum dolor dummy" title="lorem ippsum dolor dummy" class="img-responsive" />
+              <img src="/resources/files/attach/${auctionbest2.auction_title_img }" alt="lorem ippsum dolor dummy" title="lorem ippsum dolor dummy" class="img-responsive" />
               </a>
               </div>
               <div class="caption product-detail">
@@ -278,8 +323,8 @@
             </div>
           </div>
         </div>
-        <h3 class="productblock-title">Specials</h3>
-        <div class="row special-grid product-grid">
+        <h3 class="productblock-title" style="display: none;">Specials</h3>
+        <div class="row special-grid product-grid" style="display: none;">
           <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-grid-item">
             <div class="product-thumb transition">
               <div class="image product-imageblock"> <a href="#"><img src="image/product/5product50x59.jpg" alt="women's clothing" title="women's clothing" class="img-responsive" /></a>

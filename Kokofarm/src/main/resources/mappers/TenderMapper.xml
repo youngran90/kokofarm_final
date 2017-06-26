@@ -89,6 +89,10 @@
 	  update auction set auction_hits = auction_hits +1 where auction_no=#{auction_no}
 	</update>
 	
+	<select id="selectBestTend" resultType="Integer">
+	  <![CDATA[ select auction_no from (select auction_no, count(*) from tender group by auction_no order by count(*) desc) where rownum<=5 ]]>
+	</select>
+	
 	<!-- 상한가 뽑아내기 -->
 	<!-- <select id="selectPriceUp" resultType="int" parameterType="String">
 	  select auction_up from auction where auction_no=#{auction_no}

@@ -174,6 +174,12 @@ public class TenderController {
 			int currentvisitTime=v_hour*60*60+v_minute*60+v_second;
 			System.out.println("현재시간(초) "+currentvisitTime);
 			
+			if(e_day < v_day){
+				e_month=e_month-1;
+				e_day= e_day+31;
+				
+			}
+			
 			int year1= e_year-v_year;
 			int month1=e_month- v_month;
 			int day1= e_day-v_day;
@@ -181,6 +187,8 @@ public class TenderController {
 			int minute1 = e_minute-v_minute;
 			int second1= e_second-v_second;
 					
+			
+			
 			int visitingTime=0;
 				
 			if(year1==0 && month1==0 && day1>0){
@@ -222,7 +230,34 @@ public class TenderController {
 				if(visitingTime<=0){
 					visitingTime=0;
 				}				
-			}
+			}/*else if(year1==0 && month1>0 && day1<0){
+				if(e_day < v_day){
+					e_month=e_month-1;
+					e_day= e_day+31;
+					
+				}
+				if(e_second<v_second){
+					if(e_minute<1){
+						e_hour= e_hour-1;
+						e_minute = 59;
+						e_second=e_second+60;
+					}else{
+						e_minute=e_minute-1;
+						e_second=e_second+60;
+					}
+				}
+				
+				hour1=e_hour-v_hour;
+				minute1 = e_minute-v_minute;
+				second1= e_second-v_second;
+				
+				
+				visitingTime= hour1*60*60+ minute1*60+ second1;
+				
+				if(visitingTime<=0){
+					visitingTime=0;
+				}				
+			}*/
 			System.out.println("방문시간: "+ visitingTime);
 			model.addAttribute("visitingTime", visitingTime);
 					
@@ -312,6 +347,15 @@ public class TenderController {
 			}*/
 			model.addAttribute("tender_no",tender_no);
 			
+			List<Integer> listbest = service.selectBestTend();
+			List<AuctionVO> auctionbest = new ArrayList<>();
+			System.out.println("============5개가 나와야한다."+listbest.size());
+			for(int i=0;i<listbest.size();i++){
+				auctionbest.add(service.selectAuctionProduct(listbest.get(i)));
+				model.addAttribute("auctionbest"+i,auctionbest.get(i));
+			}
+			
+			System.out.println("핫한아이템"+auctionbest+"\n");
 			
 		}
 		

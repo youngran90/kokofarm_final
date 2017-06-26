@@ -96,6 +96,11 @@ public class TenderServiceImpl implements TenderService {
 	public void updateAuctionSuccess(int auction_no) throws Exception {
 		dao.updateAuctionSuccess(auction_no);
 	}
+
+	@Override
+	public List<Integer> selectBestTend() throws Exception {
+		return dao.selectBestTend();
+	}
 	
 	
 	
