@@ -32,4 +32,9 @@ public interface ProductDAO {
 	public void update_reply_count(String product_no, int amount)throws Exception;
 	
 	
+	//판매자용 리스트
+	public List<ProductVO>product_register_list(String member_id, PagingMaker PagingMaker)throws Exception;
+	
+	public int countProduct_list(String member_id)throws Exception;
+	
 }

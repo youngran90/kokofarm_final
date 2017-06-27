@@ -70,6 +70,19 @@ public class ProductDAOImpl implements ProductDAO {
 		map.put("amount", amount);
 		session.update(namespace+".update_reply_count", map);
 	}
+
+	@Override
+	public List<ProductVO> product_register_list(String member_id, PagingMaker PagingMaker) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("member_id", member_id);
+		map.put("PagingMaker", PagingMaker);
+		return session.selectList(namespace+".product_register_list", map);
+	}
+
+	@Override
+	public int countProduct_list(String member_id) throws Exception {
+		return session.selectOne(namespace+".countProduct_list", member_id);
+	}
 	
 
 }

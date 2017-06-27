@@ -59,6 +59,16 @@ public class ProductServiceImpl implements ProductService {
 		  return uuid;		
 	}
 
+	@Override
+	public List<ProductVO> product_register_list(String member_id,  PagingMaker PagingMaker) throws Exception {
+		return dao.product_register_list(member_id, PagingMaker);
+	}
+
+	@Override
+	public int countProduct_list(String member_id) throws Exception {
+		return dao.countProduct_list(member_id);
+	}
+
 
 
 }

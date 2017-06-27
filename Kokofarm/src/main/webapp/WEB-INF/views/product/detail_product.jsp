@@ -671,9 +671,9 @@
 			<div class="category-page-wrapper">
         <div class="pagination-in" style="margin-left: 40%">
          <ul class="pagination" >
-			<li><a href="/product/detail_product${pageMaker.makeQuery(1)}&product_no=${product.product_no}">처음</a></li>
+			<li><a href="/product/detail_product?page=1&product_no=${product.product_no}">처음</a></li>
 			<c:if test="${pageMaker.prev}">
-				<li><a href="/product/detail_product${pageMaker.makeQuery(pageMaker.startPage - 1) }">&laquo;</a></li>
+				<li><a href="/product/detail_product?page${pageMaker.prev}">&laquo;</a></li>
 			</c:if>
 			<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.lastPage}" var="idx">
 				 <li <c:out value="${pageMaker.page == idx?'class =active':''}"/>>
@@ -681,9 +681,9 @@
 				</li>
 			</c:forEach>
 				<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-					<li><a href="/product/detail_product${pageMaker.makeQuery(pageMaker.endPage +1) }">&raquo;</a></li>
+					<li><a href="/product/detail_product?page=${pageMaker.endPage +1}">&raquo;</a></li>
 				</c:if>
-				<li><a href="/product/detail_product${pageMaker.makeQuery(pageMaker.lastPage)}&product_no=${product.product_no}">마지막</a></li>
+				<li><a href="/product/detail_product?page=${pageMaker.lastPage}&product_no=${product.product_no}">마지막</a></li>
 			</ul>
         </div>
       </div>
@@ -787,12 +787,18 @@ $(function(){
 	};
 
 	 function eaup() {
+		 
 			var price = $('#price').val();
-			
 			var num = parseInt($("#ea").val());
 			var ea = num + 1;
+			var total = '${product.product_total}';
 			$("#ea").val(ea);
 			$("#aa").text(price * ea + "원");
+			
+		if(num >= total){
+				alert("수량이 현재 재고보다 많습니다.");
+				$("#ea").val(total);
+			}
 		}
 
 		function eadown() {
@@ -800,12 +806,12 @@ $(function(){
 			var price = $('#price').val();
 			var num = $("#ea").val();
 			var ea = parseInt(num);
-			
+	
 			if (ea <= 1) {
 				alert("더이상 수량을 줄일수없습니다.");
 				$("#aa").text(price * ea + "원");
 				
-			} else {
+			}else {
 				$("#ea").val(ea - 1);
 				$("#aa").text(price * (ea-1) + "원");
 			}
@@ -813,6 +819,13 @@ $(function(){
 		
 		function gocart(product_no){
 			var num = parseInt($("#ea").val());
+			var total = '${product.product_total}';
+			if(num > total){
+				alert("수량이 현재 재고보다 많습니다.");
+				return false;
+			}else{
+				
+			}
 			location.href="/cart/cart_detail?num=" + num + "&product_no="+ product_no;
 		}
 		

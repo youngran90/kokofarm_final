@@ -35,6 +35,7 @@ import org.springframework.web.multipart.MultipartFile;
 import kokofarm.basic.domain.Criteria;
 import kokofarm.basic.domain.FileBean;
 import kokofarm.basic.domain.PageMaker;
+import kokofarm.member.domain.MemberVO;
 import kokofarm.mypage.domain.InquiryVO;
 import kokofarm.mypage.domain.graphVO;
 import kokofarm.product.domain.PagingMaker;
@@ -345,6 +346,26 @@ public class ProductController {
          
      	return "/main/dailyPrice1";
     	
+	}
+	
+	@RequestMapping(value="/product_register_list", method= RequestMethod.GET)
+	public String product_register_list(ProductVO proudct, Model model, HttpServletRequest request,
+			@Param("pageMaker")PagingMaker PagingMaker)throws Exception{
+		
+		MemberVO member = (MemberVO)request.getSession().getAttribute("login");
+		String member_id = member.getMember_id();
+		System.out.println(member_id + " mmmmmmmmmmmmmmmmm");
+		
+		System.out.println("++++++++" +service.countProduct_list(member_id));
+		
+		PagingMaker.setDisplayPageNum(10);
+		PagingMaker.setTotalCount(service.countProduct_list(member_id));
+		
+		List<ProductVO> list = service.product_register_list(member_id, PagingMaker);
+		model.addAttribute("product", list);
+		model.addAttribute("pageMaker", PagingMaker);
+		
+		return "/mypage/product_register_list";
 	}
 	
 	
