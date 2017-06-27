@@ -49,6 +49,113 @@
     <li><a href="contact.html">고객센터</a></li>
   </ul>
   <div class="row">
+  <div id="column-left" class="col-sm-3 hidden-xs column-left">
+   		<div class="column-block">
+        <div class="column-block">
+          <div class="columnblock-title">고객센터</div>
+          <div class="category_block">
+            <ul class="box-category treeview-list treeview">
+              <li><a href="../center/customer_view" class="activSub">공지사항</a>
+              <li><a href="../center/customer_view2" class="activSub">자주묻는질문</a>
+                <!-- <ul>
+                  <li><a href="#">PC</a></li>
+                  <li><a href="#">MAC</a></li>
+                </ul> -->
+              </li>
+              <!-- <li><a href="#" class="activSub"></a>
+                <ul>
+                  <li><a href="#">Macs</a></li>
+                  <li><a href="#">Windows</a></li>
+                </ul>
+              </li> -->
+              <!-- <li><a href="#" class="activSub">Components</a>
+                <ul>
+                  <li><a href="#">Mice and Trackballs</a></li>
+                  <li><a href="#" class="activSub" >Monitors</a>
+                    <ul>
+                      <li><a href="#"  >test 1</a></li>
+                      <li><a href="#"  >test 2</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="#">Windows</a></li>
+                </ul>
+              </li>
+              <li><a href="#">Tablets</a></li>
+              <li><a href="#">Software</a></li>
+              <li><a href="#">Phones & PDAs</a></li>
+              <li><a href="#">Cameras</a></li>
+              <li><a href="#">MP3 Players</a></li> -->
+            </ul>
+          </div>
+        </div>
+    <!-- <div id="column-left" class="col-sm-3 hidden-xs column-left"> -->
+      <!-- <div class="column-block"> -->
+        
+        <!-- <h3 class="productblock-title" style="display: none;">Bestsellers</h3>
+        <div class="row bestseller-grid product-grid" style="display: none;">
+          <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-grid-item">
+            <div class="product-thumb transition">
+              <div class="image product-imageblock"> <a href="#"> <img src="image/product/2product50x59.jpg" alt="women's clothing" title="women's clothing" class="img-responsive" /> </a>
+                <div class="button-group">
+                  <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
+                  <button type="button" class="addtocart-btn">Add to Cart</button>
+                  <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product"><i class="fa fa-exchange"></i></button>
+                </div>
+              </div>
+              <div class="caption product-detail">
+                <h4 class="product-name"> <a href="product.html" title="women's clothing">Clothing</a> </h4>
+                <p class="price product-price"> <span class="price-new">$254.00</span><span class="price-tax">Ex Tax: $210.00</span> </p>
+              </div>
+              <div class="button-group">
+                <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
+                <button type="button" class="addtocart-btn">Add to Cart</button>
+                <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product"><i class="fa fa-exchange"></i></button>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-grid-item">
+            <div class="product-thumb transition">
+              <div class="image product-imageblock"> <a href="#"> <img src="image/product/3product50x59.jpg" alt="women's clothing" title="women's clothing" class="img-responsive" /> </a>
+                <div class="button-group">
+                  <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
+                  <button type="button" class="addtocart-btn">Add to Cart</button>
+                  <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product"><i class="fa fa-exchange"></i></button>
+                </div>
+              </div>
+              <div class="caption product-detail">
+                <h4 class="product-name"> <a href="product.html" title="women's clothing">Clothing</a> </h4>
+                <p class="price product-price"> <span class="price-new">$254.00</span><span class="price-tax">Ex Tax: $210.00</span> </p>
+              </div>
+              <div class="button-group">
+                <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
+                <button type="button" class="addtocart-btn">Add to Cart</button>
+                <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product"><i class="fa fa-exchange"></i></button>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-grid-item">
+            <div class="product-thumb transition">
+              <div class="image product-imageblock"> <a href="#"> <img src="image/product/4product50x59.jpg" alt="women's clothing" title="women's clothing" class="img-responsive" /> </a>
+                <div class="button-group">
+                  <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
+                  <button type="button" class="addtocart-btn">Add to Cart</button>
+                  <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product"><i class="fa fa-exchange"></i></button>
+                </div>
+              </div>
+              <div class="caption product-detail">
+                <h4 class="product-name"> <a href="product.html" title="women's clothing">Clothing</a> </h4>
+                <p class="price product-price"> <span class="price-new">$254.00</span><span class="price-tax">Ex Tax: $210.00</span> </p>
+              </div>
+              <div class="button-group">
+                <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
+                <button type="button" class="addtocart-btn">Add to Cart</button>
+                <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product"><i class="fa fa-exchange"></i></button>
+              </div>
+            </div>
+          </div>
+        </div> -->
+      <!-- </div> -->
+    </div>
     <!-- <div id="column-left" class="col-sm-3 hidden-xs column-left">
       <div class="column-block">
         <div class="column-block">
@@ -152,7 +259,8 @@
         </div> 
       </div>
     </div>-->
-    <div class="col-sm-9" id="content" style="position: relative; left:120px;">
+    </div>
+    <div class="col-sm-9" id="content" >
       <h1 style="font-weight: bold; margin-bottom: 30px;">고객센터</h1>
       <!-- <div style="margin-bottom: 10px;">
       <h3 style="display: inline-block; float:left; margin-right: 50px;">공지사항</h3>

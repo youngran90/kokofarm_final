@@ -64,10 +64,11 @@
     <div id="column-left" class="col-sm-3 hidden-xs column-left">
    		<div class="column-block">
         <div class="column-block">
-          <div class="columnblock-title">Categories</div>
+          <div class="columnblock-title">고객센터</div>
           <div class="category_block">
             <ul class="box-category treeview-list treeview">
-              <li><a href="../center/customer_view" class="activSub">고객센터</a>
+              <li><a href="../center/customer_view" class="activSub">공지사항</a>
+              <li><a href="../center/customer_view2" class="activSub">자주묻는질문</a>
                 <!-- <ul>
                   <li><a href="#">PC</a></li>
                   <li><a href="#">MAC</a></li>
@@ -169,17 +170,19 @@
     </div>
     </div>
     </div>
-    <div class="col-sm-9" id="content">
-    	 <div class="nav">
+    <div class="col-sm-9" id="content" style="postion:relativce; left:230px;">
+    	 <!-- <div class="nav" style="position: relative; left:230px; top:-122px;">
 			<ul class="nav nav-tabs">
 				<li class="active"><a onclick="move_notice()">공지사항</a></li>
 				<li class="active"><a id="faq" href="#" onclick="move_faq()">FAQ</a></li>	
 			</ul>
-			<button class="active" id="admin_button" onclick="move_admin()">등록하기</button>
-		</div>
-     	<div class="tab-pane active" id="tab-auctionview" style="margin-top: 30px;">
+		</div> -->
+     	<div class="tab-pane active" id="tab-auctionview" style="position:relative; top:-153px;">
 	        <div class="cpt_product_description ">
-								<div style="width: 1100px; position: relative; left: -100px;"> 
+	        				<h3 style="font-weight: bold; margin-bottom: 20px;">공지사항</h3>
+	        				<input type="button" class="active" id="admin_button" value="등록하기" onclick="move_admin()"
+	        				style="position:relativce; left:860px;">
+								<div style="width: 940px;"> 
 								<table class="view_board_table" id="notice_table">
 									<colgroup>
 									<col width="50">

@@ -115,6 +115,7 @@ var	time = '${visitingTime}'
 	function timer(){ 
 		 if(-30<=time && time<=0){
 			   time--;
+			   document.getElementById('timer_box').innerHTML="경매가 시작되었습니다.";
 			   $('#rt_reg_btn').show();
 		   }else if(time<-30){
 			   clearInterval(tid);
@@ -615,7 +616,7 @@ var	time = '${visitingTime}'
         <div class="col-sm-12 category-image"><img src="image/banners/category-banner.jpg" alt="Desktops" title="Desktops" class="img-thumbnail" /></div>
         <div class="col-sm-12 category-desc">Lorem ipsum dolomagna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate.</div>
       </div> -->
-      <div class="category-page-wrapper" style="position:relative; left:-100px; border-bottom: none; width: 800px; height: 600px;">
+      <div class="category-page-wrapper" style="border-bottom: none; width: 940px; height: 600px;">
       <div id="auction_list" style="border: 1px solid red; "><p>오늘은 등록된 상품이 없습니다.</p></div>
         <div class="col-md-6 list-grid-wrapper" style="width: 936px;">
           <div class="btn-group btn-list-grid" style="position: relative; top: -10px;">
@@ -665,7 +666,7 @@ var	time = '${visitingTime}'
      			bottom: 25px; left: 350px; font-size: 30px; font-weight: bold;"></div>
      			<div id="timer" style="background:#FAFAFA; width: 300px; height: 50px;
      			position: absolute; bottom: 10px; left: 330px;"></div>
-     			<input type="button" value="참여하기" id="rt_reg_btn" class="auction_part" onclick="location.href=/rt_auction/rt_auction?rt_auction_no=${RT_AuctionRegisterVO.rt_auction_no}">
+     			<input type="button" value="참여하기" id="rt_reg_btn" class="auction_part" onclick=location.href=".."/rt_auction/rt_auction?rt_auction_no=${RT_AuctionRegisterVO.rt_auction_no}" style="position: relative; left: 510px;">
      		</div>
      	</div>
      	</c:forEach>
@@ -687,7 +688,7 @@ var	time = '${visitingTime}'
      			bottom: 25px; left: 350px; font-size: 30px; font-weight: bold;"></div>
      			<div id="timer2" style="background:#FAFAFA; width: 300px; height: 50px;
      			position: absolute; bottom: 10px; left: 330px;"></div>
-     			<input type="button" value="참여하기" id="rt_reg_btn2" class="auction_part" onclick=location.href="../rt_auction/rt_auction?rt_auction_no=${RT_AuctionRegisterVO.rt_auction_no}">
+     			<input type="button" value="참여하기" id="rt_reg_btn2" class="auction_part" onclick=location.href="../rt_auction/rt_auction?rt_auction_no=${RT_AuctionRegisterVO.rt_auction_no}" style="position: relative; left: 510px;">
      		</div>
      	</div>
      	</c:forEach>

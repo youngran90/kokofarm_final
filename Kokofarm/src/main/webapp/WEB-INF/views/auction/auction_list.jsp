@@ -73,7 +73,7 @@ window.onload = function(){
 		$('#list_end').hide();
 		
 		$('#none').click(function(){
-			alert("기본리스트");
+			//alert("기본리스트");
 			$('#list_default').show();
 			$('#list_fruit').hide();
 			$('#list_vege').hide();
@@ -81,7 +81,7 @@ window.onload = function(){
 			$('#list_end').hide();
 		});
 		$('#fruit').click(function(){
-			alert("과일리스트");
+			//alert("과일리스트");
 			$('#list_fruit').show();
 			$('#list_default').hide();
 			$('#list_vege').hide();
@@ -89,7 +89,7 @@ window.onload = function(){
 			$('#list_end').hide();
 		});
 		$('#vege').click(function(){
-			alert("채소리스트");
+			//alert("채소리스트");
 			$('#list_vege').show();
 			$('#list_default').hide();
 			$('#list_fruit').hide();
@@ -97,7 +97,7 @@ window.onload = function(){
 			$('#list_end').hide();
 		});
 		$('#new').click(function(){
-			alert("신규등록순");
+			//alert("신규등록순");
 			$('#list_new').show();
 			$('#list_default').hide();
 			$('#list_fruit').hide();
@@ -105,7 +105,7 @@ window.onload = function(){
 			$('#list_end').hide();
 		});
 		$('#end').click(function(){
-			alert("마감임박순");
+			//alert("마감임박순");
 			$('#list_end').show();
 			$('#list_default').hide();
 			$('#list_fruit').hide();
@@ -180,7 +180,7 @@ window.onload = function(){
             </ul>
           </div>
         </div>
-        <h3 class="productblock-title">새 등록상품</h3>
+        <h3 class="productblock-title">신규등록상품</h3>
         <div class="row bestseller-grid product-grid">
           <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-grid-item">
             <div class="product-thumb transition">
@@ -631,9 +631,9 @@ window.onload = function(){
      	<div class="product-layout product-list col-xs-12" style="width: 220px; height:300px; padding:0; margin-right: 10px;" >
      		<div class="product-thumb" style="width: 200px; height: 300px;">
      			<div class="image product-imageblock"><a href="/tender/tenderform?auction_no=${AuctionRegisterVO.auction_no}&pay_state=null&tender_price_1=0"><img src='/resources/files/attach/${AuctionRegisterVO.auction_title_img}' class="img-responsive" id="list_img"></a></div>
-     			<h4 class="product-name" style="height: 35px;"> <a href="/tender/tenderform?auction_no=${AuctionRegisterVO.auction_no}&pay_state=null&tender_price_1=0"><span class="auction_name">${AuctionRegisterVO.auction_name}</span></a></h4>
+     			<h4 class="product-name" style="height: 35px; text-align: center;"> <a href="/tender/tenderform?auction_no=${AuctionRegisterVO.auction_no}&pay_state=null&tender_price_1=0"><span class="auction_name">${AuctionRegisterVO.auction_name}</span></a></h4>
      			<div style="overflow: hidden;" >
-     			<p style="margin-right:10px; color: gray;">
+     			<p style="margin-right:10px; color: gray; font-size:12px;">
      			<span style="font-size: 12px; color:#A6A6A6; font-weight: lighter; margin-right:5px;">경매종료일</span>${AuctionRegisterVO.end_date}
      			</p>
      			<p class="price product-price" style="margin-right:10px;">
@@ -647,14 +647,14 @@ window.onload = function(){
      	</div>
      	</c:forEach>
        </div>
-       <div id="list_fruit" class="grid-list-wrapper" style="width: 1180px; position: relative;">
+       <div id="list_fruit" class="grid-list-wrapper">
      <c:forEach items="${list_Fruit}" var="AuctionRegisterVO">
-     	<div class="product-layout product-list col-xs-12" style="height:260px; z-index: 2;">
-     		<div class="product-thumb" style="width: 240px; height: 260px; position: relative; left: 18px;">
+     	<div class="product-layout product-list col-xs-12" style="width: 220px; height:300px; padding:0; margin-right: 10px;" >
+     		<div class="product-thumb" style="width: 200px; height: 300px;">
      			<div class="image product-imageblock"><a href="/tender/tenderform?auction_no=${AuctionRegisterVO.auction_no}&pay_state=null&tender_price_1=0"><img src='/resources/files/attach/${AuctionRegisterVO.auction_title_img}' class="img-responsive" id="list_img"></a></div>
-     			<h4 class="product-name" style="height: 35px;"> <a href="/tender/tenderform?auction_no=${AuctionRegisterVO.auction_no}&pay_state=null&tender_price_1=0"><span class="auction_name">${AuctionRegisterVO.auction_name}</span></a></h4>
-     			<div style="overflow: hidden; position: relative; bottom: -5px;" >
-     			<p style="margin-right:10px; color: gray;">
+     			<h4 class="product-name" style="height: 35px; text-align: center;"> <a href="/tender/tenderform?auction_no=${AuctionRegisterVO.auction_no}&pay_state=null&tender_price_1=0"><span class="auction_name">${AuctionRegisterVO.auction_name}</span></a></h4>
+     			<div style="overflow: hidden;" >
+     			<p style="margin-right:10px; color: gray; font-size:12px;">
      			<span style="font-size: 12px; color:#A6A6A6; font-weight: lighter; margin-right:5px;">경매종료일</span>${AuctionRegisterVO.end_date}
      			</p>
      			<p class="price product-price" style="margin-right:10px;">
@@ -668,14 +668,14 @@ window.onload = function(){
      	</div>
      	</c:forEach>
        </div>
-       <div id="list_vege" class="grid-list-wrapper" style="width: 1180px; position: relative;">
+       <div id="list_vege" class="grid-list-wrapper">
      <c:forEach items="${list_Vege}" var="AuctionRegisterVO">
-     	<div class="product-layout product-list col-xs-12" style="height:260px; z-index: 2;">
-     		<div class="product-thumb" style="width: 240px; height: 260px; position: relative; left: 18px;">
+     	<div class="product-layout product-list col-xs-12" style="width: 220px; height:300px; padding:0; margin-right: 10px;">
+     		<div class="product-thumb" style="width: 200px; height: 300px;">
      			<div class="image product-imageblock"><a href="/tender/tenderform?auction_no=${AuctionRegisterVO.auction_no}&pay_state=null&tender_price_1=0"><img src='/resources/files/attach/${AuctionRegisterVO.auction_title_img}' class="img-responsive" id="list_img"></a></div>
-     			<h4 class="product-name" style="height: 35px;"> <a href="/tender/tenderform?auction_no=${AuctionRegisterVO.auction_no}&pay_state=null&tender_price_1=0"><span class="auction_name">${AuctionRegisterVO.auction_name}</span></a></h4>
-     			<div style="overflow: hidden; position: relative; bottom: -5px;" >
-     			<p style="margin-right:10px; color: gray;">
+     			<h4 class="product-name" style="height: 35px; text-align: center;"> <a href="/tender/tenderform?auction_no=${AuctionRegisterVO.auction_no}&pay_state=null&tender_price_1=0"><span class="auction_name">${AuctionRegisterVO.auction_name}</span></a></h4>
+     			<div style="overflow: hidden;" >
+     			<p style="margin-right:10px; color: gray; font-size:12px;">
      			<span style="font-size: 12px; color:#A6A6A6; font-weight: lighter; margin-right:5px;">경매종료일</span>${AuctionRegisterVO.end_date}
      			</p>
      			<p class="price product-price" style="margin-right:10px;">
@@ -689,14 +689,14 @@ window.onload = function(){
      	</div>
      	</c:forEach>
        </div>
-       <div id="list_new" class="grid-list-wrapper" style="width: 1180px; position: relative;">
+       <div id="list_new" class="grid-list-wrapper">
      <c:forEach items="${list_New}" var="AuctionRegisterVO">
-     	<div class="product-layout product-list col-xs-12" style="height:260px; z-index: 2;">
-     		<div class="product-thumb" style="width: 240px; height: 260px; position: relative; left: 18px;">
+     	<div class="product-layout product-list col-xs-12" style="width: 220px; height:300px; padding:0; margin-right: 10px;">
+     		<div class="product-thumb" style="width: 200px; height: 300px;">
      			<div class="image product-imageblock"><a href="/tender/tenderform?auction_no=${AuctionRegisterVO.auction_no}&pay_state=null&tender_price_1=0"><img src='/resources/files/attach/${AuctionRegisterVO.auction_title_img}' class="img-responsive" id="list_img"></a></div>
-     			<h4 class="product-name" style="height: 35px;"> <a href="/tender/tenderform?auction_no=${AuctionRegisterVO.auction_no}&pay_state=null&tender_price_1=0"><span class="auction_name">${AuctionRegisterVO.auction_name}</span></a></h4>
-     			<div style="overflow: hidden; position: relative; bottom: -5px;" >
-     			<p style="margin-right:10px; color: gray;">
+     			<h4 class="product-name" style="height: 35px; text-align: center;"> <a href="/tender/tenderform?auction_no=${AuctionRegisterVO.auction_no}&pay_state=null&tender_price_1=0"><span class="auction_name">${AuctionRegisterVO.auction_name}</span></a></h4>
+     			<div style="overflow: hidden;">
+     			<p style="margin-right:10px; color: gray; font-size:12px;">
      			<span style="font-size: 12px; color:#A6A6A6; font-weight: lighter; margin-right:5px;">경매종료일</span>${AuctionRegisterVO.end_date}
      			</p>
      			<p class="price product-price" style="margin-right:10px;">
@@ -710,14 +710,14 @@ window.onload = function(){
      	</div>
      	</c:forEach>
        </div>
-       <div id="list_end" class="grid-list-wrapper" style="width: 1180px; position: relative;">
+       <div id="list_end" class="grid-list-wrapper">
      <c:forEach items="${list_End}" var="AuctionRegisterVO">
-     	<div class="product-layout product-list col-xs-12" style="height:260px; z-index: 2;">
-     		<div class="product-thumb" style="width: 240px; height: 260px; position: relative; left: 18px;">
+     	<div class="product-layout product-list col-xs-12" style="width: 220px; height:300px; padding:0; margin-right: 10px;">
+     		<div class="product-thumb" style="width: 200px; height: 300px;">
      			<div class="image product-imageblock"><a href="/tender/tenderform?auction_no=${AuctionRegisterVO.auction_no}&pay_state=null&tender_price_1=0"><img src='/resources/files/attach/${AuctionRegisterVO.auction_title_img}' class="img-responsive" id="list_img"></a></div>
-     			<h4 class="product-name" style="height: 35px;"> <a href="/tender/tenderform?auction_no=${AuctionRegisterVO.auction_no}&pay_state=null&tender_price_1=0"><span class="auction_name">${AuctionRegisterVO.auction_name}</span></a></h4>
-     			<div style="overflow: hidden; position: relative; bottom: -5px;" >
-     			<p style="margin-right:10px; color: gray;">
+     			<h4 class="product-name" style="height: 35px; text-align: center;"> <a href="/tender/tenderform?auction_no=${AuctionRegisterVO.auction_no}&pay_state=null&tender_price_1=0"><span class="auction_name">${AuctionRegisterVO.auction_name}</span></a></h4>
+     			<div style="overflow: hidden;">
+     			<p style="margin-right:10px; color: gray; font-size:12px;">
      			<span style="font-size: 12px; color:#A6A6A6; font-weight: lighter; margin-right:5px;">경매종료일</span>${AuctionRegisterVO.end_date}
      			</p>
      			<p class="price product-price" style="margin-right:10px;">

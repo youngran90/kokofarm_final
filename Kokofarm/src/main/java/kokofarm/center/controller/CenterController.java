@@ -95,20 +95,36 @@ public class CenterController {
 	}
 			
 	@RequestMapping(value="/customer_view", method=RequestMethod.GET)
-	public void list(HttpServletRequest request, CenterVO vo, 
+	public void list_notice(HttpServletRequest request, CenterVO vo, 
 		MemberVO member, Model model)throws Exception{
-		System.out.println("center_list");
+		System.out.println("======================center_list_notice======================");
 		System.out.println(vo.toString());
 		
 		model.addAttribute("list_notice", service.list_notice());
+		
+		
+	}
+	
+	@RequestMapping(value="/customer_view2", method=RequestMethod.GET)
+	public void list_faq(HttpServletRequest request, CenterVO vo, 
+		MemberVO member, Model model)throws Exception{
+		System.out.println("======================center_list_faq======================");
+		System.out.println(vo.toString());
+	
 		model.addAttribute("list_faq", service.list_faq());
 		
 	}
 	
 	@RequestMapping(value="/detail_notice", method=RequestMethod.GET)
-	public void detail(@RequestParam("cno")int cno, Model model)throws Exception{
+	public void detail_notice(@RequestParam("cno")int cno, Model model)throws Exception{
 		service.update_viewcnt(cno);
 		model.addAttribute("detail_notice", service.list_notice());
+	}
+	
+	@RequestMapping(value="/detail_faq", method=RequestMethod.GET)
+	public void detail_faq(@RequestParam("cno")int cno, Model model)throws Exception{
+		service.update_viewcnt(cno);
+		model.addAttribute("detail_faq", service.list_faq());
 	}
 			
 }
