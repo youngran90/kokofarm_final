@@ -108,6 +108,7 @@ function move_register(){
 
 
 //오전 타이머
+	var	time = '${vistingTime}'
 	//alert("오전남은시간"+time);
 	
 	
@@ -138,6 +139,7 @@ function move_register(){
 	function timer2(){ 
 		if(-30<=time2 && time2<=0){
 			   time2--;
+			   document.getElementById('timer_box2').innerHTML="경매가 시작되었습니다.";
 			   $('#rt_reg_btn2').show();
 		   }else if(time2<-30){
 			   clearInterval(tid2);
