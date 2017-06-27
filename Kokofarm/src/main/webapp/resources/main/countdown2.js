@@ -36,9 +36,7 @@ var Countdown = function()
 			var diffDay = Math.floor(diff / 24 / 60 / 60);
 
 			if (diff <= 0 ) {
-				
-				console.log("once");
-			
+							
 				/*if(goodsno)
 					location.href = "goods_timesale_list.php?goodsno=" + goodsno;
 				else

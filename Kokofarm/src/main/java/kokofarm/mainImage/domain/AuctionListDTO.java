@@ -25,9 +25,10 @@ public class AuctionListDTO implements Serializable {
 	private MultipartFile file;
 	private String seller_no; 
 	
+	
 	private int tender_no;
 	private int tender_price;
-	private Timestamp tender_date;
+	private String tender_date;
 	public int getAuction_no() {
 		return auction_no;
 	}
@@ -130,10 +131,10 @@ public class AuctionListDTO implements Serializable {
 	public void setTender_price(int tender_price) {
 		this.tender_price = tender_price;
 	}
-	public Timestamp getTender_date() {
+	public String getTender_date() {
 		return tender_date;
 	}
-	public void setTender_date(Timestamp tender_date) {
+	public void setTender_date(String tender_date) {
 		this.tender_date = tender_date;
 	}
 	@Override
@@ -148,6 +149,7 @@ public class AuctionListDTO implements Serializable {
 	}
 	
 	
+
 	
 	
 }

@@ -1,6 +1,9 @@
 package kokofarm.mainImage.controller;
 
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -24,7 +27,14 @@ public class MainController {
 	
 	
 	@RequestMapping(value="/", method = RequestMethod.GET)
-	public String main(Model model) throws Exception{
+	public String main(Model model,Locale locale) throws Exception{
+		
+		Date date = new Date();
+		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+		
+		String formattedDate = dateFormat.format(date);
+		
+		model.addAttribute("serverTime", formattedDate );
 		
 		
 		List<ProductVO> productLatestList = service.productLatest();

@@ -12,11 +12,11 @@ where rownum <=10
 	</select>
 	
 	<select id="mainAuctionLatest" resultType="AuctionListDTO">
-		select ROWNUM, alias.* from 
-(select distinct a.*, t.tender_price from auction a, tender t where a.auction_no=t.auction_no order by a.end_date desc, t.tender_price desc) alias 
-<![CDATA[ where rownum <=10]]>
-
-	</select>
+	<![CDATA[
+	select rownum, alias.* from(
+select a.auction_no, a.auction_title_img, a.auction_name, max(t.tender_price) as tender_price from auction a, tender t where a.auction_no = t.auction_no group by a.end_date, a.auction_no, a.auction_title_img, a.auction_name order by a.end_date desc)
+alias where rownum <=10]]>
+		</select>
 	
 	<select id="bestSellerItem" resultType="ProductVO">
 		select ROWNUM, alias.* from

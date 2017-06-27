@@ -50,19 +50,18 @@
 			
 				<interceptor>
 					<mapping path="/mypage/list_Inquiry"/>
-					<beans:ref bean="authInterceptor"/>							
-				</interceptor>
-						
-				<interceptor>
+					<mapping path="/mypage/order_list"/>
+					<mapping path="/orderproduct/mileage_view"/>
+					<mapping path="/mypage/list_inquiry"/>
+					<mapping path="/mypage/gragh"/>
+					<mapping path="/mypage/auction_view"/>
+					<mapping path="/cart/cart"/>
 					<mapping path="/tender/tenderform"/>
-					<beans:ref bean="authInterceptor"/>
+					<mapping path="/member/myInfo"/>			
+					<beans:ref bean="authInterceptor"/>		
 				</interceptor>
 				
-				<interceptor>
-					<mapping path="/member/myInfo"/>
-					<beans:ref bean="authInterceptor"/>
-				</interceptor>
-				
+							
 				<interceptor>
 					<mapping path="/product/Insert_product"/>
 					<beans:ref bean="authInterceptor"/>
@@ -73,8 +72,7 @@
 					<mapping path="/member/join1"/>
 					<mapping path="/member/join1_1"/>
 					<mapping path="/member/join_li"/>
-					<mapping path="/member/join"/>
-					
+					<mapping path="/member/join"/>					
 					<beans:ref bean="urlAccessInterceptor"/>
 				</interceptor>
 				
@@ -84,5 +82,5 @@
 					<beans:ref bean="rt_auctionInterceptor"/>
 				</interceptor> -->
 							
-		</interceptors>
+		</interceptors>  		
 </beans:beans>
