@@ -84,15 +84,15 @@ window.onload = function(){
 	$('#auction_list').hide();
 	
 	var seller_no = '${login.seller_no}'
-	//alert(seller_no);
-	if(seller_no==""){//판매자 계정 아닐 때 등록 버튼 안보이게
+	
+	if(seller_no==""){
 		$('#register_button').hide();
 	}else{
 		$('#register_button').show();
 	}
 	
-	
-	if(count==0){ //등록된 상품이 없을 때
+	var count = '${count}'
+	if(count==0){ 
 		$('#auction_list').show();
 	}else{
 		$('#auction_list').hide();
