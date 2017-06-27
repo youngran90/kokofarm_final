@@ -158,7 +158,7 @@ function onlyNumber(obj) {
                 <td class="text-center">${rt_result_actionListVO.rt_tender_no}</td>
                 	<input type="hidden" name="rt_tender_no" value="${rt_result_actionListVO.rt_tender_no}">
                 <td class="text-center">${rt_result_actionListVO.rt_auction_group}</td>
-                <td class="text-center"><a href="product.html"><img class="img-thumbnail" title="${rt_result_actionListVO.rt_auction_title_img}" alt="" src="/resources/files/attach/${list.rt_auction_title_img }" style="width: 100px; height: 100px;"></a></td>
+                <td class="text-center"><a href="product.html"><img class="img-thumbnail" alt="${rt_result_actionListVO.rt_auction_title_img}" src="/resources/files/attach/${rt_result_actionListVO.rt_auction_title_img }" style="width: 100px; height: 100px;"></a></td>
                 <td class="text-center"><strong id="rt_acution_name"><a href="#">${rt_result_actionListVO.rt_auction_name}</a></strong></td>
                 <td class="text-center">${rt_result_actionListVO.rt_auction_unit}</td>
                 <td class="text-center"><strong id="rt_acution_price01">${rt_result_actionListVO.rt_tender_price }</strong><strong id="rt_unit">원</strong></td>

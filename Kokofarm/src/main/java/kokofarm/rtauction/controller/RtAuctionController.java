@@ -71,10 +71,10 @@ public class RtAuctionController {
 		model.addAttribute("seller_no", seller_no);
 		model.addAttribute("rt_auction_no", rt_auction_no);
 		
-		//return "redirect://localhost:8083";
+		return "redirect://localhost:8083";
 		//return "redirect:http://192.168.0.172:8083"; // 학원에서 할때 학원 서버
 		//return "redirect:http://106.242.203.68:8083"; //집에서 할때 학원 서버
-		return "redirect:http://192.168.0.172:8083/"; // 학원에서 내껄로 접속할때
+		//return "redirect:http://192.168.0.172:8083/"; // 학원에서 내껄로 접속할때
 		
 	}
 	
@@ -96,8 +96,6 @@ public class RtAuctionController {
 		
 		java.sql.Timestamp time = java.sql.Timestamp.valueOf(date); // String 날짜 형식 -> TimeStamp 형식으로 변환
 		
-		System.out.println(rt_result_no);
-		
 		RtResultAuctionVO vo = new RtResultAuctionVO();
 		vo.setRt_tender_no(rt_result_no); // 낙찰번호
 		vo.setRt_auction_no(no); // 경매 번호
@@ -105,7 +103,6 @@ public class RtAuctionController {
 		vo.setRt_tender_price(price); // 경매 낙찰가
 		vo.setRt_tender_date(time); // 낙찰 시간
 		
-		System.out.println(vo.toString());
 		
 		service.rtresultauction(vo);
 		
@@ -119,6 +116,7 @@ public class RtAuctionController {
 		MemberVO member = (MemberVO)session.getAttribute("login");
 		
 		RtResultAuctionListVO rt_result_actionListVO = service.resultList(rt_acution_no);
+			System.out.println(rt_result_actionListVO.toString());
 			
 		MemberVO memberVO = service.member_info(member.getMember_id());
 		
@@ -136,7 +134,7 @@ public class RtAuctionController {
 		model.addAttribute("rt_result_actionListVO",rt_result_actionListVO);
 		model.addAttribute("memberVO",memberVO);
 		
-		return "rt_auction/rt_auctionpay";
+		return "redirect://rt_auction/rt_auctionpay";
 		
 	}
 	

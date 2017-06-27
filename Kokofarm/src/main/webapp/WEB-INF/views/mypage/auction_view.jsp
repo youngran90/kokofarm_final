@@ -298,7 +298,7 @@
 											<tr  class="tit_tr user_tit_tr">
 												<td>${status.count}</td>
 												<td>${rt_list.rt_tender_finish_no }</td>
-												<td><img src="${ rt_list.rt_auction_title_img }" alt="${rt_list.rt_auction_name}" id="img"></td>
+												<td><img src="/resources/files/attach/${ rt_list.rt_auction_title_img }" alt="${rt_list.rt_auction_name}" id="img"></td>
 												<td>${rt_list.rt_auction_name}</td>
 												<td><fmt:formatNumber value="${rt_list.rt_tender_price }" type="number"/></td>
 												<td>${rt_list.rt_tender_date}</td>
