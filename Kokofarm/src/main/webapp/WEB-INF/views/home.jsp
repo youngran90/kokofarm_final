@@ -88,6 +88,8 @@ cursor: pointer;
 
 }
 
+.category_section .cate_title span{display:inline-block;line-height:63px;font-family:YG78;font-size:28px;color:#352f29;padding:0 18px;background:#f3f3f3;}
+.category_section .cate_title{text-align:center;position:relative;height:63px;background:url(/resources/files/attach/bg_cate_tit.gif) repeat-x left 24px;}
 
 .auction_image{
     position: relative;
@@ -462,7 +464,182 @@ font-family: YG77;
             </div>
           </div>
         </div>
-        <h3 class="productblock-title">Weekly Top Products</h3>
+        
+        <style type="text/css">
+			.insta_area li{float:left;width:16.666666%;min-height:245px;}
+			.insta_area li a{display:block;margin:5px 5px;box-sizing:border-box;}
+			.insta_area li a img{width:100%;vertical-align:middle;height:235px;}
+		</style>
+        
+        
+       <section class="category_section insta_section">
+			<h2 class="cate_title"><span>인스타그램</span></h2>
+			<p class="tit_caption">#코코팜 #새벽배송 #프리미엄 #먹거리</p>
+			<ul class="insta_area clearfix">
+			<li><a href="https://www.instagram.com/p/BVyKaUrB3Dj/" target="_blank"><img src="https://scontent.cdninstagram.com/t51.2885-15/s320x320/e35/19436581_231755284000021_7271679249046568960_n.jpg" alt="@hellodaisy_flower 님, 정성담긴 후기 고맙습니다.
+.
+어제 주문하고 받은 상품으로 아침을" title="@hellodaisy_flower 님, 정성담긴 후기 고맙습니다.
+.
+어제 주문하고 받은 상품으로 아침을"></a></li><li><a href="https://www.instagram.com/p/BVyKN2QhkwD/" target="_blank"><img src="https://scontent.cdninstagram.com/t51.2885-15/s320x320/e35/19429126_1795297364133744_6335388417311899648_n.jpg" alt="@hannah_gracelove 님, 정성담긴 후기 고맙습니다.
+.
++274
+" title="@hannah_gracelove 님, 정성담긴 후기 고맙습니다.
+.
++274
+"></a></li><li><a href="https://www.instagram.com/p/BVyKHZlBP75/" target="_blank"><img src="https://scontent.cdninstagram.com/t51.2885-15/s320x320/e35/19429261_1500600943325057_5719153768176549888_n.jpg" alt="@yj_angela_c 님, 정성담긴 후기 고맙습니다.
+-
+#몸이가벼워지는시간 #샐러드 #발사믹 #giuseppegiusti #바질페스토 #공정무역올리브유 #청무화과말랭이 #헬로네이처
+#hellonature #새벽배송 #장보기 #유기농 #친환경 #마트 #온라인쇼핑 #프리미엄마켓 #온더테이블 #장보기그램
+-
+#Repost @yj_angela_c @repostapp
+-
+구매는 프로필에서 링크클릭" title="@yj_angela_c 님, 정성담긴 후기 고맙습니다.
+-
+#몸이가벼워지는시간 #샐러드 #발사믹 #giuseppegiusti #바질페스토 #공정무역올리브유 #청무화과말랭이 #헬로네이처
+#hellonature #새벽배송 #장보기 #유기농 #친환경 #마트 #온라인쇼핑 #프리미엄마켓 #온더테이블 #장보기그램
+-
+#Repost @yj_angela_c @repostapp
+-
+구매는 프로필에서 링크클릭"></a></li><li><a href="https://www.instagram.com/p/BVqizXRhAWm/" target="_blank"><img src="https://scontent.cdninstagram.com/t51.2885-15/s320x320/e35/19379177_127486901169191_8150412296334606336_n.jpg" alt="@lee_e_u_n 님, 정성담긴 후기 고맙습니다.
+-
+.
+.
+오늘은 빵과 함께 아침을 보냇어요!
+주하는 유기농재료의 담담베이글
+엄빠는 샌드위치로 " title="@lee_e_u_n 님, 정성담긴 후기 고맙습니다.
+-
+.
+.
+오늘은 빵과 함께 아침을 보냇어요!
+주하는 유기농재료의 담담베이글
+엄빠는 샌드위치로 "></a></li><li><a href="https://www.instagram.com/p/BVqivj8hoIu/" target="_blank"><img src="https://scontent.cdninstagram.com/t51.2885-15/s320x320/e35/19367559_397965353932485_5290646946933899264_n.jpg" alt="@feel8174 님, 정성담긴 후기 고맙습니다.
+-
+아침냠냠" title="@feel8174 님, 정성담긴 후기 고맙습니다.
+-
+아침냠냠"></a></li><li><a href="https://www.instagram.com/p/BVn4MlYhzw-/" target="_blank"><img src="https://scontent.cdninstagram.com/t51.2885-15/s320x320/e35/19367417_1688597331448549_3655798517936422912_n.jpg" alt="@yeppi_creamy_taeng 님, 정성담긴 후기 고맙습니다.
+-
+조금 졸렸지만 즐거운 시간을 보낸 어제
+특별한 날이라
+맛난 과일도 준비 헤헤
+좋앙 또보쟈" title="@yeppi_creamy_taeng 님, 정성담긴 후기 고맙습니다.
+-
+조금 졸렸지만 즐거운 시간을 보낸 어제
+특별한 날이라
+맛난 과일도 준비 헤헤
+좋앙 또보쟈"></a></li><li><a href="https://www.instagram.com/p/BVn36GsBlUY/" target="_blank"><img src="https://scontent.cdninstagram.com/t51.2885-15/s320x320/e35/19367864_1876290172622542_1085384007165673472_n.jpg" alt="@baddiary_minhye 님, 정성담긴 후기 고맙습니다.
+-
+요즘 몸이 안좋은 것 같아서 아침을 간단하게라도 먹을려고, 어젯밤 #헬로네이처 에 몇가지 주문을 했다. 
+그런데 결제 후 두시간만에 배송이 왔다" title="@baddiary_minhye 님, 정성담긴 후기 고맙습니다.
+-
+요즘 몸이 안좋은 것 같아서 아침을 간단하게라도 먹을려고, 어젯밤 #헬로네이처 에 몇가지 주문을 했다. 
+그런데 결제 후 두시간만에 배송이 왔다"></a></li><li><a href="https://www.instagram.com/p/BVlTweKB7Fn/" target="_blank"><img src="https://scontent.cdninstagram.com/t51.2885-15/s320x320/e35/19228348_1918950014995372_2078772314521993216_n.jpg" alt="@sunny_and_hong 님, 정성담긴 후기 고맙습니다.
+-
+.
+20170621
+어제먹은 야식의 죄책감을 없애는 방법.
+눈뜨자마자 #올가니카 마시기.
+#그린데이 너무 맛있다.
+새벽배송해주시는 #헬로네이처 기사님.
+감사합니다.
+.
+.
+.
+#오늘은하루종일올가니카
+#난왜이맛을못낼까
+#신랑주려고따라놓고내가원샷
+#휴롬은갖다버리자
+#마켓컬리보단헬로네이처
+#헬로네이처 
+#클렌주스
+#해독주스
+#detoxjuicecleans
+#아침
+#hellonature #새벽배송 #장보기 #유기농 #친환경 #마트 #온라인쇼핑 #프리미엄마켓 #온더테이블 #장보기그램
+-
+#Repost @sunny_and_hong @repostapp
+-
+구매는 프로필에서 링크클릭" title="@sunny_and_hong 님, 정성담긴 후기 고맙습니다.
+-
+.
+20170621
+어제먹은 야식의 죄책감을 없애는 방법.
+눈뜨자마자 #올가니카 마시기.
+#그린데이 너무 맛있다.
+새벽배송해주시는 #헬로네이처 기사님.
+감사합니다.
+.
+.
+.
+#오늘은하루종일올가니카
+#난왜이맛을못낼까
+#신랑주려고따라놓고내가원샷
+#휴롬은갖다버리자
+#마켓컬리보단헬로네이처
+#헬로네이처 
+#클렌주스
+#해독주스
+#detoxjuicecleans
+#아침
+#hellonature #새벽배송 #장보기 #유기농 #친환경 #마트 #온라인쇼핑 #프리미엄마켓 #온더테이블 #장보기그램
+-
+#Repost @sunny_and_hong @repostapp
+-
+구매는 프로필에서 링크클릭"></a></li><li><a href="https://www.instagram.com/p/BVlTs5OB26q/" target="_blank"><img src="https://scontent.cdninstagram.com/t51.2885-15/s320x320/e35/19227499_1959233470979167_7178210100576780288_n.jpg" alt="@28insook 님, 정성담긴 후기 고맙습니다.
+-
+.
+샌드위치와 과일은 저녁으로 먹거라~^^
+.
+.
+헬로네이처 에서 캠핑요리로 꼬지를 타임 세일하기에 곧바로 주문 역시 실망시키지 않는다.
+.
+저 포도는 별로 좋아하지 않는데 생협에서 세일하기에 세일 너무 좋아하는 것 같애!
+. .
+#도시락 #딸도시락 #락앤락도시락 #도시락스타그램 #요리스타그램 #캠핑 요리#홈쿡 #집밥 #헬로네이처 #벤토 #bento #lunchbox #yummy #foodie #lunch #foodstagram #camping
+#hellonature #새벽배송 #장보기 #유기농 #친환경 #마트 #온라인쇼핑 #프리미엄마켓 #온더테이블 #장보기그램
+-
+#Repost @28insook @repostapp
+-
+구매는 프로필에서 링크클릭" title="@28insook 님, 정성담긴 후기 고맙습니다.
+-
+.
+샌드위치와 과일은 저녁으로 먹거라~^^
+.
+.
+헬로네이처 에서 캠핑요리로 꼬지를 타임 세일하기에 곧바로 주문 역시 실망시키지 않는다.
+.
+저 포도는 별로 좋아하지 않는데 생협에서 세일하기에 세일 너무 좋아하는 것 같애!
+. .
+#도시락 #딸도시락 #락앤락도시락 #도시락스타그램 #요리스타그램 #캠핑 요리#홈쿡 #집밥 #헬로네이처 #벤토 #bento #lunchbox #yummy #foodie #lunch #foodstagram #camping
+#hellonature #새벽배송 #장보기 #유기농 #친환경 #마트 #온라인쇼핑 #프리미엄마켓 #온더테이블 #장보기그램
+-
+#Repost @28insook @repostapp
+-
+구매는 프로필에서 링크클릭"></a></li><li><a href="https://www.instagram.com/p/BVis7IgBi98/" target="_blank"><img src="https://scontent.cdninstagram.com/t51.2885-15/s320x320/e35/19429476_184813485383447_3601837605391433728_n.jpg" alt="@h_zzzaem 님, 정성담긴 후기 고맙습니다.
+-
+건강하게 저녁밥" title="@h_zzzaem 님, 정성담긴 후기 고맙습니다.
+-
+건강하게 저녁밥"></a></li><li><a href="https://www.instagram.com/p/BVisxfBhtFn/" target="_blank"><img src="https://scontent.cdninstagram.com/t51.2885-15/s320x320/e35/19227517_372125029850958_2652113022192975872_n.jpg" alt="@__mayomayo 님, 정성담긴 후기 고맙습니다.
+-
+땡겨 무지" title="@__mayomayo 님, 정성담긴 후기 고맙습니다.
+-
+땡겨 무지"></a></li><li><a href="https://www.instagram.com/p/BVisr7rB__N/" target="_blank"><img src="https://scontent.cdninstagram.com/t51.2885-15/s320x320/e35/19379375_867978240019940_8049027355634565120_n.jpg" alt="@yj_angela_c 님, 정성담긴 후기 고맙습니다.
+-
+더 가볍게 더 심플하게 #샐러드 #샐러드생활 #하루한끼완전채식 #applevinegar #치커리와어린잎 #퀴노아 #아보카도 #파프리카 #블루베리 #청무화과말랭이 #헬로네이처
+#hellonature #새벽배송 #장보기 #유기농 #친환경 #마트 #온라인쇼핑 #프리미엄마켓 #온더테이블 #장보기그램
+-
+#Repost @yj_angela_c @repostapp
+-
+구매는 프로필에서 링크클릭" title="@yj_angela_c 님, 정성담긴 후기 고맙습니다.
+-
+더 가볍게 더 심플하게 #샐러드 #샐러드생활 #하루한끼완전채식 #applevinegar #치커리와어린잎 #퀴노아 #아보카도 #파프리카 #블루베리 #청무화과말랭이 #헬로네이처
+#hellonature #새벽배송 #장보기 #유기농 #친환경 #마트 #온라인쇼핑 #프리미엄마켓 #온더테이블 #장보기그램
+-
+#Repost @yj_angela_c @repostapp
+-
+구매는 프로필에서 링크클릭"></a></li></ul>
+		</section> 
+        
+        <!-- <h3 class="productblock-title">ㅇ</h3>
         <div class="box">
           <div id="Weekly-slider" class="row owl-carousel product-slider">
             <div class="item product-slider-item">
@@ -586,10 +763,10 @@ font-family: YG77;
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
      
-      <div id="brand_carouse" class="owl-carousel brand-logo">
+      <div id="brand_carouse" class="owl-carousel brand-logo" style="margin-top: 15px;">
         <div class="item text-center"> <a href="#"><img src="../../../resources/image/brand/brand11.jpg" alt="Disney" class="img-responsive" /></a> </div>
         <div class="item text-center"> <a href="#"><img src="../../../resources/image/brand/brand12.jpg" alt="Dell" class="img-responsive" /></a> </div>
         <div class="item text-center"> <a href="#"><img src="../../../resources/image/brand/brand13.jpg" alt="Harley" class="img-responsive" /></a> </div>

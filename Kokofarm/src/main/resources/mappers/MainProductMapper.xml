@@ -30,6 +30,14 @@ alias where rownum <=10]]>
 	]]> ORDER BY rt_auction_date asc
 	</select>
 
+	<select id="weekbestSellerItem" resultType="ProductVO">
+		select ROWNUM, alias.* from
+			(select p.* from product p, order_finish o where p.product_no=o.orderfinish_product_no and o.orderfinishi_date
+			
+			
+			 order by o.ORDERFINISH_PRODUCT_AMOUNT desc) alias 
+		<![CDATA[ where rownum <=10 ]]> 
+	</select>
 
 
 </mapper>
