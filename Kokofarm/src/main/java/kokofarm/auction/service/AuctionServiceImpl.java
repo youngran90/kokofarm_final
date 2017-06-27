@@ -39,12 +39,32 @@ public class AuctionServiceImpl implements AuctionService{
 		return dao.list_Fruit(cri);
 	}
 	@Override
+	public List<AuctionRegisterVO> list_Vege(AuctionCri cri) throws Exception {
+		return dao.list_Vege(cri);
+	}
+	@Override
+	public List<AuctionRegisterVO> list_New(AuctionCri cri) throws Exception {
+		return dao.list_New(cri);
+	}
+	@Override
+	public List<AuctionRegisterVO> list_End(AuctionCri cri) throws Exception {
+		return dao.list_End(cri);
+	}
+	@Override
 	public int CountPage(AuctionCri cri) throws Exception {
 		return dao.countPage(cri);
 	}
 	@Override
 	public AuctionRegisterVO detail(int auction_no) throws Exception {
 		return dao.detail(auction_no);
+	}
+	@Override
+	public List<AuctionRegisterVO> new_auction() throws Exception {
+		return dao.new_auction();
+	}
+	@Override
+	public List<AuctionRegisterVO> pop_auction() throws Exception {
+		return dao.pop_auction();
 	}
 	
 	
@@ -61,14 +81,22 @@ public class AuctionServiceImpl implements AuctionService{
 	public RT_AuctionRegisterVO rt_detail(String rt_auction_no) throws Exception {
 		return dao.rt_detail(rt_auction_no);
 	}
-	@Override
+	/*@Override
 	public List<RT_AuctionRegisterVO> rt_listCri(RT_AuctionCri cri) throws Exception {
-		return dao.rt_listCri(cri);
+		return dao.rt_listAM(cri);
+	}*/
+	@Override
+	public List<RT_AuctionRegisterVO> rt_listAM(RT_AuctionCri cri) throws Exception {
+		return dao.rt_listAM(cri);
 	}
-
-	
-	
-	
+	@Override
+	public List<RT_AuctionRegisterVO> rt_listPM(RT_AuctionCri cri) throws Exception {
+		return dao.rt_listPM(cri);
+	}
+	@Override
+	public int rt_count() throws Exception {
+		return dao.rt_count();
+	}
 	
 	
 

@@ -3,18 +3,22 @@
 <%@ page session="true" %>
 <title>코코팜::상품등록</title>
 <%@include file="../include/header.jsp"%>
-
+<style>
+	#full_notice{
+		color: red;
+	}
+</style>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> 
-<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
 <script type="text/javascript" src="/resources/ckeditor/ckeditor.js"></script>
 
+
 <script type="text/javascript">
+var jq = jQuery.noConflict();
+
 /* datetimepicker */
-
-var jq = jQuery.noConflict(true);
-
-jq(document).ready(function(){
+window.onload = function(){
    jq("#rt_auction_date").datepicker({
       local:"ko",
       dateFormat:"yy-mm-dd",
@@ -23,7 +27,35 @@ jq(document).ready(function(){
       maxDate: 5,
       minDate: -1
    });
-});
+   
+   jq('#full_notice').hide();
+   
+   var count = '${count}'
+  
+   
+   if(count==2){//오전, 오후 상품이 등록되어 있을 떄
+	   jq('#full_notice').show();
+   }else if(count==1){
+	   jq('#full_notice').hide();
+   }else if(count==0){
+	   jq('#full_notice').hide();
+   };
+   
+   var t_date = new Date();
+   var current_time = t_date.getHours();
+   //alert(current_time);
+   
+   if(current_time >= 10){
+	   jq('#am').click(function(){
+		   alert("오늘은 등록 가능 시간이 지났습니다.");
+	   });
+   }
+   if(current_time >= 22){
+	   jq('#pm').click(function(){
+		   alert("오늘은 등록 가능 시간이 지났습니다.");
+	   });
+   }
+};
 
 
 /* register alert */
@@ -39,6 +71,22 @@ function register(){
 	var rt_auction_area=jq('#rt_auction_area').val();
 	var rt_auction_title=jq('#rt_auction_title_img').val();
 	var rt_auction_content=jq('#rt_auction_content').val();
+	
+	var count = '${count}'
+	
+	var date = new Date();
+	var year = date.getFullYear();
+	var month = date.getMonth()+1;
+	var day = date.getDate();
+	
+	if(month.length = 1){
+		month = 0+month;
+	}
+	if(day.length = 1){
+		day = 0+day;
+	}
+	
+	var today = year+"-"+month+"-"+day;
 	
 	if(rt_auction_name==''){
 		alert("상품명을 입력하세요.");
@@ -61,6 +109,10 @@ function register(){
 	}else if(rt_auction_title==''){
 		alert("상품의 대표이미지를 선택하세요.");
 		return;
+	}else if(count==2){
+		jq('#regBtn').click(function(){
+	    alert("오늘은 상품을 등록할 수 없습니다.");
+		});	
 	}else{
 		alert("경매가 등록되었습니다.");
 		document.getElementById('auction_register').submit();
@@ -86,7 +138,7 @@ function register(){
 	
 	
 	var editor = null;
-	jq(function(){
+	jQuery(function(){
 		editor = CKEDITOR.replace("rt_auction_content", ckeditor_config);
 	});
 	
@@ -96,20 +148,13 @@ function register(){
 	
 	window.parent.CKEDITOR.tools.callFunction('${CKEditorFuncNum}', '${file_path}');
 	
-	function onlyNumber(obj) {
-	    jq(obj).keyup(function(){
-	         jq(this).val(jq(this).val().replace(/[^0-9]/g,""));
-	         jq(this).append();
-
-	    }); 
-	}
 	
 	
 </script>
 
 <div class="container">
     <ul class="breadcrumb">
-        <li><a href="http://localhost:8081/"><i class="fa fa-home"></i></a></li>
+        <li style="margin-left: 15px;"><a href="http://localhost:8081/"><i class="fa fa-home"></i></a></li>
         <li><a href="/auction/rt_auction_list">실시간 경매</a></li>
         <li><a href="#">실시간 경매 등록</a></li>
     </ul>
@@ -117,38 +162,32 @@ function register(){
     <!-- LNB 시작 -->
         <div class="col-sm-3 hidden-xs column-left" id="column-left">
             <div class="column-block">
-                <div class="columnblock-title">Account</div>
+                <div class="columnblock-title">실시간 경매</div>
                 <div class="account-block">
-                    <div class="list-group"> <a class="list-group-item" href="login.html">Login</a> <a class="list-group-item" href="register.html">Register</a> <a class="list-group-item" href="forgetpassword.html">Forgotten Password</a> <a class="list-group-item" href="#">My Account</a> <a class="list-group-item" href="#">Address Book</a> <a class="list-group-item" href="#">Wish List</a> <a class="list-group-item" href="#">Order History</a> <a class="list-group-item" href="download">Downloads</a> <a class="list-group-item" href="#">Reward Points</a> <a class="list-group-item" href="#">Returns</a> <a class="list-group-item" href="#">Transactions</a> <a class="list-group-item" href="#">Newsletter</a><a class="list-group-item last" href="#">Recurring payments</a> </div>
+                    <div class="list-group"> 
+                    <a class="list-group-item" href="/auction/rt_auction_list">실시간 경매</a> 
+                    <a class="list-group-item" href="/auction/auction_list" style="border-bottom: none;">일반 경매</a> 
+                    </div>
                 </div>
             </div>
         </div>
     <!-- LNB 끝 -->    
     <!-- Content 시작 -->
         <div class="col-sm-9" id="content">
-            <h1>실시간 경매</h1>
+            <h1 style="font-weight: bold;">실시간 경매</h1>
             <!-- <p>If you already have an account with us, please login at the <a href="login">login page</a>.</p> -->
             <form class="form-horizontal" enctype="multipart/form-data" method="post" id="auction_register" action="rt_auction_register">
                 <fieldset id="account">
                     <legend>실시간 경매 상품 등록</legend>
-                    <div style="display: none;" class="form-group required">
-                        <label class="col-sm-2 control-label">Customer Group</label>
-                        <div class="col-sm-10">
-                            <!-- <div class="radio">
-                                <label>
-                                    <input type="radio" checked="checked" value="1" name="customer_group_id">
-                                    Default</label>
-                            </div> -->
-                        </div>
-                    </div>
+                    <div id="full_notice"><p>※ 오늘은 더 이상 상품 등록이 불가능합니다! ※</p></div>
                     <div class="form-group">
-                        <label for="input-firstname" class="col-sm-2 control-label">상품명</label>
+                        <label for="input-firstname" class="col-sm-2 control-label" style="font-weight: bold;">상품명</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="rt_auction_name" name="rt_auction_name" placeholder="상품명을 입력해주세요.">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="input-fax" class="col-sm-2 control-label">분류</label>
+                        <label for="input-fax" class="col-sm-2 control-label" style="font-weight: bold;">분류</label>
                         <div class="col-sm-10">
                             <select id="rt_auction_group" name="rt_auction_group" style="height:32px; width:790px;">
                             	<option>&nbsp;&nbsp;분류를 선택해주세요</option>
@@ -158,7 +197,7 @@ function register(){
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="input-lastname" class="col-sm-2 control-label">경매일</label>
+                        <label for="input-lastname" class="col-sm-2 control-label" style="font-weight: bold;">경매일</label>
                         <div class="col-sm-10">
                         <select id="rt_auction_time" name="rt_auction_time" style="height: 32px; width: 169px; float: left;
                         text-align: center;">
@@ -171,13 +210,13 @@ function register(){
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="input-fax" class="col-sm-2 control-label">하한가</label>
+                        <label for="input-fax" class="col-sm-2 control-label" style="font-weight: bold;">하한가</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="rt_auction_down" placeholder="하한가를 입력해주세요." name="rt_auction_down" onkeyup="onlyNumber(this)">
+                            <input type="text" class="form-control" id="rt_auction_down" placeholder="하한가를 입력해주세요." name="rt_auction_down">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="input-fax" class="col-sm-2 control-label">단위</label>
+                        <label for="input-fax" class="col-sm-2 control-label" style="font-weight: bold;">단위</label>
                         <div class="col-sm-10">  
                             <select id="rt_auction_units" name="rt_auction_units" style="height:32px; width: 169px; float:left; text-align: center;">
                         	<option value="kg">kg</option>
@@ -190,7 +229,7 @@ function register(){
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="input-fax" class="col-sm-2 control-label">생산지/원산지</label>
+                        <label for="input-fax" class="col-sm-2 control-label" style="font-weight: bold;">생산지/원산지</label>
                         <div class="col-sm-10">
                             <select id="rt_auction_location" name="rt_auction_location" style="height:32px; width: 169px; float:left;
                         text-align: center;">
@@ -211,26 +250,26 @@ function register(){
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="input-fax" class="col-sm-2 control-label" style="height:32px;">대표이미지</label>
+                        <label for="input-fax" class="col-sm-2 control-label" style="height:32px; font-weight: bold;">대표이미지</label>
                         <div class="col-sm-10">
                            <input type="file" id="rt_auction_title_img" name="rt_file" style="height:32px; width:790px;">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="input-fax" class="col-sm-2 control-label" style="height:32px;">상세이미지1</label>
+                        <label for="input-fax" class="col-sm-2 control-label" style="height:32px; font-weight: bold;">상세이미지1</label>
                         <div class="col-sm-10">
                            <input type="file" id="rt_auction_title_img01" name="rt_file2" style="height:32px; width:790px;">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="input-fax" class="col-sm-2 control-label" style="height:32px;">상세이미지2</label>
+                        <label for="input-fax" class="col-sm-2 control-label" style="height:32px; font-weight: bold;">상세이미지2</label>
                         <div class="col-sm-10">
                            <input type="file" id="rt_auction_title_img02" name="rt_file3" style="height:32px; width:790px;">
                         </div>
                     </div>
                     <!-- 에디터 끼워넣을 곳! -->
                     <div class="form-group">
-                        <label for="input-fax" class="col-sm-2 control-label">상세내용</label>
+                        <label for="input-fax" class="col-sm-2 control-label" style="font-weight: bold;">상세내용</label>
                         <div class="col-sm-10">
                           <textarea id="rt_auction_content" name="rt_auction_content"></textarea>
                         </div>
@@ -238,7 +277,7 @@ function register(){
                 </fieldset>
            
                 <div class="buttons" style="text-align:right">
-                    <input type="button" class="btn btn-primary" value="등록하기" onclick="register()">
+                    <input id="regBtn" type="button" class="btn btn-primary" value="등록하기" onclick="register()">
                 </div>
             </form>
         </div>

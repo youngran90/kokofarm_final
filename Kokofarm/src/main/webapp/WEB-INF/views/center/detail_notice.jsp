@@ -22,83 +22,44 @@
 	}
 </style>
 <script>
-	$(function(){
-		$('#faq_list').hide();
-		
-		var admin_id = '${login.member_id}'
-		/* alert(admin_id); */
-		
-		if(admin_id=='kosta'){
-			/* alert("관리자맞아!"); */
-			$('#admin_button').show();
-		}else{
-			$('#admin_button').hide();
-		}
-		
-	})
+$(function(){
+	$('#faq_list').hide();
 	
-	function move_admin(){
-		window.location.href="admin_view";
+	var admin_id = '${login.member_id}'
+	alert(admin_id); */
+	
+	if(admin_id=='kosta'){
+		 alert("관리자맞아!");
+		$('#admin_button').show();
+	}else{
+		$('#admin_button').hide();
 	}
 	
-	function move_notice(){
-		$('#faq_list').hide();
-		$('#notice_table').show();
-		
-	}
+})
+
+function move_admin(){
+	window.location.href="admin_view";
+}
+
+function move_notice(){
+	window.location.href="customer_view";
 	
-	function move_faq(){
-		$('#notice_table').hide();
-		$('#faq_list').show();
-	}
-	
-	
+}
+
+function move_faq(){
+	$('#notice_table').hide();
+	$('#faq_list').show();
+}
+
+
 </script>
 
 <div class="container">
-  <ul class="breadcrumb">
-    <li style="margin-left: 15px;"><a href="http://localhost:8081"><i class="fa fa-home"></i></a></li>
+  <ul class="breadcrumb" >
+    <li style="margin-left:15px;"><a href="http://localhost:8081"><i class="fa fa-home"></i></a></li>
     <li><a href="/center/customer_view">고객센터</a></li>
   </ul>
   <div class="row">
-    <div id="column-left" class="col-sm-3 hidden-xs column-left">
-   		<div class="column-block">
-        <div class="column-block">
-          <div class="columnblock-title">Categories</div>
-          <div class="category_block">
-            <ul class="box-category treeview-list treeview">
-              <li><a href="../center/customer_view" class="activSub">고객센터</a>
-                <!-- <ul>
-                  <li><a href="#">PC</a></li>
-                  <li><a href="#">MAC</a></li>
-                </ul> -->
-              </li>
-              <!-- <li><a href="#" class="activSub"></a>
-                <ul>
-                  <li><a href="#">Macs</a></li>
-                  <li><a href="#">Windows</a></li>
-                </ul>
-              </li> -->
-              <!-- <li><a href="#" class="activSub">Components</a>
-                <ul>
-                  <li><a href="#">Mice and Trackballs</a></li>
-                  <li><a href="#" class="activSub" >Monitors</a>
-                    <ul>
-                      <li><a href="#"  >test 1</a></li>
-                      <li><a href="#"  >test 2</a></li>
-                    </ul>
-                  </li>
-                  <li><a href="#">Windows</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Tablets</a></li>
-              <li><a href="#">Software</a></li>
-              <li><a href="#">Phones & PDAs</a></li>
-              <li><a href="#">Cameras</a></li>
-              <li><a href="#">MP3 Players</a></li> -->
-            </ul>
-          </div>
-        </div>
     <!-- <div id="column-left" class="col-sm-3 hidden-xs column-left"> -->
       <!-- <div class="column-block"> -->
         
@@ -167,48 +128,46 @@
         </div> -->
       <!-- </div> -->
     </div>
-    </div>
-    </div>
-    <div class="col-sm-9" id="content">
-    	 <div class="nav">
+    <div class="col-sm-9" id="content" style="position: relative; left:120px;">
+    	<div class="nav" style="width: 1100px; position: relative; right: 130px;">
 			<ul class="nav nav-tabs">
-				<li class="active"><a onclick="move_notice()">공지사항</a></li>
+				<li class="active"><a onclick=r>공지사항</a></li>
 				<li class="active"><a id="faq" href="#" onclick="move_faq()">FAQ</a></li>	
 			</ul>
 			<button class="active" id="admin_button" onclick="move_admin()">등록하기</button>
 		</div>
      	<div class="tab-pane active" id="tab-auctionview" style="margin-top: 30px;">
 	        <div class="cpt_product_description ">
-								<div style="width: 1100px; position: relative; left: -100px;"> 
+	        <%-- <input type="hidden" name="cno" value="${detail_notice.cno}"> --%>
+								<div style="width: 1100px; position: relative; left: -100px;">
+								<c:forEach items="${detail_notice}" var="CenterVO">
 								<table class="view_board_table" id="notice_table">
 									<colgroup>
 									<col width="50">
-									<col width="250">
-									<col width="150">
 									<col width="50">
+									<col width="550">
 									</colgroup>
-									<thead>
-										<tr>
-											<th>글번호</th>
-											<th>글제목</th>
-											<th>작성일</th>
-											<th>조회수</th>
-										</tr>
-									</thead>
 									<tbody>
-										<c:forEach var="CenterVO" items="${list_notice}" varStatus="status">
-										    <c:set var="index" value="1"></c:set>
-										    
-											<tr  class="tit_tr user_tit_tr">
-												<td>${CenterVO.cno}</td>
-												<td><a href="/center/detail_notice?cno=${CenterVO.cno}">${CenterVO.c_title}</a></td>
-												<td>${CenterVO.c_regdate}</td>
-												<td>${CenterVO.c_viewcnt}</td>
-											</tr>
-										</c:forEach>
+										    <tr>
+											<th>글제목</th>
+											<td>${CenterVO.c_title}</td>
+										</tr>
+										<tr>
+											<th>작성일</th>
+											<td>${CenterVO.c_regdate}</td>
+										</tr>
+										<tr>
+											<th>내용</th>
+											<td>${CenterVO.c_content}<td>
+										</tr>
+										<tr>
+											<th>조회수</th>
+											<td>${CenterVO.c_viewcnt}<td>
+										</tr>
 								</table>
+								</c:forEach>
 							</div>
-	
+						
 	
 						</div>
 	
@@ -218,43 +177,7 @@
 	
 					</div>
 					
-		<div class="tab-pane active" id="tab-auctionview" style="margin-top: 30px;">
-	        <div class="cpt_product_description ">
-								<div style="width: 1100px; position: relative; left: -100px;">
-								<table class="view_board_table" id="faq_list">
-									<colgroup>
-									<col width="50">
-									<col width="250">
-									<col width="150">
-									</colgroup>
-									<thead>
-										<tr>
-											<th>글번호</th>
-											<th>글제목</th>
-											<th>작성일</th>
-										</tr>
-									</thead>
-									<tbody>
-										<c:forEach var="CenterVO" items="${list_faq}" varStatus="status">
-										    <c:set var="index" value="1"></c:set>
-										    
-											<tr class="tit_tr user_tit_tr">
-												<td>${CenterVO.cno}</td>
-												<td>${CenterVO.c_title}</td>
-												<td>${CenterVO.c_regdate}</td>
-											</tr>
-										</c:forEach>
-								</table>
-							</div>
-	
-	
-						</div>
-	
-						<div>
-							<!--  tab1 -->
-						</div>
-	
-					</div>			
+		
     </div>
   </div>
 

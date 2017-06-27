@@ -24,8 +24,29 @@ public class CenterDAOImpl implements CenterDAO {
 	}
 
 	@Override
-	public List<CenterVO> list() throws Exception {
-		return session.selectList(namespace+".list");
+	public List<CenterVO> list_notice() throws Exception {
+		return session.selectList(namespace+".list_notice");
+	}
+
+	@Override
+	public List<CenterVO> list_faq() throws Exception {
+		return session.selectList(namespace+".list_faq");
+	}
+
+	@Override
+	public CenterVO detail_notice(int cno) throws Exception {
+		return session.selectOne(namespace+".detail_notice", cno);
+	}
+
+	@Override
+	public CenterVO detail_faq(int cno) throws Exception {
+		return session.selectOne(namespace+".detail_faq", cno);
+	}
+
+	@Override
+	public void update_viewcnt(int cno) throws Exception {
+		session.update(namespace+".update_viewcnt", cno);
+		
 	}
 
 }

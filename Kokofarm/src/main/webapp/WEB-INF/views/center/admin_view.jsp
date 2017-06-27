@@ -44,12 +44,12 @@
 </script>
 
 <div class="container">
-  <ul class="breadcrumb">
-    <li><a href="index.html"><i class="fa fa-home"></i></a></li>
-    <li><a href="contact.html">Contact Us</a></li>
+  <ul class="breadcrumb" >
+    <li style="margin-left:15px;"><a href="index.html"><i class="fa fa-home"></i></a></li>
+    <li><a href="contact.html">고객센터</a></li>
   </ul>
   <div class="row">
-    <div id="column-left" class="col-sm-3 hidden-xs column-left">
+    <!-- <div id="column-left" class="col-sm-3 hidden-xs column-left">
       <div class="column-block">
         <div class="column-block">
           <div class="columnblock-title">Categories</div>
@@ -149,10 +149,10 @@
               </div>
             </div>
           </div>
-        </div> -->
+        </div> 
       </div>
-    </div>
-    <div class="col-sm-9" id="content">
+    </div>-->
+    <div class="col-sm-9" id="content" style="position: relative; left:120px;">
       <h1 style="font-weight: bold; margin-bottom: 30px;">고객센터</h1>
       <!-- <div style="margin-bottom: 10px;">
       <h3 style="display: inline-block; float:left; margin-right: 50px;">공지사항</h3>

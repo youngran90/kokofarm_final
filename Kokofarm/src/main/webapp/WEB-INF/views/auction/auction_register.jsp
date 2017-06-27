@@ -46,7 +46,7 @@ function register(){
 	
 	if(name==''){
 		alert("상품명을 입력하세요.");
-		return;
+		
 	}else if(group==''){
 		alert("분류를 선택하세요.");
 		return;
@@ -114,7 +114,7 @@ function register(){
 
 <div class="container">
     <ul class="breadcrumb">
-        <li><a href="http://localhost:8081/"><i class="fa fa-home"></i></a></li>
+        <li style="margin-left: 15px;"><a href="http://localhost:8081/"><i class="fa fa-home"></i></a></li>
         <li><a href="/auction/auction_list">일반 경매</a></li>
         <li><a href="#">일반 경매 등록</a></li>
     </ul>
@@ -122,16 +122,19 @@ function register(){
     <!-- LNB 시작 -->
         <div class="col-sm-3 hidden-xs column-left" id="column-left">
             <div class="column-block">
-                <div class="columnblock-title">Account</div>
+                <div class="columnblock-title">일반경매</div>
                 <div class="account-block">
-                    <div class="list-group"> <a class="list-group-item" href="login.html">Login</a> <a class="list-group-item" href="register.html">Register</a> <a class="list-group-item" href="forgetpassword.html">Forgotten Password</a> <a class="list-group-item" href="#">My Account</a> <a class="list-group-item" href="#">Address Book</a> <a class="list-group-item" href="#">Wish List</a> <a class="list-group-item" href="#">Order History</a> <a class="list-group-item" href="download">Downloads</a> <a class="list-group-item" href="#">Reward Points</a> <a class="list-group-item" href="#">Returns</a> <a class="list-group-item" href="#">Transactions</a> <a class="list-group-item" href="#">Newsletter</a><a class="list-group-item last" href="#">Recurring payments</a> </div>
+                    <div class="list-group">
+                    <a class="list-group-item" href="/auction/auction_list">일반 경매</a> 
+                    <a class="list-group-item" href="/auction/rt_auction_list" style="border-bottom: none;">실시간 경매</a>
+                    </div>
                 </div>
             </div>
         </div>
     <!-- LNB 끝 -->    
     <!-- Content 시작 -->
         <div class="col-sm-9" id="content">
-            <h1>일반 경매</h1>
+            <h1 style="font-weight: bold;">일반 경매</h1>
             <!-- <p>If you already have an account with us, please login at the <a href="login">login page</a>.</p> -->
             <form class="form-horizontal" enctype="multipart/form-data" method="post" id="auction_register" action="auction_register">
                 <fieldset id="account">
@@ -147,13 +150,13 @@ function register(){
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="input-firstname" class="col-sm-2 control-label">상품명</label>
+                        <label for="input-firstname" class="col-sm-2 control-label" style="font-weight: bold;">상품명</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="auction_name" placeholder="상품명을 입력해주세요." name="auction_name">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="input-fax" class="col-sm-2 control-label">분류</label>
+                        <label for="input-fax" class="col-sm-2 control-label" style="font-weight: bold;">분류</label>
                         <div class="col-sm-10">
                             <select id="auction_group" name="auction_group" style="height:32px; width:790px;">
                             	<option value="">&nbsp;&nbsp;분류를 선택해주세요</option>
@@ -163,53 +166,73 @@ function register(){
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="input-lastname" class="col-sm-2 control-label">경매시작일</label>
+                        <label for="input-lastname" class="col-sm-2 control-label" style="font-weight: bold;">경매시작일</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="start_date" name="start_date" placeholder="날짜를 선택해주세요."
                             style="width: 389px; float: left; margin-right: 10px;">
-                            <select name="selectedTime">
-                            	<option id="am" value="am">오전</option>
-                            	<option id="pm" value="pm">오후</option>
+                            <select name="selectedTime" style="height: 35px; width: 80px;">
+                            	<option id="am" value="am">&nbsp;오전</option>
+                            	<option id="pm" value="pm">&nbsp;오후</option>
                             </select>
-                            <select name="select_Time">
-                            	<option value="01">01</option><option value="02">02</option>
-                            	<option value="03">03</option><option value="04">04</option>
-                            	<option value="05">05</option><option value="06">06</option>
-                            	<option value="07">07</option><option value="08">08</option>
-                            	<option value="09">09</option><option value="10">10</option>
-                            	<option value="11">11</option><option value="12">12</option>
+                            <select name="select_Time" style="height: 35px; width: 80px;">
+                            	<option value="01">&nbsp;00</option><option value="02">&nbsp;02</option>
+                            	<option value="03">&nbsp;03</option><option value="04">&nbsp;04</option>
+                            	<option value="05">&nbsp;05</option><option value="06">&nbsp;06</option>
+                            	<option value="07">&nbsp;07</option><option value="08">&nbsp;08</option>
+                            	<option value="09">&nbsp;09</option><option value="10">&nbsp;10</option>
+                            	<option value="11">&nbsp;11</option><option value="12">&nbsp;12</option>
                             </select>
-                            <select name="select_Min">
-                            	<option value="01">00</option><option value="01">05</option>
-                            	<option value="01">10</option><option value="01">15</option>
-                            	<option value="01">20</option><option value="01">25</option>
-                            	<option value="01">30</option><option value="01">35</option>
-                            	<option value="01">40</option><option value="01">45</option>
-                            	<option value="01">50</option><option value="01">55</option>
+                            <select name="select_Min" style="height: 35px; width: 80px;">
+                            	<option value="00">&nbsp;00</option><option value="05">&nbsp;05</option>
+                            	<option value="10">&nbsp;10</option><option value="15">&nbsp;15</option>
+                            	<option value="20">&nbsp;20</option><option value="25">&nbsp;25</option>
+                            	<option value="30">&nbsp;30</option><option value="35">&nbsp;35</option>
+                            	<option value="40">&nbsp;40</option><option value="45">&nbsp;45</option>
+                            	<option value="50">&nbsp;50</option><option value="55">&nbsp;55</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="input-email" class="col-sm-2 control-label">경매종료일</label>
+                        <label for="input-email" class="col-sm-2 control-label" style="font-weight: bold;">경매종료일</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="end_date" name="end_date">
-                            <input type="text" class="form-control" id="end_time" name="end_time">
+                            <input type="text" class="form-control" id="end_date" name="end_date" placeholder="날짜를 선택해주세요."
+                            style="width: 389px; float: left; margin-right: 10px;">
+                            <select name="selectedTime2" style="height: 35px; width: 80px;">
+                            	<option id="am2" value="am">&nbsp;오전</option>
+                            	<option id="pm2" value="pm">&nbsp;오후</option>
+                            </select>
+                            <select name="select_Time2" style="height: 35px; width: 80px;">
+                            	<option value="01">&nbsp;01</option><option value="02">&nbsp;02</option>
+                            	<option value="03">&nbsp;03</option><option value="04">&nbsp;04</option>
+                            	<option value="05">&nbsp;05</option><option value="06">&nbsp;06</option>
+                            	<option value="07">&nbsp;07</option><option value="08">&nbsp;08</option>
+                            	<option value="09">&nbsp;09</option><option value="10">&nbsp;10</option>
+                            	<option value="11">&nbsp;11</option><option value="12">&nbsp;12</option>
+                            </select>
+                            <select name="select_Min2" style="height: 35px; width: 80px;">
+                            	<option value="01">&nbsp;00</option><option value="05">&nbsp;05</option>
+                            	<option value="10">&nbsp;10</option><option value="15">&nbsp;15</option>
+                            	<option value="20">&nbsp;20</option><option value="25">&nbsp;25</option>
+                            	<option value="30">&nbsp;30</option><option value="35">&nbsp;35</option>
+                            	<option value="40">&nbsp;40</option><option value="45">&nbsp;45</option>
+                            	<option value="50">&nbsp;50</option><option value="55">&nbsp;55</option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="input-telephone" class="col-sm-2 control-label">상한가</label>
+                        <label for="input-telephone" class="col-sm-2 control-label" style="font-weight: bold;">상한가</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="auction_up" placeholder="상한가를 입력해주세요." name="auction_up">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="input-fax" class="col-sm-2 control-label">하한가</label>
+                        <label for="input-fax" class="col-sm-2 control-label" style="font-weight: bold;">하한가</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="auction_down" placeholder="하한가를 입력해주세요." name="auction_down">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="input-fax" class="col-sm-2 control-label">단위</label>
+                        <label for="input-fax" class="col-sm-2 control-label" style="font-weight: bold;">단위</label>
                         <div class="col-sm-10">  
                         <select id="auction_units" name="auction_units" style="height:32px; width: 169px; float:left; text-align: center;">
                         	<option value="kg">kg</option>
@@ -222,9 +245,9 @@ function register(){
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="input-fax" class="col-sm-2 control-label">생산지/원산지</label>
+                        <label for="input-fax" class="col-sm-2 control-label" style="font-weight: bold;">생산지/원산지</label>
                         <div class="col-sm-10">
-                        <select id="auction_location" name="auction_location" style="height:32px; width:150px; float:left;
+                        <select id="auction_location" name="auction_location" style="height:32px; width: 169px; float:left;
                         text-align: center;">
                         	<option value="서울특별시">서울특별시</option>
                         	<option value="인천광역시">인천광역시</option>
@@ -239,18 +262,18 @@ function register(){
                         	<option value="제주특별자치도">제주특별자치도</option>
                         </select>
                             <input type="text" class="form-control" placeholder="주소를 입력해주세요." 
-                            id="auction_area" name="auction_area" style="width:638px; height:32px;">
+                            id="auction_area" name="auction_area" style="width:619px; height:32px;">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="input-fax" class="col-sm-2 control-label">대표이미지</label>
+                        <label for="input-fax" class="col-sm-2 control-label" style="font-weight: bold;">대표이미지</label>
                         <div class="col-sm-10">
                            <input type="file" id="auction_title_img" name="file" style="height:32px; width:787px;">
                         </div>
                         </div>
                     <!-- 에디터 끼워넣을 곳! -->
                     <div class="form-group">
-                        <label for="input-fax" class="col-sm-2 control-label">상세내용</label>
+                        <label for="input-fax" class="col-sm-2 control-label" style="font-weight: bold;">상세내용</label>
                         <div class="col-sm-10">
                           <textarea id="auction_content" name="auction_content"></textarea>
                         </div>

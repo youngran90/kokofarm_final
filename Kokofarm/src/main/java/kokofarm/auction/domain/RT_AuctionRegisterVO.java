@@ -5,8 +5,6 @@ import java.io.Serializable;
 import org.springframework.web.multipart.MultipartFile;
 
 public class RT_AuctionRegisterVO implements Serializable{
-	private static final long serialVersionUID = 1L;
-	
 	
 	private String rt_auction_no;
 	private String rt_auction_name;
@@ -18,6 +16,7 @@ public class RT_AuctionRegisterVO implements Serializable{
 	private String rt_auction_content;
 	private String rt_auction_regdate;
 	private String seller_no;
+	private String rt_auction_time;
 	private String rt_auction_title_img;
 	private String rt_auction_title_img01;
 	private String rt_auction_title_img02;
@@ -87,6 +86,12 @@ public class RT_AuctionRegisterVO implements Serializable{
 	public void setSeller_no(String seller_no) {
 		this.seller_no = seller_no;
 	}
+	public String getRT_auction_time() {
+		return rt_auction_time;
+	}
+	public void setRT_auction_time(String rt_auction_time) {
+		this.rt_auction_time = rt_auction_time;
+	}
 	public String getRt_auction_title_img() {
 		return rt_auction_title_img;
 	}
@@ -129,11 +134,13 @@ public class RT_AuctionRegisterVO implements Serializable{
 				+ ", rt_auction_group=" + rt_auction_group + ", rt_auction_date=" + rt_auction_date
 				+ ", rt_auction_down=" + rt_auction_down + ", rt_auction_unit=" + rt_auction_unit + ", rt_auction_area="
 				+ rt_auction_area + ", rt_auction_content=" + rt_auction_content + ", rt_auction_regdate="
-				+ rt_auction_regdate + ", seller_no=" + seller_no + ", rt_auction_title_img=" + rt_auction_title_img
-				+ ", rt_auction_title_img01=" + rt_auction_title_img01 + ", rt_auction_title_img02="
-				+ rt_auction_title_img02 + ", rt_file=" + rt_file + ", rt_file2=" + rt_file2 + ", rt_file3=" + rt_file3
-				+ "]";
+				+ rt_auction_regdate + ", seller_no=" + seller_no + ", rt_auction_time=" + rt_auction_time
+				+ ", rt_auction_title_img=" + rt_auction_title_img + ", rt_auction_title_img01="
+				+ rt_auction_title_img01 + ", rt_auction_title_img02=" + rt_auction_title_img02 + ", rt_file=" + rt_file
+				+ ", rt_file2=" + rt_file2 + ", rt_file3=" + rt_file3 + "]";
 	}
+	
+	
 	
 	
 }

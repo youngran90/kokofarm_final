@@ -46,6 +46,18 @@ public class AuctionDAOImpl implements AuctionDAO{
 		return session.selectList(namespace+".list_Fruit", cri, new RowBounds(cri.getPageStart(), cri.getPerPageNum()));
 	}
 	@Override
+	public List<AuctionRegisterVO> list_Vege(AuctionCri cri) throws Exception {
+		return session.selectList(namespace+".list_Vege", cri, new RowBounds(cri.getPageStart(), cri.getPerPageNum()));
+	}
+	@Override
+	public List<AuctionRegisterVO> list_New(AuctionCri cri) throws Exception {
+		return session.selectList(namespace+".list_New", cri, new RowBounds(cri.getPageStart(), cri.getPerPageNum()));
+	}
+	@Override
+	public List<AuctionRegisterVO> list_End(AuctionCri cri) throws Exception {
+		return session.selectList(namespace+".list_End", cri, new RowBounds(cri.getPageStart(), cri.getPerPageNum()));
+	}
+	@Override
 	public int countPage(AuctionCri cri) throws Exception {
 		return session.selectOne(namespace+".countPage", cri);
 	}
@@ -53,7 +65,14 @@ public class AuctionDAOImpl implements AuctionDAO{
 	public AuctionRegisterVO detail(int auction_no) throws Exception {
 		return session.selectOne(namespace+".detail", auction_no);
 	}
-	
+	@Override
+	public List<AuctionRegisterVO> new_auction() throws Exception {
+		return session.selectList(namespace+".new_auction");
+	}
+	@Override
+	public List<AuctionRegisterVO> pop_auction() throws Exception {
+		return session.selectList(namespace+".pop_auction");
+	}
 	
 	
 	/*실시간 경매*/	
@@ -73,20 +92,26 @@ public class AuctionDAOImpl implements AuctionDAO{
 		page = (page - 1) * 10;
 		return session.selectList(namespace+".rt_list", page);
 	}
-	@Override
+	/*@Override
 	public List<RT_AuctionRegisterVO> rt_listCri(RT_AuctionCri cri) throws Exception {
 		return session.selectList(namespace+".rt_listCri", cri, new RowBounds(cri.getPageStart(), cri.getPerPageNum()));
+	}*/
+	@Override
+	public List<RT_AuctionRegisterVO> rt_listAM(RT_AuctionCri cri) throws Exception {
+		return session.selectList(namespace+".rt_listAM");
+	}
+	@Override
+	public List<RT_AuctionRegisterVO> rt_listPM(RT_AuctionCri cri) throws Exception {
+		return session.selectList(namespace+".rt_listPM");
 	}
 	@Override
 	public RT_AuctionRegisterVO rt_detail(String rt_auction_no) throws Exception {
 		return session.selectOne(namespace+".rt_detail", rt_auction_no);
 	}
-
-	
-	
-	
-	
-	
+	@Override
+	public int rt_count() throws Exception {
+		return session.selectOne(namespace+".rt_count");
+	}
 	
 	
 	

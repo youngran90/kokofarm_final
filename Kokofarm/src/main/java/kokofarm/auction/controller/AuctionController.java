@@ -3,13 +3,16 @@ package kokofarm.auction.controller;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.UUID;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.swing.plaf.synth.SynthSeparatorUI;
 
 import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
@@ -54,8 +57,8 @@ public class AuctionController {
 	@RequestMapping(value="/auction_register", method=RequestMethod.POST)
 	public String auctionRegsterPOST(AuctionRegisterVO auction, HttpServletRequest request) throws Exception{
 		
-		logger.info("넘어오냐");
-		logger.info(auction.toString());
+		System.out.println("넘어오냐");
+		System.out.println(auction.toString());
 		String originalName = auction.getFile().getOriginalFilename();
 	    byte[] fileData = auction.getFile().getBytes();
 	         
@@ -68,29 +71,80 @@ public class AuctionController {
 	    auction.setAuction_title_img(auction_title_img);
 	    //logger.info("auction_title_img : "+auction.getAuction_title_img());
 	    
-	    String select_time = request.getParameter("selectedTime");
-	    logger.info("오전이냐 오후냐 : "+select_time);
+	    //시간을 받아오자아,,,ㅇㅁㅇ!
+	    String selected_day = request.getParameter("start_date");
+	    System.out.println(selected_day);
+	    String selected_day2 = request.getParameter("end_date");
+	    System.out.println(selected_day2);
+	    String select_Sec = "00"; //선택초
+	    
+	    //경매시작일
+	    String selected_time = request.getParameter("selectedTime"); //AM or PM
+	    System.out.println("시간:"+selected_time);
+	    String select_Time = request.getParameter("select_Time"); //선택시간
+	    System.out.println(select_Time);
+	    String select_Min = request.getParameter("select_Min"); //선택분
+	    System.out.println(select_Min);
+	    
+	    
+	    if(selected_time.equals("pm")){
+	    	String parse = String.valueOf(Integer.parseInt(select_Time)+12); //선택 시간에 12를 더해서 오후시간으로!
+	    	auction.setStart_date(selected_day+" "+parse+":"+select_Min+":"+select_Sec);
+	    }else if(selected_time.equals("am")){
+	    	auction.setStart_date(selected_day+" "+select_Time+":"+select_Min+":"+select_Sec);
+	    }
+	    
+	    
+	    //경매종료일
+	    String selected_time2 = request.getParameter("selectedTime2"); //AM or PM
+	    System.out.println("종료일:"+selected_time2);
+	    String select_Time2 = request.getParameter("select_Time2"); //선택시간
+	    System.out.println("종료일 선택시간:"+select_Time2);
+	    String select_Min2 = request.getParameter("select_Min2"); //선택분
+	    System.out.println("종료일 선택분:"+select_Min2);
+	    
+	    if(selected_time2.equals("pm")){
+	    	String parse2 = String.valueOf(Integer.parseInt(select_Time2)+12);
+	    	System.out.println(selected_day2+" "+parse2+":"+select_Min2+":"+select_Sec);
+	    	auction.setEnd_date(selected_day2+" "+parse2+":"+select_Min2+":"+select_Sec);
+	    }else if(selected_time2.equals("am")){
+	    	auction.setEnd_date(selected_day2+" "+select_Time2+":"+select_Min2+":"+select_Sec);
+	    }
+	    
+	    System.out.println("시작일:"+auction.getStart_date());
+	    System.out.println("종료일:"+auction.getEnd_date());
+	    
 	    
 	    String auction_unit = request.getParameter("auction_unit");
 	    String auction_units = request.getParameter("auction_units");
 	    String unit = auction_unit+auction_units;
 	    auction.setAuction_unit(unit);
+	    System.out.println("단위"+auction.getAuction_unit());
 	    
 	    String auction_location = request.getParameter("auction_location");
 	    String auction_area = request.getParameter("auction_area");
 	    String area = auction_location+" "+auction_area;
 	    auction.setAuction_area(area);
+	    System.out.println("지역"+auction.getAuction_area());
+	    
 	    
 	    MemberVO member = (MemberVO)session.getAttribute("login");
 	    String seller_no = member.getSeller_no();
 	    auction.setSeller_no(seller_no);
+	    System.out.println("셀러넘버"+auction.getSeller_no());
 	    
-	    service.register(auction);
-	    logger.info("auction_title_img : "+auction.getAuction_title_img());
+	    System.out.println("노어이"+auction.toString());
+	    System.out.println("auction_title_img : "+auction.getAuction_title_img());
+	    
+	    
 	         
 	    File auction_file = new File(root_path + attach_path, auction_title_img);
 	    FileCopyUtils.copy(fileData, auction_file);
-	      
+	    
+	    service.register(auction);
+	    System.out.println(auction.toString());
+	    
+	    
 		return "redirect:/auction/auction_list";
 		
 	}
@@ -130,26 +184,139 @@ public class AuctionController {
 		}
 	
 	@RequestMapping(value="/auction_list", method=RequestMethod.GET)
-	public void auctionList(@ModelAttribute("cri")AuctionCri cri, HttpServletRequest request, AuctionRegisterVO auction,
+	public void auctionList(@ModelAttribute("cri")AuctionCri cri, AuctionRegisterVO auction, HttpServletRequest request, 
 			MemberVO member, Model model) throws Exception{
-		logger.info(cri.toString());
-
+		
+		List<AuctionRegisterVO> list = service.listCri(cri);
+		
+		System.out.println("선생님,,"+list);
 		model.addAttribute("list", service.listCri(cri));
+		
+		System.out.println("신상품 리스트:"+service.new_auction());
+		for(int i=0; i<5; i++){
+			model.addAttribute("new_auction"+i, service.new_auction().get(i));
+		}
+		
+		List<Integer> time_list = new ArrayList<Integer>();
+		for(int i=0; i<list.size(); i++){
+			String start_time = list.get(i).getStart_date();
+		
+	
+		//타이머
+		/*String start_time = list.get(0).getStart_date();*/
+		System.out.println("시작시간 "+start_time);
+		int s_year= Integer.parseInt(start_time.substring(0, 4));
+		int s_month= Integer.parseInt(start_time.substring(5, 7));
+		int s_day = Integer.parseInt(start_time.substring(8,10));
+		int s_hour = Integer.parseInt(start_time.substring(11,13));
+		int s_minute = Integer.parseInt(start_time.substring(14,16));
+		int s_second = Integer.parseInt(start_time.substring(17,19));
+		
+		int startTime=s_hour*60*60+s_minute*60+s_second;
+		System.out.println("시작시간(초) "+startTime);
+		
+		/*String end_time = auction.getEnd_date();
+		System.out.println("끝나는시간 "+ end_time);
+		int e_year = Integer.parseInt(end_time.substring(0,4));
+		int e_month=Integer.parseInt(end_time.substring(5,7));
+		int e_day=Integer.parseInt(end_time.substring(8,10));
+		int e_hour=Integer.parseInt(end_time.substring(11,13));
+		int e_minute= Integer.parseInt(end_time.substring(14,16));
+		int e_second=Integer.parseInt(end_time.substring(17,19));
+		
+		int endTime=e_hour*60*60+e_minute*60+e_second;
+		System.out.println("끝나는시간(초) "+endTime);*/
+		
+		Calendar cal= Calendar.getInstance();
+		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String visitTime=sf.format(cal.getTime());
+		System.out.println("현재시간 "+visitTime);
+		
+	
+		int v_year = Integer.parseInt(visitTime.substring(0,4));
+		int v_month=Integer.parseInt(visitTime.substring(5,7));
+		int v_day=Integer.parseInt(visitTime.substring(8,10));
+		int v_hour=Integer.parseInt(visitTime.substring(11,13));
+		int v_minute= Integer.parseInt(visitTime.substring(14,16));
+		int v_second=Integer.parseInt(visitTime.substring(17,19));
+		
+		int currentvisitTime=v_hour*60*60+v_minute*60+v_second;
+		System.out.println("현재시간(초) "+currentvisitTime);
+		
+		int year1= s_year-v_year;
+		int month1=s_month- v_month;
+		int day1= s_day-v_day;
+		int hour1=s_hour-v_hour;
+		int minute1 = s_minute-v_minute;
+		int second1= s_second-v_second;
+				
+		int visitingTime=0;
+			
+		if(year1==0 && month1==0 && day1>0){
+			if(s_second<v_second){
+				if(s_minute<1){
+					s_hour= s_hour-1;
+					s_minute = 59;
+					s_second=s_second+60;
+				}else{
+					s_minute=s_minute-1;
+					s_second=s_second+60;
+				}
+			}
+			
+			hour1=s_hour-v_hour;
+			minute1 = s_minute-v_minute;
+			second1= s_second-v_second;
+	
+			visitingTime= day1*24*60*60+ hour1*60*60+ minute1*60+ second1;
+		}else if(year1==0 && month1==0 && day1==0){
+			if(s_second<v_second){
+				if(s_minute<1){
+					s_hour= s_hour-1;
+					s_minute = 59;
+					s_second=s_second+60;
+				}else{
+					s_minute=s_minute-1;
+					s_second=s_second+60;
+				}
+			}
+			
+			hour1=s_hour-v_hour;
+			minute1 = s_minute-v_minute;
+			second1= s_second-v_second;
+			
+			
+			visitingTime= hour1*60*60+ minute1*60+ second1;
+			
+			if(visitingTime<=0){
+				visitingTime=0;
+			}				
+		}
+		
+		time_list.add(visitingTime);
+		}
+		
+		model.addAttribute("visitingTime", time_list);
+		System.out.println(time_list);
+		//System.out.println("방문시간: "+ visitingTime);
+		//model.addAttribute("visitingTime", visitingTime);
+		
 		
 		AuctionPage auctionPage = new AuctionPage();
 		auctionPage.setCri(cri);
 		auctionPage.setTotalCount(service.CountPage(cri));
 		
 		model.addAttribute("auctionPage", auctionPage);
+		model.addAttribute("list_Fruit", service.list_Fruit(cri));
+		model.addAttribute("list_Vege", service.list_Vege(cri));
+		model.addAttribute("list_New", service.list_New(cri));
+		model.addAttribute("list_End", service.list_End(cri));
+		/*System.out.println("과일"+service.list_Fruit(cri));
+		System.out.println("채소"+service.list_Vege(cri));
+		System.out.println("채소"+service.list_New(cri));
+		System.out.println("채소"+service.list_End(cri));*/
 		logger.info("페이징 + 일반경매리스트_GET");
 		
-		
-		//logger.info("넘어오니 : " + request.getParameter("auction-sort"));
-		
-		
-		logger.info("넘어오니 : " + request.getParameter("dd"));
-		
-		auction.setSeller_no(member.getSeller_no()); //사업자번호 받아오기
 	}
 	
 	
@@ -165,8 +332,11 @@ public class AuctionController {
 	
 	/*실시간 경매*/
 	@RequestMapping(value="/rt_auction_register", method=RequestMethod.GET)
-	public void RT_auctionRegisterGET(RT_AuctionRegisterVO rt_auction, Model model)throws Exception{
-		logger.info("실시간 경매 등록폼_get");
+	public void RT_auctionRegisterGET(RT_AuctionRegisterVO rt_auction, @ModelAttribute("cri")RT_AuctionCri cri, 
+			HttpServletRequest request, Model model)throws Exception{
+		System.out.println("넘어옵니까?");
+	
+		model.addAttribute("count", service.rt_count());
 		
 		Calendar calendar = Calendar.getInstance();
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -182,7 +352,7 @@ public class AuctionController {
 	
 	@RequestMapping(value="/rt_auction_register", method=RequestMethod.POST)
 	public String RT_auctionRegisterPOST(RT_AuctionRegisterVO rt_auction, HttpServletRequest request)throws Exception{
-		logger.info("넘어오냐");
+		System.out.println("넘어오나");
 		
 		UUID uid = UUID.randomUUID();
 		String auction_no = "RT_Auction_"+uid.toString().replace("-", "");
@@ -192,6 +362,15 @@ public class AuctionController {
 		String set_t = request.getParameter("rt_auction_time");
 		String setDate = set_d+" "+set_t;
 		rt_auction.setRt_auction_date(setDate);
+		System.out.println(rt_auction.getRt_auction_date());
+		
+		String auction_time = request.getParameter("rt_auction_time");
+ 		System.out.println("시간대 : "+auction_time);
+ 		if(auction_time.equals("10:00:00")){
+ 			rt_auction.setRT_auction_time("am");
+ 		}else{
+ 			rt_auction.setRT_auction_time("pm");
+ 		}
 		
 		String unit = request.getParameter("rt_auction_unit");
 		String units = request.getParameter("rt_auction_units");
@@ -230,40 +409,248 @@ public class AuctionController {
 	    String seller_no = member.getSeller_no();
 	    rt_auction.setSeller_no(seller_no);
 	         
-	    service.rt_register(rt_auction);
+	    
 	    logger.info("auction_title_img : "+rt_auction.getRt_auction_title_img());
 	    logger.info("auction_title_img01 : "+rt_auction.getRt_auction_title_img01());
 	    logger.info("auction_title_img02 : "+rt_auction.getRt_auction_title_img02());
 	    logger.info("seller_no : " + rt_auction.getSeller_no());
 	    
-	         
+	    service.rt_register(rt_auction);     
 	    File auction_file = new File(root_path + attach_path, rt_auction_title_img);
 	    File auction_file2 = new File(root_path + attach_path, rt_auction_title_img01);
 	    File auction_file3 = new File(root_path + attach_path, rt_auction_title_img02);
 	    FileCopyUtils.copy(fileData, auction_file);
 	    FileCopyUtils.copy(fileData2, auction_file2);
 	    FileCopyUtils.copy(fileData3, auction_file3);
+	    
+	    System.out.println(rt_auction.toString());
 	      
 		return "redirect:/auction/rt_auction_list";
 	}
 
 	@RequestMapping(value="/rt_auction_list", method=RequestMethod.GET)
 	public void RT_auctionList(@ModelAttribute("cri")RT_AuctionCri cri, RT_AuctionRegisterVO vo, Model model)throws Exception{
-		logger.info(cri.toString());
-		model.addAttribute("list", service.rt_listCri(cri));
+		//logger.info(cri.toString());
 		
-		Calendar calendar = Calendar.getInstance();
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		String vistiTime = format.format(calendar.getTime());
-		System.out.println("현재시간 : "+vistiTime);
+		model.addAttribute("count", service.rt_count());
+		System.out.println("카운트:"+service.rt_count());
+		model.addAttribute("list", service.rt_listAM(cri));
+		//System.out.println("AM"+service.rt_listAM());
+		model.addAttribute("list2", service.rt_listPM(cri));
+		//System.out.println("PM"+service.rt_listPM());
 		
-		int hour = Integer.parseInt(vistiTime.substring(11,13));
-		int minute = Integer.parseInt(vistiTime.substring(14,16));
-		model.addAttribute("set_time", hour);
-		model.addAttribute("set_min", minute);
+		System.out.println("마감임박 리스트:"+service.pop_auction());
+		for(int i=0; i<5; i++){
+			model.addAttribute("pop_auction"+i, service.pop_auction().get(i));
+		}
 		
-		logger.info("실시간 경매 리스트_get");
-	}
+		List<RT_AuctionRegisterVO> a = service.rt_listAM(cri);
+		List<RT_AuctionRegisterVO> p = service.rt_listPM(cri);
+		System.out.println("오전경매날짜"+a);
+		System.out.println("오후경매날짜"+p);
+		
+		String start_time2 = null;
+		if(p.size()>0){
+			start_time2 = p.get(0).getRt_auction_date();
+			System.out.println("나오냐"+start_time2);
+		}
+		System.out.println("========"+start_time2);
+		if(start_time2!=null){
+			start_time2 = p.get(0).getRt_auction_date();	
+			System.out.println("시작시간 "+start_time2);
+			int s_year2= Integer.parseInt(start_time2.substring(0, 4));
+			int s_month2= Integer.parseInt(start_time2.substring(5, 7));
+			int s_day2 = Integer.parseInt(start_time2.substring(8,10));
+			int s_hour2 = Integer.parseInt(start_time2.substring(11,13));
+			int s_minute2 = Integer.parseInt(start_time2.substring(14,16));
+			int s_second2 = Integer.parseInt(start_time2.substring(17,19));
+			
+			int startTime2=s_hour2*60*60+s_minute2*60+s_second2;
+			System.out.println("시작시간(초) "+startTime2);
+			
+			/*String end_time = auction.getEnd_date();
+			System.out.println("끝나는시간 "+ end_time);
+			int e_year = Integer.parseInt(end_time.substring(0,4));
+			int e_month=Integer.parseInt(end_time.substring(5,7));
+			int e_day=Integer.parseInt(end_time.substring(8,10));
+			int e_hour=Integer.parseInt(end_time.substring(11,13));
+			int e_minute= Integer.parseInt(end_time.substring(14,16));
+			int e_second=Integer.parseInt(end_time.substring(17,19));
+			
+			int endTime=e_hour*60*60+e_minute*60+e_second;
+			System.out.println("끝나는시간(초) "+endTime);*/
+			
+			Calendar cal2= Calendar.getInstance();
+			SimpleDateFormat sf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			String visitTime2=sf2.format(cal2.getTime());
+			System.out.println("현재시간 "+visitTime2);
+			
+
+			int v_year2 = Integer.parseInt(visitTime2.substring(0,4));
+			int v_month2=Integer.parseInt(visitTime2.substring(5,7));
+			int v_day2=Integer.parseInt(visitTime2.substring(8,10));
+			int v_hour2=Integer.parseInt(visitTime2.substring(11,13));
+			int v_minute2= Integer.parseInt(visitTime2.substring(14,16));
+			int v_second2=Integer.parseInt(visitTime2.substring(17,19));
+			
+			int currentvisitTime2=v_hour2*60*60+v_minute2*60+v_second2;
+			System.out.println("현재시간(초) "+currentvisitTime2);
+			
+			int year2= s_year2-v_year2;
+			int month2=s_month2- v_month2;
+			int day2= s_day2-v_day2;
+			int hour2=s_hour2-v_hour2;
+			int minute2 = s_minute2-v_minute2;
+			int second2= s_second2-v_second2;
+					
+			int visitingTime2=0;
+				
+			if(year2==0 && month2==0 && day2>0){
+				if(s_second2<v_second2){
+					if(s_minute2<1){
+						s_hour2= s_hour2-1;
+						s_minute2 = 59;
+						s_second2=s_second2+60;
+					}else{
+						s_minute2=s_minute2-1;
+						s_second2=s_second2+60;
+					}
+				}
+				
+				hour2=s_hour2-v_hour2;
+				minute2 = s_minute2-v_minute2;
+				second2= s_second2-v_second2;
+
+				visitingTime2= day2*24*60*60+ hour2*60*60+ minute2*60+ second2;
+			}else if(year2==0 && month2==0 && day2==0){
+				if(s_second2<v_second2){
+					if(s_minute2<1){
+						s_hour2= s_hour2-1;
+						s_minute2 = 59;
+						s_second2=s_second2+60;
+					}else{
+						s_minute2=s_minute2-1;
+						s_second2=s_second2+60;
+					}
+				}
+				
+				hour2=s_hour2-v_hour2;
+				minute2 = s_minute2-v_minute2;
+				second2= s_second2-v_second2;
+				
+				
+				visitingTime2= hour2*60*60+ minute2*60+ second2;
+				
+				if(visitingTime2<=0){
+					visitingTime2=0;
+				}				
+			}
+			model.addAttribute("vistingTime2", visitingTime2);
+			System.out.println("오후방문시간: "+ visitingTime2);
+		}
+		
+		
+			String start_time = null;
+			if(a.size()>0){
+				start_time = a.get(0).getRt_auction_date();
+				System.out.println("나오냐"+start_time);
+			}
+			System.out.println("========"+start_time);
+			if(start_time!=null){
+			System.out.println("시작시간 "+start_time);
+			int s_year= Integer.parseInt(start_time.substring(0, 4));
+			int s_month= Integer.parseInt(start_time.substring(5, 7));
+			int s_day = Integer.parseInt(start_time.substring(8,10));
+			int s_hour = Integer.parseInt(start_time.substring(11,13));
+			int s_minute = Integer.parseInt(start_time.substring(14,16));
+			int s_second = Integer.parseInt(start_time.substring(17,19));
+			
+			int startTime=s_hour*60*60+s_minute*60+s_second;
+			System.out.println("시작시간(초) "+startTime);
+			
+			/*String end_time = auction.getEnd_date();
+			System.out.println("끝나는시간 "+ end_time);
+			int e_year = Integer.parseInt(end_time.substring(0,4));
+			int e_month=Integer.parseInt(end_time.substring(5,7));
+			int e_day=Integer.parseInt(end_time.substring(8,10));
+			int e_hour=Integer.parseInt(end_time.substring(11,13));
+			int e_minute= Integer.parseInt(end_time.substring(14,16));
+			int e_second=Integer.parseInt(end_time.substring(17,19));
+			
+			int endTime=e_hour*60*60+e_minute*60+e_second;
+			System.out.println("끝나는시간(초) "+endTime);*/
+			
+			Calendar cal= Calendar.getInstance();
+			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			String visitTime=sf.format(cal.getTime());
+			System.out.println("현재시간 "+visitTime);
+			
+
+			int v_year = Integer.parseInt(visitTime.substring(0,4));
+			int v_month=Integer.parseInt(visitTime.substring(5,7));
+			int v_day=Integer.parseInt(visitTime.substring(8,10));
+			int v_hour=Integer.parseInt(visitTime.substring(11,13));
+			int v_minute= Integer.parseInt(visitTime.substring(14,16));
+			int v_second=Integer.parseInt(visitTime.substring(17,19));
+			
+			int currentvisitTime=v_hour*60*60+v_minute*60+v_second;
+			System.out.println("현재시간(초) "+currentvisitTime);
+			
+			int year1= s_year-v_year;
+			int month1=s_month- v_month;
+			int day1= s_day-v_day;
+			int hour1=s_hour-v_hour;
+			int minute1 = s_minute-v_minute;
+			int second1= s_second-v_second;
+					
+			int visitingTime=0;
+				
+			if(year1==0 && month1==0 && day1>0){
+				if(s_second<v_second){
+					if(s_minute<1){
+						s_hour= s_hour-1;
+						s_minute = 59;
+						s_second=s_second+60;
+					}else{
+						s_minute=s_minute-1;
+						s_second=s_second+60;
+					}
+				}
+				
+				hour1=s_hour-v_hour;
+				minute1 = s_minute-v_minute;
+				second1= s_second-v_second;
+
+				visitingTime= day1*24*60*60+ hour1*60*60+ minute1*60+ second1;
+			}else if(year1==0 && month1==0 && day1==0){
+				if(s_second<v_second){
+					if(s_minute<1){
+						s_hour= s_hour-1;
+						s_minute = 59;
+						s_second=s_second+60;
+					}else{
+						s_minute=s_minute-1;
+						s_second=s_second+60;
+					}
+				}
+				
+				hour1=s_hour-v_hour;
+				minute1 = s_minute-v_minute;
+				second1= s_second-v_second;
+				
+				
+				visitingTime= hour1*60*60+ minute1*60+ second1;
+				
+				if(visitingTime<=0){
+					visitingTime=0;
+				}				
+			}
+			
+			model.addAttribute("visitingTime", visitingTime);
+			System.out.println("오전방문시간: "+ visitingTime);
+			}
+		}
+		
 	
 	
 	@RequestMapping(value="/rt_auction/rt_auction", method=RequestMethod.GET)

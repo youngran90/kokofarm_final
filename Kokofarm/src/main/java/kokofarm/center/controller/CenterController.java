@@ -2,6 +2,9 @@ package kokofarm.center.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.UUID;
 
 import javax.inject.Inject;
@@ -15,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import kokofarm.basic.domain.FileBean;
@@ -40,17 +44,16 @@ public class CenterController {
 		logger.info("create_POST");
 		logger.info(vo.toString());
 		
-		UUID uid = UUID.randomUUID();
-		String c_group = request.getParameter("c_group");
-		vo.setC_group(c_group);
+		Calendar calendar = Calendar.getInstance();
 		
-		if(c_group.equals("notice")){
-			String cno = "Notice-"+uid.toString().replace("-", "");
-			vo.setCno(cno);
-		}else if(c_group.equals("faq")){
-			String cno = "FAQ-"+uid.toString().replace("-", "");
-			vo.setCno(cno);
-		}
+		int year = calendar.get(Calendar.YEAR);
+		int month = calendar.get(Calendar.MONTH);
+		int day = calendar.get(Calendar.DAY_OF_MONTH);
+		int hour = calendar.get(Calendar.HOUR_OF_DAY);
+		int minute = calendar.get(Calendar.MINUTE);
+		int second = calendar.get(Calendar.SECOND);
+		
+		vo.setC_regdate(String.valueOf(year+"-"+month+"-"+day+""+hour+":"+minute+":"+second));
 		
 		service.create(vo);
 		
@@ -58,47 +61,54 @@ public class CenterController {
 	}
 	
 	//CKEditor//
-			@RequestMapping(value="/file_upload", method=RequestMethod.POST)
-			public String FileUpload(FileBean fileBean, HttpServletRequest request, Model model){
-				HttpSession session = request.getSession();
-				String root_path = session.getServletContext().getRealPath("/");
-				String attach_path = "resources/files/c_attach/";
-				MultipartFile upload = fileBean.getUpload();
-				String filename = "";
-				String CKEditorFuncNum = "";
+	@RequestMapping(value="/file_upload", method=RequestMethod.POST)
+	public String FileUpload(FileBean fileBean, HttpServletRequest request, Model model){
+		HttpSession session = request.getSession();
+		String root_path = session.getServletContext().getRealPath("/");
+		String attach_path = "resources/files/c_attach/";
+		MultipartFile upload = fileBean.getUpload();
+		String filename = "";
+		String CKEditorFuncNum = "";
 				
 				
-				if(upload != null){
-					filename = "Notice_" + upload.getOriginalFilename();
-					logger.info(filename);
-					fileBean.setFilename(filename);
-					CKEditorFuncNum = fileBean.getCKEditorFuncNum();
-					try{
-						File file = new File(root_path + attach_path + filename);
-						logger.info(root_path+attach_path+filename);
-						upload.transferTo(file);
-					} catch(IOException e){
-						e.printStackTrace();
-					}
+		if(upload != null){
+			filename = "Notice_" + upload.getOriginalFilename();
+			logger.info(filename);
+			fileBean.setFilename(filename);
+			CKEditorFuncNum = fileBean.getCKEditorFuncNum();
+			try{
+				File file = new File(root_path + attach_path + filename);
+				logger.info(root_path+attach_path+filename);
+				upload.transferTo(file);
+			} catch(IOException e){
+				e.printStackTrace();
 				}
-				
-				String file_path = "/"+attach_path+filename;
-				
-				model.addAttribute("file_path", file_path);
-				model.addAttribute("CKEditorFuncNum", CKEditorFuncNum);
-				
-				return "center/admin_view";
-				
 			}
+				
+		String file_path = "/"+attach_path+filename;
+				
+		model.addAttribute("file_path", file_path);
+		model.addAttribute("CKEditorFuncNum", CKEditorFuncNum);
+				
+		return "center/admin_view";
+				
+	}
 			
-			@RequestMapping(value="/customer_view", method=RequestMethod.GET)
-			public void list(HttpServletRequest request, CenterVO vo, 
-					MemberVO member, Model model)throws Exception{
-				logger.info("center_list");
-				logger.info(vo.toString());
-				model.addAttribute("list", service.list());
-				
-				member.getMember_id();
-			}
+	@RequestMapping(value="/customer_view", method=RequestMethod.GET)
+	public void list(HttpServletRequest request, CenterVO vo, 
+		MemberVO member, Model model)throws Exception{
+		System.out.println("center_list");
+		System.out.println(vo.toString());
+		
+		model.addAttribute("list_notice", service.list_notice());
+		model.addAttribute("list_faq", service.list_faq());
+		
+	}
+	
+	@RequestMapping(value="/detail_notice", method=RequestMethod.GET)
+	public void detail(@RequestParam("cno")int cno, Model model)throws Exception{
+		service.update_viewcnt(cno);
+		model.addAttribute("detail_notice", service.list_notice());
+	}
 			
 }

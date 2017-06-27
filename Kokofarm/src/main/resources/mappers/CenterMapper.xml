@@ -6,15 +6,31 @@
 <mapper namespace="kokofarm.center.mapper.centerMapper">
 	<insert id="create" parameterType="CenterVO">
 		insert into customercenter(cno, c_title, c_group, c_content, c_regdate, c_viewcnt)
-		values(#{cno}, #{c_title}, #{c_group}, #{c_content}, to_date(sysdate), 0)
+		values(cno.nextval, #{c_title}, #{c_group}, #{c_content}, 
+		to_date(#{c_regdate}, 'yyyy-mm-dd hh24:mi:ss'), 0)
 	</insert>
 
-	<select id="list" resultType="CenterVO">
-		select cno, c_title, c_regdate, c_viewcnt
+	<select id="list_notice" resultType="CenterVO">
+		select *
 		from customercenter where c_group='notice' order by c_regdate
 	</select>
  	
+ 	<select id="list_faq" resultType="CenterVO">
+		select cno, c_title, c_regdate, c_viewcnt
+		from customercenter where c_group='faq' order by c_regdate
+	</select>
  
+ 	<select id="detail_notice" resultType="CenterVO">
+ 		select * from customercenter where cno=#{cno}
+ 	</select>
+ 	
+ 	<select id="detail_faq" resultType="CenterVO">
+ 		select * from customercenter where cno=#{cno}
+ 	</select>
+ 	
+ 	<update id="update_viewcnt">
+ 		update customercenter set c_viewcnt = c_viewcnt + 1 where cno=#{cno}
+ 	</update>
 </mapper>  
 
 

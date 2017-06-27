@@ -22,19 +22,35 @@
  	</insert>
   
  	<select id="listCri" resultType="AuctionRegisterVO">
- 		<![CDATA[ select auction_no, auction_name, auction_up, auction_down, auction_content, auction_title_img
+ 		<![CDATA[ select *
 			 from auction where auction_result is null]]>
 			 <include refid="search"></include>
 		<![CDATA[ order by auction_name ]]>
  	</select>
- 	
  	<select id="list_Fruit" resultType="AuctionRegisterVO">
- 		<![CDATA[ select auction_no, auction_name, auction_up, auction_down, auction_content, auction_title_img
-			 from auction auction_group = '과일' and auction_result is null]]>
+ 		<![CDATA[ select *
+			 from auction where auction_group = '과일' and auction_result is null]]>
 			 <include refid="search"></include>
 		<![CDATA[ order by auction_name ]]>
  	</select>
- 	
+ 	<select id="list_Vege" resultType="AuctionRegisterVO">
+ 		<![CDATA[ select *
+			 from auction where auction_group = '채소' and auction_result is null]]>
+			 <include refid="search"></include>
+		<![CDATA[ order by auction_name ]]>
+ 	</select>
+ 	<select id="list_New" resultType="AuctionRegisterVO">
+ 		<![CDATA[ select *
+			 from auction where auction_result is null]]>
+			 <include refid="search"></include>
+		<![CDATA[ order by auction_regdate desc]]>
+ 	</select>
+ 	<select id="list_End" resultType="AuctionRegisterVO">
+ 		<![CDATA[ select *
+			 from auction where auction_result is null]]>
+			 <include refid="search"></include>
+		<![CDATA[ order by end_date]]>
+ 	</select>
  	
  	<sql id="search">
 		<if test="searchType != null">
@@ -45,7 +61,7 @@
 	</sql>
  	
  	<select id="countPage" resultType="Integer">
- 		<![CDATA[ select count(auction_no) from auction where auction_no > 0 ]]>	
+ 		<![CDATA[ select count(auction_no) from auction where auction_no > 0 and auction_result is null]]>	
  		<include refid="search"></include>
  		
  	</select>
@@ -53,33 +69,44 @@
  	<select id="detail" resultType="AuctionRegisterVO">
  		select * from auction where auction_no=#{auction_no}
  	</select>
- 	
- 	
+ 	<select id="new_auction" resultType="AuctionRegisterVO">
+ 		select * from auction order by auction_regdate
+ 	</select>
+ 	<select id="pop_auction" resultType="AuctionRegisterVO">
+ 		select * from auction order by end_date
+ 	</select>
  	
  	<!-- 실시간 경매 -->
  	<insert id="rt_register" parameterType="RT_AuctionRegisterVO">
  		insert into rt_auction(rt_auction_no, rt_auction_name, rt_auction_group, rt_auction_date,
  							   rt_auction_down, rt_auction_unit, rt_auction_area, rt_auction_content,
  							   rt_auction_title_img, rt_auction_title_img01, rt_auction_title_img02, rt_auction_regdate,
- 							   seller_no
+ 							   seller_no, rt_auction_time
  							   )
  		values(#{rt_auction_no}, #{rt_auction_name}, #{rt_auction_group}, to_date(#{rt_auction_date}, 'yyyy-mm-dd hh24:mi:ss'), 
  			   #{rt_auction_down}, #{rt_auction_unit}, #{rt_auction_area}, #{rt_auction_content}, 
  			   #{rt_auction_title_img}, #{rt_auction_title_img01}, #{rt_auction_title_img02}, to_date(sysdate),
- 			   #{seller_no}
+ 			   #{seller_no}, #{rt_auction_time}
  		)					   
  	</insert>
- 	
- 	<select id="rt_listCri" resultType="RT_AuctionRegisterVO">
- 		<![CDATA[ select rt_auction_no, rt_auction_name, rt_auction_down, rt_auction_content, rt_auction_title_img
-			 from rt_auction where trunc(rt_auction_date, 'DD') = trunc(sysdate) ]]>
-		<![CDATA[ order by rt_auction_no desc, rt_auction_regdate desc ]]>
+ 	<!-- <select id="rt_listCri" resultType="RT_AuctionRegisterVO">
+ 		select * from rt_auction where trunc(rt_auction_date, 'DD') = trunc(sysdate)
+		order by rt_auction_no desc, rt_auction_regdate desc
+ 	</select> -->
+ 	<select id="rt_listAM" resultType="RT_AuctionRegisterVO">
+ 		select * from rt_auction where trunc(rt_auction_date, 'DD') = trunc(sysdate) and rt_auction_time='am'
+ 	</select>
+ 	<select id="rt_listPM" resultType="RT_AuctionRegisterVO">
+ 		select * from rt_auction where trunc(rt_auction_date, 'DD') = trunc(sysdate) and rt_auction_time='pm'
  	</select>
  	
  	<select id="rt_detail" resultType="RT_AuctionRegisterVO">
  		select * from rt_auction where rt_auction_no=#{rt_auction_no}
  	</select>
  	
+ 	<select id="rt_count" resultType="Integer">
+ 		select count(rt_auction_no) from rt_auction where trunc(rt_auction_date, 'DD') = trunc(sysdate)
+ 	</select>
  
 </mapper>  
 
