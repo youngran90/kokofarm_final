@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file="../include/header.jsp"%>
 <link rel="stylesheet" href="/resources/css/detail.css">
 
@@ -124,7 +125,7 @@
 												  </c:otherwise>
 												</c:choose>
 												
-												<td>${SuccessViewDetailVO.tender_price}</td>
+												<td><fmt:formatNumber value="${SuccessViewDetailVO.tender_price}" type="number"/></td>
 												<c:choose>
 													<c:when test="${SuccessViewDetailVO.pay_state eq null}">
 														<td><div class="reply_check comp" style="width: 100px;">결제대기중</div></td>
@@ -213,7 +214,7 @@
 												<td>${status.count}</td>
 												<td>${ TenderViewVO.auction_no }</td>
 												<td>${TenderViewVO.tender_no}</td>
-												<td>${TenderViewVO.tender_price}</td>
+												<td><fmt:formatNumber value="${TenderViewVO.tender_price}" type="number"/></td>
 												<td>${TenderViewVO.tender_date}</td>
 												
 											</tr>
@@ -223,7 +224,7 @@
 												<td>${status.count}</td>
 												<td>${ TenderViewVO.auction_no }</td>
 												<td>${TenderViewVO.tender_no}</td>
-												<td>${TenderViewVO.tender_price}</td>
+												<td><fmt:formatNumber value="${TenderViewVO.tender_price}" type="number"/></td>
 												<td>${TenderViewVO.tender_date}</td>
 					
 											</tr>
@@ -263,6 +264,57 @@
 	
 					</div>
 					
+		<!-- 실시간 경매결과 출력 -->
+		<div class="tab-pane active" id="tab-registerview">
+	        <div class="cpt_product_description ">
+								<section class="sub_top_section">
+									<h2 class="cate_title">
+										<span style="font-weight: bold;">실시간 경매 낙찰 내역&nbsp;&nbsp;</span>
+									</h2>
+								</section>
+								<table class="view_board_table">
+									<colgroup>
+									<col width="84">
+									<col width="120">
+									<col width="150">
+									<col width="200">
+									<col width="200">
+									<col width="150">
+									</colgroup>
+									<thead>
+										<tr>
+										    <th>번호</th>
+											<th>낙찰번호</th>
+											<th>경매상품</th>
+											<th>상품명</th>
+											<th>낙찰가</th>
+											<th>낙찰일자</th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach var="rt_list" items="${rt_list}" varStatus="status">
+										    <c:set var="index" value="1"></c:set>
+								
+											<tr  class="tit_tr user_tit_tr">
+												<td>${status.count}</td>
+												<td>${rt_list.rt_tender_finish_no }</td>
+												<td><img src="/resources/files/attach/${ rt_list.rt_auction_title_img }" alt="${rt_list.rt_auction_name}" id="img"></td>
+												<td>${rt_list.rt_auction_name}</td>
+												<td><fmt:formatNumber value="${rt_list.rt_tender_price }" type="number"/></td>
+												<td>${rt_list.rt_tender_date}</td>
+											</tr>
+										</c:forEach>
+								</table>
+	
+						</div>
+						<div>
+							<!--  tab1 -->
+						</div>
+					</div>
+		<!--  -->
+		
+		
+		
 					
 		<!-- 등록 상품 조회-->
 		<div class="tab-pane active" id="tab-registerview">

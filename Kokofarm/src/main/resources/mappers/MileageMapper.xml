@@ -56,10 +56,6 @@
 		select count(*) from mileage where mileage_member_id = #{member_id} and to_char(mileage_date,'YYYYMMDD') between to_date(#{start_time}) and to_date(#{end_time})
 	</select>
 	
-	<!-- <select id="dateAsc"> 오름차순... 작은거 부터....
-		select mileage_date from mileage where mileage_member_id = #{mileage_member_id} order by mileage_date asc
-	</select> -->
-	
 	<select id="orderproduct_detail" resultType="OrderFinish_DetailVO">
 		select o.orderfinish_no, o.orderfinish_product_name, o.orderfinish_product_amount, o.orderfinish_delivery_price,
 				o.orderfinish_total_price, o.orderfinish_final_price, o.orderfinish_member_name, o.orderfinish_member_phonenum, o.orderfinish_member_address,

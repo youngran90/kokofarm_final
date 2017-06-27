@@ -23,7 +23,7 @@ h2 {
 <div class="container">
 <ul class="breadcrumb">
     <li><a href="/"><i class="fa fa-home"></i></a></li>
-    <li><a href="/mypage/order_list">마이페이지/주문배송정보</a></li>
+    <li><a href="/product/product_register_list">마이페이지/상품 등록 리스트</a></li>
   </ul>
 	<div class="row">
 	 <%@include file="./Mypage.jsp"%>
@@ -33,61 +33,60 @@ h2 {
             <div class="cpt_product_description ">
 							
 							<section class="sub_top_section">
-								<h2 class="cate_title"><span>구매내역&nbsp;&nbsp;</span></h2>
+								<h2 class="cate_title"><span>상품 등록 내역&nbsp;&nbsp;</span></h2>
 							</section>
 
 							<table class="view_board_table">
 								<colgroup>
 									<col width="50">
 									<col width="152">
-									<col width="630">
-									<col width="162">
-									<col width="140">
-									<col width="100">
+									<col width="580">
+									<col width="152">
+									<col width="152">
 								</colgroup>
 								<thead>
 									<tr>
 										<th>번호</th>
 										<th>상품이미지</th>
-										<th>주문 정보</th>
-										<th>주문 날짜</th>
-										<th>상태</th>
+										<th>상품 정보</th>
+										<th>남은 수량</th>
+										<th>등록일</th>
+										
 									</tr>
 								</thead>
 
 								<tbody>
-									<c:forEach var="list" items="${list}" 	varStatus="status">
+									<c:forEach var="list" items="${product}" 	varStatus="status">
 											<tr class="tit_tr user_tit_tr">
 												<td>${pageMaker.start + status.index}</td>
 												<td><img src="/resources/files/attach/${list.product_mainimage}" style="width: 100px; height: 100px;"></td>
 												<td class="txt_td">
-													<b>주문상품 : </b> ${list.orderfinish_product_name}<br>
-												    <b> 주문수량 : </b> ${list.orderfinish_product_amount}<br>
-												<b>결제금액 : </b><fmt:formatNumber value="${list.orderfinish_final_price}" pattern="###,###원" />
-												<td><fmt:formatDate value="${list.orderfinish_date}" pattern="yyyy-MM-dd" /></td>
-												<td>배송상태</td>
+													<b>상품명 : </b> ${list.product_name}<br>
+												    <b>단위 : </b> ${list.product_unit} ${list.unit}<br>
+												<b>가격 단가 : </b><fmt:formatNumber value="${list.product_price}" pattern="###,###원" />
+												<td><b>총수량 :</b> ${list.product_total}</td>
+												<td><fmt:formatDate value="${list.product_uploaddate }" pattern="yyyy-MM-dd" /></td>
 											</tr>
 									</c:forEach>
 								</tbody>
 					</table>
 					
-      
-      <div class="category-page-wrapper">
+		<div class="category-page-wrapper">
         <div class="pagination-in" style="margin-left: 40%">
          <ul class="pagination" >
-			<li><a href="/mypage/order_list?page=1">처음</a></li>
+			<li><a href="/product/product_register_list?page=1">처음</a></li>
 			<c:if test="${pageMaker.prev}">
-				<li><a href="/mypage/order_list?page${pageMaker.prev}">&laquo;</a></li>
+				<li><a href="/product/product_register_list?page${pageMaker.prev}">&laquo;</a></li>
 			</c:if>
 			<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.lastPage}" var="idx">
 				 <li <c:out value="${pageMaker.page == idx?'class =active':''}"/>>
-					 <a href="/mypage/order_list?page=${idx}">${idx}</a>
+					 <a href="/product/product_register_list?page=${idx}">${idx}</a>
 				</li>
 			</c:forEach>
 				<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-					<li><a href="/mypage/order_list?page=${pageMaker.endPage +1}">&raquo;</a></li>
+					<li><a href="/product/product_register_list?page=${pageMaker.endPage +1}">&raquo;</a></li>
 				</c:if>
-				<li><a href="/mypage/order_list?page=${pageMaker.lastPage}">마지막</a></li>
+				<li><a href="/product/product_register_list?page=${pageMaker.lastPage}">마지막</a></li>
 			</ul>
         </div>
       </div>

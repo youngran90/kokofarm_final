@@ -64,6 +64,20 @@ app.get('/btn_img02',function (req,res){
     })
 });
 
+app.get('/tag_img01',function (req,res){     
+    var filename = 'carrot.png';
+    var dir = 'C:\\Users\\김Jason\\git\\kokofarm_final\\Kokofarm\\src\\main\\webapp\\resources\\rt_auction\\image\\'+filename;
+    fs.exists(dir, function (exists) {
+        if (exists) {
+            fs.readFile(dir, function (err,data){
+                res.end(data);
+            });
+        } else {
+            res.end('file is not exists');
+        }
+    })
+});
+
 app.get('/img',function (req,res){     
     var filename = img;
     var dir = 'C:\\Users\\김Jason\\Desktop\\Kosta\\spring_work\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Kokofarm\\resources\\files\\attach\\'+filename;
@@ -120,15 +134,11 @@ app.get('/', function(request, response) {
 	
 });
 
+var m = 100; //경매 대기 시간 카운트 (분)
+var s = 10;  //경매 대기 시간 카운트 (초)
 
-
-
-
-var m = 120; //경매 대기 시간 카운트 (분)
-var s = 0;  //경매 대기 시간 카운트 (초)
-
-var minute = 120 //경매 진행 시간 카운트 (분)
-var second = 0;//경매 진행 시간 카운트 (초)
+var minute = 100; //경매 진행 시간 카운트 (분)
+var second = 10;//경매 진행 시간 카운트 (초)
 
 var wait = setInterval(function(){ //setInterval 일정시간마다 반복 실행하는 함수
 	if(m == 0 && s == 0 ){
@@ -220,7 +230,7 @@ io.sockets.on('connection', function(socket) {
 		
 	//메세지 전달 이벤트
 	socket.on('send',function(data){ //클리이언트에서 보낸 메세지를 받고
-		io.sockets.emit('send',{ // 보낸다
+		socket.broadcast.emit('send',{ // 보낸다
 			nickname : data.name,
 			msg : data.messeage
 		});
@@ -318,10 +328,10 @@ io.sockets.on('connection', function(socket) {
 		 				s : second
 		 			});
 		 		 	if(minute == 0 && second == 0 ){
+		 		 		clearInterval(timer); //타이머 종료
 		 		 		socket.emit("end",{
 				 			msg : "경매가 종료 되었습니다."
 		 		 		});
-		 		 		clearInterval(timer); //타이머 종료
 		 		 	}
 		 		 }, 1000); //1초단위로 변동
 		 		

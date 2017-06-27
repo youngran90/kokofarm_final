@@ -294,7 +294,7 @@
           </div>
         </div>
       </div> -->
-      <form class="form-horizontal" enctype="multipart/form-data" method="post" action="#">
+      <form class="form-horizontal" enctype="multipart/form-data" method="post" action="/center/admin_view">
         <fieldset>
           <div class="form-group required">
             <label for="input-name" class="col-sm-2 control-label" style="width: 90px; margin-left: 10px;">제목</label>

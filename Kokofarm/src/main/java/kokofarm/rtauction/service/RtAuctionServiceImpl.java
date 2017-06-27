@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import kokofarm.member.domain.MemberVO;
 import kokofarm.rtauction.domain.RtAcutionFinishVO;
+import kokofarm.rtauction.domain.RtAuctionFinishListVO;
 import kokofarm.rtauction.domain.RtAuctionInfoVO;
 import kokofarm.rtauction.domain.RtResultAuctionListVO;
 import kokofarm.rtauction.domain.RtResultAuctionVO;
@@ -44,4 +45,10 @@ public class RtAuctionServiceImpl implements RtAuctionService{
 		dao.rt_auction_finish(vo);
 	}
 
+	@Override
+	public List<RtAuctionFinishListVO> rt_auction_finish_list(String member_id) throws Exception {
+		return dao.rt_auction_finish_list(member_id);
+	}
+
+	
 }

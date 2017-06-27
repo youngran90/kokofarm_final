@@ -25,5 +25,7 @@ public interface ProductService {
     
     //public void view_count(String product_no)throws Exception;
 
+    public List<ProductVO>product_register_list(String member_id, PagingMaker PagingMaker)throws Exception;
 
+    public int countProduct_list(String member_id)throws Exception;
 }

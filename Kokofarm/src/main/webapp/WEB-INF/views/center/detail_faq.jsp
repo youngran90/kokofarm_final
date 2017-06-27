@@ -20,16 +20,26 @@
 		left: 1100px;
 		top: -42px;
 	}
+	
+	#list_btn{
+		border: none;
+		background: #F28D33;
+		text-align: center;
+		color: #FFFFFF;
+		width: 80px;
+		height: 40px;
+		margin-left: 860px;
+	}
 </style>
 <script>
 $(function(){
 	$('#faq_list').hide();
 	
 	var admin_id = '${login.member_id}'
-	alert(admin_id);
+	//alert(admin_id);
 	
 	if(admin_id=='kosta'){
-		 alert("관리자맞아!");
+		 //alert("관리자맞아!");
 		$('#admin_button').show();
 	}else{
 		$('#admin_button').hide();
@@ -161,41 +171,45 @@ function move_admin(){
     </div>
     </div>
     </div>
-    <div class="col-sm-9" id="content" style="postion:relativce; left:230px;">
+    <div class="col-sm-9" id="content"  style="postion:relativce; left:230px; top:-153px;">
     	 <!-- <div class="nav" style="position: relative; left:230px; top:-122px;">
 			<ul class="nav nav-tabs">
 				<li class="active"><a onclick="move_notice()">공지사항</a></li>
 				<li class="active"><a id="faq" href="#" onclick="move_faq()">FAQ</a></li>	
 			</ul>
 		</div> -->
-     	<div class="tab-pane active" id="tab-auctionview" style="position:relative; top:-153px;">
+     	<div class="tab-pane active" id="tab-auctionview">
 	        <div class="cpt_product_description ">
 	        				<h3 style="font-weight: bold; margin-bottom: 20px;">FAQ</h3>
-	        				<input type="button" class="active" id="admin_button" value="등록하기" onclick="move_admin()"
-	        				style="position:relativce; left:860px;">
+	        				<input type="button" class="active" id="admin_button" value="등록하기" 
+	        				onclick=location.href="/center/admin_view" style="position:relativce; left:860px;">
 								<div style="width: 940px;"> 
 								<c:forEach items="${detail_faq}" var="CenterVO">
 								<table class="view_board_table" id="notice_table">
+								<colgroup>
+									<col width="150">
+								</colgroup>
 									<tbody>
 										<tr>
-											<th style="width:50px;" colspan="2" >글제목</th>
-											<th colspan="2" >${CenterVO.c_title}</th>
+											<th style="border: lightgray;">글제목</th>
+											<td colspan="4" style="border-top: 1px solid lightgray;">${CenterVO.c_title}</td>
 										</tr>
-										<tr>
-											<th>작성일</th>
+										<tr style="text-align: center;">
+											<th style="border: lightgray;">작성일</th>
 											<td>${CenterVO.c_regdate}</td>
-											<th>조회수</th>
-											<td>${CenterVO.c_viewcnt}<td>
+											<th style="border: lightgray;">조회수</th>
+											<td >${CenterVO.c_viewcnt}<td>
 										</tr>
 										<tr>
-											<th>내용</th>
-											<td>${CenterVO.c_content}<td>
+											<th style="border: lightgray; height:500px;">내용</th>
+											<td colspan="3" style="height:500px;">${CenterVO.c_content}<td>
 										</tr>
-										<tbody>
+										<tr>
+										</tr>
 								</table>
 								</c:forEach>
 							</div>
-						
+						<input id="list_btn" type="button" value="목록으로" onclick=location.href="../center/customer_view2">
 	
 						</div>
 	

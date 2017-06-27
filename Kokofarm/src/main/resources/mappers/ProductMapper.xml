@@ -46,6 +46,9 @@
 	  					<when test="input_sort == 'vc'">
 	  						order by view_count desc
 	  					</when> 
+	  					<when test="input_sort == 'lud'">
+							order by product_uploaddate desc				
+							</when> 
   					</choose>
   					) a
   						where ROWNUM <![CDATA[<=]]> #{end})
@@ -84,7 +87,7 @@
 	<update id="deleteProduct" parameterType="String">
 		update product 
 		set product_total = 0
-		where product_no =#{product_nos}
+		where product_no =#{product_no}
 	</update>
 	
 	
@@ -94,6 +97,20 @@
 	where product_no = #{product_no}	
 	</update>
 	
+	<select id="product_register_list" parameterType="java.util.HashMap" resultType="ProductVO">
+	 SELECT * FROM (SELECT ROWNUM AS RNUM,a.* FROM(
+  					 select * from product
+				 where seller_no = #{member_id}
+				 order by product_uploaddate
+  					) a
+  						where ROWNUM <![CDATA[<=]]> #{PagingMaker.end})
+  							where RNUM <![CDATA[>=]]> #{PagingMaker.start}
+	</select>
 	
+	
+	<select id="countProduct_list" resultType="int" parameterType="String">
+	select count(*) from product
+		where seller_no =  #{member_id}
+	</select>
 	
 	</mapper>
