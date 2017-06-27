@@ -119,8 +119,7 @@ $(document).keydown(function (e) {
 	/* 엔터키 입력 & 입력버튼 클릭 */
 	$("#chat_text").keypress(function(e){
 		if(e.which == 13){
-			var text = "<div id='test'><img src='/tag_img01'><span id='my_text'/>"+
-			$("#chat_text").val()+"</div>";
+			var text = "<div id='test'><img src='/tag_img01'>"+$("#chat_text").val()+"</div>";
 			$("#chat_area").append(text);
 			
 			socket.emit('send',{
@@ -132,8 +131,7 @@ $(document).keydown(function (e) {
 	});
 	
 	$("#chat_enter").click(function(e){
-		var text = "<div id='test'><img src='/tag_img01'><span id='my_text'/>"+
-		$("#chat_text").val()+"</div>";
+		var text = "<div id='test'><img src='/tag_img01'>"+$("#chat_text").val()+"</div>";
 		$("#chat_area").append(text);
 		
 		socket.emit('send',{
@@ -147,8 +145,11 @@ $(document).keydown(function (e) {
 	
 	// 주고받는 메세지
 	socket.on('send',function(data){
-		var messeage = '&nbsp;[ '+data.nickname+' ] '+data.msg+'<br>';	
+		var messeage = "<div id='me'><img src='/tag_img02'>[ "+data.nickname+" ]"+
+		data.msg+"</div>";
+		//var messeage = '&nbsp;[ '+data.nickname+' ] '+data.msg+'<br>';	
 		$("#chat_area").append(messeage);
+		
 		if($('#area').prop('scrollHeight') > $('#area').height()){
 			 $('#area').scrollTop($('#area').prop('scrollHeight'));
 		}
@@ -158,7 +159,7 @@ $(document).keydown(function (e) {
 	function userUpdate(userList){
 		$("#chat_list").empty();
 		for(var i=0; i<userList.length; i++){
-			var list = userList[i];
+			var list = "<div id='list_img'><img src='/tag_img03'>"+userList[i]+"</div>";
 			$("#chat_list").append("&nbsp;"+list+'\n');
 		}
 	}
@@ -546,7 +547,7 @@ $(document).keydown(function (e) {
 					<div id="area" class="area" style="overflow: auto;">
 						<div id="chat_area" class="chat_area"></div>
 					</div>
-						<textarea id="chat_list" name="chat_list" rows="18" cols="11" readonly="readonly"></textarea><br>
+						<div id="chat_list" name="chat_list" readonly="readonly"></div><br>
 				</div>
 				<div class="chat_input" id="chat_input">
 					<input type="text" id="id" name="id" value="" readonly="readonly">

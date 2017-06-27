@@ -78,6 +78,34 @@ app.get('/tag_img01',function (req,res){
     })
 });
 
+app.get('/tag_img02',function (req,res){     
+    var filename = 'sweet.png';
+    var dir = 'C:\\Users\\김Jason\\git\\kokofarm_final\\Kokofarm\\src\\main\\webapp\\resources\\rt_auction\\image\\'+filename;
+    fs.exists(dir, function (exists) {
+        if (exists) {
+            fs.readFile(dir, function (err,data){
+                res.end(data);
+            });
+        } else {
+            res.end('file is not exists');
+        }
+    })
+});
+
+app.get('/tag_img03',function (req,res){     
+    var filename = 'potato.jpg';
+    var dir = 'C:\\Users\\김Jason\\git\\kokofarm_final\\Kokofarm\\src\\main\\webapp\\resources\\rt_auction\\image\\'+filename;
+    fs.exists(dir, function (exists) {
+        if (exists) {
+            fs.readFile(dir, function (err,data){
+                res.end(data);
+            });
+        } else {
+            res.end('file is not exists');
+        }
+    })
+});
+
 app.get('/img',function (req,res){     
     var filename = img;
     var dir = 'C:\\Users\\김Jason\\Desktop\\Kosta\\spring_work\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Kokofarm\\resources\\files\\attach\\'+filename;
@@ -134,11 +162,11 @@ app.get('/', function(request, response) {
 	
 });
 
-var m = 100; //경매 대기 시간 카운트 (분)
-var s = 10;  //경매 대기 시간 카운트 (초)
+var m = 0; //경매 대기 시간 카운트 (분)
+var s = 30;  //경매 대기 시간 카운트 (초)
 
-var minute = 100; //경매 진행 시간 카운트 (분)
-var second = 10;//경매 진행 시간 카운트 (초)
+var minute = 0; //경매 진행 시간 카운트 (분)
+var second = 30;//경매 진행 시간 카운트 (초)
 
 var wait = setInterval(function(){ //setInterval 일정시간마다 반복 실행하는 함수
 	if(m == 0 && s == 0 ){

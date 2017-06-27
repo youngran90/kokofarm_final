@@ -276,6 +276,7 @@ body{
 #chat_list {
 	border: 1px solid green;
 	height : 402px;
+	width : 130px;
 	margin-left : 25px;
 	float : left;
 	position: relative;
@@ -308,6 +309,19 @@ body{
 	text-align: right;
 }
 #test img{
+	margin-right: 3px;
+	vertical-align: middle;
+}
+
+#me{
+	text-align: left;
+}
+#me img{
+	margin-right: 3px;
+	vertical-align: middle;
+}
+
+#list_img img{
 	margin-right: 3px;
 	vertical-align: middle;
 }
