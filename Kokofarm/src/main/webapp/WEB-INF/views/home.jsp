@@ -272,9 +272,9 @@ font-family: YG77;
     
 <div class="mainbanner">
   <div id="main-banner" class="owl-carousel home-slider">
-    <div class="item"> <a href="#"><img src="/resources/files/attach/여름과일기획전_메인배너.jpg" alt="main-banner1" class="img-responsive" /></a> </div>
-    <div class="item"> <a href="#"><img src="/resources/files/attach/토마토할인_메인배너.jpg" alt="main-banner2" class="img-responsive" /></a> </div>
-    <div class="item"> <a href="#"><img src="/resources/files/attach/수박_메인배너.jpg" alt="main-banner3" class="img-responsive" /></a> </div>
+    <div class="item"> <a href="/product/list_product"><img src="/resources/files/attach/여름과일기획전_메인배너.jpg" alt="main-banner1" class="img-responsive" /></a> </div>
+    <div class="item"> <a href="#"><img src="/resources/files/attach/오디복분자예약전_메인배너_특별기획전제거.jpg" alt="main-banner2" class="img-responsive" /></a> </div>
+    <div class="item"> <a href="/product/list_product?searchOption=product_name&searchText=&page=1&input_sort=&ca2=1&ca3=fs_3"><img src="/resources/files/attach/수박3종_수정_웹.jpg" alt="main-banner3" class="img-responsive" /></a> </div>
    </div>
     <div class="button-group-admin">
   	 	 <button class="addmainslider-btn" type="button">슬라이더 교체</button>

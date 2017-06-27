@@ -274,7 +274,7 @@ $( document ).ready( function() {
             <li><a href="/mypage/list_Inquiry" >1:1 문의</a></li>
             <li><a href="/mypage/graph" >통계</a></li>
             <li><a href="/mypage/auction_view" >경매내역</a></li>
-            <li><a href="/product/product_register_list" >상품 등록 리스트</a></li>
+            <li style="display: none;" class="seller_register"><a href="/product/product_register_list" >상품 등록 리스트</a></li>
             <li style="display: none;" class="seller_register"><a href="/product/Insert_product">일반물품 등록</a></li>
             <li style="display: none;" class="seller_register"><a href="/auction/auction_register" >일반경매 등록</a></li>
             <li style="display: none;" class="seller_register"><a href="/auction/rt_auction_register" >실시간경매 등록</a></li>
