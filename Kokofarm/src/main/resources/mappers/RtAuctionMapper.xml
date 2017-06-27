@@ -42,6 +42,15 @@
 		)
 	</insert>
 	
+	
+	<select id="rt_auction_finish_list" resultType="RtAuctionFinishListVO">
+		select rtf.rt_tender_finish_no, ra.rt_auction_title_img, ra.rt_auction_name, rt.rt_tender_price, rt.rt_tender_date
+		from rt_auction ra, rt_tender rt, rt_tender_finish rtf
+		where ra.rt_auction_no = rt.rt_auction_no
+		and rt.rt_tender_no = rtf.rt_tender_no
+		and member_id = #{member_id}
+	</select>
+	
 </mapper>
 
 

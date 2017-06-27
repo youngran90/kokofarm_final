@@ -20,6 +20,8 @@ import kokofarm.mypage.domain.SuccessViewDetailVO;
 import kokofarm.mypage.domain.SuccessViewVO;
 import kokofarm.mypage.domain.TenderViewVO;
 import kokofarm.mypage.service.AuctionViewService;
+import kokofarm.rtauction.domain.RtAuctionFinishListVO;
+import kokofarm.rtauction.service.RtAuctionService;
 
 
 @Controller
@@ -29,6 +31,9 @@ public class AuctionViewController {
 	
 	@Inject
 	private AuctionViewService service;
+	
+	@Inject
+	private RtAuctionService rt_service;
 	
 	@RequestMapping("auction_view")
 	public void auction_view(HttpServletRequest request, Model model) throws Exception{
@@ -155,6 +160,12 @@ public class AuctionViewController {
 			model.addAttribute("tenderViewList",tenderViewList);
 			System.out.println("이리로는넘어오니");
 		}
+		
+		
+		
+		//여기서 부터 실시간 경매 출력
+		List<RtAuctionFinishListVO> rt_list = rt_service.rt_auction_finish_list(member_id);
+		model.addAttribute("rt_list",rt_list);
 	}
 	
 

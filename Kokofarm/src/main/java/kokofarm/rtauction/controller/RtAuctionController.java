@@ -2,6 +2,8 @@ package kokofarm.rtauction.controller;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -34,7 +36,7 @@ public class RtAuctionController {
 	private RtAuctionService service;
 	
 	@RequestMapping(value="/rt_auction",method=RequestMethod.GET)
-	public String rt_actionGet(//@RequestParam("rt_auction_no") String rt_auction_no,
+	public String rt_actionGet(@RequestParam("rt_auction_no") String rt_auction_no,
 			HttpServletRequest request, Model model)throws Exception{
 		
 		HttpSession session = request.getSession();
@@ -45,8 +47,7 @@ public class RtAuctionController {
 			return "/member/login";
 		}
 		
-		
-		RtAuctionInfoVO vo = service.rtauction_info("RT_Auction_bff703e9e7f449cead2ad6f1d52ed6e4");
+		RtAuctionInfoVO vo = service.rtauction_info(rt_auction_no);
 		String name = vo.getRt_auction_name();
 		int down = vo.getRt_auction_down();
 		String unit = vo.getRt_auction_unit();
@@ -56,7 +57,7 @@ public class RtAuctionController {
 		String content = vo.getRt_auction_content();
 		String area = vo.getRt_auction_area();
 		String seller_no = vo.getSeller_no();
-		String rt_auction_no = vo.getRt_auction_no();
+	//	String rt_auction_no = vo.getRt_auction_no();
 		
 		model.addAttribute("member_id", member.getMember_id());
 		model.addAttribute("name", name);
@@ -111,13 +112,13 @@ public class RtAuctionController {
 	}
 	
 	@RequestMapping(value="/rt_auctionpay", method=RequestMethod.GET)
-	public String rt_auctionpayGet(/*@RequestParam("rt_acution_no") String rt_acution_no,*/ Model model,
+	public String rt_auctionpayGet(@RequestParam("rt_acution_no") String rt_acution_no, Model model,
 			HttpServletRequest request)throws Exception{
 		
 		HttpSession session = request.getSession();
 		MemberVO member = (MemberVO)session.getAttribute("login");
 		
-		RtResultAuctionListVO rt_result_actionListVO = service.resultList("RT_Auction_bff703e9e7f449cead2ad6f1d52ed6e4");
+		RtResultAuctionListVO rt_result_actionListVO = service.resultList(rt_acution_no);
 			
 		MemberVO memberVO = service.member_info(member.getMember_id());
 		
@@ -149,7 +150,17 @@ public class RtAuctionController {
 		
 		String rt_tender_finish_no = UUID.randomUUID().toString().replace("-", ""); // 실시간 경매 결제번호 생성
 		
-		vo.setRt_tender_finish_no(rt_tender_finish_no);
+		String rt_tender_no = rt_tender_finish_no.substring(0, 5);
+		
+		Calendar cal = Calendar.getInstance();
+		SimpleDateFormat time = new SimpleDateFormat("yyyyMMdd");
+		String date = time.format(cal.getTime());
+		System.out.println(date);
+		
+		
+		String rt_result_no = date+rt_tender_no; 
+		
+		vo.setRt_tender_finish_no(rt_result_no);
 		vo.setRecipient_address(HomeAddr);
 		vo.setRecipient_phone(PhoneNum);
 		vo.setRecipient_tel(HomeNum);
@@ -160,4 +171,6 @@ public class RtAuctionController {
 		
 		return "/rt_auction/rt_auctionfinish";
 	}
+	
+	
 }

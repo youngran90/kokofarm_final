@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import kokofarm.member.domain.MemberVO;
 import kokofarm.rtauction.domain.RtAcutionFinishVO;
+import kokofarm.rtauction.domain.RtAuctionFinishListVO;
 import kokofarm.rtauction.domain.RtAuctionInfoVO;
 import kokofarm.rtauction.domain.RtResultAuctionListVO;
 import kokofarm.rtauction.domain.RtResultAuctionVO;
@@ -45,6 +46,11 @@ public class RtAuctionDAOImpl implements RtAuctionDAO{
 	@Override
 	public void rt_auction_finish(RtAcutionFinishVO vo) throws Exception {
 		session.insert(namespace+".rt_auction_finish", vo);
+	}
+
+	@Override
+	public List<RtAuctionFinishListVO> rt_auction_finish_list(String member_id) throws Exception {
+		return session.selectList(namespace+".rt_auction_finish_list",member_id);
 	}
 	
 	

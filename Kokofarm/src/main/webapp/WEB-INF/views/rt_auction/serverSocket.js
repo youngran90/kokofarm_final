@@ -120,14 +120,10 @@ app.get('/', function(request, response) {
 	
 });
 
-
-
-
-
-var m = 120; //경매 대기 시간 카운트 (분)
+var m = 1; //경매 대기 시간 카운트 (분)
 var s = 0;  //경매 대기 시간 카운트 (초)
 
-var minute = 120 //경매 진행 시간 카운트 (분)
+var minute = 1 //경매 진행 시간 카운트 (분)
 var second = 0;//경매 진행 시간 카운트 (초)
 
 var wait = setInterval(function(){ //setInterval 일정시간마다 반복 실행하는 함수

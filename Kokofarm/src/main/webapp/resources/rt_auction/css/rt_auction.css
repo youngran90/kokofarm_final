@@ -260,7 +260,7 @@ body{
 }
 .auction_time_price {
 	position: absolute;
-	top : 20px;
+	top : 15px;
 	left: 45%;
 	height: 180px;
 	width: 35%;
