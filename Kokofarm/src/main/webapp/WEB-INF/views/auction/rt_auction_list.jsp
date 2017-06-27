@@ -108,7 +108,6 @@ function move_register(){
 
 
 //오전 타이머
-var	time = '${visitingTime}'
 	//alert("오전남은시간"+time);
 	
 	
@@ -313,303 +312,15 @@ var	time = '${visitingTime}'
             </div>
           </div>
         </div>
-        <h3 class="productblock-title" style="display: none;">Latest</h3>
-        <div class="row latest-grid product-grid" style="display: none;">
-          <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-grid-item">
-            <div class="product-thumb transition">
-              <div class="image product-imageblock">
-              <a href="#">
-              <img src="/resources/files/attach/${auctionbest2.auction_title_img }" alt="lorem ippsum dolor dummy" title="lorem ippsum dolor dummy" class="img-responsive" />
-              </a>
-              </div>
-              <div class="caption product-detail">
-                <h4 class="product-name">
-                <a href="#" title="lorem ippsum dolor dummy">Clothing</a>
-                </h4>
-                <p class="price product-price">$122.00<span class="price-tax">Ex Tax: $100.00</span></p>
-                <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-grid-item">
-            <div class="product-thumb transition">
-              <div class="image product-imageblock"><a href="#"><img src="image/product/2product50x59.jpg" alt="lorem ippsum dolor dummy" title="lorem ippsum dolor dummy" class="img-responsive" /></a>
-                <div class="button-group">
-                  <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List" ><i class="fa fa-heart-o"></i></button>
-                  <button type="button" class="addtocart-btn" >Add to Cart</button>
-                  <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product" ><i class="fa fa-exchange"></i></button>
-                </div>
-              </div>
-              <div class="caption product-detail">
-                <h4 class="product-name">
-                <a href="#" title="lorem ippsum dolor dummy">Clothing</a>
-                </h4>
-                <p class="price product-price">$122.00<span class="price-tax">Ex Tax: $100.00</span></p>
-                <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-grid-item">
-            <div class="product-thumb transition">
-              <div class="image product-imageblock"><a href="#"><img src="image/product/3product50x59.jpg" alt="lorem ippsum dolor dummy" title="lorem ippsum dolor dummy" class="img-responsive" /></a>
-                <div class="button-group">
-                  <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List" ><i class="fa fa-heart-o"></i></button>
-                  <button type="button" class="addtocart-btn" >Add to Cart</button>
-                  <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product" ><i class="fa fa-exchange"></i></button>
-                </div>
-              </div>
-              <div class="caption product-detail">
-                <h4 class="product-name">
-                <a href="#" title="lorem ippsum dolor dummy">Clothing</a>
-                </h4>
-                <p class="price product-price">$122.00<span class="price-tax">Ex Tax: $100.00</span></p>
-                <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-grid-item">
-            <div class="product-thumb transition">
-              <div class="image product-imageblock"><a href="#"><img src="image/product/2product50x59.jpg" alt="lorem ippsum dolor dummy" title="lorem ippsum dolor dummy" class="img-responsive" /></a>
-                <div class="button-group">
-                  <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List" ><i class="fa fa-heart-o"></i></button>
-                  <button type="button" class="addtocart-btn" >Add to Cart</button>
-                  <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product" ><i class="fa fa-exchange"></i></button>
-                </div>
-              </div>
-              <div class="caption product-detail">
-                <h4 class="product-name">
-                <a href="#" title="lorem ippsum dolor dummy">Clothing</a>
-                </h4>
-                <p class="price product-price">$122.00<span class="price-tax">Ex Tax: $100.00</span></p>
-                <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <h3 class="productblock-title" style="display: none;">Specials</h3>
-        <div class="row special-grid product-grid" style="display: none;">
-          <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-grid-item">
-            <div class="product-thumb transition">
-              <div class="image product-imageblock"> <a href="#"><img src="image/product/5product50x59.jpg" alt="women's clothing" title="women's clothing" class="img-responsive" /></a>
-              </div>
-              <div class="caption product-detail">
-                <h4 class="product-name"><a href="#" title="lorem ippsum dolor dummy">Clothing</a></h4>
-                <p class="price product-price"> <span class="price-new">$254.00</span> <span class="price-tax">Ex Tax: $210.00</span> </p>
-              </div>
-              <div class="button-group">
-                <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
-                <button type="button" class="addtocart-btn">Add to Cart</button>
-                <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product"><i class="fa fa-exchange"></i></button>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-grid-item">
-            <div class="product-thumb transition">
-              <div class="image product-imageblock"> <a href="#"><img src="image/product/6product50x59.jpg" alt="women's clothing" title="women's clothing" class="img-responsive" /></a>
-              </div>
-              <div class="caption product-detail">
-                <h4 class="product-name"><a href="#" title="lorem ippsum dolor dummy">Clothing</a></h4>
-                <p class="price product-price"> <span class="price-new">$254.00</span> <span class="price-tax">Ex Tax: $210.00</span> </p>
-              </div>
-              <div class="button-group">
-                <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
-                <button type="button" class="addtocart-btn">Add to Cart</button>
-                <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product"><i class="fa fa-exchange"></i></button>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-grid-item">
-            <div class="product-thumb transition">
-              <div class="image product-imageblock"> <a href="#"><img src="image/product/7product50x59.jpg" alt="women's clothing" title="women's clothing" class="img-responsive" /></a>
-              </div>
-              <div class="caption product-detail">
-                <h4 class="product-name"><a href="#" title="lorem ippsum dolor dummy">Clothing</a></h4>
-                <p class="price product-price"> <span class="price-new">$254.00</span> <span class="price-tax">Ex Tax: $210.00</span> </p>
-              </div>
-              <div class="button-group">
-                <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
-                <button type="button" class="addtocart-btn">Add to Cart</button>
-                <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product"><i class="fa fa-exchange"></i></button>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-grid-item">
-            <div class="product-thumb transition">
-              <div class="image product-imageblock"> <a href="#"><img src="image/product/6product50x59.jpg" alt="women's clothing" title="women's clothing" class="img-responsive" /></a>
-              </div>
-              <div class="caption product-detail">
-                <h4 class="product-name"><a href="#" title="lorem ippsum dolor dummy">Clothing</a></h4>
-                <p class="price product-price"> <span class="price-new">$254.00</span> <span class="price-tax">Ex Tax: $210.00</span> </p>
-              </div>
-              <div class="button-group">
-                <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
-                <button type="button" class="addtocart-btn">Add to Cart</button>
-                <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product"><i class="fa fa-exchange"></i></button>
-              </div>
-            </div>
-          </div>
-        </div>
+              
       </div>
     </div>
       <!-- LNB (Search) 시작 -->
-      <div class="panel panel-default filter" style="display: none;">
-        <div class="panel-heading columnblock-title">Refine Search</div>
-        <div class="filter-block">
-          <div class="list-group"> <a class="list-group-item">Color</a>
-            <div class="list-group-item">
-              <div id="filter-group1">
-                <label class="checkbox">
-                  <input name="filter[]" type="checkbox" value="1" />
-                  Black (7)</label>
-                <label class="checkbox">
-                  <input name="filter[]" type="checkbox" value="2" />
-                  Blue (6)</label>
-                <label class="checkbox">
-                  <input name="filter[]" type="checkbox" value="3" />
-                  Red (6)</label>
-              </div>
-            </div>
-            <a class="list-group-item">Price</a>
-            <div class="list-group-item">
-              <div id="filter-group2">
-                <label class="checkbox">
-                  <input name="filter[]" type="checkbox" value="4" />
-                  $100-$300 (6)</label>
-                <label class="checkbox">
-                  <input name="filter[]" type="checkbox" value="5" />
-                  $301-$1000 (6)</label>
-              </div>
-            </div>
-            <a class="list-group-item">Size</a>
-            <div class="list-group-item">
-              <div id="filter-group3">
-                <label class="checkbox">
-                  <input name="filter[]" type="checkbox" value="6" />
-                  Big (3)</label>
-                <label class="checkbox">
-                  <input name="filter[]" type="checkbox" value="7" />
-                  Medium (3)</label>
-                <label class="checkbox">
-                  <input name="filter[]" type="checkbox" value="8" />
-                  Small (1)</label>
-              </div>
-            </div>
-          </div>
-          <div class="panel-footer text-right">
-            <button type="button" id="button-filter" class="btn btn-primary">Refine Search</button>
-          </div>
-        </div>
-      </div>
+      
       <!-- LNB (Search) 끝 -->
       <!-- Special 시작 -->
-      <div class="banner" style="display: none;">
-        <div class="item"> <a href="#"><img src="image/banners/LeftBanner.jpg" alt="Left Banner" class="img-responsive" /></a> </div>
-      </div>
-      <h3 class="productblock-title" style="display: none;">Specials</h3>
-      <div class="row special-grid product-grid" style="display: none;">
-        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-grid-item">
-          <div class="product-thumb transition">
-            <div class="image product-imageblock"> <a href="#"><img src="image/product/5product50x59.jpg" alt="women's clothing" title="women's clothing" class="img-responsive" /></a>
-              <div class="button-group">
-                <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List" ><i class="fa fa-heart-o"></i></button>
-                <button type="button" class="addtocart-btn" >Add to Cart</button>
-                <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product" ><i class="fa fa-exchange"></i></button>
-              </div>
-            </div>
-            <div class="caption product-detail">
-              <h4 class="product-name"> <a href="product.html" title="women's clothing">Clothing</a> </h4>
-              <p class="price product-price"> <span class="price-new">$254.00</span><span class="price-tax">Ex Tax: $210.00</span> </p>
-            </div>
-            <div class="button-group">
-              <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List" ><i class="fa fa-heart-o"></i></button>
-              <button type="button" class="addtocart-btn" >Add to Cart</button>
-              <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product" ><i class="fa fa-exchange"></i></button>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-grid-item">
-          <div class="product-thumb transition">
-            <div class="image product-imageblock"> <a href="#"><img src="image/product/1product50x59.jpg" alt="women's clothing" title="women's clothing" class="img-responsive" /></a>
-              <div class="button-group">
-                <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List" ><i class="fa fa-heart-o"></i></button>
-                <button type="button" class="addtocart-btn" >Add to Cart</button>
-                <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product" ><i class="fa fa-exchange"></i></button>
-              </div>
-            </div>
-            <div class="caption product-detail">
-              <h4 class="product-name"> <a href="product.html" title="women's clothing">Clothing</a> </h4>
-              <p class="price product-price"> <span class="price-new">$254.00</span><span class="price-tax">Ex Tax: $210.00</span> </p>
-            </div>
-            <div class="button-group">
-              <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List" ><i class="fa fa-heart-o"></i></button>
-              <button type="button" class="addtocart-btn" >Add to Cart</button>
-              <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product" ><i class="fa fa-exchange"></i></button>
-            </div>
-          </div>
-        </div><div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-grid-item">
-          <div class="product-thumb transition">
-            <div class="image product-imageblock"> <a href="#"><img src="image/product/2product50x59.jpg" alt="women's clothing" title="women's clothing" class="img-responsive" /></a>
-              <div class="button-group">
-                <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List" ><i class="fa fa-heart-o"></i></button>
-                <button type="button" class="addtocart-btn" >Add to Cart</button>
-                <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product" ><i class="fa fa-exchange"></i></button>
-              </div>
-            </div>
-            <div class="caption product-detail">
-              <h4 class="product-name"> <a href="product.html" title="women's clothing">Clothing</a> </h4>
-              <p class="price product-price"> <span class="price-new">$254.00</span><span class="price-tax">Ex Tax: $210.00</span> </p>
-            </div>
-            <div class="button-group">
-              <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List" ><i class="fa fa-heart-o"></i></button>
-              <button type="button" class="addtocart-btn" >Add to Cart</button>
-              <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product" ><i class="fa fa-exchange"></i></button>
-            </div>
-          </div>
-        </div><div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-grid-item">
-          <div class="product-thumb transition">
-            <div class="image product-imageblock"> <a href="#"><img src="image/product/5product50x59.jpg" alt="women's clothing" title="women's clothing" class="img-responsive" /></a>
-              <div class="button-group">
-                <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List" ><i class="fa fa-heart-o"></i></button>
-                <button type="button" class="addtocart-btn" >Add to Cart</button>
-                <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product" ><i class="fa fa-exchange"></i></button>
-              </div>
-            </div>
-            <div class="caption product-detail">
-              <h4 class="product-name"> <a href="product.html" title="women's clothing">Clothing</a> </h4>
-              <p class="price product-price"> <span class="price-new">$254.00</span><span class="price-tax">Ex Tax: $210.00</span> </p>
-            </div>
-            <div class="button-group">
-              <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List" ><i class="fa fa-heart-o"></i></button>
-              <button type="button" class="addtocart-btn" >Add to Cart</button>
-              <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product" ><i class="fa fa-exchange"></i></button>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-grid-item">
-          <div class="product-thumb transition">
-            <div class="image product-imageblock"> <a href="#"><img src="image/product/4product50x59.jpg" alt="women's clothing" title="women's clothing" class="img-responsive" /></a>
-              <div class="button-group">
-                <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List" ><i class="fa fa-heart-o"></i></button>
-                <button type="button" class="addtocart-btn" >Add to Cart</button>
-                <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product" ><i class="fa fa-exchange"></i></button>
-              </div>
-            </div>
-            <div class="caption product-detail">
-              <h4 class="product-name"> <a href="product.html" title="women's clothing">Clothing</a> </h4>
-              <p class="price product-price"> <span class="price-new">$254.00</span><span class="price-tax">Ex Tax: $210.00</span> </p>
-            </div>
-            <div class="button-group">
-              <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List" ><i class="fa fa-heart-o"></i></button>
-              <button type="button" class="addtocart-btn" >Add to Cart</button>
-              <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product" ><i class="fa fa-exchange"></i></button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Special 끝 -->
-    <!-- 리스트 시작 -->
-    <div id="content" class="col-sm-9" style="position: relative; left:235px; bottom: 1196px;">
+      
+      <div id="content" class="col-sm-9">
       <h2 class="category-title" style="font-weight: bold; position: relative; top: 1px;">실시간 경매</h2>
       <input type="button" id="register_button" value="상품등록" onclick="move_register()" style="position: relative; top:-605px; left: 835px;">
       <!-- <div class="row category-banner">
@@ -734,6 +445,20 @@ var	time = '${visitingTime}'
     </div>
   </div>
 </div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </div>
+    <!-- Special 끝 -->
+    <!-- 리스트 시작 -->
+    
 </div>
 </div>
 <%@include file="../include/footer.jsp"%>
