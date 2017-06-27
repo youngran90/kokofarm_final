@@ -1,6 +1,7 @@
 package kokofarm.cart.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 import javax.inject.Inject;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import kokofarm.cart.domain.CartVO;
 import kokofarm.cart.service.CartService;
 import kokofarm.member.domain.MemberVO;
+import kokofarm.orderproduct.domain.OrderProductListVO;
 import kokofarm.orderproduct.domain.OrderProductVO;
 import kokofarm.orderproduct.service.OrderProductService;
 
@@ -57,7 +59,7 @@ public class CartController {
 			@RequestParam("product_no") String product_no,
 			Model model, HttpServletRequest request) throws Exception{
 		
-	HttpSession session = request.getSession();
+		HttpSession session = request.getSession();
 		MemberVO member = (MemberVO)session.getAttribute("login");
 
 		if(member == null){
@@ -76,10 +78,23 @@ public class CartController {
 	}
 	
 	@RequestMapping(value="/delete", method=RequestMethod.GET)
-	public String deleteGet(@RequestParam("product_no") String product_no) throws Exception{
+	public String deleteGet(@RequestParam("product_no") String product_no,HttpServletRequest request) throws Exception{
+		
+		HttpSession session = request.getSession();
+		MemberVO member = (MemberVO)session.getAttribute("login");
+
+		List<OrderProductListVO> list = op_service.order_list(member.getMember_id());
+		
+		for(int i=0; i<list.size(); i++){
+			if(list.get(i).getProduct_no().equals(product_no)){
+				op_service.delete(product_no);
+				service.cart_delete(product_no);
+			}
+		}
 		service.cart_delete(product_no);
 		return "redirect:/cart/cart";
 	}
+	
 	
 	@RequestMapping(value="/deleteall" ,method=RequestMethod.GET)
 	public String deleteallGET(@RequestParam("data[]") String[] product_no) throws Exception{
@@ -87,11 +102,14 @@ public class CartController {
 		
 		for(int i=0; i<product_no.length; i++){
 			map.put("product_no", product_no[i]);
-			service.cart_delte_all(map);
+			op_service.orderproduct_delete_all(map);
+			service.cart_delete_all(map);
 		}
 		
 		return "redirect:/cart/cart";
 	}
+	
+	
 	
 	@RequestMapping(value="/orderproduct", method=RequestMethod.POST)
 	public String orderproductPost(@RequestParam("product_no") String[] product_no,

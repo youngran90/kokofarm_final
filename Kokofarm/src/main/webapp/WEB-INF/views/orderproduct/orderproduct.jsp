@@ -181,7 +181,7 @@ $(function(){
 							</tr>
 						</thead>
 						<c:forEach var="order_list" items="${order_list }" varStatus="status">
-							<em class="${status.count}p_amount" id="p_amount" style="display: none;">${order_list.product_total}개&nbsp;</em>
+							<em class="${status.count}p_amount" id="p_amount" style="display: none;">${order_list.product_total}&nbsp;</em>
 							<td style="display: none;"><input type="checkbox" id="${status.count }ac" name="product_no"	value="${order_list.product_no }">${order_list.product_no } 제품번호</td>
 							<td style="display: none;"><input type="checkbox" id="dp" name="order_delivery_price" value="${order_list.order_delivery_price}" class="${status.count }dp">${order_list.order_delivery_price}배송비</td>	<!-- 배송비 값 submit -->
 							<td style="display: none;"><input type="checkbox" id="order_product_amount" name="order_product_amount" value="${order_list.order_product_amount }" class="${status.count}opa">${order_list.order_product_amount }수량</td>

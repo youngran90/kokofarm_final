@@ -41,7 +41,7 @@ public class MileageServiceImpl implements MileageService {
 				dao.insert_mileage(vo); //마일리지 테이블에 더한다.
 				
 				milage_update(mileage_total, vo.getMember_id()); // 회원 마일리지에 변동사항을 업데이트 해준다.
-				update(mileage_total, vo.getMember_id()); // 마일리지테이블 현재 마일리지 컬럼도 업에트 해준다. 
+			//	update(mileage_total, vo.getMember_id()); // 마일리지테이블 현재 마일리지 컬럼도 업에트 해준다. 
 			}
 		}else{ // 사용하는 마일리지가 있다면.. 적립 안됨.
 			int current = mileage_current(vo.getMember_id()); //현재 마일리지 
@@ -53,7 +53,7 @@ public class MileageServiceImpl implements MileageService {
 			dao.insert_mileage(vo); //마일리지 테이블에 더한다.
 			
 			milage_update(c_mileage, vo.getMember_id()); // 회원 마일리지에 변동사항을 업데이트 해준다.
-			update(c_mileage, vo.getMember_id()); // 마일리지테이블 현재 마일리지 컬럼도 업에트 해준다. 
+		//	update(c_mileage, vo.getMember_id()); // 마일리지테이블 현재 마일리지 컬럼도 업에트 해준다. 
 			
 		}
 	}
@@ -73,10 +73,10 @@ public class MileageServiceImpl implements MileageService {
 		dao.milage_update(mileage_total, member_id);
 	}
 
-	@Override
+	/*@Override
 	public void update(int mileage_current, String member_id) throws Exception {
 		dao.update(mileage_current, member_id);
-	}
+	}*/
 
 	@Override
 	public List<MileageListVO> mileage_view(String member_id,PagingMaker pagingMaker) throws Exception {

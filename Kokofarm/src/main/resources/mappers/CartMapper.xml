@@ -27,7 +27,7 @@
 	</delete> 
 	
 	 
-	<delete id="cart_delte_all">
+	<delete id="cart_delete_all">
 		delete from cart where product_no = #{product_no}
 	</delete>
 	

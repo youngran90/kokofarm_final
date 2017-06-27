@@ -13,7 +13,7 @@ public interface CartService {
 
 	public void cart_delete(String product_no) throws Exception;
 
-	public void cart_delte_all(HashMap<String, String> product_no) throws Exception;
+	public void cart_delete_all(HashMap<String, String> product_no) throws Exception;
 
 	public void cart_update(CartVO vo) throws Exception;
 

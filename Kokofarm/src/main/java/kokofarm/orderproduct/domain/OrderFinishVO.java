@@ -6,7 +6,9 @@ import java.sql.Timestamp;
 public class OrderFinishVO implements Serializable {
 
 	private String orderfinish_no;
-
+	private String payment_no;
+	private String mileage_no;
+	
 	private String orderfinish_product_no;
 	private String orderfinish_product_name;
 	private int orderfinish_product_amount;
@@ -30,14 +32,16 @@ public class OrderFinishVO implements Serializable {
 	public OrderFinishVO() {
 	}
 
-	public OrderFinishVO(String orderfinish_no, String orderfinish_product_no, String orderfinish_product_name,
-			int orderfinish_product_amount, int orderfinish_product_price, int orderfinish_delivery_price,
-			int orderfinish_total_price, int orderfinish_final_price, String orderfinish_member_id,
-			String orderfinish_member_name, String orderfinish_member_phonenum, String orderfinish_member_homenum,
-			String orderfinish_member_address, String orderfinish_message, Timestamp orderfinish_date,
-			String product_mainimage) {
+	public OrderFinishVO(String orderfinish_no, String payment_no, String mileage_no, String orderfinish_product_no,
+			String orderfinish_product_name, int orderfinish_product_amount, int orderfinish_product_price,
+			int orderfinish_delivery_price, int orderfinish_total_price, int orderfinish_final_price,
+			String orderfinish_member_id, String orderfinish_member_name, String orderfinish_member_phonenum,
+			String orderfinish_member_homenum, String orderfinish_member_address, String orderfinish_message,
+			Timestamp orderfinish_date, String product_mainimage) {
 		super();
 		this.orderfinish_no = orderfinish_no;
+		this.payment_no = payment_no;
+		this.mileage_no = mileage_no;
 		this.orderfinish_product_no = orderfinish_product_no;
 		this.orderfinish_product_name = orderfinish_product_name;
 		this.orderfinish_product_amount = orderfinish_product_amount;
@@ -61,6 +65,22 @@ public class OrderFinishVO implements Serializable {
 
 	public void setOrderfinish_no(String orderfinish_no) {
 		this.orderfinish_no = orderfinish_no;
+	}
+
+	public String getPayment_no() {
+		return payment_no;
+	}
+
+	public void setPayment_no(String payment_no) {
+		this.payment_no = payment_no;
+	}
+
+	public String getMileage_no() {
+		return mileage_no;
+	}
+
+	public void setMileage_no(String mileage_no) {
+		this.mileage_no = mileage_no;
 	}
 
 	public String getOrderfinish_product_no() {
@@ -185,16 +205,18 @@ public class OrderFinishVO implements Serializable {
 
 	@Override
 	public String toString() {
-		return "OrderFinishVO [orderfinish_no=" + orderfinish_no + ", orderfinish_product_no=" + orderfinish_product_no
-				+ ", orderfinish_product_name=" + orderfinish_product_name + ", orderfinish_product_amount="
-				+ orderfinish_product_amount + ", orderfinish_product_price=" + orderfinish_product_price
-				+ ", orderfinish_delivery_price=" + orderfinish_delivery_price + ", orderfinish_total_price="
-				+ orderfinish_total_price + ", orderfinish_final_price=" + orderfinish_final_price
-				+ ", orderfinish_member_id=" + orderfinish_member_id + ", orderfinish_member_name="
-				+ orderfinish_member_name + ", orderfinish_member_phonenum=" + orderfinish_member_phonenum
-				+ ", orderfinish_member_homenum=" + orderfinish_member_homenum + ", orderfinish_member_address="
-				+ orderfinish_member_address + ", orderfinish_message=" + orderfinish_message + ", orderfinish_date="
-				+ orderfinish_date + ", product_mainimage=" + product_mainimage + "]";
+		return "OrderFinishVO [orderfinish_no=" + orderfinish_no + ", payment_no=" + payment_no + ", mileage_no="
+				+ mileage_no + ", orderfinish_product_no=" + orderfinish_product_no + ", orderfinish_product_name="
+				+ orderfinish_product_name + ", orderfinish_product_amount=" + orderfinish_product_amount
+				+ ", orderfinish_product_price=" + orderfinish_product_price + ", orderfinish_delivery_price="
+				+ orderfinish_delivery_price + ", orderfinish_total_price=" + orderfinish_total_price
+				+ ", orderfinish_final_price=" + orderfinish_final_price + ", orderfinish_member_id="
+				+ orderfinish_member_id + ", orderfinish_member_name=" + orderfinish_member_name
+				+ ", orderfinish_member_phonenum=" + orderfinish_member_phonenum + ", orderfinish_member_homenum="
+				+ orderfinish_member_homenum + ", orderfinish_member_address=" + orderfinish_member_address
+				+ ", orderfinish_message=" + orderfinish_message + ", orderfinish_date=" + orderfinish_date
+				+ ", product_mainimage=" + product_mainimage + "]";
 	}
 
+	
 }

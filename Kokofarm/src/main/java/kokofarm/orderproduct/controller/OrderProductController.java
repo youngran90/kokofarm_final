@@ -97,9 +97,13 @@ public class OrderProductController {
 		String HomeAddr = addr.getRecipientpost() + addr.getAddress() + addr.getAddress_sub();
 		
 		String orderfinish_no = UUID.randomUUID().toString().replace("-", "");
+		String payment_no = UUID.randomUUID().toString().replace("-", "");
+		String mileage_no = UUID.randomUUID().toString().replace("-", "");
 		
 		for(int i=0; i<product_info.getProduct_no().length; i++){
 			vo.setOrderfinish_no(orderfinish_no);
+			vo.setMileage_no(mileage_no);
+			vo.setPayment_no(payment_no);
 			
 			vo.setOrderfinish_product_no(product_info.getProduct_no()[i]);
 			vo.setOrderfinish_product_name(product_info.getOrderfinish_product_name()[i]);
@@ -120,8 +124,6 @@ public class OrderProductController {
 		
 		
 		//결제 방법 
-		String payment_no = UUID.randomUUID().toString().replace("-", "");
-		
 		if(payment_info.getPay().equals("신용카드")){
 			payment_info.setPay_bank("none");
 			payment_info.setDeposit_name("none");
@@ -140,23 +142,17 @@ public class OrderProductController {
 			payment_info.setPay_month("none");
 		}
 		
-		payment_info.setOrderfinish_no(orderfinish_no);
+		//payment_info.setOrderfinish_no(orderfinish_no);
 		payment_info.setPayment_no(payment_no);
-		payment_info.setMember_id(member.getMember_id());
 		service.payment_insert(payment_info);
 		
-		//마일리지
-		String mileage_no = UUID.randomUUID().toString().replace("-", "");
 		
+		//마일리지
 		vo1.setOrderfinish_no(orderfinish_no);
 		vo1.setMember_id(member.getMember_id());
 		vo1.setMileage_no(mileage_no);
 		
 		m_service.insert_mileage(vo1);
-		
-		System.out.println(vo.toString());
-		System.out.println(payment_info.toString());
-		System.out.println(vo1.toString());
 		
 		return "orderproduct/orderfinish";	
 	}
@@ -262,6 +258,9 @@ public class OrderProductController {
 			@RequestParam("start_date") String start, @RequestParam("end_date") String end) throws Exception{
 		
 		
+		start = start.replace("-", "");
+		end = end.replace("-", "");
+		
 		MemberVO member = (MemberVO)request.getSession().getAttribute("login");
 		String member_id = member.getMember_id();
 		
@@ -297,7 +296,8 @@ public class OrderProductController {
 		System.out.println(list.toString());
 		int sum = 0; //배달비
 		int total =0; // 제품 가격
-		int finish = 0; // 배달비 + 제품가격
+		int sum_total = 0; //배달비 + 제품가격
+		int finish = 0; // (배달비 + 제품가격) - 할인가격
 		String phonenumber = null;
 		
 		for(int i=0; i<list.size(); i++){
@@ -315,9 +315,14 @@ public class OrderProductController {
 			model.addAttribute("delivery",sum);
 			
 			model.addAttribute("finish",list.get(i).getOrderfinish_final_price());
+			
+			
 		}
+		sum_total = total + sum;
+		model.addAttribute("sum_total",sum_total);
 		
 		for(int i=0; i<pay.size(); i++){
+			System.out.println(pay.get(i));
 			model.addAttribute("payment",pay.get(i));
 		}
 		

@@ -7,10 +7,9 @@
 	<insert id="insert_mileage" parameterType="MileageVO">
 		insert into mileage
 		(
-			mileage_no, mileage_use, mileage_saving, mileage_total, mileage_member_id, mileage_date, orderfinish_no, mileage_current
+			mileage_no, mileage_use, mileage_saving, mileage_total, mileage_member_id, mileage_date, orderfinish_no
 		) values ( 
-			#{mileage_no}, #{mileage_use}, #{mileage_saving}, #{mileage_total}, #{member_id}, sysdate, #{orderfinish_no}, 
-			(select member_point from member where member_id = #{member_id})
+			#{mileage_no}, #{mileage_use}, #{mileage_saving}, #{mileage_total}, #{member_id}, sysdate, #{orderfinish_no}
 		)
 	</insert>
 	
@@ -18,20 +17,17 @@
 		select member_point from member where member_id = #{member_id}
 	</select>
 
-	<update id="milage_update">
+	<update id="milage_update" parameterType="java.util.HashMap">
 		update member set member_point = #{member_point} where member_id = #{member_id}
-	</update>
-	
-	<update id="update">
-		update mileage set mileage_current = #{mileage_current} where mileage_member_id = #{mileage_member_id}
 	</update>
 	
 	<select id="mileage_view" resultType="MileageListVO" parameterType="java.util.HashMap">
 		SELECT * FROM (SELECT ROWNUM AS RNUM,a.* FROM(
-			select orderfinish_no, mileage_use, mileage_saving, mileage_total, mileage_date 
-		from mileage
-		where mileage_member_id = #{member_id}
-		order by mileage_date desc
+		select DISTINCT o.orderfinish_no, m.mileage_use, m.mileage_saving, m.mileage_total, m.mileage_date 
+		from mileage m, order_finish o
+		where m.mileage_no = o.mileage_no 
+		and m.mileage_member_id = #{member_id}
+		order by m.mileage_date desc
 					) a
 			where ROWNUM <![CDATA[<=]]> #{PagingMaker.end})
 				where RNUM <![CDATA[>=]]> #{PagingMaker.start}
@@ -39,11 +35,12 @@
 	
 	<select id="mileage_search_view" resultType="MileageListVO" parameterType="java.util.HashMap">
 		SELECT * FROM (SELECT ROWNUM AS RNUM,a.* FROM(
-			select orderfinish_no, mileage_use, mileage_saving, mileage_total, mileage_date 
-		from mileage
-		where mileage_member_id = #{member_id}
-		and mileage_date between to_date(#{start_time}) and to_date(#{end_time})
-		order by mileage_date desc
+		select DISTINCT o.orderfinish_no, m.mileage_use, m.mileage_saving, m.mileage_total, m.mileage_date 
+		from mileage m, order_finish o
+		where m.mileage_no = o.mileage_no
+		and m.mileage_member_id = #{member_id}
+		and to_char(mileage_date,'YYYYMMDD') between to_char(#{start_time}) and to_char(#{end_time})
+		order by m.mileage_date desc
 					) a
 			where ROWNUM <![CDATA[<=]]> #{PagingMaker.end})
 				where RNUM <![CDATA[>=]]> #{PagingMaker.start}
@@ -56,12 +53,12 @@
 	</select>
 	
 	<select id="mileage_search_count" resultType="int" parameterType="java.util.HashMap">
-		select count(*) from mileage where mileage_member_id = #{member_id} and mileage_date between to_date(#{start_time}) and to_date(#{end_time})
+		select count(*) from mileage where mileage_member_id = #{member_id} and to_char(mileage_date,'YYYYMMDD') between to_date(#{start_time}) and to_date(#{end_time})
 	</select>
 	
-	<select id="dateAsc"> <!-- 오름차순... 작은거 부터.... -->
+	<!-- <select id="dateAsc"> 오름차순... 작은거 부터....
 		select mileage_date from mileage where mileage_member_id = #{mileage_member_id} order by mileage_date asc
-	</select>
+	</select> -->
 	
 	<select id="orderproduct_detail" resultType="OrderFinish_DetailVO">
 		select o.orderfinish_no, o.orderfinish_product_name, o.orderfinish_product_amount, o.orderfinish_delivery_price,
@@ -75,7 +72,9 @@
 	</select>
 	
 	<select id="detail_payment" resultType="String">
-		select DISTINCT pay from payment where orderfinish_no = #{orderfinish_no}
+		<!-- select DISTINCT pay from payment where payment_no = #{payment_no} -->
+		select DISTINCT p.pay from payment p, order_finish o 
+		where p.payment_no = o.payment_no and o.orderfinish_no = #{orderfinish_no}
 	</select>
 	
 	<select id="detail_mileage" resultType="Integer">

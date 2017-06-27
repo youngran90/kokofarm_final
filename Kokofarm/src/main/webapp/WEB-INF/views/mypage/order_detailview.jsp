@@ -81,10 +81,12 @@
 				<span id="payment">${payment}</span>
 			</div>
 			<div class="price_info">
-				<strong>총상품가격</strong>
+				<strong>총 상품가격</strong>
 				<strong id="pay_t"><fmt:formatNumber value="${total}" type="number"/>원</strong><br>
 				<strong>배송비</strong>
 				<strong id="pay_d"><fmt:formatNumber value="${delivery}" type="number"/>원</strong><br>
+				<strong>총 상품가격 + 배송비</strong>
+				<strong id="pay_t+d"><fmt:formatNumber value="${sum_total}" type="number"/>원</strong><br>
 				<strong>할인내역</strong>
 				<strong id="pay_m"><fmt:formatNumber value="${mileage}" type="number"/>원</strong><br>
 				<strong>총가격</strong>

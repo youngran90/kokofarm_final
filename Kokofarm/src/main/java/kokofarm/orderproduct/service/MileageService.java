@@ -16,7 +16,7 @@ public interface MileageService {
 	
 	public void milage_update(int mileage_total, String member_id) throws Exception;
 	
-	public void update(int mileage_current, String member_id) throws Exception;
+	//public void update(int mileage_current, String member_id) throws Exception;
 	
 	public List<MileageListVO> mileage_view(String member_id, PagingMaker pagingMaker) throws Exception;
 	

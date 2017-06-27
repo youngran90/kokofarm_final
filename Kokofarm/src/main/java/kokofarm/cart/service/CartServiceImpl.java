@@ -56,8 +56,8 @@ public class CartServiceImpl implements CartService{
 	}
 	
 	@Override
-	public void cart_delte_all(HashMap<String, String> product_no) throws Exception {
-		dao.cart_delte_all(product_no);
+	public void cart_delete_all(HashMap<String, String> product_no) throws Exception {
+		dao.cart_delete_all(product_no);
 	}
 
 

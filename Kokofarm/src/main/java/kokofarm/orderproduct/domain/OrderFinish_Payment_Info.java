@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class OrderFinish_Payment_Info {
 
-	private String orderfinish_no;
+	//private String orderfinish_no;
 	private String payment_no;// 결제번호
 	private String pay; // 결제 방법
 	private String creditcard_name;// 신용카드 이름
@@ -13,15 +13,13 @@ public class OrderFinish_Payment_Info {
 	private String pay_bank; // 계좌이체일경우-은행, 나머지는 null
 	private String deposit_name; // 계좌이체일경우-입금자명, 나머지는 null
 	private Timestamp payment_date; // 결제 일
-	private String member_id;
 
 	public OrderFinish_Payment_Info() {
 	}
 
-	public OrderFinish_Payment_Info(String orderfinish_no, String payment_no, String pay, String creditcard_name,
-			String pay_month, String pay_bank, String deposit_name, Timestamp payment_date, String member_id) {
+	public OrderFinish_Payment_Info(String payment_no, String pay, String creditcard_name, String pay_month,
+			String pay_bank, String deposit_name, Timestamp payment_date) {
 		super();
-		this.orderfinish_no = orderfinish_no;
 		this.payment_no = payment_no;
 		this.pay = pay;
 		this.creditcard_name = creditcard_name;
@@ -29,15 +27,6 @@ public class OrderFinish_Payment_Info {
 		this.pay_bank = pay_bank;
 		this.deposit_name = deposit_name;
 		this.payment_date = payment_date;
-		this.member_id = member_id;
-	}
-
-	public String getOrderfinish_no() {
-		return orderfinish_no;
-	}
-
-	public void setOrderfinish_no(String orderfinish_no) {
-		this.orderfinish_no = orderfinish_no;
 	}
 
 	public String getPayment_no() {
@@ -96,20 +85,16 @@ public class OrderFinish_Payment_Info {
 		this.payment_date = payment_date;
 	}
 
-	public String getMember_id() {
-		return member_id;
-	}
-
-	public void setMember_id(String member_id) {
-		this.member_id = member_id;
-	}
-
 	@Override
 	public String toString() {
-		return "OrderFinish_Payment_Info [orderfinish_no=" + orderfinish_no + ", payment_no=" + payment_no + ", pay="
-				+ pay + ", creditcard_name=" + creditcard_name + ", pay_month=" + pay_month + ", pay_bank=" + pay_bank
-				+ ", deposit_name=" + deposit_name + ", payment_date=" + payment_date + ", member_id=" + member_id
-				+ "]";
+		return "OrderFinish_Payment_Info [payment_no=" + payment_no + ", pay=" + pay + ", creditcard_name="
+				+ creditcard_name + ", pay_month=" + pay_month + ", pay_bank=" + pay_bank + ", deposit_name="
+				+ deposit_name + ", payment_date=" + payment_date + "]";
 	}
+	
+	
+
+
+	
 
 }

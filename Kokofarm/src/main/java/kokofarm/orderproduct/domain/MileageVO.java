@@ -5,29 +5,35 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 public class MileageVO implements Serializable {
+	private String orderfinish_no;
 	private String member_id;
 	private String mileage_no;
 	private int mileage_use;
 	private int mileage_saving;
 	private int mileage_total;
 	private Timestamp mileage_date;
-	private String orderfinish_no;
-	private int mileage_current;
 
 	public MileageVO() {
 	}
 
-	public MileageVO(String member_id, String mileage_no, int mileage_use, int mileage_saving, int mileage_total,
-			Timestamp mileage_date, String orderfinish_no, int mileage_current) {
+	public MileageVO(String orderfinish_no, String member_id, String mileage_no, int mileage_use, int mileage_saving,
+			int mileage_total, Timestamp mileage_date) {
 		super();
+		this.orderfinish_no = orderfinish_no;
 		this.member_id = member_id;
 		this.mileage_no = mileage_no;
 		this.mileage_use = mileage_use;
 		this.mileage_saving = mileage_saving;
 		this.mileage_total = mileage_total;
 		this.mileage_date = mileage_date;
+	}
+
+	public String getOrderfinish_no() {
+		return orderfinish_no;
+	}
+
+	public void setOrderfinish_no(String orderfinish_no) {
 		this.orderfinish_no = orderfinish_no;
-		this.mileage_current = mileage_current;
 	}
 
 	public String getMember_id() {
@@ -78,27 +84,11 @@ public class MileageVO implements Serializable {
 		this.mileage_date = mileage_date;
 	}
 
-	public String getOrderfinish_no() {
-		return orderfinish_no;
-	}
-
-	public void setOrderfinish_no(String orderfinish_no) {
-		this.orderfinish_no = orderfinish_no;
-	}
-
-	public int getMileage_current() {
-		return mileage_current;
-	}
-
-	public void setMileage_current(int mileage_current) {
-		this.mileage_current = mileage_current;
-	}
-
 	@Override
 	public String toString() {
-		return "MileageVO [member_id=" + member_id + ", mileage_no=" + mileage_no + ", mileage_use=" + mileage_use
-				+ ", mileage_saving=" + mileage_saving + ", mileage_total=" + mileage_total + ", mileage_date="
-				+ mileage_date + ", orderfinish_no=" + orderfinish_no + ", mileage_current=" + mileage_current + "]";
+		return "MileageVO [orderfinish_no=" + orderfinish_no + ", member_id=" + member_id + ", mileage_no=" + mileage_no
+				+ ", mileage_use=" + mileage_use + ", mileage_saving=" + mileage_saving + ", mileage_total="
+				+ mileage_total + ", mileage_date=" + mileage_date + "]";
 	}
 
 }

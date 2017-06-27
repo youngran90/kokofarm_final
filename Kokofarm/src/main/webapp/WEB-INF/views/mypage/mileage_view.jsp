@@ -104,7 +104,7 @@ $(function(){
 		$(this).on('click',function(e){
 			e.preventDefault();
 			
-			window.open('/orderproduct/order_detailview?order_finish_no='+$(this).val(), "주문 내역 상세", "width=800, height=800");
+			window.open('/orderproduct/order_detailview?order_finish_no='+$(this).val(), "주문 내역 상세", "width=800, height=700");
 			
 		});
 	});

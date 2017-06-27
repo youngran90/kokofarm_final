@@ -1,5 +1,6 @@
 package kokofarm.orderproduct.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import kokofarm.member.domain.MemberVO;
@@ -26,5 +27,7 @@ public interface OrderProductService {
 	public List<String> orderfinish_no(String orderfinish_no) throws Exception;
 	
 	public void delete(String product_no) throws Exception;
+	
+	public void orderproduct_delete_all(HashMap<String, String> product_no) throws Exception;
 
 }

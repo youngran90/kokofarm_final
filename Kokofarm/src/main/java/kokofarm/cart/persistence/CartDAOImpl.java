@@ -36,8 +36,8 @@ public class CartDAOImpl implements CartDAO{
 	}
 
 	@Override
-	public void cart_delte_all(HashMap<String, String> product_no) throws Exception {
-		session.delete(namespace+".cart_delte_all",product_no);
+	public void cart_delete_all(HashMap<String, String> product_no) throws Exception {
+		session.delete(namespace+".cart_delete_all",product_no);
 	}
 
 	@Override

@@ -24,6 +24,10 @@
 		delete from orderproduct where product_no = #{product_no}
 	</delete>
 	
+	<delete id="orderproduct_delete_all">
+		delete from orderproduct where product_no = #{product_no}
+	</delete>
+	
 	<update id="order_update" parameterType="OrderProductVO">
 		update orderproduct set order_product_amount = order_product_amount + #{order_product_amount}, order_total_price = order_total_price + #{order_total_price},
 		order_delivery_price = #{order_delivery_price}
@@ -36,12 +40,12 @@
 	
 	<insert id="orderfinish_insert" parameterType="OrderFinishVO">
 		insert into order_finish(
-			orderfinish_no, orderfinish_product_no, orderfinish_product_name,
+			orderfinish_no,payment_no, mileage_no, orderfinish_product_no, orderfinish_product_name,
 			orderfinish_product_amount,	orderfinish_product_price, orderfinish_delivery_price,
 			orderfinish_total_price, orderfinish_member_id, orderfinish_member_name,
 			orderfinish_member_phonenum, orderfinish_member_homenum, orderfinish_member_address, orderfinish_message, orderfinish_date, orderfinish_final_price
 		)values(
-			#{orderfinish_no}, #{orderfinish_product_no}, #{orderfinish_product_name},
+			#{orderfinish_no},#{payment_no},#{mileage_no}, #{orderfinish_product_no}, #{orderfinish_product_name},
 			#{orderfinish_product_amount}, #{orderfinish_product_price}, #{orderfinish_delivery_price},
 			#{orderfinish_total_price}, #{orderfinish_member_id}, #{orderfinish_member_name},
 			#{orderfinish_member_phonenum}, #{orderfinish_member_homenum}, #{orderfinish_member_address},
@@ -51,15 +55,15 @@
 	
 	<insert id="payment_insert" parameterType="OrderFinish_Payment_Info">
 		insert into payment(
-			payment_no, pay, creditcard_name, pay_month, pay_bank, deposit_name, payment_date, member_id, orderfinish_no
+			payment_no, pay, creditcard_name, pay_month, pay_bank, deposit_name, payment_date
 		)values(
-			#{payment_no}, #{pay}, #{creditcard_name}, #{pay_month}, #{pay_bank}, #{deposit_name}, sysdate, #{member_id},#{orderfinish_no}
+			#{payment_no}, #{pay}, #{creditcard_name}, #{pay_month}, #{pay_bank}, #{deposit_name}, sysdate
 		)
 	</insert>
 	
 	<select id="total_price" resultType="Integer" >
-		select distinct o.orderfinish_final_price from payment p, order_finish o
- 		 where p.orderfinish_no = o.orderfinish_no 
+  		select distinct o.orderfinish_final_price from order_finish o, payment p
+   		where p.payment_no = o.payment_no
   		and o.orderfinish_no = #{orderfinish_no}
 	</select><!-- 최종금액 뽑아내는 쿼리문 -->
 	

@@ -19,6 +19,7 @@ var product_n;
 var down;
 var content;
 var area;
+var unit;
 var rt_auction_no;
 
 app.get('/rt_auction',function (req,res){     
@@ -65,7 +66,7 @@ app.get('/btn_img02',function (req,res){
 
 app.get('/img',function (req,res){     
     var filename = img;
-    var dir = 'C:\\Users\\김Jason\\Desktop\\Kosta\\spring_work\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Kokofarm\\resources\\files\\attach'+filename;
+    var dir = 'C:\\Users\\김Jason\\Desktop\\Kosta\\spring_work\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Kokofarm\\resources\\files\\attach\\'+filename;
     fs.exists(dir, function (exists) {
         if (exists) {
             fs.readFile(dir, function (err,data){
@@ -78,7 +79,7 @@ app.get('/img',function (req,res){
 });
 app.get('/img01',function (req,res){     
     var filename = img01;
-    var dir = 'C:\\Users\\김Jason\\Desktop\\Kosta\\spring_work\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Kokofarm\\resources\\files\\attach'+filename;
+    var dir = 'C:\\Users\\김Jason\\Desktop\\Kosta\\spring_work\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Kokofarm\\resources\\files\\attach\\'+filename;
     fs.exists(dir, function (exists) {
         if (exists) {
             fs.readFile(dir, function (err,data){
@@ -91,7 +92,7 @@ app.get('/img01',function (req,res){
 });
 app.get('/img02',function (req,res){     
     var filename = img02;
-    var dir = 'C:\\Users\\김Jason\\Desktop\\Kosta\\spring_work\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Kokofarm\\resources\\files\\attach'+filename;
+    var dir = 'C:\\Users\\김Jason\\Desktop\\Kosta\\spring_work\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Kokofarm\\resources\\files\\attach\\'+filename;
     fs.exists(dir, function (exists) {
         if (exists) {
             fs.readFile(dir, function (err,data){
@@ -116,7 +117,12 @@ app.get('/', function(request, response) {
 	seller_no =request.param("seller_no");
 	rt_auction_no = request.param("rt_auction_no");
 	response.sendfile(__dirname + '/rt_auction.html');
+	
 });
+
+
+
+
 
 var m = 120; //경매 대기 시간 카운트 (분)
 var s = 0;  //경매 대기 시간 카운트 (초)

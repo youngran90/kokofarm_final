@@ -1,5 +1,6 @@
 package kokofarm.orderproduct.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -109,6 +110,11 @@ public class OrderProductServiceImpl implements OrderProductService {
 	@Override
 	public void delete(String product_no) throws Exception {
 		dao.delete(product_no);
+	}
+
+	@Override
+	public void orderproduct_delete_all(HashMap<String, String> product_no) throws Exception {
+		dao.orderproduct_delete_all(product_no);
 	}
 
 	

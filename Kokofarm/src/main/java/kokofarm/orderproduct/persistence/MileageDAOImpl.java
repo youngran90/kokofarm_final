@@ -34,6 +34,7 @@ public class MileageDAOImpl implements MileageDAO {
 
 	@Override
 	public void milage_update(int mileage_total, String member_id) throws Exception {
+		System.out.println(mileage_total);
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("member_point", mileage_total);
 		map.put("member_id", member_id);
@@ -41,14 +42,14 @@ public class MileageDAOImpl implements MileageDAO {
 		session.update(namespace+".milage_update",map);
 	}
 
-	@Override
+	/*@Override
 	public void update(int mileage_current, String member_id) throws Exception {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("mileage_current", mileage_current);
 		map.put("mileage_member_id", member_id);
 		
 		session.update(namespace+".update",map);
-	}
+	}*/
 
 	
 	

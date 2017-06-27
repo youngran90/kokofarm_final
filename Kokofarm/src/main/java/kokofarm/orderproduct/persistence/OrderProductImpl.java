@@ -84,6 +84,11 @@ public class OrderProductImpl implements OrderProductDAO {
 	}
 
 	@Override
+	public void orderproduct_delete_all(HashMap<String, String> product_no) throws Exception {
+		session.delete(namespace+".orderproduct_delete_all", product_no);
+	}
+
+	@Override
 	public void delete(String product_no) throws Exception {
 		session.delete(namespace+".delete",product_no);
 		
