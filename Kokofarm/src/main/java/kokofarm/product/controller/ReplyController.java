@@ -39,9 +39,9 @@ public class ReplyController {
 	
 	@RequestMapping(value = "/deleteReply",method = RequestMethod.GET)
 	@ResponseBody
-	   public void deleteReply(@Param("reply_no") String reply_no , Model model) throws Exception {
+	   public void deleteReply(@Param("reply_no") String reply_no , @Param("product_no")String product_no, Model model) throws Exception {
 		logger.info("post----delete--------");
-		service.delete_Post(reply_no);
+		service.delete_Post(reply_no, product_no);
 	}
 	
 	@RequestMapping(value = "/updateReply",method = RequestMethod.GET)

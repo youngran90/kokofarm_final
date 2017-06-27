@@ -102,8 +102,6 @@ function send(){
 	 var inquiry_reply = $("#inquiry_reply").val();
 	 var inquiry_no= $("#inquiry_no").val();
 
-	 alert("inquiry_reply: "+inquiry_reply);
-	 alert("inquiry_no: "+inquiry_no);
 	
 	if(inquiry_reply == ''){
 		alert("빈칸을 입력해주세요");

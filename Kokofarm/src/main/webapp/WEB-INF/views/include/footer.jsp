@@ -30,42 +30,42 @@
     </div>
     <div class="row">
       <div class="col-sm-3 footer-block">
-        <h5 class="footer-title">Information</h5>
+        <h5 class="footer-title">회사정보</h5>
         <ul class="list-unstyled ul-wrapper">
-          <li><a href="about-us.html">About Us</a></li>
-          <li><a href="checkout.html">Delivery Information</a></li>
-          <li><a href="#">Privacy Policy</a></li>
-          <li><a href="#">Terms &amp; Conditions</a></li>
+          <li><a href="about-us.html">회사소개</a></li>
+          <li><a href="checkout.html">배송정보</a></li>
+          <li><a href="#">개인정보처리방침</a></li>
+          <li><a href="#">취소/환불 규정</a></li>
         </ul>
       </div>
       <div class="col-sm-3 footer-block">
-        <h5 class="footer-title">Customer Service</h5>
+        <h5 class="footer-title">판매자 제휴</h5>
         <ul class="list-unstyled ul-wrapper">
-          <li><a href="contact.html">Contact Us</a></li>
-          <li><a href="#">Returns</a></li>
-          <li><a href="#">Site Map</a></li>
-          <li><a href="#">Wish List</a></li>
+          <li><a href="contact.html">판매자 계약규정</a></li>
+          <li><a href="#">판매자 </a></li>
+          <li><a href="#">사이트 맵</a></li>
+          <li><a href="#">장바구니</a></li>
         </ul>
       </div>
       <div class="col-sm-3 footer-block">
-        <h5 class="footer-title">Extras</h5>
+        <h5 class="footer-title">추가기능</h5>
         <ul class="list-unstyled ul-wrapper">
-          <li><a href="#">Brands</a></li>
-          <li><a href="gift.html">Gift Vouchers</a></li>
-          <li><a href="affiliate.html">Affiliates</a></li>
-          <li><a href="#">Specials</a></li>
+          <li><a href="#">브랜드 소개</a></li>
+          <li><a href="gift.html">상품권 안내</a></li>
+          <li><a href="affiliate.html">제휴사</a></li>
+          <li><a href="#">특가 상품</a></li>
         </ul>
       </div>
       <div class="col-sm-3 footer-block">
         <div class="content_footercms_right">
           <div class="footer-contact">
-            <h5 class="contact-title footer-title">Contact Us</h5>
+            <h5 class="contact-title footer-title">문의사항</h5>
             <ul class="ul-wrapper">
               <li><i class="fa fa-map-marker"></i><span class="location2"> 서울시 금천구 가산동,<br>
                 371-47 이노플렉스	 1차 2층<br>
                 </span></li>
-              <li><i class="fa fa-envelope"></i><span class="mail2"><a href="#">Kosta@korea	.com</a></span></li>
-              <li><i class="fa fa-mobile"></i><span class="phone2">+82 10 3333-3333</span></li>
+              <li><i class="fa fa-envelope"></i><span class="mail2"><a href="#">Kosta@koreaㄴ.com</a></span></li>
+              <li><i class="fa fa-mobile"></i><span class="phone2">(02)534-7777</span></li>
             </ul>
           </div>
         </div>

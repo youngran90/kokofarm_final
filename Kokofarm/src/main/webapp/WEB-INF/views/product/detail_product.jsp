@@ -302,9 +302,9 @@
        <c:when test="${reply_avg == 4}">
        <b> <span  style="color: #EF8829;">★★★★</span><span>☆</span></b>
        </c:when>
-       <c:otherwise>
-       
-       </c:otherwise>
+       <c:when test="${reply_avg == 5}">
+       <b> <span  style="color: #EF8829;">★★★★★</span></b>
+       </c:when>
        </c:choose>
 
 			 
@@ -646,8 +646,8 @@
 				
 				<c:set var="member_id" value="${login.member_id}"></c:set>
 					<c:if test="${replylist.member_id eq member_id}">
-					 	<td colspan="2"><button id="deleteReply" value="${replylist.reply_no}" onclick="deleteReply('${replylist.reply_no}')">삭제</button>
-					 	<button id="updateReply" class="updateReply" value="${status.count}" onclick="updateReply('${replylist.reply_no}')">수정</button></td>
+					 	<td colspan="2"><button id="deleteReply" value="${replylist.reply_no}" data-loading-text="Loading..." class="btn btn-primary" onclick="deleteReply('${replylist.reply_no}')">삭제</button>
+					 	<button id="updateReply" class="updateReply btn btn-primary" value="${status.count}" data-loading-text="Loading..."  onclick="updateReply('${replylist.reply_no}')">수정</button></td>
 					</c:if> 
 					</tr>
 					<tr>
@@ -693,7 +693,7 @@
     </div>
   </div>
   
-  
+  <%@include file="../include/footer.jsp"%>
 
 <script type="text/javascript">
 
@@ -704,8 +704,8 @@ $(function(){
 				var index =$(this).attr("value");
 				var reply_content = $(".tit_td").eq(index-1).html();
 				var re_no = $(".re_no").eq(index-1).attr("value");
-				alert(re_no);
-				$(".tit_td").eq(index-1).html('<input type="text" id="reply_contents" value="'+ reply_content+'" size="50"/><button id="update_Re" value="'+re_no+'" onclick="update_Re()">수정완료</button> ');
+				$(this).hide();
+			$(".tit_td").eq(index-1).html('<input type="text" id="reply_contents" value="'+ reply_content+'" size="50"/><button id="update_Re" value="'+re_no+'" data-loading-text="Loading..." class="btn btn-primary" onclick="update_Re()">수정완료</button> ');
 				doubleSubmitFlag = false;
 		    }else{
 		        return false;
@@ -767,18 +767,17 @@ $(function(){
 	}
 	
 	function deleteReply(reply_no) {
-		alert(reply_no);
-		
+		var product_no = '${product.product_no}';
 		$.ajax({
 			type : "get",
 			url : "/deleteReply",
 			data : {
-				"reply_no" : reply_no
+				"reply_no" : reply_no,
+				"product_no": product_no
 			},
 			success : function(data) {
-				location.reload();
 				alert("댓글이 삭제되었습니다.");
-				return false;
+				location.reload();
 			},
 			error : function(data) {
 				console.log('Error:', data);
@@ -813,9 +812,7 @@ $(function(){
 		}
 		
 		function gocart(product_no){
-			alert(product_no);
 			var num = parseInt($("#ea").val());
-			alert(num);
 			location.href="/cart/cart_detail?num=" + num + "&product_no="+ product_no;
 		}
 		
@@ -842,9 +839,6 @@ $(function(){
 			}
 			
 		}
- 
-		
-	
 
 </script>
 

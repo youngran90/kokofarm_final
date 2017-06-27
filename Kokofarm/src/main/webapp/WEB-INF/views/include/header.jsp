@@ -266,15 +266,18 @@ $( document ).ready( function() {
         <li><a href="/auction/auction_list"   class="parent"  >일반경매</a> </li>
          <li><a href="/auction/rt_auction_list"   class="parent" >실시간경매</a> </li>
         <li><a href="/center/customer_view"   class="parent"  >고객센터</a> </li>
-        <li><a href="/mypage/list_Inquiry" class="active parent">MyPage</a>
+        <li><a href="/mypage/order_list" class="active parent">MyPage</a>
           <ul>
-            <li><a href="category.html">주문배송조회</a></li>
+            <li><a href="/mypage/order_list">주문배송정보</a></li>
             <li><a href="/cart/cart">장바구니</a></li>
             <li><a href="checkout.html">결제 페이지</a></li>
+            <li><a href="/orderproduct/mileage_view" >마일리지</a></li>
             <li><a href="/mypage/list_Inquiry" >1:1 문의</a></li>
-            <li style="display: none;"><a href="/product/Insert_product">셀러 판매물품 등록</a></li>
-            <li style="display: none;"><a href="/auction/rt_auction_register" >셀러 실시간 물품 등록</a></li>
-            <li style="display: none;"><a href="/mypage/auction_view" >경매</a></li>
+            <li><a href="/mypage/graph" >통계</a></li>
+            <li><a href="/mypage/auction_view" >경매내역</a></li>
+            <li style="display: none;"><a href="/product/Insert_product">일반물품 등록</a></li>
+            <li style="display: none;"><a href="/auction/auction_register" >일반경매 등록</a></li>
+            <li style="display: none;"><a href="/auction/rt_auction_register" >실시간경매 등록</a></li>
             </ul>
         </li>       
         <div class="show_price" >

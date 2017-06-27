@@ -141,7 +141,6 @@ public class ProductController {
 		model.addAttribute("reply_avg", reply_avg);
 		
 		
-		
 		//댓글 페이징
 		  re_service.countReply(product_no); //상품별 총 댓글수
 		  paging.setDisplayPageNum(5);

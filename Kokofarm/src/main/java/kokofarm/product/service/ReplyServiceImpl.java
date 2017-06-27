@@ -35,9 +35,8 @@ public class ReplyServiceImpl implements ReplyService {
 
 	@Transactional
 	@Override
-	public void delete_Post(String reply_no) throws Exception {
+	public void delete_Post(String reply_no, String product_no) throws Exception {
 		dao.delete_Po(reply_no);
-		String product_no = dao.get_product_no(reply_no);
 		product_dao.update_reply_count(product_no, -1);
 	}
 

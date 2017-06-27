@@ -32,12 +32,9 @@ $(function(){
 	var doubleSubmitFlag = true;
 	$(".update").on("click", function(){
 	var index =$(this).attr("value");
-			alert("index"+index);
 		 if(doubleSubmitFlag){
 				var inquiry_content = $(".inquiry_content").eq(index-1).val();
-				alert("inquiry_content"+inquiry_content);
 				var inquiry_no = $(".inquiry_no").eq(index-1).attr("value");
-				alert(inquiry_no);
 				$(".reply_user_txt").eq(index-1).html('<textarea  rows="5" cols="60" id="inquiry_contents" size="500"  style="resize:none;">'+ inquiry_content+'</textarea><button id="update_Re" class="button_in" value="'+inquiry_no+'" onclick="update_Re()">수정완료</button> ');
 				doubleSubmitFlag = false;
 		    }else{
@@ -77,7 +74,6 @@ $(function(){
 function update_Re() {
 	var inquiry_content = $("#inquiry_contents").val();
 	var inquiry_no = $("#update_Re").attr("value");
-	alert(inquiry_no);
 	if(inquiry_content == ""){
 		alert("댓글내용을 입력해주세요");
 		return false;
