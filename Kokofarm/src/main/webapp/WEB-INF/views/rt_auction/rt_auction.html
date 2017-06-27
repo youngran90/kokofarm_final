@@ -235,7 +235,19 @@ $(document).keydown(function (e) {
 		});
 		
 		socket.on('finish',function(data){
-			
+			$.ajax({
+				type : 'POST',
+				url : 'http://localhost:8081/rt_auction/result_rt_auction',
+				data : {
+					no : data.no,
+					id : data.id,
+					price : data.price,
+					date : data.date
+				},
+				dataType : 'text',
+				success: function(){
+				}
+			});
 			var check = confirm("해당 경매에 낙찰 되셨습니다.\n" + 
 					"경매 번호 : " + data.no + "\n"+
 					"낙찰자 : " + data.id + "\n"+
@@ -245,20 +257,9 @@ $(document).keydown(function (e) {
 					"아닐경우에는 취소를 눌러 메인으로 이동하세요."
 					);
 			if(check){
-				$.ajax({
-					type : 'POST',
-					url : 'http://localhost:8081/rt_auction/result_rt_auction',
-					data : {
-						no : data.no,
-						id : data.id,
-						price : data.price,
-						date : data.date
-					},
-					dataType : 'text',
-					success: function(){
-					}
-				});
+				
 				$(location).attr("href", "http://localhost:8081/rt_auction/rt_auctionpay?rt_acution_no="+data.no);
+				//$(location).attr("href", "http://localhost:8081/rt_auction/result_rt_auction");
 			}else{
 				$(location).attr("href", "http://localhost:8081/");
 			}

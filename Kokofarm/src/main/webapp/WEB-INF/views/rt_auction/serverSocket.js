@@ -120,11 +120,11 @@ app.get('/', function(request, response) {
 	
 });
 
-var m = 1; //경매 대기 시간 카운트 (분)
-var s = 0;  //경매 대기 시간 카운트 (초)
+var m = 0; //경매 대기 시간 카운트 (분)
+var s = 10;  //경매 대기 시간 카운트 (초)
 
 var minute = 0 //경매 진행 시간 카운트 (분)
-var second = 30;//경매 진행 시간 카운트 (초)
+var second = 10;//경매 진행 시간 카운트 (초)
 
 var wait = setInterval(function(){ //setInterval 일정시간마다 반복 실행하는 함수
 	if(m == 0 && s == 0 ){
@@ -314,10 +314,10 @@ io.sockets.on('connection', function(socket) {
 		 				s : second
 		 			});
 		 		 	if(minute == 0 && second == 0 ){
+		 		 		clearInterval(timer); //타이머 종료
 		 		 		socket.emit("end",{
 				 			msg : "경매가 종료 되었습니다."
 		 		 		});
-		 		 		clearInterval(timer); //타이머 종료
 		 		 	}
 		 		 }, 1000); //1초단위로 변동
 		 		

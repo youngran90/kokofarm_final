@@ -116,8 +116,7 @@ public class RtAuctionController {
 		MemberVO member = (MemberVO)session.getAttribute("login");
 		
 		RtResultAuctionListVO rt_result_actionListVO = service.resultList(rt_acution_no);
-			System.out.println(rt_result_actionListVO.toString());
-			
+		
 		MemberVO memberVO = service.member_info(member.getMember_id());
 		
 		String phoneNum = memberVO.getMember_phoneNum();
@@ -134,7 +133,7 @@ public class RtAuctionController {
 		model.addAttribute("rt_result_actionListVO",rt_result_actionListVO);
 		model.addAttribute("memberVO",memberVO);
 		
-		return "redirect://rt_auction/rt_auctionpay";
+		return "/rt_auction/rt_auctionpay";
 		
 	}
 	
