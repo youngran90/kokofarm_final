@@ -20,13 +20,23 @@
 		left: 1100px;
 		top: -42px;
 	}
+	
+	#list_btn{
+		border: none;
+		background: #F28D33;
+		text-align: center;
+		color: #FFFFFF;
+		width: 80px;
+		height: 40px;
+		margin-left: 860px;
+	}
 </style>
 <script>
 $(function(){
 	$('#faq_list').hide();
 	
 	var admin_id = '${login.member_id}'
-	alert(admin_id); */
+	//alert(admin_id);
 	
 	if(admin_id=='kosta'){
 		 alert("관리자맞아!");
@@ -192,15 +202,15 @@ function move_admin(){
 											<td >${CenterVO.c_viewcnt}<td>
 										</tr>
 										<tr>
-											<th style="border: lightgray;">내용</th>
-											<td colspan="3" style="height: 50px;">${CenterVO.c_content}<td>
+											<th style="border: lightgray; height:500px;">내용</th>
+											<td colspan="3" style="height:500px;">${CenterVO.c_content}<td>
 										</tr>
 										<tr>
 										</tr>
 								</table>
 								</c:forEach>
 							</div>
-						
+						<input id="list_btn" type="button" value="목록으로" onclick=location.href="../center/customer_view">
 	
 						</div>
 	

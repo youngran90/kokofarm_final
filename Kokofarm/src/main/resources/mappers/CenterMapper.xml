@@ -16,7 +16,7 @@
 	</select>
  	
  	<select id="list_faq" resultType="CenterVO">
-		select cno, c_title, c_regdate, c_viewcnt
+		select *
 		from customercenter where c_group='faq' order by c_regdate
 	</select>
  

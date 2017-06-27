@@ -70,10 +70,10 @@
  		select * from auction where auction_no=#{auction_no}
  	</select>
  	<select id="new_auction" resultType="AuctionRegisterVO">
- 		select * from auction order by auction_regdate
+ 		select * from auction where auction_regdate is not null order by auction_regdate desc
  	</select>
  	<select id="pop_auction" resultType="AuctionRegisterVO">
- 		select * from auction order by end_date
+ 		select * from auction order by end_date desc
  	</select>
  	
  	<!-- 실시간 경매 -->

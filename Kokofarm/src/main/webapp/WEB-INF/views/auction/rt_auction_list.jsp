@@ -108,7 +108,7 @@ function move_register(){
 
 
 //오전 타이머
-	var	time = '${vistingTime}'
+	var time = '${vistingTime}'
 	//alert("오전남은시간"+time);
 	
 	
@@ -127,7 +127,7 @@ function move_register(){
 			   	time--;
 			    $('#rt_reg_btn').click(function(){
 					  alert("입장 시간이 아닙니다.");
-				  });
+				  }).removeAttr('onclick');
 		   }
 	} 
 	
@@ -151,7 +151,7 @@ function move_register(){
 			   	time2--;
 			     $('#rt_reg_btn2').click(function(){
 					  alert("입장 시간이 아닙니다.");
-				  });
+				  }).removeAttr('onclick');
 		   }
 		} 
 
@@ -379,7 +379,7 @@ function move_register(){
      			bottom: 25px; left: 350px; font-size: 30px; font-weight: bold;"></div>
      			<div id="timer" style="background:#FAFAFA; width: 300px; height: 50px;
      			position: absolute; bottom: 10px; left: 330px;"></div>
-     			<input type="button" value="참여하기" id="rt_reg_btn" class="auction_part" onclick=location.href=".."/rt_auction/rt_auction?rt_auction_no=${RT_AuctionRegisterVO.rt_auction_no}" style="position: relative; left: 510px;">
+     			<input type="button" value="참여하기" id="rt_reg_btn" class="auction_part" onclick=location.href="../rt_auction/rt_auction?rt_auction_no=${RT_AuctionRegisterVO.rt_auction_no}" style="position: relative; left: 510px;">
      		</div>
      	</div>
      	</c:forEach>
@@ -462,6 +462,6 @@ function move_register(){
     <!-- 리스트 시작 -->
     
 </div>
-</div>
+
 <%@include file="../include/footer.jsp"%>
 </body>
