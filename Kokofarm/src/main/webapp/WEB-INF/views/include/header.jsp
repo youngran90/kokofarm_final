@@ -87,7 +87,7 @@ System.out.println("세션값" +vo);
 		if(vo !=null) {
 				if(vo.getSeller_no() != null){ %>
 					$(document).ready(function(){					
-						$('ul.main-navigation ul>li').eq(4).css("display","inline").next().css("display","inline").next().css("display","inline");
+						$('.seller_register').css("display","inline");
 			 		});			 	
 			 	<%}
 				
@@ -270,14 +270,14 @@ $( document ).ready( function() {
           <ul>
             <li><a href="/mypage/order_list">주문배송정보</a></li>
             <li><a href="/cart/cart">장바구니</a></li>
-            <li><a href="checkout.html">결제 페이지</a></li>
             <li><a href="/orderproduct/mileage_view" >마일리지</a></li>
             <li><a href="/mypage/list_Inquiry" >1:1 문의</a></li>
             <li><a href="/mypage/graph" >통계</a></li>
             <li><a href="/mypage/auction_view" >경매내역</a></li>
-            <li style="display: none;"><a href="/product/Insert_product">일반물품 등록</a></li>
-            <li style="display: none;"><a href="/auction/auction_register" >일반경매 등록</a></li>
-            <li style="display: none;"><a href="/auction/rt_auction_register" >실시간경매 등록</a></li>
+            <li><a href="/product/product_register_list" >상품 등록 리스트</a></li>
+            <li style="display: none;" class="seller_register"><a href="/product/Insert_product">일반물품 등록</a></li>
+            <li style="display: none;" class="seller_register"><a href="/auction/auction_register" >일반경매 등록</a></li>
+            <li style="display: none;" class="seller_register"><a href="/auction/rt_auction_register" >실시간경매 등록</a></li>
             </ul>
         </li>       
         <div class="show_price" >
