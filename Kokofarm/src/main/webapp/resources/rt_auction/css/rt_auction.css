@@ -256,7 +256,6 @@ body{
 	margin-right: 10%;
 	width: 79%;
 	height: 700px;
-	background-color: #EAEAEA;
 }
 .auction_time_price {
 	position: absolute;
@@ -285,7 +284,6 @@ body{
 	font-size: 15px;
 	font-weight: bold;
 	text-align: left;
-	background-color: #EAEAEA;
 }
 #chat_input{
 	position: relative;
@@ -304,4 +302,12 @@ body{
 #chat_enter {
 	margin-left : 19px;
 	width: 26%;
+}
+
+#test{
+	text-align: right;
+}
+#test img{
+	margin-right: 3px;
+	vertical-align: middle;
 }

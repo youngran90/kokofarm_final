@@ -119,6 +119,10 @@ $(document).keydown(function (e) {
 	/* 엔터키 입력 & 입력버튼 클릭 */
 	$("#chat_text").keypress(function(e){
 		if(e.which == 13){
+			var text = "<div id='test'><img src='/tag_img01'><span id='my_text'/>"+
+			$("#chat_text").val()+"</div>";
+			$("#chat_area").append(text);
+			
 			socket.emit('send',{
 				name : $("#id").val(),
 				messeage : $("#chat_text").val()
@@ -128,6 +132,10 @@ $(document).keydown(function (e) {
 	});
 	
 	$("#chat_enter").click(function(e){
+		var text = "<div id='test'><img src='/tag_img01'><span id='my_text'/>"+
+		$("#chat_text").val()+"</div>";
+		$("#chat_area").append(text);
+		
 		socket.emit('send',{
 			name : $("#id").val(),
 			messeage : $("#chat_text").val()
