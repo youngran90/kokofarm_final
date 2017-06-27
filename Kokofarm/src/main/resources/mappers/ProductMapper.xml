@@ -46,6 +46,9 @@
 	  					<when test="input_sort == 'vc'">
 	  						order by view_count desc
 	  					</when> 
+	  					<when test="input_sort == 'lud'">
+							order by product_uploaddate desc				
+							</when> 
   					</choose>
   					) a
   						where ROWNUM <![CDATA[<=]]> #{end})

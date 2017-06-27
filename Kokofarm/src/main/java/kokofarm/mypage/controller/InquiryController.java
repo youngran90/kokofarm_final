@@ -75,7 +75,7 @@ public class InquiryController {
 			seller_no = "";
 		}
 		PagingMaker PagingMaker = new PagingMaker();
-		PagingMaker.setDisplayPageNum(2);
+		PagingMaker.setDisplayPageNum(4);
 	    if(page1 != 1){
 			PagingMaker.setPage(page1);
 	    }
@@ -86,7 +86,7 @@ public class InquiryController {
 		System.out.println(PagingMaker.toString());
 		
 		PagingMaker PagingMaker_s = new PagingMaker();
-		PagingMaker_s.setDisplayPageNum(2);
+		PagingMaker_s.setDisplayPageNum(4);
 	    if(page2 != 1){
 	    	PagingMaker_s.setPage(page2);
 	    }
@@ -235,7 +235,7 @@ public class InquiryController {
 		MemberVO member = (MemberVO)request.getSession().getAttribute("login");
 		String member_id = member.getMember_id();
 		PagingMaker PagingMaker = new PagingMaker();
-		PagingMaker.setDisplayPageNum(2);
+		PagingMaker.setDisplayPageNum(5);
 		if(page != 1){
 			PagingMaker.setPage(page);
 	    }

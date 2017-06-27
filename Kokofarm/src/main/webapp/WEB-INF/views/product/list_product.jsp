@@ -97,6 +97,7 @@
 				<option value="ph" <c:if test="${pageMaker.input_sort eq 'ph'}">selected="selected"</c:if>>가격 높은순</option>
 	            <option value="pl" <c:if test="${pageMaker.input_sort eq 'pl'}">selected="selected"</c:if> >가격 낮은순</option>
 	        	<option value="vc" <c:if test="${pageMaker.input_sort eq 'vc'}">selected="selected"</c:if> >판매인기순</option>
+	        	<option value="lud" <c:if test="${pageMaker.input_sort eq 'lud'}">selected="selected"</c:if> >최신 등록순</option>
 			</select>
 			
 			<select  id="searchType" name="searchType" style="width: 75px; height:27px; margin-left: 15px;">

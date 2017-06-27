@@ -354,9 +354,6 @@ public class ProductController {
 		
 		MemberVO member = (MemberVO)request.getSession().getAttribute("login");
 		String member_id = member.getMember_id();
-		System.out.println(member_id + " mmmmmmmmmmmmmmmmm");
-		
-		System.out.println("++++++++" +service.countProduct_list(member_id));
 		
 		PagingMaker.setDisplayPageNum(10);
 		PagingMaker.setTotalCount(service.countProduct_list(member_id));
