@@ -17,10 +17,6 @@
 		
 		if(title==''){
 			alert("제목을 입력하세요.");
-		}else if(group==null){
-			alert("분류를 선택하세요.");
-		}else if(content==''){
-			alert("내용을 입력하세요.");
 		}else{
 			alert("공지가 등록되었습니다.");
 			document.getElementById('admin').submit();

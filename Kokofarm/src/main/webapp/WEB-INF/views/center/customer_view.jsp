@@ -28,7 +28,7 @@
 		var admin_id = '${login.member_id}'
 		/* alert(admin_id); */
 		
-		if(admin_id=='kosta'){
+		if(admin_id=='mn509'){
 			/* alert("관리자맞아!"); */
 			$('#admin_button').show();
 		}else{
@@ -183,7 +183,9 @@
 	        				<input type="button" class="active" id="admin_button" value="등록하기" onclick="move_admin()"
 	        				style="position:relativce; left:860px;">
 								<div style="width: 940px;"> 
+								
 								<table class="view_board_table" id="notice_table">
+							
 									<colgroup>
 									<col width="50">
 									<col width="250">
@@ -198,10 +200,9 @@
 											<th>조회수</th>
 										</tr>
 									</thead>
-									<tbody>
+									<tbody>    
 										<c:forEach var="CenterVO" items="${list_notice}" varStatus="status">
 										    <c:set var="index" value="1"></c:set>
-										    
 											<tr  class="tit_tr user_tit_tr">
 												<td>${CenterVO.cno}</td>
 												<td><a href="/center/detail_notice?cno=${CenterVO.cno}">${CenterVO.c_title}</a></td>

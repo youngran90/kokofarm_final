@@ -118,13 +118,13 @@ public class CenterController {
 	@RequestMapping(value="/detail_notice", method=RequestMethod.GET)
 	public void detail_notice(@RequestParam("cno")int cno, Model model)throws Exception{
 		service.update_viewcnt(cno);
-		model.addAttribute("detail_notice", service.list_notice());
+		model.addAttribute("detail_notice", service.detail_notice(cno));
 	}
 	
 	@RequestMapping(value="/detail_faq", method=RequestMethod.GET)
 	public void detail_faq(@RequestParam("cno")int cno, Model model)throws Exception{
 		service.update_viewcnt(cno);
-		model.addAttribute("detail_faq", service.list_faq());
+		model.addAttribute("detail_faq", service.detail_faq(cno));
 	}
 	
 	@RequestMapping(value="/delete_notice", method=RequestMethod.POST)

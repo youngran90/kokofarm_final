@@ -207,30 +207,32 @@ function move_admin(){
 	        				<input type="button" class="active" id="admin_button" value="등록하기" 
 	        				onclick=location.href="/center/admin_view" style="position:relativce; left:860px;">
 								<div style="width: 940px;"> 
-								<c:forEach items="${detail_notice}" var="CenterVO">
+								
 								<table class="view_board_table" id="notice_table">
+								
 								<colgroup>
 									<col width="150">
 								</colgroup>
 									<tbody>
 										<tr>
 											<th style="border: lightgray;">글제목</th>
-											<td colspan="4" style="border-top: 1px solid lightgray;">${CenterVO.c_title}</td>
+											<td colspan="4" style="border-top: 1px solid lightgray;">${detail_notice.c_title}</td>
 										</tr>
 										<tr style="text-align: center;">
 											<th style="border: lightgray;">작성일</th>
-											<td>${CenterVO.c_regdate}</td>
+											<td>${detail_notice.c_regdate}</td>
 											<th style="border: lightgray;">조회수</th>
-											<td >${CenterVO.c_viewcnt}<td>
+											<td >${detail_notice.c_viewcnt}<td>
 										</tr>
 										<tr>
 											<th style="border: lightgray; height:500px;">내용</th>
-											<td colspan="3" style="height:500px;">${CenterVO.c_content}<td>
+											<td colspan="3" style="height:500px;">${detail_notice.c_content}<td>
 										</tr>
 										<tr>
 										</tr>
+										
 								</table>
-								</c:forEach>
+								
 							</div>
 						<input id="list_btn" type="button" value="목록으로" onclick=location.href="../center/customer_view">
 						<!-- <input id="delete_btn" type="button" value="삭제하기" onclick=location.href="/delete_notice">
