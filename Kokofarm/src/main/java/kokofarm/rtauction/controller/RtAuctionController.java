@@ -1,10 +1,7 @@
 package kokofarm.rtauction.controller;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 
 import javax.inject.Inject;
@@ -16,7 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import kokofarm.member.domain.MemberVO;
 import kokofarm.rtauction.domain.RtAcutionFinishVO;
@@ -139,7 +135,8 @@ public class RtAuctionController {
 	
 	@RequestMapping(value="/rt_auctionfinish", method=RequestMethod.POST)
 	public String rt_auction_finishPost(RtAcutionFinishVO vo, Rt_Auction_Address addr,
-				Rt_Auction_Homenum home, Rt_Auction_Phonenum phone) throws Exception{
+				Rt_Auction_Homenum home, Rt_Auction_Phonenum phone,
+				HttpServletRequest request) throws Exception{
 		
 		String PhoneNum = phone.getMobileReceiver1() + phone.getMobileReceiver2() + phone.getMobileReceiver3(); //전화번호
 		String HomeNum = home.getPhoneReceiver1() + home.getPhoneReceiver2() + home.getPhoneReceiver3(); //집번호
@@ -152,19 +149,19 @@ public class RtAuctionController {
 		Calendar cal = Calendar.getInstance();
 		SimpleDateFormat time = new SimpleDateFormat("yyyyMMdd");
 		String date = time.format(cal.getTime());
-		System.out.println(date);
 		
+		HttpSession session = request.getSession();
+		MemberVO member = (MemberVO)session.getAttribute("login");
 		
 		String rt_result_no = date+rt_tender_no; 
 		
+		vo.setMember_id(member.getMember_id());
 		vo.setRt_tender_finish_no(rt_result_no);
 		vo.setRecipient_address(HomeAddr);
 		vo.setRecipient_phone(PhoneNum);
 		vo.setRecipient_tel(HomeNum);
 		
 		service.rt_auction_finish(vo);
-		
-		System.out.println(vo.toString());
 		
 		return "/rt_auction/rt_auctionfinish";
 	}

@@ -41,22 +41,14 @@ public class RtAuctionServiceImpl implements RtAuctionService{
 		return dao.member_info(member_id);
 	}
 	
-	@Transactional
 	@Override
 	public void rt_auction_finish(RtAcutionFinishVO vo) throws Exception {
-		dao.delete_rt_tender(vo.getRt_tender_no());
 		dao.rt_auction_finish(vo);
 	}
 
 	@Override
 	public List<RtAuctionFinishListVO> rt_auction_finish_list(String member_id) throws Exception {
 		return dao.rt_auction_finish_list(member_id);
-	}
-
-	@Transactional
-	@Override
-	public void delete_rt_tender(String rt_tender_no) throws Exception {
-		dao.delete_rt_tender(rt_tender_no);
 	}
 
 	

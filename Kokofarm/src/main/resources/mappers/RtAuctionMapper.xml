@@ -38,7 +38,7 @@
 			creditcard_name, pay_month, pay_bank, deposit_name, price, pay_date , member_id
 		) values (
 			#{rt_tender_finish_no}, #{rt_tender_no}, #{recipient_name}, #{recipient_phone}, #{recipient_tel}, #{recipient_address}, #{delivery_message}, #{pay},
-			#{creditcard_name}, #{pay_month}, #{pay_bank}, #{deposit_name}, #{price}, sysdate, (select member_id from rt_tender where rt_tender_no = #{rt_tender_no})
+			#{creditcard_name}, #{pay_month}, #{pay_bank}, #{deposit_name}, #{price}, sysdate, #{member_id}
 		)
 	</insert>
 	
@@ -48,12 +48,9 @@
 		from rt_auction ra, rt_tender rt, rt_tender_finish rtf
 		where ra.rt_auction_no = rt.rt_auction_no
 		and rt.rt_tender_no = rtf.rt_tender_no
-		and member_id = #{member_id}
+		and rtf.member_id = #{member_id}
 	</select>
 	
-	<delete id="delete_rt_tender" parameterType="String">
-		delete from rt_tender where rt_tender_no = #{rt_tender_no}
-	</delete>
 </mapper>
 
 

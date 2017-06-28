@@ -22,5 +22,4 @@ public interface RtAuctionService {
 	
 	public List<RtAuctionFinishListVO> rt_auction_finish_list(String member_id) throws Exception;
 	
-	public void delete_rt_tender(String rt_tender_no) throws Exception;
 }
