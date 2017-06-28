@@ -177,12 +177,13 @@ function register(){
                             	<option id="pm" value="pm">&nbsp;오후</option>
                             </select>
                             <select name="select_Time" style="height: 35px; width: 80px;">
-                            	<option value="01">&nbsp;00</option><option value="02">&nbsp;02</option>
-                            	<option value="03">&nbsp;03</option><option value="04">&nbsp;04</option>
-                            	<option value="05">&nbsp;05</option><option value="06">&nbsp;06</option>
-                            	<option value="07">&nbsp;07</option><option value="08">&nbsp;08</option>
-                            	<option value="09">&nbsp;09</option><option value="10">&nbsp;10</option>
-                            	<option value="11">&nbsp;11</option><option value="12">&nbsp;12</option>
+                            	<option value="00">&nbsp;00</option><option value="01">&nbsp;01</option>
+                            	<option value="02">&nbsp;02</option><option value="03">&nbsp;03</option>
+                            	<option value="04">&nbsp;04</option><option value="05">&nbsp;05</option>
+                            	<option value="06">&nbsp;06</option><option value="07">&nbsp;07</option>
+                            	<option value="08">&nbsp;08</option><option value="09">&nbsp;09</option>
+                            	<option value="10">&nbsp;10</option><option value="11">&nbsp;11</option>
+                            	<option value="12">&nbsp;12</option>
                             </select>
                             <select name="select_Min" style="height: 35px; width: 80px;">
                             	<option value="00">&nbsp;00</option><option value="05">&nbsp;05</option>
@@ -204,15 +205,16 @@ function register(){
                             	<option id="pm2" value="pm">&nbsp;오후</option>
                             </select>
                             <select name="select_Time2" style="height: 35px; width: 80px;">
-                            	<option value="01">&nbsp;01</option><option value="02">&nbsp;02</option>
-                            	<option value="03">&nbsp;03</option><option value="04">&nbsp;04</option>
-                            	<option value="05">&nbsp;05</option><option value="06">&nbsp;06</option>
-                            	<option value="07">&nbsp;07</option><option value="08">&nbsp;08</option>
-                            	<option value="09">&nbsp;09</option><option value="10">&nbsp;10</option>
-                            	<option value="11">&nbsp;11</option><option value="12">&nbsp;12</option>
+                            	<option value="00">&nbsp;00</option><option value="01">&nbsp;01</option>
+                            	<option value="02">&nbsp;02</option><option value="03">&nbsp;03</option>
+                            	<option value="04">&nbsp;04</option><option value="05">&nbsp;05</option>
+                            	<option value="06">&nbsp;06</option><option value="07">&nbsp;07</option>
+                            	<option value="08">&nbsp;08</option><option value="09">&nbsp;09</option>
+                            	<option value="10">&nbsp;10</option><option value="11">&nbsp;11</option>
+                            	<option value="12">&nbsp;12</option>
                             </select>
                             <select name="select_Min2" style="height: 35px; width: 80px;">
-                            	<option value="01">&nbsp;00</option><option value="05">&nbsp;05</option>
+                            	<option value="00">&nbsp;00</option><option value="05">&nbsp;05</option>
                             	<option value="10">&nbsp;10</option><option value="15">&nbsp;15</option>
                             	<option value="20">&nbsp;20</option><option value="25">&nbsp;25</option>
                             	<option value="30">&nbsp;30</option><option value="35">&nbsp;35</option>
