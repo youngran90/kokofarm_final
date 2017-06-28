@@ -200,7 +200,42 @@
             </tbody>
           </table>
         </div>
-      
+        
+      <!-- 일반 상품 리스트 -->
+        <div id="tab-latest" class="tab-content">
+          <div class="box">
+            <div id="latest-slidertab" class="row owl-carousel product-slider">
+              <c:forEach items="${Latestlist }" var="LproductVO">
+              <div class="item">
+                <div class="product-thumb transition">
+                  <div class="image product-imageblock"> 
+                  	<a href="/product/detail_product?product_no=${LproductVO.product_no }">
+                  		<img src="/resources/files/attach/${LproductVO.product_mainimage}" alt="${LproductVO.product_name}" title="${LproductVO.product_name }"   class="img-responsive"  style="width: 250px; height:190px;"/> 
+                  		<img src = "/resources/files/attach/${LproductVO.product_sellerimage }" alt = "${LproductVO.product_sellerimage}" style="position: absolute; width: 50px; height: 50px; z-index: 100; top: 135px; left : 198px; " />
+                  	</a>
+                    <div class="button-group">
+                      <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List" ><i class="fa fa-heart-o"></i></button>
+                      <button type="button" class="addtocart-btn" no="${LproductVO.product_no }" >장바구니</button>
+                      <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product" ><i class="fa fa-exchange"></i></button>
+                    </div>
+                  </div>
+                  <div class="caption product-detail">
+                    <h4 class="product-name"><a href="/product/detail_product?product_no=${LproductVO.product_no }" title="${LproductVO.product_name}">${LproductVO.product_name}</a></h4>
+                    <p class="price product-price">${LproductVO.product_price }원<!-- <span class="price-tax">Ex Tax: $100.00</span> --></p>
+                    <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
+                  </div>
+                  <div class="button-group">
+                    <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List" ><i class="fa fa-heart-o"></i></button>
+                    <button type="button" class="addtocart-btn" >Add To Cart</button>
+                    <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product" ><i class="fa fa-exchange"></i></button>
+                  </div>
+                </div>
+              </div>
+              </c:forEach>           
+            </div>
+          </div>
+        </div>
+        
       <div class="result_info_box">
       	<div class="inbox">
       		<div class="price_info"><em class="result_price"></em><b>원</b></div>

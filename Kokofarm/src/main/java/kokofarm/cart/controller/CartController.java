@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import kokofarm.cart.domain.CartVO;
 import kokofarm.cart.service.CartService;
+import kokofarm.mainImage.service.MainImageService;
 import kokofarm.member.domain.MemberVO;
 import kokofarm.orderproduct.domain.OrderProductListVO;
 import kokofarm.orderproduct.domain.OrderProductVO;
@@ -33,6 +34,8 @@ public class CartController {
 	@Inject
 	private OrderProductService op_service;
 	
+	@Inject
+	private MainImageService m_service;
 	
 	private static String cart_no = UUID.randomUUID().toString().replace("-", "");
 	
@@ -48,7 +51,7 @@ public class CartController {
 		if(member == null){
 			return "/cart/cart";
 		}
-		
+		model.addAttribute("Latestlist",m_service.productLatest());
 		model.addAttribute("listcart",service.cart_list(member.getMember_id()));
 		
 		return "/cart/cart";

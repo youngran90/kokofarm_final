@@ -9,6 +9,27 @@
 				*/
 
 				$(function(){
+					
+					// 장바구니에서 장바구니로
+					 $('.addtocart-btn').on('click',function(){
+			    		   var product_no = $(this).attr("no");
+			    		   var amount = 1;
+			    		   $.ajax({
+			    			type : "get",
+			    			url : "/cart/cart_detail",
+			    			data : {num : amount, product_no : product_no},
+			    			dataType : "text",
+			    			success : function(){
+			    				alert("장바구니에 추가되었습니다.");
+			    				location.reload();
+			    			}
+			    				
+			    			   
+			    		   });
+			  			
+			  			 
+			  		 });
+					
 					// ajax로 체크한 품목만 삭제하기
 					//초기 로딩시 전 제품 선택이 되어 있는 상태
 					$("input:checkbox[name=product_no]").prop("checked", true); //선택 체크박스
@@ -96,7 +117,7 @@
 								$("button[id="+index+"bd]").attr("disabled",true);
 								$("button[id="+index+"bc]").attr("disabled",true);
 								$("em[id="+index+"tp]").css("text-decoration","line-through");
-								$("input[id="+index+"ac]").prop("checked",false);
+								$("input[id="+index+"ac]").prop("checked",false).attr("disabled",true);
 								$("input[class="+index+"dp]").prop("checked",false); //배송비
 								$("input[class="+index+"tp]").prop("checked",false); // 금액
 								$("input[class="+index+"opa]").prop("checked",false); // 수량

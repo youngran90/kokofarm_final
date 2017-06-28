@@ -10,11 +10,12 @@
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
 
 <script type="text/javascript">
-$(function(){
+var jq = jQuery.noConflict();
+jq(function(){
 	
-	 $.datepicker.setDefaults($.datepicker.regional['ko']); 
+	 jq.datepicker.setDefaults(jq.datepicker.regional['ko']); 
 
-	  $('#start_date').datepicker({
+	  jq('#start_date').datepicker({
           showOn: "both",                     // 달력을 표시할 타이밍 (both: focus or button)
           buttonImage: "/resources/files/attach/cal.png", // 버튼 이미지
           buttonImageOnly : true,             // 버튼 이미지만 표시할지 여부
@@ -27,12 +28,12 @@ $(function(){
           onClose: function( selectedDate ) {    
               // 시작일(fromDate) datepicker가 닫힐때
               // 종료일(toDate)의 선택할수있는 최소 날짜(minDate)를 선택한 시작일로 지정
-              $("#toDate").datepicker( "option", "minDate", selectedDate );
+              jq("#toDate").datepicker( "option", "minDate", selectedDate );
           }                
       });
 
 
-	$("#end_date").datepicker({
+	jq("#end_date").datepicker({
 		showOn: "both",                     // 달력을 표시할 타이밍 (both: focus or button)
         buttonImage: "/resources/files/attach/cal.png", // 버튼 이미지
         buttonImageOnly : true,             // 버튼 이미지만 표시할지 여부
@@ -45,14 +46,14 @@ $(function(){
         onClose: function( selectedDate ) {    
             // 시작일(fromDate) datepicker가 닫힐때
             // 종료일(toDate)의 선택할수있는 최소 날짜(minDate)를 선택한 시작일로 지정
-            $("#toDate").datepicker( "option", "minDate", selectedDate );
+            jq("#toDate").datepicker( "option", "minDate", selectedDate );
     	}     
 	});
 	
-	$("#search").on('click',function(e){
+	jq("#search").on('click',function(e){
 		e.preventDefault();
-		var start = parseInt($("#start_date").val().replace(/-/g,""));
-		var end = parseInt($("#end_date").val().replace(/-/g,""));
+		var start = parseInt(jq("#start_date").val().replace(/-/g,""));
+		var end = parseInt(jq("#end_date").val().replace(/-/g,""));
 		
 		var now = new Date();
 		now = finish_auction(now);
@@ -66,7 +67,7 @@ $(function(){
 		}else if(end > now){
 			alert("끝나는 날이 오늘을 못 넘어요~");
 		}else{
-			$("#search_form").submit();
+			jq("#search_form").submit();
 		}
 			
 	});
@@ -93,18 +94,18 @@ $(function(){
 	}
 	
 	
-	$("button[class=order_detail]").each(function(i){
+	jq("button[class=order_detail]").each(function(i){
 		
-		$(this).hover(function(){
-			$(this).css('background-color','#38a9a5').css('color','white');
+		jq(this).hover(function(){
+			jq(this).css('background-color','#38a9a5').css('color','white');
 		},function(){
-			$(this).css('background-color','white').css('color','#38a9a5');
+			jq(this).css('background-color','white').css('color','#38a9a5');
 		});
 		
-		$(this).on('click',function(e){
+		jq(this).on('click',function(e){
 			e.preventDefault();
 			
-			window.open('/orderproduct/order_detailview?order_finish_no='+$(this).val(), "주문 내역 상세", "width=800, height=700");
+			window.open('/orderproduct/order_detailview?order_finish_no='+jq(this).val(), "주문 내역 상세", "width=800, height=700");
 			
 		});
 	});

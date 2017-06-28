@@ -70,7 +70,7 @@ $(document).keydown(function (e) {
 		var income = "<strong id=income>&nbsp;"+data.nickname+" 님 입장하셨습니다.</strong><br>";
 		$("#chat_area").append(income);
 		
-		if($('#area').prop('scrollHeight') > $('#area').height()){
+		if($('#area').prop('scrollHeight') > $('#aea').height()){
 			 $('#area').scrollTop($('#area').prop('scrollHeight'));
 		}
 		//유저 리스트 업데이트
@@ -110,7 +110,7 @@ $(document).keydown(function (e) {
 		var out = "<strong id=out>&nbsp;"+data.msg+"</strong><br>";
 		$("#chat_area").append(out);
 		
-		if($('#area').prop('scrollHeight') > $('#area').height()){
+		if($('#area').prop('scrollHeight') > $('#aea').height()){
 			 $('#area').scrollTop($('#area').prop('scrollHeight'));
 		}
 		
@@ -127,7 +127,10 @@ $(document).keydown(function (e) {
 				messeage : $("#chat_text").val()
 			});
 			$("#chat_text").val("");
-		}	
+		}
+		if($('#area').prop('scrollHeight') > $('#aea').height()){
+			 $('#area').scrollTop($('#area').prop('scrollHeight'));
+		}
 	});
 	
 	$("#chat_enter").click(function(e){
@@ -140,6 +143,9 @@ $(document).keydown(function (e) {
 		});
 		$("#chat_text").val("");
 		e.preventDefault();
+		if($('#area').prop('scrollHeight') > $('#aea').height()){
+			 $('#area').scrollTop($('#area').prop('scrollHeight'));
+		}
 	});
 	/* */
 	
@@ -150,7 +156,7 @@ $(document).keydown(function (e) {
 		//var messeage = '&nbsp;[ '+data.nickname+' ] '+data.msg+'<br>';	
 		$("#chat_area").append(messeage);
 		
-		if($('#area').prop('scrollHeight') > $('#area').height()){
+		if($('#area').prop('scrollHeight') > $('#aea').height()){
 			 $('#area').scrollTop($('#area').prop('scrollHeight'));
 		}
 	});
@@ -160,8 +166,10 @@ $(document).keydown(function (e) {
 		$("#chat_list").empty();
 		for(var i=0; i<userList.length; i++){
 			var list = "<div id='list_img'><img src='/tag_img03'>"+userList[i]+"</div>";
-			$("#chat_list").append("&nbsp;"+list+'\n');
+			$("#chat_list").append(list+'\n');
 		}
+		
+		
 	}
 	
 	
@@ -266,7 +274,6 @@ $(document).keydown(function (e) {
 					"아닐경우에는 취소를 눌러 메인으로 이동하세요."
 					);
 			if(check){
-				
 				$(location).attr("href", "http://localhost:8081/rt_auction/rt_auctionpay?rt_acution_no="+data.no);
 				//$(location).attr("href", "http://localhost:8081/rt_auction/result_rt_auction");
 			}else{

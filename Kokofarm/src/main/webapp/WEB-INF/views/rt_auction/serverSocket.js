@@ -4,7 +4,6 @@ var app = express();
 var http = require('http');
 var fs = require('fs');
 var socketio = require('socket.io');
-var path = require('path');
 
 // 웹 서버 만듦
 var server = http.createServer(app);
@@ -163,10 +162,10 @@ app.get('/', function(request, response) {
 });
 
 var m = 0; //경매 대기 시간 카운트 (분)
-var s = 30;  //경매 대기 시간 카운트 (초)
+var s = 10;  //경매 대기 시간 카운트 (초)
 
 var minute = 0; //경매 진행 시간 카운트 (분)
-var second = 30;//경매 진행 시간 카운트 (초)
+var second = 10;//경매 진행 시간 카운트 (초)
 
 var wait = setInterval(function(){ //setInterval 일정시간마다 반복 실행하는 함수
 	if(m == 0 && s == 0 ){

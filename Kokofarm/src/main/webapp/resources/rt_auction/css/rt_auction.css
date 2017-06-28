@@ -307,6 +307,7 @@ body{
 
 #test{
 	text-align: right;
+	padding-right: 15px;
 }
 #test img{
 	margin-right: 3px;
@@ -321,7 +322,11 @@ body{
 	vertical-align: middle;
 }
 
+#list_img{
+	margin-top: 3px;
+}
 #list_img img{
-	margin-right: 3px;
+	margin-left : 10px;
+	margin-right: 5px;
 	vertical-align: middle;
 }
