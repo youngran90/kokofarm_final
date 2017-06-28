@@ -35,10 +35,10 @@
 	<insert id="rt_auction_finish" parameterType="RtAcutionFinishVO">
 		insert into rt_tender_finish(
 			rt_tender_finish_no, rt_tender_no, recipient_name, recipient_phone, recipient_tel, recipient_address, delivery_message, pay,
-			creditcard_name, pay_month, pay_bank, deposit_name, price, pay_date
+			creditcard_name, pay_month, pay_bank, deposit_name, price, pay_date , member_id
 		) values (
 			#{rt_tender_finish_no}, #{rt_tender_no}, #{recipient_name}, #{recipient_phone}, #{recipient_tel}, #{recipient_address}, #{delivery_message}, #{pay},
-			#{creditcard_name}, #{pay_month}, #{pay_bank}, #{deposit_name}, #{price}, sysdate
+			#{creditcard_name}, #{pay_month}, #{pay_bank}, #{deposit_name}, #{price}, sysdate, (select member_id from rt_tender where rt_tender_no = #{rt_tender_no})
 		)
 	</insert>
 	
@@ -51,6 +51,9 @@
 		and member_id = #{member_id}
 	</select>
 	
+	<delete id="delete_rt_tender" parameterType="String">
+		delete from rt_tender where rt_tender_no = #{rt_tender_no}
+	</delete>
 </mapper>
 
 

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kokofarm.member.domain.MemberVO;
 import kokofarm.rtauction.domain.RtAcutionFinishVO;
@@ -39,15 +40,23 @@ public class RtAuctionServiceImpl implements RtAuctionService{
 	public MemberVO member_info(String member_id) throws Exception {
 		return dao.member_info(member_id);
 	}
-
+	
+	@Transactional
 	@Override
 	public void rt_auction_finish(RtAcutionFinishVO vo) throws Exception {
+		dao.delete_rt_tender(vo.getRt_tender_no());
 		dao.rt_auction_finish(vo);
 	}
 
 	@Override
 	public List<RtAuctionFinishListVO> rt_auction_finish_list(String member_id) throws Exception {
 		return dao.rt_auction_finish_list(member_id);
+	}
+
+	@Transactional
+	@Override
+	public void delete_rt_tender(String rt_tender_no) throws Exception {
+		dao.delete_rt_tender(rt_tender_no);
 	}
 
 	

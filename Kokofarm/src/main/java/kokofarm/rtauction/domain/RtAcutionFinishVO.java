@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 
 public class RtAcutionFinishVO {
 	private String rt_tender_finish_no;
+	private String member_id;
 	private String rt_tender_no;
 	private String recipient_name;
 	private String recipient_phone;
@@ -18,14 +19,16 @@ public class RtAcutionFinishVO {
 	private int price;
 	private Timestamp pay_date;
 
-	public RtAcutionFinishVO() {}
+	public RtAcutionFinishVO() {
+	}
 
-	public RtAcutionFinishVO(String rt_tender_finish_no, String rt_tender_no, String recipient_name,
+	public RtAcutionFinishVO(String rt_tender_finish_no, String member_id, String rt_tender_no, String recipient_name,
 			String recipient_phone, String recipient_tel, String recipient_address, String delivery_message, String pay,
 			String creditcard_name, String pay_month, String pay_bank, String deposit_name, int price,
 			Timestamp pay_date) {
 		super();
 		this.rt_tender_finish_no = rt_tender_finish_no;
+		this.member_id = member_id;
 		this.rt_tender_no = rt_tender_no;
 		this.recipient_name = recipient_name;
 		this.recipient_phone = recipient_phone;
@@ -39,6 +42,14 @@ public class RtAcutionFinishVO {
 		this.deposit_name = deposit_name;
 		this.price = price;
 		this.pay_date = pay_date;
+	}
+
+	public String getMember_id() {
+		return member_id;
+	}
+
+	public void setMember_id(String member_id) {
+		this.member_id = member_id;
 	}
 
 	public String getRt_tender_finish_no() {
@@ -155,11 +166,13 @@ public class RtAcutionFinishVO {
 
 	@Override
 	public String toString() {
-		return "RtAcutionFinish [rt_tender_finish_no=" + rt_tender_finish_no + ", rt_tender_no=" + rt_tender_no
-				+ ", recipient_name=" + recipient_name + ", recipient_phone=" + recipient_phone + ", recipient_tel="
-				+ recipient_tel + ", recipient_address=" + recipient_address + ", delivery_message=" + delivery_message
-				+ ", pay=" + pay + ", creditcard_name=" + creditcard_name + ", pay_month=" + pay_month + ", pay_bank="
-				+ pay_bank + ", deposit_name=" + deposit_name + ", price=" + price + ", pay_date=" + pay_date + "]";
+		return "RtAcutionFinishVO [rt_tender_finish_no=" + rt_tender_finish_no + ", member_id=" + member_id
+				+ ", rt_tender_no=" + rt_tender_no + ", recipient_name=" + recipient_name + ", recipient_phone="
+				+ recipient_phone + ", recipient_tel=" + recipient_tel + ", recipient_address=" + recipient_address
+				+ ", delivery_message=" + delivery_message + ", pay=" + pay + ", creditcard_name=" + creditcard_name
+				+ ", pay_month=" + pay_month + ", pay_bank=" + pay_bank + ", deposit_name=" + deposit_name + ", price="
+				+ price + ", pay_date=" + pay_date + "]";
 	}
+	
 
 }

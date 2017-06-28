@@ -52,6 +52,12 @@ public class RtAuctionDAOImpl implements RtAuctionDAO{
 	public List<RtAuctionFinishListVO> rt_auction_finish_list(String member_id) throws Exception {
 		return session.selectList(namespace+".rt_auction_finish_list",member_id);
 	}
+
+	@Override
+	public void delete_rt_tender(String rt_tender_no) throws Exception {
+		session.delete(namespace+".delete_rt_tender",rt_tender_no);
+		
+	}
 	
 	
 	
