@@ -17,19 +17,19 @@
           <div class="columnblock-title">Categories</div>
           <div class="category_block">
             <ul class="box-category treeview-list treeview">
-              <li><a href="#" class="activSub">Desktops</a>
-                <ul>
+              <li><a href="../auction/auction_list" class="activSub">경매리스트</a>
+                <!-- <ul>
                   <li><a href="#">PC</a></li>
                   <li><a href="#">MAC</a></li>
-                </ul>
+                </ul> -->
               </li>
-              <li><a href="#" class="activSub">Laptops &amp; Notebooks</a>
-                <ul>
+             <!-- <li><a href="#" class="activSub">Laptops &amp; Notebooks</a>
+                 <ul>
                   <li><a href="#">Macs</a></li>
                   <li><a href="#">Windows</a></li>
-                </ul>
-              </li>
-              <li><a href="#" class="activSub">Components</a>
+                </ul> 
+              </li>-->
+              <!-- <li><a href="#" class="activSub">Components</a>
                 <ul>
                   <li><a href="#">Mice and Trackballs</a></li>
                   <li><a href="#" class="activSub" >Monitors</a>
@@ -45,12 +45,12 @@
               <li><a href="#">Software</a></li>
               <li><a href="#">Phones & PDAs</a></li>
               <li><a href="#">Cameras</a></li>
-              <li><a href="#">MP3 Players</a></li>
-            </ul>
+              <li><a href="#">MP3 Players</a></li>-->
+            </ul> 
           </div>
         </div>
-        <h3 class="productblock-title">Bestsellers</h3>
-        <div class="row bestseller-grid product-grid">
+        <h3 class="productblock-title" style="display: none;">Bestsellers</h3>
+        <div class="row bestseller-grid product-grid" style="display: none;">
           <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-grid-item">
             <div class="product-thumb transition">
               <div class="image product-imageblock"> <a href="#"> <img src="image/product/2product50x59.jpg" alt="women's clothing" title="women's clothing" class="img-responsive" /> </a>
@@ -112,8 +112,8 @@
             </div>
           </div>
         </div>
-        <h3 class="productblock-title">Latest</h3>
-        <div class="row latest-grid product-grid">
+        <h3 class="productblock-title" style="display: none;">Latest</h3>
+        <div class="row latest-grid product-grid" style="display: none;">
           <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-grid-item">
             <div class="product-thumb transition">
               <div class="image product-imageblock">
@@ -185,8 +185,8 @@
             </div>
           </div>
         </div>
-        <h3 class="productblock-title">Specials</h3>
-        <div class="row special-grid product-grid">
+        <h3 class="productblock-title" style="display: none;">Specials</h3>
+        <div class="row special-grid product-grid" style="display: none;">
           <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-grid-item">
             <div class="product-thumb transition">
               <div class="image product-imageblock"> <a href="#"><img src="image/product/5product50x59.jpg" alt="women's clothing" title="women's clothing" class="img-responsive" /></a>
@@ -386,7 +386,7 @@
          <input type="hidden" name="auction_no" value="${tender.auction_no }">
          <input type="hidden" name="pay_state" value=null>
          <!-- <input type="hidden" name="tender_price_1" value=0> -->
-        <div id="tendercompleteDiv" style="text-align: center; font-size: 30px; padding: 6px;">
+        <div id="tendercompleteDiv" style="text-align: center; font-size: 30px; padding: 6px; padding-bottom: 300px;">
         <p id="firstP">경매번호 : ${tender.auction_no } </p>
 		<p id="secondP">${tender.member_id }님 입찰이 완료되었습니다.</p>
 		<input id="btn" type="submit" value="돌아가기" style="margin-top:6px; background: #ef8829; color: white; width: 170px; height: 40px; font-weight: bold;">

@@ -98,13 +98,13 @@
           <div class="columnblock-title">Categories</div>
           <div class="category_block">
             <ul class="box-category treeview-list treeview">
-              <li><a href="#" class="activSub">Desktops</a>
-                <ul>
+              <li><a href="../auction/auction_list" class="activSub">경매리스트</a>
+                <!-- <ul>
                   <li><a href="#">PC</a></li>
                   <li><a href="#">MAC</a></li>
-                </ul>
+                </ul> -->
               </li>
-              <li><a href="#" class="activSub">Laptops &amp; Notebooks</a>
+             <!--  <li><a href="#" class="activSub">Laptops &amp; Notebooks</a>
                 <ul>
                   <li><a href="#">Macs</a></li>
                   <li><a href="#">Windows</a></li>
@@ -126,12 +126,12 @@
               <li><a href="#">Software</a></li>
               <li><a href="#">Phones & PDAs</a></li>
               <li><a href="#">Cameras</a></li>
-              <li><a href="#">MP3 Players</a></li>
+              <li><a href="#">MP3 Players</a></li> -->
             </ul>
           </div>
         </div>
-        <h3 class="productblock-title">Bestsellers</h3>
-        <div class="row bestseller-grid product-grid">
+        <h3 class="productblock-title" style="display: none;">Bestsellers</h3>
+        <div class="row bestseller-grid product-grid" style="display: none;">
           <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-grid-item">
             <div class="product-thumb transition">
               <div class="image product-imageblock"> <a href="#"> <img src="image/product/2product50x59.jpg" alt="women's clothing" title="women's clothing" class="img-responsive" /> </a>
@@ -220,8 +220,8 @@
                 <td class="text-center">${successPay.success_no}</td>
                 <input type="hidden" name="success_no" value="${successPay.success_no}">
                 <td class="text-center">${successPay.auction_group}</td>
-                <td class="text-center"><a href="product.html"><img class="img-thumbnail" title="${successPay.auction_name}" alt="" src="/resources/files/attach/${auction_title_img }" style="width: 100px; height: 100px;"></a></td>
-                <td class="text-center"><a href="product.html">${successPay.auction_name}</a></td>
+                <td class="text-center"><a><img class="img-thumbnail" title="${successPay.auction_name}" alt="" src="/resources/files/attach/${auction_title_img }" style="width: 100px; height: 100px;"></a></td>
+                <td class="text-center"><a>${successPay.auction_name}</a></td>
                 <td class="text-center">${successPay.auction_unit}</td>
                 <td class="text-center">${successPay.tender_price }원</td>
                 <!-- <td class="text-left"><div style="max-width: 200px;" class="input-group btn-block">
