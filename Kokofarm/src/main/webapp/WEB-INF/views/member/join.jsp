@@ -91,10 +91,19 @@ text-align: center;
 		var idD = $("#idDuplication").val();
 		if(idD !="idCheck"){
 			alert("아이디 중복체크를 해주세요.");
+			return false;			
+		}
+		
+		var emailD = $("#emailDuplication").val();
+		if(emailD !="emailCheck"){
+			alert("이메일 중복체크를 해주세요.");
 			return false;
 			
 			
 		}
+		
+		
+		
 		var id = $('#member_id').val();
 		var eid = /^[a-z0-9A-Z_]{4,15}$/;
 		if(!eid.test(id)){

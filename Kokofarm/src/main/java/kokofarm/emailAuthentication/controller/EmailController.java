@@ -45,7 +45,7 @@ public class EmailController {
 			StringBuilder sb = new StringBuilder();
 			
 			sb.append("귀하의 아이디는 " + member_id + "입니다. ");
-			service.send(subject, sb.toString(),"KokoFarm@kosta.com", member_email, null);
+			service.send(subject, sb.toString(),"kokofarm@gmail.com", member_email, null);
 			ra.addFlashAttribute("resultMsg", "귀하의 이메일 주소로 가입된 아이디를 보내 드렸습니다. ");
 		}else{
 			ra.addFlashAttribute("resultMsg", "귀하의 이메일 주소로 가입된 회원이 존재 하지 않습니다.");

@@ -316,7 +316,7 @@ font-family: YG77;
 							</span>
 				
 							<script type="text/javascript">
-									Countdown.init('2017-06-27 18:14:30', 'el-countdown-0','1111');
+									Countdown.init('2017-06-28 10:00:00', 'el-countdown-0','1111');
 							</script> 
 					</div>						
 				 </div>
@@ -349,7 +349,7 @@ font-family: YG77;
 							</span>
 				
 							<script type="text/javascript">
-									Countdown.init('2017-06-27 22:00:00', 'el-countdown-1','1111');
+									Countdown.init('2017-06-28 22:00:00', 'el-countdown-1','1111');
 							</script> 
 					</div>
       		</div>
