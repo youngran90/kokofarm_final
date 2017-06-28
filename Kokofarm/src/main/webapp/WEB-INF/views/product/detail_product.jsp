@@ -667,7 +667,7 @@
       	</c:if>
 				</tbody>
 			</table>
-			
+				<c:if test="${not empty replylist}">
 			<div class="category-page-wrapper">
         <div class="pagination-in" style="margin-left: 40%">
          <ul class="pagination" >
@@ -687,6 +687,7 @@
 			</ul>
         </div>
       </div>
+      </c:if>
 			
 			</div>
       </div>
@@ -731,7 +732,7 @@ $(function(){
 			},
 			success : function(data) {
 				location.reload();
-				alert("댓글수정");
+				alert("댓글이 수정되었습니다.");
 				return false;
 			},
 			error : function(data) {
@@ -755,7 +756,7 @@ $(function(){
 					data : param,
 				    dataType : "html",
 					success : function(data) {
-						alert("성공");
+						alert("댓글이 등록되었습니다");
 						 location.reload();
 					},
 					error : function(data) {

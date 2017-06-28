@@ -88,7 +88,7 @@ function update_Re() {
 		},
 		success : function(data) {
 			location.reload();
-			alert("문의수정완료");
+			alert("문의글 수정이 완료되었습니다.");
 			
 		},
 		error : function(data) {

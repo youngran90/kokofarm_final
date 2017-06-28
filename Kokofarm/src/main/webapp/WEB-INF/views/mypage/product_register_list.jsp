@@ -59,7 +59,7 @@ h2 {
 									<c:forEach var="list" items="${product}" 	varStatus="status">
 											<tr class="tit_tr user_tit_tr">
 												<td>${pageMaker.start + status.index}</td>
-												<td><img src="/resources/files/attach/${list.product_mainimage}" style="width: 100px; height: 100px;"></td>
+												<td><a href="/product/detail_product?product_no=${list.product_no}"><img src="/resources/files/attach/${list.product_mainimage}" style="width: 100px; height: 100px;"></a></td>
 												<td class="txt_td">
 													<b>상품명 : </b> ${list.product_name}<br>
 												    <b>단위 : </b> ${list.product_unit} ${list.unit}<br>

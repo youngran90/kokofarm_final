@@ -63,9 +63,9 @@ h2 {
 												<td class="txt_td">
 													<b>주문상품 : </b> ${list.orderfinish_product_name}<br>
 												    <b> 주문수량 : </b> ${list.orderfinish_product_amount}<br>
-												<b>결제금액 : </b><fmt:formatNumber value="${list.orderfinish_final_price}" pattern="###,###원" />
+												<b>결제금액 : </b><fmt:formatNumber value="${list.orderfinish_total_price}" pattern="###,###원" />
 												<td><fmt:formatDate value="${list.orderfinish_date}" pattern="yyyy-MM-dd" /></td>
-												<td>배송상태</td>
+												<td>배송완료</td>
 											</tr>
 									</c:forEach>
 								</tbody>
@@ -75,7 +75,9 @@ h2 {
       <div class="category-page-wrapper">
         <div class="pagination-in" style="margin-left: 40%">
          <ul class="pagination" >
+         <c:if test="${pageMaker.page eq 0}">
 			<li><a href="/mypage/order_list?page=1">처음</a></li>
+			</c:if>
 			<c:if test="${pageMaker.prev}">
 				<li><a href="/mypage/order_list?page${pageMaker.prev}">&laquo;</a></li>
 			</c:if>
@@ -87,7 +89,9 @@ h2 {
 				<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
 					<li><a href="/mypage/order_list?page=${pageMaker.endPage +1}">&raquo;</a></li>
 				</c:if>
+				         <c:if test="${pageMaker.page eq 0}">
 				<li><a href="/mypage/order_list?page=${pageMaker.lastPage}">마지막</a></li>
+				</c:if>
 			</ul>
         </div>
       </div>

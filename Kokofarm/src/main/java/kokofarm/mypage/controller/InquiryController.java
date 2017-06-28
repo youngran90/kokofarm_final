@@ -90,7 +90,7 @@ public class InquiryController {
 	    if(page2 != 1){
 	    	PagingMaker_s.setPage(page2);
 	    }
-		PagingMaker_s.setTotalCount(service.countInquiry(seller_no));
+		PagingMaker_s.setTotalCount(service.count_Inquiry(seller_no));
 		List<InquiryVO> inquirylist_s =  service.list_Inquiry_s(seller_no, PagingMaker_s);
 		System.out.println("PagingMaker_s : ");
 		System.out.println(PagingMaker_s.toString());

@@ -62,17 +62,22 @@
 		select count(*) from Inquiry
 		where member_id = #{member_id}
 	</select>
+	
+	<select id="count_Inquiry" resultType="int" >
+		select count(*) from Inquiry
+		where seller_no = #{seller_no}
+	</select>
 		
 	
 		<select id="orderproduct_list" resultType="OrderFinishVO" parameterType="java.util.HashMap">
 		SELECT *
 		 FROM (SELECT ROWNUM AS RNUM,a.* FROM(
 				select  f.orderfinish_product_no, f.orderfinish_product_name, f.orderfinish_product_amount,
-		f.orderfinish_final_price, f.orderfinish_date, p.product_mainimage 
+		f.orderfinish_total_price, f.orderfinish_final_price, f.orderfinish_date, p.product_mainimage 
 		from order_finish f ,  product  p
 		 where f.orderfinish_product_no  = p.product_no
 		 and f.orderfinish_member_id = #{member_id}
-		 order by f.orderfinish_date
+		 order by f.orderfinish_date desc
 					) a
 			where ROWNUM <![CDATA[<=]]> #{PagingMaker.end})
 				where RNUM <![CDATA[>=]]> #{PagingMaker.start}

@@ -69,6 +69,11 @@ public class InquiryServiceImpl implements InquiryService {
 		return dao.countOrderfinish(member_id);
 	}
 
+	@Override
+	public int count_Inquiry(String seller_id) throws Exception {
+		return dao.count_Inquiry(seller_id);
+	}
+
 
 
 	

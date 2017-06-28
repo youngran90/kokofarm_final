@@ -219,7 +219,7 @@ public class ProductController {
 		 
 		 //조회날짜
 		// String today_date = "&p_regday="+year +"-"+ month + "-" + date; //당일날짜
-		 String t_date = "24";
+		 String t_date = "22";
 		 String today_date = "&p_regday="+year +"-"+ month + "-" + t_date; //당일날짜
 		 
 		 //소매 채소

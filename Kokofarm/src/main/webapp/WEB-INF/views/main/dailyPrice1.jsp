@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<img alt="" src="/resources/css/m_tab05_o.gif">
+<img alt="" src="/resources/css/m_tab04_o.gif">
 <table class="view_board_table" style="font-size: 14px;">
 <colgroup>
 			<col width="60">
@@ -25,7 +25,7 @@
 	  		<th>품목명</th>
 	  		<th>품종명</th>
 	  		<th>상태</th>
-	  		<th>일자 <span style="font-size: 10px">(${today})</span></th>
+	  		<th>일자 <span style="font-size: 10px"></span></th>
 	  		<th>1일전 일자</th>
 	  		<th>1주일전 일자</th>
   		</tr>

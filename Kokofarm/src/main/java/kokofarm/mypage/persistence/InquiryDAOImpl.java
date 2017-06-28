@@ -86,5 +86,10 @@ public class InquiryDAOImpl implements InquiryDAO {
 	public int countOrderfinish(String member_id) throws Exception {
 		return session.selectOne(namespace+".countOrderfinish", member_id);
 	}
+
+	@Override
+	public int count_Inquiry(String seller_id) throws Exception {
+		return session.selectOne(namespace+".count_Inquiry", seller_id);
+	}
 	
 }

@@ -29,6 +29,8 @@ public interface InquiryService {
 	
 	public int countInquiry(String member_id)throws Exception;
 	
+	public int count_Inquiry(String seller_id)throws Exception;
+	
 	//order
 	public List<OrderFinishVO> orderproduct_list(String member_id, PagingMaker PagingMaker) throws Exception;
 	
