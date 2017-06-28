@@ -7,7 +7,7 @@
 	<select id="mainImageLatest" resultType="ProductVO">
 		
 		select ROWNUM, alias.* from(select * from product order by product_uploaddate desc) alias<![CDATA[
-where rownum <=10
+where rownum <=10 and product_total >0
 		  ]]>
 	</select>
 	
@@ -19,9 +19,10 @@ alias where rownum <=10]]>
 		</select>
 	
 	<select id="bestSellerItem" resultType="ProductVO">
+		<![CDATA[ 
 		select ROWNUM, alias.* from
-			(select p.* from product p, order_finish o where p.product_no=o.orderfinish_product_no order by o.ORDERFINISH_PRODUCT_AMOUNT desc) alias 
-		<![CDATA[ where rownum <=10 ]]> 
+			(select p.product_no, p.product_name, p.product_price, p.product_mainimage, p.product_sellerimage from product p, order_finish o where p.product_no=o.orderfinish_product_no and p.product_total>0 group by p.product_no, p.product_name, p.product_price,p.product_mainimage,p.product_sellerimage,p.product_total) alias 
+		where rownum <=10 ]]> 
 	</select>
 
 	<select id="rtAuctionImage" resultType="RT_AuctionRegisterVO">
