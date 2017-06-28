@@ -47,8 +47,10 @@ public class MainController {
 		model.addAttribute("Latestlist",productLatestList);
 		model.addAttribute("auctionList",auctionPLatestList);
 		model.addAttribute("bestList", TbestList);
-		model.addAttribute("rtAuctionInfoList", rtAuctionInfoList);
-		
+		model.addAttribute("rtAuctionInfoListAm", rtAuctionInfoList.get(0));
+		if(rtAuctionInfoList.get(1)!=null){
+		model.addAttribute("rtAuctionInfoListPm",rtAuctionInfoList.get(1));
+		}
 		
 		
 		

@@ -293,7 +293,7 @@ font-family: YG77;
     	<a href="/auction/rt_auction_list"> 
    		  <div class="auctionsale_banner"> 
    		  <div class="auction_image left1">
-   		  <img alt="" src="/resources/files/attach/${rtAuctionInfoList.get(0).rt_auction_title_img }" style="width: 200px; height: 100px;">
+   		  <img alt="" src="/resources/files/attach/${rtAuctionInfoListAm.rt_auction_title_img }" style="width: 200px; height: 100px;">
  		  
    	</div>
    		  
@@ -323,7 +323,7 @@ font-family: YG77;
 				 
 								
 			<div class="auction_image right2">
-   		  		<img alt="" src="/resources/files/attach/${rtAuctionInfoList.get(1).rt_auction_title_img }" style="width: 200px; height: 100px;">
+   		  		<img alt="" src="/resources/files/attach/${rtAuctionInfoListPm.rt_auction_title_img }" style="width: 200px; height: 100px;">
    		  
    		  </div>					
 									 
