@@ -126,5 +126,12 @@ public class CenterController {
 		service.update_viewcnt(cno);
 		model.addAttribute("detail_faq", service.list_faq());
 	}
+	
+	@RequestMapping(value="/delete_notice", method=RequestMethod.POST)
+	public String delete_notice(@RequestParam("cno")int cno, Model model)throws Exception{
+		service.delete_notice(cno);
+		
+		return "redirect:/center/customer_view";
+	}
 			
 }

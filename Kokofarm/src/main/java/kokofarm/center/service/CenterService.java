@@ -10,5 +10,7 @@ public interface CenterService {
 	public List<CenterVO> list_faq()throws Exception;
 	public CenterVO detail_notice(int cno)throws Exception;
 	public CenterVO detail_faq(int cno)throws Exception;
+	public void delete_notice(int cno)throws Exception;
+	public void delete_faq(int cno)throws Exception;
 	public void update_viewcnt(int cno)throws Exception;
 }

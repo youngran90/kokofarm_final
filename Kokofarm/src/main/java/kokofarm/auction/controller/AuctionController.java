@@ -396,9 +396,9 @@ public class AuctionController {
 	    String root_path = session.getServletContext().getRealPath("/");
 	    String attach_path = "resources/files/attach/";
 	               
-	    String rt_auction_title_img = "RT_Auction_"+originalName;
-	    String rt_auction_title_img01 = "RT_Auction_2"+originalName01;
-	    String rt_auction_title_img02 = "RT_Auction_3"+originalName02;
+	    String rt_auction_title_img = "RT_Auction_"+uid+originalName;
+	    String rt_auction_title_img01 = "RT_Auction_2"+uid+originalName01;
+	    String rt_auction_title_img02 = "RT_Auction_3"+uid+originalName02;
 	    
 	    rt_auction.setRt_auction_title_img(rt_auction_title_img);
 	    rt_auction.setRt_auction_title_img01(rt_auction_title_img01);
@@ -449,6 +449,8 @@ public class AuctionController {
 		System.out.println("오전경매날짜"+a);
 		System.out.println("오후경매날짜"+p);
 		
+		
+		//오후 타이머
 		String start_time2 = null;
 		if(p.size()>0){
 			start_time2 = p.get(0).getRt_auction_date();
@@ -468,6 +470,8 @@ public class AuctionController {
 			int startTime2=s_hour2*60*60+s_minute2*60+s_second2;
 			System.out.println("시작시간(초) "+startTime2);
 			
+			model.addAttribute("s_hour2", s_hour2);
+			model.addAttribute("s_min2", s_minute2);
 			/*String end_time = auction.getEnd_date();
 			System.out.println("끝나는시간 "+ end_time);
 			int e_year = Integer.parseInt(end_time.substring(0,4));
@@ -549,7 +553,7 @@ public class AuctionController {
 			System.out.println("오후방문시간: "+ visitingTime2);
 		}
 		
-		
+		//오전 타이머
 			String start_time = null;
 			if(a.size()>0){
 				start_time = a.get(0).getRt_auction_date();
@@ -568,6 +572,8 @@ public class AuctionController {
 			int startTime=s_hour*60*60+s_minute*60+s_second;
 			System.out.println("시작시간(초) "+startTime);
 			
+			model.addAttribute("s_hour", s_hour);
+			model.addAttribute("s_min", s_minute);
 			/*String end_time = auction.getEnd_date();
 			System.out.println("끝나는시간 "+ end_time);
 			int e_year = Integer.parseInt(end_time.substring(0,4));

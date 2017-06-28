@@ -42,11 +42,23 @@ public class CenterDAOImpl implements CenterDAO {
 	public CenterVO detail_faq(int cno) throws Exception {
 		return session.selectOne(namespace+".detail_faq", cno);
 	}
+	
+	@Override
+	public void delete_notice(int cno) throws Exception {
+		session.delete(namespace+".delete_notice", cno);
+	}
+
+	@Override
+	public void delete_faq(int cno) throws Exception {
+		session.delete(namespace+".delete_faq", cno);
+	}
 
 	@Override
 	public void update_viewcnt(int cno) throws Exception {
 		session.update(namespace+".update_viewcnt", cno);
 		
 	}
+
+
 
 }

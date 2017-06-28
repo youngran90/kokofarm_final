@@ -24,6 +24,14 @@
  		select * from customercenter where cno=#{cno}
  	</select>
  	
+ 	<delete id="delete_notice">
+ 		delete from customercenter where cno=#{cno}
+ 	</delete>
+ 	
+ 	<delete id="delete_faq">
+ 		delete from customercenter where cno=#{cno}
+ 	</delete>
+ 	
  	<select id="detail_faq" resultType="CenterVO">
  		select * from customercenter where cno=#{cno}
  	</select>

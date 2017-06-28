@@ -29,10 +29,10 @@ window.onload = function(){
    });
    
    jq('#full_notice').hide();
-   
-   var count = '${count}'
+   var seller_no = '${login.seller_no}'
   
    
+   var count = '${count}'
    if(count==2){//오전, 오후 상품이 등록되어 있을 떄
 	   jq('#full_notice').show();
    }else if(count==1){
@@ -91,6 +91,9 @@ function register(){
 	if(rt_auction_name==''){
 		alert("상품명을 입력하세요.");
 		return;
+	}else if(rt_auction_group==null){
+		alert("분류를 선택하세요.");
+		return;
 	}else if(rt_auction_time==''){
 		alert("경매시간을 선택하세요.");
 		return;
@@ -109,9 +112,13 @@ function register(){
 	}else if(rt_auction_title==''){
 		alert("상품의 대표이미지를 선택하세요.");
 		return;
+	}else if(rt_auction_content==null){
+		alert("상세내용을 입력하세요.");
+		return;
 	}else if(count==2){
 		jq('#regBtn').click(function(){
 	    alert("오늘은 상품을 등록할 수 없습니다.");
+	    window.location.href="/auction/rt_auction_list";
 		});	
 	}else{
 		alert("경매가 등록되었습니다.");

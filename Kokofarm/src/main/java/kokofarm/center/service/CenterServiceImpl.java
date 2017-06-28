@@ -43,12 +43,24 @@ public class CenterServiceImpl implements CenterService {
 	public CenterVO detail_faq(int cno) throws Exception {
 		return dao.detail_faq(cno);
 	}
+	
+	@Override
+	public void delete_notice(int cno) throws Exception {
+		dao.delete_notice(cno);
+	}
+
+	@Override
+	public void delete_faq(int cno) throws Exception {
+		dao.delete_faq(cno);
+	}
 
 	@Override
 	public void update_viewcnt(int cno) throws Exception {
 		dao.update_viewcnt(cno);
 		
 	}
+
+
 
 	
 

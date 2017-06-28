@@ -47,7 +47,7 @@ function register(){
 	if(name==''){
 		alert("상품명을 입력하세요.");
 		
-	}else if(group==''){
+	}else if(group=null){
 		alert("분류를 선택하세요.");
 		return;
 	}else if(start_date==''){
@@ -71,6 +71,8 @@ function register(){
 	}else if(title==''){
 		alert("상품의 대표이미지를 선택하세요.");
 		return;
+	}else if(content==""){
+		alert("상세내용을 입력하세요.");
 	}else{
 		alert("경매가 등록되었습니다.")
 		document.getElementById('auction_register').submit();

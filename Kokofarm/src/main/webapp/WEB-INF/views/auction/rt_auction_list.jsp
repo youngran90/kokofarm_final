@@ -84,7 +84,7 @@ window.onload = function(){
 	$('#auction_list').hide();
 	
 	var seller_no = '${login.seller_no}'
-	
+	//alert(seller_no);
 	if(seller_no==""){
 		$('#register_button').hide();
 	}else{
@@ -108,18 +108,29 @@ function move_register(){
 
 
 //오전 타이머
-	var time = '${vistingTime}'
+	var time = '${visitingTime}'
 	//alert("오전남은시간"+time);
 	
 	
+	var date = new Date();
+	var now = date.getHours();
+	var now_m = date.getMinutes();
+	
+	var s_hour = '${s_hour}'
+	var s_min = '${s_min}'
+	
 	function timer(){ 
-		 if(-30<=time && time<=0){
+		if(s_hour<=now && s_min<now_m){
+				//time--;
+				document.getElementById('timer_box').innerHTML="오전 경매가 종료되었습니다.";
+				$('#rt_reg_btn').hide();
+			}else if(-30<=time && time<=0){
 			   time--;
-			   document.getElementById('timer_box').innerHTML="경매가 시작되었습니다.";
+			   document.getElementById('timer_box').innerHTML="오전 경매가 시작되었습니다.";
 			   $('#rt_reg_btn').show();
 		   }else if(time<-30){
 			   clearInterval(tid);
-			   document.getElementById('timer_box').innerHTML="경매가 종료되었습니다.";
+			   document.getElementById('timer_box').innerHTML="오전 경매가 종료되었습니다.";
 			   $('#rt_reg_btn').hide();
 		   }else if(time>0){
 			   m= Math.floor(time/(24*60*60))+"일"+Math.floor((time%(24*60*60)/(60*60)))+"시간"+Math.floor(((time%3600)/60))+"분"+time%60+"초";
@@ -127,23 +138,35 @@ function move_register(){
 			   	time--;
 			    $('#rt_reg_btn').click(function(){
 					  alert("입장 시간이 아닙니다.");
-				  }).removeAttr('onclick');
+					  return;
+				  });/* .removeAttr('onclick') */
 		   }
 	} 
 	
 	//오후 타이머
 	var	time2 = '${vistingTime2}'
 		//alert("오후남은시간"+time2);
-
+	
+	var date = new Date();
+	var now = date.getHours();
+	var now_m = date.getMinutes();
+	//alert(now_m);
+	
+	var s_hour2 = '${s_hour2}'
+	var s_min2 = '${s_min2}'
+	//alert(s_min2);
 	
 	function timer2(){ 
-		if(-30<=time2 && time2<=0){
+		if(s_hour2<=now && s_min2<now_m){
+			document.getElementById('timer_box2').innerHTML="오후 경매가 종료되었습니다.";
+			$('#rt_reg_btn2').hide();
+		   }else if(-30<=time2 && time2<=0){
 			   time2--;
-			   document.getElementById('timer_box2').innerHTML="경매가 시작되었습니다.";
+			   document.getElementById('timer_box2').innerHTML="오후 경매가 시작되었습니다.";
 			   $('#rt_reg_btn2').show();
 		   }else if(time2<-30){
 			   clearInterval(tid2);
-			   document.getElementById('timer_box2').innerHTML="경매가 종료되었습니다.";
+			   document.getElementById('timer_box2').innerHTML="오후 경매가 종료되었습니다.";
 			   $('#rt_reg_btn2').hide();
 		   }else if(time2>0){
 			   m= Math.floor(time2/(24*60*60))+"일"+Math.floor((time2%(24*60*60)/(60*60)))+"시간"+Math.floor(((time2%3600)/60))+"분"+time2%60+"초";
@@ -151,7 +174,8 @@ function move_register(){
 			   	time2--;
 			     $('#rt_reg_btn2').click(function(){
 					  alert("입장 시간이 아닙니다.");
-				  }).removeAttr('onclick');
+					  return;
+				  });/* .removeAttr('onclick') */
 		   }
 		} 
 
@@ -324,7 +348,7 @@ function move_register(){
       
       <div id="content" class="col-sm-9">
       <h2 class="category-title" style="font-weight: bold; position: relative; top: 1px;">실시간 경매</h2>
-      <input type="button" id="register_button" value="상품등록" onclick="move_register()" style="position: relative; top:-605px; left: 835px;">
+      <input type="button" id="register_button" value="상품등록" onclick="move_register()" style="position:relative; left:840px;">
       <!-- <div class="row category-banner">
         <div class="col-sm-12 category-image"><img src="image/banners/category-banner.jpg" alt="Desktops" title="Desktops" class="img-thumbnail" /></div>
         <div class="col-sm-12 category-desc">Lorem ipsum dolomagna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate.</div>

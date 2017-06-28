@@ -30,6 +30,24 @@
 		height: 40px;
 		margin-left: 860px;
 	}
+	#delete_btn{
+		border: none;
+		background: #F28D33;
+		text-align: center;
+		color: #FFFFFF;
+		width: 80px;
+		height: 40px;
+		margin-left: 860px;
+	}
+	#modify_btn{
+		border: none;
+		background: #F28D33;
+		text-align: center;
+		color: #FFFFFF;
+		width: 80px;
+		height: 40px;
+		margin-left: 860px;
+	}
 </style>
 <script>
 $(function(){
@@ -39,10 +57,14 @@ $(function(){
 	//alert(admin_id);
 	
 	if(admin_id=='kosta'){
-		 alert("관리자맞아!");
+		 //alert("관리자맞아!");
 		$('#admin_button').show();
+		$('#delete_btn').show();
+		$('#modify_btn').show();
 	}else{
 		$('#admin_button').hide();
+		$('#delete_btn').hide();
+		$('#modify_btn').hide();
 	}
 	
 })
@@ -211,7 +233,8 @@ function move_admin(){
 								</c:forEach>
 							</div>
 						<input id="list_btn" type="button" value="목록으로" onclick=location.href="../center/customer_view">
-	
+						<!-- <input id="delete_btn" type="button" value="삭제하기" onclick=location.href="/delete_notice">
+						<input id="modify_btn" type="button" value="수정하기"> -->
 						</div>
 	
 						<div>

@@ -10,6 +10,23 @@
 <script type="text/javascript" src="/resources/ckeditor/ckeditor.js"></script>
 
 <script>
+	function register(){
+		var title = $('#c_title').val();
+		var group = $('#c_group').val();
+		var content = $('#c_content').val();
+		
+		if(title==''){
+			alert("제목을 입력하세요.");
+		}else if(group==null){
+			alert("분류를 선택하세요.");
+		}else if(content==''){
+			alert("내용을 입력하세요.");
+		}else{
+			alert("공지가 등록되었습니다.");
+			document.getElementById('admin').submit();
+		}
+	};
+
 	var ckeditor_config = {
 			width: "818px",
 			height: "500px",
@@ -294,7 +311,7 @@
           </div>
         </div>
       </div> -->
-      <form class="form-horizontal" enctype="multipart/form-data" method="post" action="/center/admin_view">
+      <form id="admin" class="form-horizontal" enctype="multipart/form-data" method="post" action="/center/admin_view">
         <fieldset>
           <div class="form-group required">
             <label for="input-name" class="col-sm-2 control-label" style="width: 90px; margin-left: 10px;">제목</label>
@@ -321,7 +338,7 @@
         </fieldset>
         <div class="buttons">
           <div class="pull-right">
-            <input type="submit" value="등록하기" class="btn btn-primary"
+            <input type="button" value="등록하기" class="btn btn-primary" onclick="register()"
             style="position: relative; right: 25px;">
           </div>
         </div>
